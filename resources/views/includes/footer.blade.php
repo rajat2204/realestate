@@ -1,0 +1,97 @@
+<!-- Footer Section Start -->
+<footer class="footer-area section-padding" id="footer-section">
+  <div class="container">
+    <div class="wow fadeInDown" data-wow-delay="0.3s">
+    <div class="row">
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+        <div class="footer-text">
+          <div class="menus_footer">
+            <h3>About <span style="color: #00b4d9">R</span>eal <span style="color: #00b4d9">E</span>state</h3>
+          </div>
+          <div class="footer-about">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <ul class="social-icon">
+            <li>
+              <a class="facebook" href="javascript:void(0);"><i class="icon-social-facebook"></i></a>
+            </li>
+            <li>
+              <a class="twitter" href="javascript:void(0);"><i class="icon-social-twitter"></i></a>
+            </li>
+            <li>
+              <a class="instagram" href="javascript:void(0);"><i class="icon-social-instagram"></i></a>
+            </li>
+            <li>
+              <a class="linkedin" href="javascript:void(0);"><i class="icon-social-linkedin"></i></a>
+            </li>
+            <li>
+              <a class="google" href="javascript:void(0);"><i class="icon-social-google"></i></a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+        <div class="footer-menu">
+          <div class="menus_footer">
+            <h3><span style="color: #00b4d9">O</span>ther <span style="color: #00b4d9">M</span>enus</h3>
+          </div>
+          <ul class="menus_footer">
+            <li><a href="javascript:void(0);"><i class="fa fa-info-circle"></i>About Us</li>
+            <li><a href="javascript:void(0);"><i class="fa fa-building"></i>Privacy & Policy</a></li>
+            <li><a href="javascript:void(0);"><i class="fa fa-phone"></i>Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
+        <div class="menus_footer">
+            <h3><span style="color: #00b4d9">S</span>ubscribe <span style="color: #00b4d9">H</span>ere !!!</h3>
+          </div>
+          <div class="subscribe-news">
+            <input type="text" name="subscribe" placeholder="subscribe">
+            <div class="subscribe-btn">
+              <button class="btn btn-blue"><i class="fa fa-bell"></i></button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</footer>
+<!-- </div> -->
+<footer class="footer-bottom footer-area">
+  <div class="text-center copyright_footer">
+     <p>Copyright © <a href="https://www.igniterpro.com/">Igniterpro</a> 2018 All Right Reserved</p>
+  </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- social icons section -->
+<div class="fixed-social-icon">
+    <div class="share_with">
+       <a class="icon-share" href="javascript:void(0)"></a>
+    </div>
+    <ul class="social-icon">
+        <li>
+          <a class="facebook" href="javascript:void(0);"><i class="icon-social-facebook"></i></a>
+        </li>
+        <li>
+          <a class="twitter" href="javascript:void(0);"><i class="icon-social-twitter"></i></a>
+        </li>
+        <li>
+          <a class="instagram" href="javascript:void(0);"><i class="icon-social-instagram"></i></a>
+        </li>
+        <li>
+          <a class="instagram" href="javascript:void(0);"><i class="icon-social-linkedin"></i></a>
+        </li>
+        <li>
+          <a class="instagram" href="javascript:void(0);"><i class="icon-social-google"></i></a>
+        </li>
+    </ul>
+</div>
+<!-- social icons section ends-->
+
+<!-- Go to Top Link -->
+<a href="javascript:void(0);" class="back-to-top">
+  <i class="icon-arrow-up"></i>
+</a>

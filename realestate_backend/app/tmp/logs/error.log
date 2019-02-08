@@ -1,0 +1,165 @@
+2019-01-23 20:15:50 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-23 20:15:50 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-23 20:15:59 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /realestate1/img/42a7f37b3c078bba3e864323cc1d7128.png
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2019-01-31 15:19:18 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 15:19:18 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 15:20:34 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 15:20:34 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 15:23:13 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 15:23:13 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 15:58:53 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 15:58:53 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 16:01:58 Error: [MissingControllerException] Controller class PublicController could not be found.
+Exception Attributes: array (
+  'class' => 'PublicController',
+  'plugin' => NULL,
+)
+Request URL: /realestate1/public
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2019-01-31 16:02:07 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 16:02:07 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 16:02:15 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 16:02:15 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 16:04:50 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-01-31 16:04:50 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-01-31 16:06:25 Error: [MissingControllerException] Controller class Index.htmlController could not be found.
+Exception Attributes: array (
+  'class' => 'Index.htmlController',
+  'plugin' => NULL,
+)
+Request URL: /realestate1/index.html
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2019-01-31 16:06:29 Error: [MissingControllerException] Controller class IndexController could not be found.
+Exception Attributes: array (
+  'class' => 'IndexController',
+  'plugin' => NULL,
+)
+Request URL: /realestate1/index
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2019-02-01 11:24:26 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-02-01 11:24:26 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-02-01 11:27:50 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-02-01 11:27:50 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-02-01 11:30:38 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-02-01 11:30:38 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-02-08 14:54:48 Error: Fatal Error (4): syntax error, unexpected '}' in [C:\xampp\htdocs\realestate1\app\View\Pages\home.ctp, line 57]
+2019-02-08 14:54:48 Error: [InternalErrorException] Internal Server Error
+Request URL: /realestate1/
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\lib\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#2 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\\xampp\\htdocs...', 57, Array)
+#3 C:\xampp\htdocs\realestate1\lib\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2019-02-08 14:54:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /realestate1/img/42a7f37b3c078bba3e864323cc1d7128.png
+Stack Trace:
+#0 C:\xampp\htdocs\realestate1\app\webroot\index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
