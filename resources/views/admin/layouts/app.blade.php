@@ -28,6 +28,7 @@
 	  	<link rel="stylesheet" href="{{asset('assets/dist/css/skins/_all-skins.min.css')}}">
 	  	<!-- Morris chart -->
 	  	<link rel="stylesheet" href="{{asset('assets/bower_components/morris.js/morris.css')}}">
+	  	<link rel="stylesheet" href="{{asset('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.css')}}">
 	  	<!-- jvectormap -->
 	  	<link rel="stylesheet" href="{{asset('assets/bower_components/jvectormap/jquery-jvectormap.css')}}">
 	  	<!-- Date Picker -->
@@ -40,7 +41,7 @@
 	  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 	</head>
 
-	<body class="page-md login">
+	<body class="hold-transition skin-blue sidebar-mini">
 	    <div id="cover"></div>
 	    <div class="wrapper">
 	            @yield('content')
@@ -61,6 +62,7 @@
 		<script src="{{asset('assets/bower_components/morris.js/morris.min.js')}}"></script>
 		<!-- Sparkline -->
 		<script src="{{asset('assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
+		<script src="{{asset('assets/bower_components/datatables.net/js/jquery.dataTables.js')}}"></script>
 		<!-- jvectormap -->
 		<script src="{{asset('assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 		<script src="{{asset('assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
@@ -74,6 +76,7 @@
 		<!-- Bootstrap WYSIHTML5 -->
 		<script src="{{asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
 		<!-- Slimscroll -->
+		<script src="{{asset('assets/js/sweetalert2.js')}}"></script>
 		<script src="{{asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 		<!-- FastClick -->
 		<script src="{{asset('assets/bower_components/fastclick/lib/fastclick.js')}}"></script>
@@ -83,6 +86,24 @@
 		<script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="{{asset('assets/dist/js/demo.js')}}"></script>
+		
+		<script src="{{asset('assets/js/script.js')}}"></script>
+		<script type="text/javascript">
+		$(function () {
+		    $.ajaxSetup({
+		        headers: {
+		            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+		        },isLocal: false
+		    });
+		});  
+
+		$(window).load(function(){
+		    setTimeout(function(){
+		        $('#cover').fadeOut(500);
+		    },1000)
+		});
+		</script>
+@yield('requirejs')
 
 	</body>
 </html>

@@ -58,4 +58,26 @@ class Validate
 		];
 		return $validation[$key];
 	}
+
+	public function createpropertyCategory($action='add'){
+        $validations = [
+            'name' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('property_categories')]),
+    	];
+		if($action =='edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+				Rule::unique('categories')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'name.required'     			=> 'Category Name is Required.',
+        	'slug.required'     			=> 'Category Slug is Required.',
+        	'slug.unique'     				=> 'This Category Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        ]);
+        return $validator;		
+	}
 }

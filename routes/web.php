@@ -22,3 +22,9 @@ Route::get('aboutus','HomeController@aboutUs');
 
 Route::get('admin/login','Admin\LoginController@login');
 Route::get('admin/home','Admin\LoginController@home');
+
+
+
+/***********************Categories-Section****************************/
+
+Route::resource('admin/categories', 'Admin\CategoryController');
