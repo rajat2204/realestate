@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\PropertyCategories;
+use App\Models\Plots;
+use App\Models\Plots_Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -11,7 +12,7 @@ use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
 
-class CategoryController extends Controller
+class PlotController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,30 +25,30 @@ class CategoryController extends Controller
     }
 
     public function index(Request $request, Builder $builder){
-        $data['view'] = 'admin.category.list';
+        $data['view'] = 'admin.plot.list';
         
-        $propertycategory  = _arefy(PropertyCategories::where('status','!=','trashed')->get());
+        $plots  = _arefy(Plots::where('status','!=','trashed')->get());
        
         if ($request->ajax()) {
-            return DataTables::of($propertycategory)
+            return DataTables::of($plots)
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-                $html   .= '<a href="'.url(sprintf('admin/categories/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/plot/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/categories/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/delete.png').'"
                         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
                 if($item['status'] == 'active'){
                     $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/categories/status/?id=%s&status=inactive',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=inactive',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/inactive-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
                 }elseif($item['status'] == 'inactive'){
                     $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/categories/status/?id=%s&status=active',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=active',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/active-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
@@ -62,7 +63,14 @@ class CategoryController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
-            ->rawColumns(['action'])
+            ->editColumn('price',function($item){
+                return 'Rs.'.' ' .($item['price']);
+            })
+            ->editColumn('featured_image',function($item){
+                $imageurl = asset("assets/img/plots/".$item['featured_image']);
+                return '<img src="'.$imageurl.'" height="100px" width="120px">';
+            })
+            ->rawColumns(['featured_image','action'])
             ->make(true);
         }
 
@@ -70,8 +78,10 @@ class CategoryController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Category Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'featured_image', 'name' => 'featured_image',"render"=> 'data','title' => 'Plot Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Plot Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'price','name' => 'price','title' => 'Plot Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -84,7 +94,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $data['view'] = 'admin.category.add';
+        $data['view'] = 'admin.plot.add';
         return view('admin.home',$data);
     }
 
@@ -96,23 +106,41 @@ class CategoryController extends Controller
      */
     public function store(Request $request){
         $validation = new Validations($request);
-        $validator  = $validation->createpropertyCategory();
-        if ($validator->fails()) {
+        $validator  = $validation->addPlot();
+        if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $propertycategory = new PropertyCategories;
-            $propertycategory->fill($request->all());
+            $data = new Plots();
+            $data->fill($request->all());
 
-            $propertycategory['status'] = 'active';
-            $propertycategory->save();
-           
-            $this->status   = true;
-            $this->modal    = true;
-            $this->alert    = true;
-            $this->message  = "Property Category has been Added successfully.";
-            $this->redirect = url('admin/categories');
+            if ($file = $request->file('featured_image')){
+                $photo_name = time().$request->file('featured_image')->getClientOriginalName();
+                $file->move('assets/img/plots',$photo_name);
+                $data['featured_image'] = $photo_name;
+            }
+            $data['status'] = 'active';
+
+            $data->save();
+            $lastid = $data->id;
+
+            if ($files = $request->file('gallery')){
+                foreach ($files as $file){
+                    $gallery = new Plots_Gallery;
+                    $image_name = str_random(2).time().$file->getClientOriginalName();
+                    $file->move('assets/img/Plot Gallery',$image_name);
+                    $gallery['images'] = $image_name;
+                    $gallery['plot_id'] = $lastid;
+                    $gallery->save();
+
+                    $this->status   = true;
+                    $this->modal    = true;
+                    $this->alert    = true;
+                    $this->message  = "Plot has been Added successfully.";
+                    $this->redirect = url('admin/plot');
+                }
+            }    
         }
-         return $this->populateresponse();
+        return $this->populateresponse();
     }
 
     /**
@@ -134,10 +162,11 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data['view'] = 'admin.category.edit';
+        $data['view'] = 'admin.plot.edit';
         $id = ___decrypt($id);
-        $data['propertycategory'] = _arefy(PropertyCategories::where('id',$id)->first());
-        // dd($data['propertycategory']);
+        $data['plot'] = _arefy(Plots::where('id',$id)->first());
+        $data['gallery'] = _arefy(Plots_Gallery::where('plot_id',$id)->get());
+        // dd($data['plot']);
         return view('admin.home',$data);
     }
 
@@ -149,24 +178,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
-        $id = ___decrypt($id);
-        $validation = new Validations($request);
-        $validator  = $validation->createpropertyCategory('edit');
-        if ($validator->fails()) {
-            $this->message = $validator->errors();
-        }else{
-            $propertycategory = PropertyCategories::findOrFail($id);
-            $input = $request->all();
-            
-            $propertycategory->update($input);
-            $this->status   = true;
-            $this->modal    = true;
-            $this->alert    = true;
-            $this->message  = "Property Category has been Updated successfully.";
-            $this->redirect = url('admin/categories');
-        }
-        return $this->populateresponse();
+    {
+        //
     }
 
     /**
@@ -182,13 +195,13 @@ class CategoryController extends Controller
 
     public function changeStatus(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
-        $isUpdated               = PropertyCategories::change($request->id,$userData);
+        $isUpdated               = Plots::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
-                $this->message = 'Deleted Category successfully.';
+                $this->message = 'Deleted Plots successfully.';
             }else{
-                $this->message = 'Updated Category successfully.';
+                $this->message = 'Updated Plots successfully.';
             }
             $this->status = true;
             $this->redirect = true;

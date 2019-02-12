@@ -35,6 +35,7 @@
 	  	<link rel="stylesheet" href="{{asset('assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
 	  	<!-- Daterange picker -->
 	  	<link rel="stylesheet" href="{{asset('assets/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}">
+	  	<link rel="stylesheet" href="{{asset('assets/css/sweetalert2.css')}}">
 	  	<!-- bootstrap wysihtml5 - text editor -->
 	  	<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 	  	<!-- Google Font -->
@@ -78,6 +79,8 @@
 		<!-- Slimscroll -->
 		<script src="{{asset('assets/js/sweetalert2.js')}}"></script>
 		<script src="{{asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+		<script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+		<script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
 		<!-- FastClick -->
 		<script src="{{asset('assets/bower_components/fastclick/lib/fastclick.js')}}"></script>
 		<!-- AdminLTE App -->
@@ -97,7 +100,7 @@
 		    });
 		});  
 
-		$(window).load(function(){
+		$(document).ready(function(){
 		    setTimeout(function(){
 		        $('#cover').fadeOut(500);
 		    },1000)

@@ -25,14 +25,24 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
-          <a href="#">
+        <li class="active">
+          <a href="{{url('admin/home')}}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
         <li class="active">
           <a href="{{url('admin/categories')}}">
             <i class="fa fa-fw fa-sitemap"></i> <span>Main Categories</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/plot')}}">
+            <i class="fa fa-fw fa-file-image-o"></i> <span>Plot</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/logout')}}">
+            <i class="fa fa-fw fa-sign-out"></i> <span>Logout</span>
           </a>
         </li>
       </ul>

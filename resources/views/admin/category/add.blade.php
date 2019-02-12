@@ -18,7 +18,7 @@
         </div>
 
         <div class="box-footer">
-          <button type="submit" class="btn btn-default">Cancel</button>
+          <a href="{{url('admin/categories')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-category"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>

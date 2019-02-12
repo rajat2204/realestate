@@ -20,9 +20,9 @@ $(document).on('click','[data-request="ajax-submit"]',function(){
     if($('#description').attr('name')!=undefined){
         $( "#description" ).val(CKEDITOR.instances.description.getData());
     }
-    // if($('#policy').attr('name')!=undefined){
-    //     $( "#policy" ).val(CKEDITOR.instances.policy.getData());
-    // }
+    if($('#key_points').attr('name')!=undefined){
+        $( "#key_points" ).val(CKEDITOR.instances.key_points.getData());
+    }
     var $this       = $(this);
     var $target     = $this.data('target');
     var $url        = $($target).attr('action');

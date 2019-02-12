@@ -21,42 +21,44 @@ class Validate
 			'req_email'			=> ['required','email'],
 			'first_name' 		=> ['required','string'],
 			'name' 				=> ['required','string'],
-			'name_product' 		=> ['required','string','max:20'],
 			'last_name' 		=> ['nullable','string'],
-			'date_of_birth' 	=> ['nullable','string'],
-			'gender' 			=> ['required','string'],
 			'phone_code' 		=> ['nullable','required_with:mobile_number','string'],
 			'mobile_number' 	=> ['required','numeric'],
 			'req_mobile_number' => ['required','required_with:phone_code','numeric'],
 			'country' 			=> ['required','string'],
 			'address'           => ['nullable','string','max:1500'],
-			'qualifications'    => ['required','string','max:1500'],
-			'specifications'    => ['nullable','string','max:1500'],
 			'description'       => ['required','string','max:1500'],
-			'required_description'  => ['required','string','max:1500'],
-			'slug_cat'				=> ['required','max:255'],
+			'key_points'       	=> ['required','string','max:1500'],
 			'title'             => ['required','string'],
 			'profile_picture'   => ['required','mimes:doc,docx,pdf','max:2048'],
 			'pin_code' 			=> ['nullable','max:6','min:4'],
-			'appointment_date'  => ['required','string'],
 			'type' 	            => ['required','string'],
 			'phone' 	        => ['required','string','numeric'],
-			'course' 	        => ['required','string'],
 			'location' 	        => ['required','string'],
-			'comments' 	        => ['required','string'],
 			'password'          => ['required','string','max:50'],
 			'price'				=> ['required','numeric'],
 			'start_from'		=> ['required'],
 			'photo'				=> ['required','mimes:jpg,jpeg,png','max:2408'],
 			'photomimes'		=> ['mimes:jpg,jpeg,png','max:2408'],
 			'photo_null'		=> ['nullable'],
-			'url' 				=> ['required','url'],
 			'slug_no_space'		=> ['required','alpha_dash','max:255'],
 			'password_check'	=> ['required'],
-			'newpassword'		=> ['required','max:10']	
+			'newpassword'		=> ['required','max:10'],
+			'area'				=> ['required','numeric'],
+			'gallery'			=> ['required','mimes:jpg,jpeg,png','max:2048'],
+			'gallery_null'		=> ['nullable'],
 
 		];
 		return $validation[$key];
+	}
+
+	public function login(){
+        $validations = [
+            'email' 		       => $this->validation('req_email'),
+			'password'       	   => $this->validation('password'),
+    	];
+        $validator = \Validator::make($this->data->all(), $validations,[]);
+        return $validator;		
 	}
 
 	public function createpropertyCategory($action='add'){
@@ -65,9 +67,8 @@ class Validate
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('property_categories')]),
     	];
 		if($action =='edit'){
-			$validations['image'] 	= $this->validation('photo_null');
 			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
-				Rule::unique('categories')->where(function($query){
+				Rule::unique('property_categories')->where(function($query){
 					$query->where('id','!=',$this->data->id);
 				})
 			]);
@@ -79,5 +80,45 @@ class Validate
         	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
         ]);
         return $validator;		
+	}
+
+	public function addPlot($action='add'){
+		$validations = [
+            'name' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('plots')]),
+			'price'  			=> $this->validation('price'),
+			'featured_image'  	=> $this->validation('photo'),
+			'gallery'			=> $this->validation('id'),
+			'gallery.*'			=> $this->validation('gallery'),
+			'property_type'		=> $this->validation('name'),
+			'bedrooms'			=> $this->validation('name'),
+			'area'				=> $this->validation('area'),
+			'location'			=> $this->validation('name'),
+			'description'		=> $this->validation('description'),
+			'key_points'		=> $this->validation('key_points'),
+    	];
+
+    	$validator = \Validator::make($this->data->all(), $validations,[
+        	'name.required'     			=> 'Plot Name is Required.',
+        	'slug.required'     			=> 'Plot Slug is Required.',
+        	'slug.unique'     				=> 'This Plot Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in plot slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        	'price.required'				=> 'Price of Plot is required.',
+        	'price.numeric'					=> 'Price of the plot must be numeric.',
+        	'featured_image.required'		=> 'Plot Image is required.',
+        	'featured_image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'featured_image.max' 			=> 'Images should not be greater than 2MB.',
+        	'gallery.*.required' 			=> 'Gallery Images are required.',
+			'gallery.*.mimes' 				=> 'Gallery Images should be in jpg,jpeg,png format.',
+			'gallery.*.max' 				=> 'Gallery Images should not be greater than 2MB.',
+			'property_type.required'		=> 'Plot Type is required.',
+			'bedrooms.required'				=> 'Number of bedrooms in a plot is required.',
+			'area.required'					=> 'Area of a plot is required.',
+			'area.numeric'					=> 'Area of a plot must be numeric.',
+			'location.required'				=> 'Location of a plot is required.',
+			'description.required'			=> 'Description of a Plot is required.',
+			'key_points.required'			=> 'Key Points for a plot is required.',
+        ]);
+        return $validator;
 	}
 }
