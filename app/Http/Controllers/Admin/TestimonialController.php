@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Plots;
-use App\Models\Plots_Gallery;
+use App\Models\Testimonials;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +11,7 @@ use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
 
-class PlotController extends Controller
+class TestimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,30 +24,30 @@ class PlotController extends Controller
     }
 
     public function index(Request $request, Builder $builder){
-        $data['view'] = 'admin.plot.list';
+        $data['view'] = 'admin.testimonials.list';
         
-        $plots  = _arefy(Plots::where('status','!=','trashed')->get());
+        $testimonial  = _arefy(Testimonials::where('status','!=','trashed')->get());
        
         if ($request->ajax()) {
-            return DataTables::of($plots)
+            return DataTables::of($testimonial)
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-                $html   .= '<a href="'.url(sprintf('admin/plot/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/testimonial/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/testimonial/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/delete.png').'"
                         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
                 if($item['status'] == 'active'){
                     $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=inactive',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/testimonial/status/?id=%s&status=inactive',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/inactive-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
                 }elseif($item['status'] == 'inactive'){
                     $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/plot/status/?id=%s&status=active',$item['id'])).'" 
+                        data-url="'.url(sprintf('admin/testimonial/status/?id=%s&status=active',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/active-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
@@ -63,17 +62,14 @@ class PlotController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
-            ->editColumn('price',function($item){
-                return 'Rs.'.' ' .($item['price']);
+            ->editColumn('description',function($item){
+                return str_limit($item['description'],50);
             })
-            ->editColumn('area',function($item){
-                return ($item['area']). ' ' . 'sq.ft.';
+            ->editColumn('image',function($item){
+                $imageurl = asset("assets/img/testimonials/".$item['image']);
+                return '<img src="'.$imageurl.'" height="80px" width="150px">';
             })
-            ->editColumn('featured_image',function($item){
-                $imageurl = asset("assets/img/plots/".$item['featured_image']);
-                return '<img src="'.$imageurl.'" height="100px" width="120px">';
-            })
-            ->rawColumns(['featured_image','action'])
+            ->rawColumns(['image','action'])
             ->make(true);
         }
 
@@ -81,11 +77,9 @@ class PlotController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'featured_image', 'name' => 'featured_image',"render"=> 'data','title' => 'Plot Image','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Plot Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'area','name' => 'area','title' => 'Plot Area','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'price','name' => 'price','title' => 'Plot Price','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Testimonial Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Testimonial Title','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Testimonial Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -98,7 +92,7 @@ class PlotController extends Controller
      */
     public function create()
     {
-        $data['view'] = 'admin.plot.add';
+        $data['view'] = 'admin.testimonials.add';
         return view('admin.home',$data);
     }
 
@@ -110,40 +104,27 @@ class PlotController extends Controller
      */
     public function store(Request $request){
         $validation = new Validations($request);
-        $validator  = $validation->addPlot();
+        $validator  = $validation->addTestimonial();
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $data = new Plots();
+            $data = new Testimonials();
             $data->fill($request->all());
 
-            if ($file = $request->file('featured_image')){
-                $photo_name = time().$request->file('featured_image')->getClientOriginalName();
-                $file->move('assets/img/plots',$photo_name);
-                $data['featured_image'] = $photo_name;
+            if ($file = $request->file('image')){
+                $photo_name = time().$request->file('image')->getClientOriginalName();
+                $file->move('assets/img/testimonials',$photo_name);
+                $data['image'] = $photo_name;
             }
-            $data['status'] = 'active';
 
             $data->save();
-            $lastid = $data->id;
 
-            if ($files = $request->file('gallery')){
-                foreach ($files as $file){
-                    $gallery = new Plots_Gallery;
-                    $image_name = str_random(2).time().$file->getClientOriginalName();
-                    $file->move('assets/img/Plot Gallery',$image_name);
-                    $gallery['images'] = $image_name;
-                    $gallery['plot_id'] = $lastid;
-                    $gallery->save();
-
-                    $this->status   = true;
-                    $this->modal    = true;
-                    $this->alert    = true;
-                    $this->message  = "Plot has been Added successfully.";
-                    $this->redirect = url('admin/plot');
-                }
-            }    
-        }
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Testimonial has been Added successfully.";
+                $this->redirect = url('admin/testimonial');
+            }
         return $this->populateresponse();
     }
 
@@ -166,11 +147,9 @@ class PlotController extends Controller
      */
     public function edit($id)
     {
-        $data['view'] = 'admin.plot.edit';
+        $data['view'] = 'admin.testimonials.edit';
         $id = ___decrypt($id);
-        $data['plot'] = _arefy(Plots::where('id',$id)->first());
-        $data['gallery'] = _arefy(Plots_Gallery::where('plot_id',$id)->get());
-        // dd($data['plot']);
+        $data['testimonial'] = _arefy(Testimonials::where('id',$id)->first());
         return view('admin.home',$data);
     }
 
@@ -182,46 +161,30 @@ class PlotController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $id = ___decrypt($id);
         $validation = new Validations($request);
-        $validator  = $validation->addPlot('edit');
+        $validator  = $validation->addTestimonial('edit');
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
-            $plot = Plots::findOrFail($id);
-            $input = $request->all();
+            $testimonial = Testimonials::findOrFail($id);
+            $data = $request->all();
 
-            if ($file = $request->file('featured_image')){
-                $photo_name = time().$request->file('featured_image')->getClientOriginalName();
-                $file->move('assets/img/plots',$photo_name);
-                $input['featured_image'] = $photo_name;
+            if ($file = $request->file('image')){
+                $photo_name = str_random(3).$request->file('image')->getClientOriginalName();
+                $file->move('assets/img/testimonials',$photo_name);
+                $data['image'] = $photo_name;
             }
+            $testimonial->update($data);
 
-            if ($request->galdel == 1){
-                $gal = Plots_Gallery::where('plot_id',$id);
-                $gal->delete();
-            }
-
-            $plot->update($input);
-
-            if ($files = $request->file('gallery')){
-                foreach ($files as $file){
-                    $gallery = new Plots_Gallery;
-                    $image_name = str_random(2).time().$file->getClientOriginalName();
-                    $file->move('assets/img/Plot Gallery',$image_name);
-                    $gallery['images'] = $image_name;
-                    $gallery['plot_id'] = $id;
-                    $gallery->save();
-                }
-            }
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
-            $this->message  = "Plot has been Updated successfully.";
-            $this->redirect = url('admin/plot');
+            $this->message  = "Testimonials has been Updated successfully.";
+            $this->redirect = url('admin/testimonial');
         }
-            return $this->populateresponse();
+        return $this->populateresponse();
     }
 
     /**
@@ -237,13 +200,13 @@ class PlotController extends Controller
 
     public function changeStatus(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
-        $isUpdated               = Plots::change($request->id,$userData);
+        $isUpdated               = Testimonials::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
-                $this->message = 'Deleted Plots successfully.';
+                $this->message = 'Deleted Testimonials successfully.';
             }else{
-                $this->message = 'Updated Plots successfully.';
+                $this->message = 'Updated Testimonials successfully.';
             }
             $this->status = true;
             $this->redirect = true;

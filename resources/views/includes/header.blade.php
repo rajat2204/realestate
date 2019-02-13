@@ -36,27 +36,27 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0);">
+                  <a class="nav-link" href="#property" class="page-scroll">
                     Properties
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0);">
+                  <a class="nav-link" href="#service" class="page-scroll">
                     Services
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0);">
+                  <a class="nav-link" href="#gallery" class="page-scroll">
                     Projects
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0);">
+                  <a class="nav-link" href="#testimonials" class="page-scroll">
                     Testimonials
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0);">
+                  <a class="nav-link" href="#contact" class="page-scroll">
                     Contact Us
                   </a>
                 </li>

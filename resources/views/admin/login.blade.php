@@ -50,7 +50,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="login" action="{{url('admin/login')}}" class="form-horizontal" method="post">
+            <form role="login" action="{{url('admin/login')}}" class="form-horizontal" method="post" data-request="enable-enter">
             	{{ csrf_field() }}
               <div class="box-body">
                 <div class="form-group">
@@ -80,7 +80,7 @@
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="button" class="btn btn-default">Forgot Password?</button>
-                <button type="button" data-request="ajax-submit" data-target='[role="login"]' class="btn btn-info pull-right">Sign in</button>
+                <button type="button" data-request="ajax-submit" data-target='[role="login"]' class="btn btn-info pull-right login">Sign in</button>
               </div>
               <!-- /.box-footer -->
             </form>
@@ -144,6 +144,17 @@
 		    },1000)
 		});
 		</script>
+	<script type="text/javascript">
+	    setTimeout(function(){
+	    $('[data-request="enable-enter"]').on('keyup','input',function (e) {
+	    e.preventDefault();
+	    if (e.which == 13) {
+	    $('[data-request="enable-enter"]').find('.login').trigger('click');
+	    return false;    //<---- Add this line
+	    }
+	    }); 
+	    },100);
+	</script>
 @yield('requirejs')
 
 	</body>

@@ -496,7 +496,7 @@
       </div>
   </div>
 </section>
-<section>
+<section id="service">
   <div id="services">
     <div class="container">
       <div class="row">
@@ -907,33 +907,30 @@
         <div class="col-md-6 col-lg-6 col-sm-12">
           <div class="contact-block">
             <h2>Contact Form</h2>
-            <form id="contactForm">
+            <form id="contactForm" role="contactus" action="{{url('contactussubmission')}}" method="POST">
+              {{csrf_field()}}
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name">
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                   </div>                                 
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="text" placeholder="Email" id="email" class="form-control" name="email" required data-error="Please enter your email">
-                    <div class="help-block with-errors"></div>
+                    <input type="text" placeholder="E-mail" id="email" class="form-control" name="email">
                   </div> 
                 </div>
                  <div class="col-md-12">
                   <div class="form-group">
-                    <input type="text" placeholder="Subject" id="msg_subject" class="form-control" required data-error="Please enter your subject">
-                    <div class="help-block with-errors"></div>
+                    <input type="text" placeholder="Subject" id="msg_subject" class="form-control" name="subject">
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group"> 
-                    <textarea class="form-control" id="message" placeholder="Your Message" rows="5" data-error="Write your message" required></textarea>
-                    <div class="help-block with-errors"></div>
+                    <textarea class="form-control" id="message" placeholder="Message" rows="5" name="message"></textarea>
                   </div>
                   <div class="submit-button">
-                    <button class="btn btn-common" id="submit" type="submit">Send Message</button>
+                    <button class="btn btn-common" id="submit" type="button" data-request="ajax-submit" data-target='[role="contactus"]'>Send Message</button>
                     <div id="msgSubmit" class="h3 text-center hidden"></div> 
                     <div class="clearfix"></div> 
                   </div>

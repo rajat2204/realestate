@@ -47,6 +47,7 @@ class Validate
 			'area'				=> ['required','numeric'],
 			'gallery'			=> ['required','mimes:jpg,jpeg,png','max:2048'],
 			'gallery_null'		=> ['nullable'],
+			'url' 				=> ['required','url'],
 
 		];
 		return $validation[$key];
@@ -97,7 +98,15 @@ class Validate
 			'description'		=> $this->validation('description'),
 			'key_points'		=> $this->validation('key_points'),
     	];
-
+    	if($action == 'edit'){
+			$validations['featured_image'] 	= $this->validation('photo_null');
+			$validations['gallery'] = $this->validation('gallery_null');
+			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+				Rule::unique('plots')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
     	$validator = \Validator::make($this->data->all(), $validations,[
         	'name.required'     			=> 'Plot Name is Required.',
         	'slug.required'     			=> 'Plot Slug is Required.',
@@ -120,5 +129,77 @@ class Validate
 			'key_points.required'			=> 'Key Points for a plot is required.',
         ]);
         return $validator;
+	}
+
+	public function addslider($action='add'){
+    	$validations = [
+            'image' 		        => $this->validation('photo'),
+    	];
+		if($action == 'edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'image.required'     			=> 'Slider Image is required.',
+        	'image.mimes'					=> 'Slider Should be in .jpg,.jpeg,.png format.',
+        ]);
+		return $validator;
+	}
+
+	public function createContactUs($action='add'){
+        $validations = [
+        	'name' 				=> $this->validation('name'),
+			'email'  			=> $this->validation('req_email'),
+            'subject' 		    => $this->validation('name'),
+            'message' 		    => $this->validation('name'),
+    	];
+    	
+        $validator = \Validator::make($this->data->all(), $validations,[
+    		'name.required' 		=>  'Name is required.',
+    		'email.required' 		=>  'E-mail is required.',
+    		'subject.required' 		=>  'Subject is required.',
+    		'message.required' 		=>  'Message is required.',
+
+    	]);
+        return $validator;		
+	}
+
+	public function addsocialmedia(){
+		$validations = [
+        	'url' 				=> $this->validation('url'),
+    	];
+    	
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'url.required'			=>	'Social Media URL is required.',
+		]);
+		return $validator;
+	}
+
+	public function subscriber($action='add'){
+		$validations = [
+        	'email' 				=> $this->validation('req_email'),
+    	];
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'email.required'		=> 	'E-mail is required',
+		]);
+		return $validator;
+	}
+
+	public function addTestimonial($action='add')
+	{
+		$validations = [
+        	'name' 				=> $this->validation('name'),
+        	'image' 			=> $this->validation('photo'),
+        	'description' 		=> $this->validation('name'),
+    	];
+    	if($action == 'edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+		}
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'name.required'     	=> 'Testimonial Name is Required.',
+			'image.required'		=> 'Testimonial Image is required.',
+        	'image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'description.required'	=> 'Testimonial Description is required.',
+		]);
+		return $validator;
 	}
 }

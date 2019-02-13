@@ -41,6 +41,21 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/sliders')}}">
+            <i class="fa fa-fw fa-sliders"></i> <span>Sliders</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/social')}}">
+            <i class="fa fa-fw fa-linkedin-square"></i> <span>Social Media</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/testimonial')}}">
+            <i class="fa fa-fw fa-quote-right"></i> <span>Testimonials</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/logout')}}">
             <i class="fa fa-fw fa-sign-out"></i> <span>Logout</span>
           </a>

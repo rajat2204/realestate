@@ -20,8 +20,8 @@ Route::get('/config', function() { $exitCode = Artisan::call('config:cache'); $e
 
 Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
-
-
+Route::post('contactussubmission','HomeController@contactUs');
+Route::post('subscribe', 'HomeController@Subscribe');
 
 /***********************Admin-Section****************************/
 
@@ -46,4 +46,21 @@ Route::resource('plot', 'PlotController');
 	Route::group(['prefix' => 'plot'],function(){
 		Route::post('/status', 'PlotController@changeStatus');
 	});
+
+/***********************Sliders-Section****************************/
+
+Route::resource('sliders', 'SliderController');
+	Route::group(['prefix' => 'sliders'],function(){
+		Route::post('/status', 'SliderController@changeStatus');
+	});
+
+/***********************Testimonials-Section****************************/
+
+Route::resource('testimonial', 'TestimonialController');
+	Route::group(['prefix' => 'testimonial'],function(){
+		Route::post('/status', 'TestimonialController@changeStatus');
+	});
+
+/***********************Social Media-Section****************************/
+Route::resource('social', 'SocialMediaController');
 });

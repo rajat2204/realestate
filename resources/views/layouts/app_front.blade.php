@@ -31,6 +31,7 @@
     <!-- Slider CSS -->
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/slide-style.css"> -->
     <!-- Nivo Lightbox -->
+    <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/nivo-lightbox.css')}}" >
     <!-- owl carousal css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}" >
@@ -67,6 +68,8 @@
     <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
+    <script src="{{asset('assets/js/script.js')}}"></script>
+    <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
     <!-- [ SLIDER SCRIPT ] -->
     <script type="text/javascript">
        $('.review-slider').owlCarousel({

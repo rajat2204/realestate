@@ -39,6 +39,15 @@
         </div>
 
         <div class="form-group">
+            <div>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="galdel" value="1"/>
+                        Delete Old Gallery Images</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
           <label for="image">Plot Gallery Images:</label>
           <div>
             @if(!empty($gallery))
@@ -55,9 +64,9 @@
         <div class="form-group">
           <label>Select Plot Type:</label>
           <select class="form-control" name="property_type">
-            <option value="" selected disabled hidden>Select Plot Type</option>
-            <option value="sale">Sale</option>
-            <option value="rent">Rent</option>
+            <option value="">Select Plot Type</option>
+            <option <?php if($plot['property_type'] == 'sale'){echo("selected");}?>>sale</option>
+            <option <?php if($plot['property_type'] == 'rent'){echo("selected");}?>>rent</option>
           </select>
         </div>
 
@@ -65,14 +74,14 @@
           <label>Bedrooms:</label>
           <select class="form-control" name="bedrooms">
             <option value="">Select Bedrooms</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
+            <option <?php if($plot['bedrooms'] == '1'){echo("selected");}?>>1</option>
+            <option <?php if($plot['bedrooms'] == '2'){echo("selected");}?>>2</option>
+            <option <?php if($plot['bedrooms'] == '3'){echo("selected");}?>>3</option>
+            <option <?php if($plot['bedrooms'] == '4'){echo("selected");}?>>4</option>
+            <option <?php if($plot['bedrooms'] == '5'){echo("selected");}?>>5</option>
+            <option <?php if($plot['bedrooms'] == '6'){echo("selected");}?>>6</option>
+            <option <?php if($plot['bedrooms'] == '7'){echo("selected");}?>>7</option>
+            <option <?php if($plot['bedrooms'] == '8'){echo("selected");}?>>8</option>
           </select>
         </div>
 

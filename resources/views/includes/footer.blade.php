@@ -13,19 +13,19 @@
           </div>
           <ul class="social-icon">
             <li>
-              <a class="facebook" href="javascript:void(0);"><i class="icon-social-facebook"></i></a>
+              <a class="facebook" href="{{$social[0]['url']}}" target="_blank"><i class="icon-social-facebook"></i></a>
             </li>
             <li>
-              <a class="twitter" href="javascript:void(0);"><i class="icon-social-twitter"></i></a>
+              <a class="twitter" href="{{$social[1]['url']}}" target="_blank"><i class="icon-social-twitter"></i></a>
             </li>
             <li>
-              <a class="instagram" href="javascript:void(0);"><i class="icon-social-instagram"></i></a>
+              <a class="instagram" href="{{$social[2]['url']}}" target="_blank"><i class="icon-social-instagram"></i></a>
             </li>
             <li>
-              <a class="linkedin" href="javascript:void(0);"><i class="icon-social-linkedin"></i></a>
+              <a class="linkedin" href="{{$social[3]['url']}}" target="_blank"><i class="icon-social-linkedin"></i></a>
             </li>
             <li>
-              <a class="google" href="javascript:void(0);"><i class="icon-social-google"></i></a>
+              <a class="google" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
             </li>
           </ul>
           
@@ -47,12 +47,15 @@
         <div class="menus_footer">
             <h3><span style="color: #00b4d9">S</span>ubscribe <span style="color: #00b4d9">H</span>ere !!!</h3>
           </div>
-          <div class="subscribe-news">
-            <input type="text" name="subscribe" placeholder="subscribe">
-            <div class="subscribe-btn">
-              <button class="btn btn-blue"><i class="fa fa-bell"></i></button>
+          <form role="subscribe" action="{{url('subscribe')}}" method="POST" class="form-inline">
+              {{csrf_field()}}
+            <div class="subscribe-news">
+              <input type="email" name="email" placeholder="Subscribe">
+              <div class="subscribe-btn">
+                <button type="button" class="btn btn-blue" data-request="ajax-submit" data-target='[role="subscribe"]'><i class="fa fa-bell"></i></button>
+              </div>
             </div>
-          </div>
+          </form>
       </div>
     </div>
   </div>
@@ -73,19 +76,19 @@
     </div>
     <ul class="social-icon">
         <li>
-          <a class="facebook" href="javascript:void(0);"><i class="icon-social-facebook"></i></a>
+          <a class="facebook" href="{{$social[0]['url']}}" target="_blank"><i class="icon-social-facebook"></i></a>
         </li>
         <li>
-          <a class="twitter" href="javascript:void(0);"><i class="icon-social-twitter"></i></a>
+          <a class="twitter" href="{{$social[1]['url']}}" target="_blank"><i class="icon-social-twitter"></i></a>
         </li>
         <li>
-          <a class="instagram" href="javascript:void(0);"><i class="icon-social-instagram"></i></a>
+          <a class="instagram" href="{{$social[2]['url']}}" target="_blank"><i class="icon-social-instagram"></i></a>
         </li>
         <li>
-          <a class="instagram" href="javascript:void(0);"><i class="icon-social-linkedin"></i></a>
+          <a class="instagram" href="{{$social[3]['url']}}" target="_blank"><i class="icon-social-linkedin"></i></a>
         </li>
         <li>
-          <a class="instagram" href="javascript:void(0);"><i class="icon-social-google"></i></a>
+          <a class="instagram" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
         </li>
     </ul>
 </div>
