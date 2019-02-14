@@ -36,6 +36,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/agent')}}">
+            <i class="fa fa-user-secret"></i><span>Agents</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/plot')}}">
             <i class="fa fa-fw fa-file-image-o"></i> <span>Plot</span>
           </a>
@@ -53,6 +58,16 @@
         <li class="active">
           <a href="{{url('admin/testimonial')}}">
             <i class="fa fa-fw fa-quote-right"></i> <span>Testimonials</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/service')}}">
+            <i class="fa fa-fw fa-quote-right"></i> <span>Services</span>
+          </a>
+        </li>
+        <li class="active">
+          <a href="{{url('admin/contact')}}">
+            <i class="fa fa-phone"></i> <span>Contact Address</span>
           </a>
         </li>
         <li class="active">

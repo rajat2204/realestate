@@ -63,11 +63,11 @@ class TestimonialController extends Controller
                 return ucfirst($item['name']);
             })
             ->editColumn('description',function($item){
-                return str_limit($item['description'],50);
+                return str_limit(strip_tags($item['description']),50);
             })
             ->editColumn('image',function($item){
                 $imageurl = asset("assets/img/testimonials/".$item['image']);
-                return '<img src="'.$imageurl.'" height="80px" width="150px">';
+                return '<img src="'.$imageurl.'" height="70px" width="120px">';
             })
             ->rawColumns(['image','action'])
             ->make(true);

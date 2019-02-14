@@ -86,13 +86,56 @@
         </div>
 
         <div class="form-group">
+          <label>Bathrooms:</label>
+          <select class="form-control" name="bathroom">
+            <option value="">Select Bathrooms</option>
+            <option <?php if($plot['bathroom'] == '1'){echo("selected");}?>>1</option>
+            <option <?php if($plot['bathroom'] == '2'){echo("selected");}?>>2</option>
+            <option <?php if($plot['bathroom'] == '3'){echo("selected");}?>>3</option>
+            <option <?php if($plot['bathroom'] == '4'){echo("selected");}?>>4</option>
+            <option <?php if($plot['bathroom'] == '5'){echo("selected");}?>>5</option>
+            <option <?php if($plot['bathroom'] == '6'){echo("selected");}?>>6</option>
+            <option <?php if($plot['bathroom'] == '7'){echo("selected");}?>>7</option>
+            <option <?php if($plot['bathroom'] == '8'){echo("selected");}?>>8</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Garage:</label>
+          <select class="form-control" name="garage">
+            <option value="">Select Garage</option>
+            <option <?php if($plot['garage'] == '1'){echo("selected");}?>>1</option>
+            <option <?php if($plot['garage'] == '2'){echo("selected");}?>>2</option>
+            <option <?php if($plot['garage'] == '3'){echo("selected");}?>>3</option>
+            <option <?php if($plot['garage'] == '4'){echo("selected");}?>>4</option>
+            <option <?php if($plot['garage'] == '5'){echo("selected");}?>>5</option>
+            <option <?php if($plot['garage'] == '6'){echo("selected");}?>>6</option>
+            <option <?php if($plot['garage'] == '7'){echo("selected");}?>>7</option>
+            <option <?php if($plot['garage'] == '8'){echo("selected");}?>>8</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Plot Area:</label>
           <input type="text" class="form-control" placeholder="Enter Plot Area..." name="area" value="{{!empty($plot['area'])?$plot['area']:''}}">
         </div>
 
         <div class="form-group">
           <label>Plot Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Location..." name="location" value="{{!empty($plot['location'])?$plot['location']:''}}">
+          <input type="text" class="form-control" placeholder="Enter Plot Location..." name="location" value="{{!empty($plot['location'])?$plot['location']:''}}" id="autocomplete">
+          <input type="hidden" name="city" id="city" value="{{!empty($plot['city'])?$plot['city']:''}}">
+          <input type="hidden" name="latitude" id="cityLat" value="{{!empty($plot['latitude'])?$plot['latitude']:''}}">
+          <input type="hidden" name="longitude" id="cityLng" value="{{!empty($plot['longitude'])?$plot['longitude']:''}}">
+        </div>
+
+        <div class="form-group">
+          <label>Select Agent:</label>
+          <select class="form-control" name="agent_id" id="agent_id">
+            <option value="">Select Agent</option>
+            @foreach($agent as $agents)
+              <option value="{{!empty($agents['id'])?$agents['id']:''}}" @if($agents['id'] == $plot['agent_id']) selected @endif >{{!empty($agents['name'])?$agents['name']:''}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="form-group">
@@ -103,6 +146,22 @@
         <div class="form-group">
           <label>Key Points:</label>
           <textarea id="key_points" name="key_points" rows="6" cols="80">{{!empty($plot['key_points'])?$plot['key_points']:''}}</textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              @if($plot['featured'] == 1)
+                <input type="checkbox" name="featured" value="1" id="id" checked>
+                Add to featured Properties
+            </label>
+              @else
+                <label>
+                  <input type="checkbox" name="featured" value="1" autocomplete="off">
+                  Add to featured Properties
+                </label>
+                @endif
+          </div>
         </div>
 
         <div class="box-footer">

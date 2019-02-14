@@ -202,4 +202,56 @@ class Validate
 		]);
 		return $validator;
 	}
+
+	public function addAgent($action='add')
+	{
+		$validations = [
+        	'name' 				=> $this->validation('name'),
+        	'image' 			=> $this->validation('photo'),
+        	'designation' 		=> $this->validation('name'),
+    	];
+    	if($action == 'edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+		}
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'name.required'     	=> 'Agent Name is Required.',
+			'image.required'		=> 'Agent Image is required.',
+        	'image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'designation.required'	=> 'Agent Description is required.',
+		]);
+		return $validator;
+	}
+
+	public function addService($action='add')
+	{
+		$validations = [
+        	'image' 			=> $this->validation('photo'),
+        	'title' 			=> $this->validation('name'),
+        	'description' 		=> $this->validation('name'),
+    	];
+    	if($action == 'edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+		}
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'image.required'		=> 'Service Image is required.',
+        	'image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
+			'title.required'     	=> 'Service Name is Required.',
+        	'description.required'	=> 'Service Description is required.',
+		]);
+		return $validator;
+	}
+
+	public function contactaddress($action='edit'){
+		$validations = [
+        	'address' 				=> $this->validation('name'),
+        	'email'					=> $this->validation('req_email'),
+        	'phone'					=> $this->validation('name'),
+    	];
+		$validator = \Validator::make($this->data->all(), $validations,[
+			'address.required' 				=>  'Please enter your address.',
+			'email.required'				=> 	'Please enter your E-mail.',
+			'phone.required'				=> 	'Please enter your Contact Number.',
+		]);
+		return $validator;
+	}
 }

@@ -106,6 +106,64 @@
 		    },1000)
 		});
 		</script>
+<script type="text/javascript">
+	function geolocate() {
+	 if (navigator.geolocation) {
+	   navigator.geolocation.getCurrentPosition(function(position) {
+	     var geolocation = {
+	       lat: position.coords.latitude,
+	       lng: position.coords.longitude
+	     };
+	    
+	     //console.log(geolocation);
+	     var circle = new google.maps.Circle({
+	       center: geolocation,
+	       radius: position.coords.accuracy
+	     });
+	     autocomplete.setBounds(circle.getBounds());
+	   });
+	 }
+	}  
+	function initAutocomplete1() {
+	    autocomplete = new google.maps.places.Autocomplete(
+	       /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+	       {types: ['geocode']});
+	   console.log(autocomplete);
+	   geolocate();
+	}
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFN6hK1mAT4moig0d3PEVCr4-NJaTrqLA&libraries=places&callback=initAutocomplete1">
+	</script>
+
+	  <script>
+	var placeSearch, autocomplete;
+	var componentForm = {
+	 street_number: 'short_name',
+	 route: 'long_name',
+	 locality: 'long_name',
+	 administrative_area_level_1: 'short_name',
+	 country: 'long_name',
+	 postal_code: 'short_name',
+	 
+	};
+
+
+	function initialize() {
+	      var input = document.getElementById('autocomplete');
+	      var autocomplete = new google.maps.places.Autocomplete(input);
+	    
+	      google.maps.event.addListener(autocomplete, 'place_changed', function () {
+	          var place = autocomplete.getPlace();
+	          document.getElementById('city').value = place.name;
+	          document.getElementById('cityLat').value = place.geometry.location.lat();
+	          document.getElementById('cityLng').value = place.geometry.location.lng();
+
+	      });
+	}
+
+	 google.maps.event.addDomListener(window, 'load', initialize); 
+</script>
 @yield('requirejs')
 
 	</body>

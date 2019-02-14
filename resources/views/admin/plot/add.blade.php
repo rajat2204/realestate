@@ -66,13 +66,56 @@
         </div>
 
         <div class="form-group">
+          <label>Bathrooms:</label>
+          <select class="form-control" name="bathroom">
+            <option value="">Select Bathrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Garage:</label>
+          <select class="form-control" name="garage">
+            <option value="">Select Garage</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Plot Area:</label>
           <input type="text" class="form-control" placeholder="Enter Plot Area..." name="area">
         </div>
 
         <div class="form-group">
           <label>Plot Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Location..." name="location">
+          <input type="text" class="form-control" placeholder="Enter Plot Location..." name="location" id="autocomplete">
+          <input type="hidden" name="city" id="city">
+          <input type="hidden" name="latitude" id="cityLat">
+          <input type="hidden" name="longitude" id="cityLng">
+        </div>
+
+        <div class="form-group">
+          <label>Select Agent:</label>
+          <select class="form-control" name="agent_id" id="agent_id">
+            <option value="">Select Agent</option>
+            @foreach($agent as $agents)
+              <option value="{{!empty($agents->id)?$agents->id:''}}">{{!empty($agents->name)?$agents->name:''}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="form-group">
@@ -83,6 +126,15 @@
         <div class="form-group">
           <label>Key Points:</label>
           <textarea id="key_points" name="key_points" rows="6" cols="80"></textarea>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="featured" value="1" id="id">
+              Add to featured Properties
+            </label>
+          </div>
         </div>
 
         <div class="box-footer">

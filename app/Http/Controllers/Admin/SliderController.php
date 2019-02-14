@@ -69,7 +69,7 @@ class SliderController extends Controller
             })
             ->editColumn('description',function($item){
                 if (!empty($item['description'])) {
-                    return str_limit($item['description'],50);
+                    return str_limit(strip_tags($item['description']),50);
                 }
                 else{
                     return 'N/A';
@@ -77,7 +77,7 @@ class SliderController extends Controller
             })
             ->editColumn('image',function($item){
                 $imageurl = asset("assets/img/Sliders/".$item['image']);
-                return '<img src="'.$imageurl.'" height="80px" width="150px">';
+                return '<img src="'.$imageurl.'" height="70px" width="120px">';
             })
             ->rawColumns(['image','action'])
             ->make(true);

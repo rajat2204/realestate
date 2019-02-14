@@ -1,46 +1,27 @@
-<!-- header section html -->
+<-- header section html -->
+
 <header id="hero-area">
     <!-- Place somewhere in the <body> of your page -->
     <div class="header_wrapper clearfix">
         <div class="vertical_slides">
             <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
-                <li>
-                    <img src="{{url('assets/img/gallery/slide1.jpg')}}" />
-                    <p>Asian Paints</p>
-                </li>
-                <li>
-                    <img src="{{url('assets/img/gallery/slide2.jpg')}}" />
-                    <p>RR Cables</p>
-                </li>
-                <li>
-                    <img src="{{url('assets/img/gallery/slide3.jpg')}}" />
-                    <p>CP Tiles</p>
-                </li>
-                <li>
-                    <img src="{{url('assets/img/gallery/slide4.jpg')}}" />
-                    <p>Water Purifier</p>
-                </li>
+                @foreach($slider as $sliders)
+                  <li>
+                      <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
+                      <p>{{$sliders['title']}}</p>
+                  </li>
+                @endforeach
             </ul>
         </div>
         <div class="horizontal_slider">
             <div id="hero_slider" class="owl-carousel">
-                <div class="item">
-                    <img src="{{url('assets/img/gallery/slide1.jpg')}}" />
-                    <p>THIS SPACE USE FOR MOTIVATE OUR ASSOCIATES AND SCROLLED THEIR B’DAY, ANIVERSARY, ACHIVEMNT MUCH MORE LIKE UPCOMING PROJECTS</p>
-                </div>
-                <div class="item">
-                    <img src="{{url('assets/img/gallery/slide2.jpg')}}" />
-                    <p>THIS SPACE USE FOR MOTIVATE OUR ASSOCIATES AND SCROLLED THEIR B’DAY, ANIVERSARY, ACHIVEMNT MUCH MORE LIKE UPCOMING PROJECTS</p>
-                </div>
-                <div class="item">
-                    <img src="{{url('assets/img/gallery/slide3.jpg')}}" />
-                    <p>THIS SPACE USE FOR MOTIVATE OUR ASSOCIATES AND SCROLLED THEIR B’DAY, ANIVERSARY, ACHIVEMNT MUCH MORE LIKE UPCOMING PROJECTS</p>
-                </div>
-                <div class="item">
-                    <img src="{{url('assets/img/gallery/slide4.jpg')}}" />
-                    <p>THIS SPACE USE FOR MOTIVATE OUR ASSOCIATES AND SCROLLED THEIR B’DAY, ANIVERSARY, ACHIVEMNT MUCH MORE LIKE UPCOMING PROJECTS</p>
-                </div>
+               @foreach($slider as $sliders)
+                  <div class="item">
+                      <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
+                      <p>{{strip_tags($sliders['description'])}}</p>
+                  </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -68,7 +49,7 @@
     </div>
 </section>
   <!-- About Section Start -->
-<section id="filter-section" class="section-padding">
+<section id="filter-search" class="section-padding">
     <div class="container">
         <div class="row">
            <div class="col-md-12 col-sm-12 col-xs-12">
@@ -223,279 +204,62 @@
       </div>
 
       <div class="row">
-
-          <!-- Single Featured Property -->
+          @foreach($plot as $plots)
           <div class="col-12 col-md-6 col-xl-4">
+            <a href="{{url('plot')}}/{{___encrypt($plots['id'])}}">
               <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
                   <!-- Property Thumbnail -->
                   <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature1.jpg')}}" alt="feature">
+                      <img src="{{url('assets/img/plots')}}/{{$plots['featured_image']}}" alt="feature">
 
                       <div class="tag">
-                          <span>For Sale</span>
+                          <span>For {{$plots['property_type']}}</span>
                       </div>
                       <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
+                          <p><i class="fa fa-rupee-sign"></i>{{$plots['price']}}</p>
                       </div>
                   </div>
                   <!-- Property Content -->
                   <div class="feature-text">
                     <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
+                      <h5>{{$plots['name']}}</h5>
+                      <p title="{{$plots['location']}}"><i class="fa fa-map-marker"></i> {{str_limit($plots['location'],40)}}</p>
                     </div>
                     <div class="room-info-warp">
                       <div class="room-info">
                         <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
+                          <p><i class="fa fa-th-large"></i> {{$plots['area']}} Square foot</p>
+                          <p><i class="fa fa-bed"></i> {{$plots['bedrooms']}} Bedrooms</p>
                         </div>
                         <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
+                          <p><i class="fa fa-car"></i> {{$plots['garage']}} Garages</p>
+                          <p><i class="fa fa-bed"></i> {{$plots['bathroom']}} Bathrooms</p>
                         </div>  
                       </div>
                       <div class="room-info">
                         <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
+                          <p><i class="fa fa-user"></i>{{$plots['agent']['name']}}</p>
                         </div>
                         <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
+                          <p><i class="fa fa-clock-o"></i>{{ ___ago($plots['updated_at'])}}</p>
                         </div>  
                       </div>
                     </div>
                     <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
                   </div>
               </div>
+            </a>
           </div>
-
-          <!-- Single Featured Property -->
-          <div class="col-12 col-md-6 col-xl-4">
-              <div class="single-featured-property wow fadeInUp" data-wow-delay="200ms">
-                  <!-- Property Thumbnail -->
-                  <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature5.jpg')}}" alt="feature">
-
-                      <div class="tag">
-                          <span>For Sale</span>
-                      </div>
-                      <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
-                      </div>
-                  </div>
-                  <!-- Property Content -->
-                  <div class="feature-text">
-                    <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
-                    </div>
-                    <div class="room-info-warp">
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
-                        </div>  
-                      </div>
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
-                        </div>  
-                      </div>
-                    </div>
-                    <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Single Featured Property -->
-          <div class="col-12 col-md-6 col-xl-4">
-              <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
-                  <!-- Property Thumbnail -->
-                  <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature7.jpg')}}" alt="feature">
-
-                      <div class="tag">
-                          <span>For Sale</span>
-                      </div>
-                      <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
-                      </div>
-                  </div>
-                  <!-- Property Content -->
-                  <div class="feature-text">
-                    <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
-                    </div>
-                    <div class="room-info-warp">
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
-                        </div>  
-                      </div>
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
-                        </div>  
-                      </div>
-                    </div>
-                    <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Single Featured Property -->
-          <div class="col-12 col-md-6 col-xl-4">
-              <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
-                  <!-- Property Thumbnail -->
-                  <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature1.jpg')}}" alt="feature">
-
-                      <div class="tag">
-                          <span>For Sale</span>
-                      </div>
-                      <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
-                      </div>
-                  </div>
-                  <!-- Property Content -->
-                  <div class="feature-text">
-                    <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
-                    </div>
-                    <div class="room-info-warp">
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
-                        </div>  
-                      </div>
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
-                        </div>  
-                      </div>
-                    </div>
-                    <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Single Featured Property -->
-          <div class="col-12 col-md-6 col-xl-4">
-              <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
-                  <!-- Property Thumbnail -->
-                  <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature5.jpg')}}" alt="feature">
-
-                      <div class="tag">
-                          <span>For Sale</span>
-                      </div>
-                      <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
-                      </div>
-                  </div>
-                  <!-- Property Content -->
-                  <div class="feature-text">
-                    <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
-                    </div>
-                    <div class="room-info-warp">
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
-                        </div>  
-                      </div>
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
-                        </div>  
-                      </div>
-                    </div>
-                    <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
-                  </div>
-              </div>
-          </div>
-
-          <!-- Single Featured Property -->
-          <div class="col-12 col-md-6 col-xl-4">
-              <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
-                  <!-- Property Thumbnail -->
-                  <div class="property-thumb">
-                      <img src="{{url('assets/img/feature/feature6.jpg')}}" alt="feature">
-
-                      <div class="tag">
-                          <span>For Sale</span>
-                      </div>
-                      <div class="list-price">
-                          <p><i class="fa fa-rupee-sign"></i>945 679</p>
-                      </div>
-                  </div>
-                  <!-- Property Content -->
-                  <div class="feature-text">
-                    <div class="text-center feature-title">
-                      <h5>Sofi Berryessa 750 N King Road</h5>
-                      <p><i class="fa fa-map-marker"></i> San Jose, CA 95133</p>
-                    </div>
-                    <div class="room-info-warp">
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-th-large"></i> 500 Square foot</p>
-                          <p><i class="fa fa-bed"></i> 4 Bedrooms</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-car"></i> 1 Garages</p>
-                          <p><i class="fa fa-bed"></i> 2 Bathrooms</p>
-                        </div>  
-                      </div>
-                      <div class="room-info">
-                        <div class="rf-left">
-                          <p><i class="fa fa-user"></i> Gina Wesley</p>
-                        </div>
-                        <div class="rf-right">
-                          <p><i class="fa fa-clock-o"></i> 8 days ago</p>
-                        </div>  
-                      </div>
-                    </div>
-                    <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
-                  </div>
-              </div>
-          </div>
+          @endforeach
       </div>
+      @if(count($plot_featured)>6)
+      <div class="text-center">
+        <a class="btn btn-info" href="{{url('/featuredplots')}}">Load More..</a>
+      </div>
+      @endif
   </div>
 </section>
+
 <section id="service">
   <div id="services">
     <div class="container">
@@ -508,61 +272,23 @@
           </div>
       </div>
       <div class="row">
+        @foreach($service as $services)
         <div class="col-md-4 col-sm-6">
           <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-1.jpg')}}" alt="service"> </div>
+              <div class="service-media"> <img src="{{url('assets/img/services')}}/{{$services['image']}}" alt="service"> </div>
               <div class="service-desc">
-                <h3>New Home Construction</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
+                <h3>{{$services['title']}}</h3>
+                <p>{{strip_tags($services['description'])}}</p>
               </div>
           </div>
         </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-2.jpg')}}" alt="service"> </div>
-              <div class="service-desc">
-                <h3>Home Additions</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-3.jpg')}}" alt="service"> </div>
-              <div class="service-desc">
-                <h3>Bathroom Remodels</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-4.jpg')}}" alt="service"> </div>
-              <div class="service-desc">
-                <h3>Kitchen Remodels</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-5.jpg')}}" alt="service"> </div>
-              <div class="service-desc">
-                <h3>Windows &amp; Doors</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <div class="our_services">
-              <div class="service-media"> <img src="{{url('assets/img/services/service-6.jpg')}}" alt="service"> </div>
-              <div class="service-desc">
-                <h3>Decks &amp; Porches</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.</p>
-              </div>
-          </div>
-        </div>
+        @endforeach
       </div>
+      @if(count($service_load)>6)
+      <div class="text-center">
+        <a class="btn btn-info" href="{{url('/services')}}">Load More..</a>
+      </div>
+      @endif
     </div>
   </div>
 </section>
@@ -582,57 +308,19 @@
       <div>
         <div class="row">
           <div class="col-md-12">
-            <div class="owl-carousel" id="our-agent"> 
+            <div class="owl-carousel" id="our-agent">
+              @foreach($agent as $agents)
                 <div class="item agentSpace">
                   <div>
-                    <img src="{{url('assets/img/agent/1.jpg')}}" alt="agent">
+                    <img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent">
                     <div class="overlay"></div>
                   </div>
                   <div class="agentContent">
-                    <div class="agent_name">Preeti</div>
-                    <div class="agent_name">Property</div>
+                    <div class="agent_name">{{$agents['name']}}</div>
+                    <div class="agent_name">{{$agents['designation']}}</div>
                   </div>
                 </div>
-                 <div class="item agentSpace">
-                  <div>
-                    <img src="{{url('assets/img/agent/2.jpg')}}" alt="agent">
-                    <div class="overlay"></div>
-                  </div>
-                  <div class="agentContent">
-                    <div class="agent_name">Saumya</div>
-                    <div class="agent_name">Property</div>
-                  </div>
-                </div>
-                 <div class="item agentSpace">
-                  <div>
-                    <img src="{{url('assets/img/agent/3.jpg')}}" alt="agent">
-                    <div class="overlay"></div>
-                  </div>
-                  <div class="agentContent">
-                    <div class="agent_name">Preeti</div>
-                    <div class="agent_name">Property</div>
-                  </div>
-                </div>
-                 <div class="item agentSpace">
-                  <div>
-                    <img src="{{url('assets/img/agent/4.jpg')}}" alt="agent">
-                    <div class="overlay"></div>
-                  </div>
-                  <div class="agentContent">
-                    <div class="agent_name">Preeti</div>
-                    <div class="agent_name">Property</div>
-                  </div>
-                </div>
-                 <div class="item agentSpace">
-                  <div>
-                    <img src="{{url('assets/img/agent/5.jpg')}}" alt="agent">
-                    <div class="overlay"></div>
-                  </div>
-                  <div class="agentContent">
-                    <div class="agent_name">Rajat</div>
-                    <div class="agent_name">Property</div>
-                  </div>
-                </div>
+              @endforeach
               </div>
             </div>
         </div> 
@@ -640,7 +328,7 @@
   </div>
 </section>
     <!-- Portfolio Section -->
-<section id="gallery" class="gallery-wrap">
+<!-- <section id="gallery" class="gallery-wrap">
   
   <div class="container"> 
   <div class="row">
@@ -775,7 +463,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
     <!-- Portfolio Section Ends -->
      
 <section class="review-section set-bg" style="background-image: url(assets/img/review-bg.jpg); background-size: cover;">
@@ -816,61 +504,17 @@
 
         </div> -->
         <div class="row">
+            @foreach($testimonial as $testimonials)
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/01.jpg')}}" alt=""> </div>
+              <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt=""> </div>
               <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."</p>
-                <div class="testimonial-meta"> - John Doe </div>
+                <p>"{{strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')}}"</p>
+                <div class="testimonial-meta">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</div>
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/02.jpg')}}" alt=""> </div>
-              <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis."</p>
-                <div class="testimonial-meta"> - Johnathan Doe </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/03.jpg')}}" alt=""> </div>
-              <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."</p>
-                <div class="testimonial-meta"> - John Doe </div>
-              </div>
-            </div>
-          </div>
-          <div class="row"> </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/04.jpg')}}" alt=""> </div>
-              <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."</p>
-                <div class="testimonial-meta"> - Johnathan Doe </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/05.jpg')}}" alt=""> </div>
-              <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."</p>
-                <div class="testimonial-meta"> - John Doe </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="testimonial">
-              <div class="testimonial-image"> <img src="{{url('assets/img/testimonials/06.jpg')}}" alt=""> </div>
-              <div class="testimonial-content">
-                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis."</p>
-                <div class="testimonial-meta"> - Johnathan Doe </div>
-              </div>
-            </div>
-          </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -947,19 +591,20 @@
                 <div class="contact-icon">
                   <i class="fa fa-map-marker"></i>
                 </div>
-                <p>A-102 1<sup>st </sup> floor sector 65 Noida , 201301</p>
+
+                <p>{{!empty($contact[0]['address'])?$contact[0]['address']:''}}</p>
               </div>
               <div class="single-contact">
                 <div class="contact-icon">
                   <i class="fa fa-envelope"></i>
                 </div>
-                <p><a href="mailto:devdrishtiinfrahomes@gmail.com">devdrishtiinfrahomes@gmail.com</a></p>
+                <p><a href="mailto:{{!empty($contact[0]['email'])?$contact[0]['email']:''}}">{{!empty($contact[0]['email'])?$contact[0]['email']:''}}</a></p>
               </div>
               <div class="single-contact">
                 <div class="contact-icon">
                   <i class="fa fa-phone"></i>
                 </div>
-                <p><a href="tel:+91-7510085144">+91-7510085144</a></p>
+                <p><a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a></p>
               </div>
             </div>
           </div>
@@ -971,4 +616,4 @@
     </div>
   </div>   
 </section>
-    <!-- Contact Section End -->
+    <!-- Contact Section End

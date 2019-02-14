@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Plots;
+use App\Models\Agents;
 use App\Models\Plots_Gallery;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -63,6 +64,12 @@ class PlotController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('property_type',function($item){
+                return ucfirst($item['property_type']);
+            })
+            ->editColumn('location',function($item){
+                return ucfirst(str_limit($item['location'],30));
+            })
             ->editColumn('price',function($item){
                 return 'Rs.'.' ' .($item['price']);
             })
@@ -71,7 +78,7 @@ class PlotController extends Controller
             })
             ->editColumn('featured_image',function($item){
                 $imageurl = asset("assets/img/plots/".$item['featured_image']);
-                return '<img src="'.$imageurl.'" height="100px" width="120px">';
+                return '<img src="'.$imageurl.'" height="70px" width="100px">';
             })
             ->rawColumns(['featured_image','action'])
             ->make(true);
@@ -85,6 +92,8 @@ class PlotController extends Controller
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Plot Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'area','name' => 'area','title' => 'Plot Area','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'location','name' => 'location','title' => 'Plot Location','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_type','name' => 'property_type','title' => 'Plot Type','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'price','name' => 'price','title' => 'Plot Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
@@ -99,6 +108,7 @@ class PlotController extends Controller
     public function create()
     {
         $data['view'] = 'admin.plot.add';
+        $data['agent'] = Agents::where('status', '=', 'active')->get();
         return view('admin.home',$data);
     }
 
@@ -116,13 +126,16 @@ class PlotController extends Controller
         }else{
             $data = new Plots();
             $data->fill($request->all());
-
+            
             if ($file = $request->file('featured_image')){
                 $photo_name = time().$request->file('featured_image')->getClientOriginalName();
                 $file->move('assets/img/plots',$photo_name);
                 $data['featured_image'] = $photo_name;
             }
-            $data['status'] = 'active';
+
+            if ($request->featured == 1){
+                $data->featured = 1;
+            }
 
             $data->save();
             $lastid = $data->id;
@@ -168,8 +181,10 @@ class PlotController extends Controller
     {
         $data['view'] = 'admin.plot.edit';
         $id = ___decrypt($id);
-        $data['plot'] = _arefy(Plots::where('id',$id)->first());
+        $where = ' id = '.$id;
+        $data['plot'] = _arefy(Plots::list('single',$where));
         $data['gallery'] = _arefy(Plots_Gallery::where('plot_id',$id)->get());
+        $data['agent'] = Agents::where('status', '=', 'active')->get();
         // dd($data['plot']);
         return view('admin.home',$data);
     }
@@ -201,6 +216,12 @@ class PlotController extends Controller
             if ($request->galdel == 1){
                 $gal = Plots_Gallery::where('plot_id',$id);
                 $gal->delete();
+            }
+
+            if ($request->featured == 1){
+                $input['featured'] = 1;
+            }else{
+                $input['featured'] = NULL;
             }
 
             $plot->update($input);

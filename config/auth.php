@@ -71,7 +71,7 @@ return [
         // ],
         'users' => [
          'driver' => 'database',
-         'table' => 'users1',
+         'table' => 'users_realestate',
      ],
 
         // 'users' => [

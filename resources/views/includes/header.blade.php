@@ -2,7 +2,7 @@
   <div class="header_strip">
       <div class="phone_header">
           <i class="fa fa-phone"></i>
-          <a href="tel:+91-7510085144">+91-7510085144</a>
+          <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
       </div>
      <ul>
          <li><a href="javascript:void(0)">Sign Up</a></li>
@@ -61,7 +61,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#filter-section">
+                  <a class="nav-link" href="#filter-search" class="page-scroll">
                     <i class="fa fa-search"></i>
                   </a>
                 </li>

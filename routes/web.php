@@ -22,6 +22,8 @@ Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
 Route::post('contactussubmission','HomeController@contactUs');
 Route::post('subscribe', 'HomeController@Subscribe');
+Route::get('featuredplots', 'HomeController@featuredPlots');
+Route::get('services', 'HomeController@allServices');
 
 /***********************Admin-Section****************************/
 
@@ -61,6 +63,24 @@ Route::resource('testimonial', 'TestimonialController');
 		Route::post('/status', 'TestimonialController@changeStatus');
 	});
 
+/***********************Agents-Section****************************/
+
+Route::resource('agent', 'AgentController');
+	Route::group(['prefix' => 'agent'],function(){
+		Route::post('/status', 'AgentController@changeStatus');
+	});
+
+/***********************Services-Section****************************/
+
+Route::resource('service', 'ServiceController');
+	Route::group(['prefix' => 'service'],function(){
+		Route::post('/status', 'ServiceController@changeStatus');
+	});
+
 /***********************Social Media-Section****************************/
 Route::resource('social', 'SocialMediaController');
+
+/***********************Contact-Address-Section****************************/
+Route::resource('contact', 'ContactController');
+
 });

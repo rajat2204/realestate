@@ -538,6 +538,76 @@
         return $html;
     }
 
+    function ___ago($timestamp){
+        if(1/*(int)$timestamp > 0*/){
+            //type cast, current time, difference in timestamps
+            if(!empty(strtotime($timestamp))){
+                $current_time   = \Carbon\Carbon::parse($timestamp);
+                $current_time   = $current_time->tz('Asia/Kolkata');
+                $timestamp      = $current_time->toDateTimeString();
+                $timestamp      = strtotime($timestamp);
+                $timestamp      = (int) $timestamp;
+
+                $current_time   = date('Y-m-d H:i:s');
+                $current_time   = \Carbon\Carbon::parse($current_time);
+                $current_time   = $current_time->tz('Asia/Kolkata');
+                $current_time   = $current_time->toDateTimeString();
+                $current_time   = strtotime($current_time);
+
+                $diff           = $current_time - $timestamp;
+                $intervals      = array (
+                    'year' => 31556926, 'month' => 2629744, 'week' => 604800, 'day' => 86400, 'hour' => 3600, 'minute'=> 60
+                );
+
+                //now we just find the difference
+                if ($diff < 5){
+                    return 'Just Now';
+                }
+
+                if ($diff < 10){
+                    return 'Few seconds ago';
+                }
+
+                if ($diff < 59){
+                    return $diff == 1 ? $diff . ' second ago' : $diff . ' seconds ago';
+                }
+
+                if ($diff >= 60 && $diff < $intervals['hour']){
+                    $diff = floor($diff/$intervals['minute']);
+                    return $diff == 1 ? $diff . ' minute ago' : $diff . ' minutes ago';
+                }
+
+                if ($diff >= $intervals['hour'] && $diff < $intervals['day']){
+                    $diff = floor($diff/$intervals['hour']);
+                    return $diff == 1 ? $diff . ' hour ago' : $diff . ' hours ago';
+                }
+
+                if ($diff >= $intervals['day'] && $diff < $intervals['week']){
+                    $diff = floor($diff/$intervals['day']);
+                    return $diff == 1 ? $diff . ' day ago' : $diff . ' days ago';
+                }
+
+                if ($diff >= $intervals['week'] && $diff < $intervals['month']){
+                    $diff = floor($diff/$intervals['week']);
+                    return $diff == 1 ? $diff . ' week ago' : $diff . ' weeks ago';
+                }
+
+                if ($diff >= $intervals['month'] && $diff < $intervals['year']){
+                    $diff = floor($diff/$intervals['month']);
+                    return $diff == 1 ? $diff . ' month ago' : $diff . ' months ago';
+                }
+
+                if ($diff >= $intervals['year']){
+                    $diff = floor($diff/$intervals['year']);
+                    // return $diff == 1 ? $diff . ' year ago' : $diff . ' years ago';
+                    return 'Posted '. date('M d,Y', ($timestamp) ) ;
+                }
+            }
+        }else{
+            return N_A;
+        }
+    }
+
     function ___getmenu($section,$format,$active_class,$active_list = false,$active_value= false, $query_string = null,$footer=null){
         $html = "";
         $current_name = "";
