@@ -123,7 +123,81 @@ $(document).ready(function(){
         }
       });
         // }
-       
+      $(document).ready(function(){
+      var winWidth = $(window).width();
+      // showWidth( "window", $( window ).width() );
+        if (winWidth>991) {
+           $("#vertical_slider2").mCustomScrollbar({
+              axis:"y", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+      //         callbacks:{
+      //   onOverflowY:function(){
+      //     var opt=$(this).data("mCS").opt;
+      //     if(opt.mouseWheel.axis!=="y") opt.mouseWheel.axis="y";
+      //   },
+      //   onOverflowX:function(){
+      //     var opt=$(this).data("mCS").opt;
+      //     if(opt.mouseWheel.axis!=="x") opt.mouseWheel.axis="x";
+        
+          });
+        }
+        else{
+          $("#vertical_slider2").mCustomScrollbar({
+              axis:"x", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+          });
+        }
+      });
+
+      /*on mobile slider*/
+
+      $(document).ready(function(){
+      var winWidth = $(window).width();
+      // showWidth( "window", $( window ).width() );
+        if (winWidth>991) {
+           $("#vertical_slider_mobile").mCustomScrollbar({
+              axis:"y", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+    
+          });
+        }
+        else{
+          $("#vertical_slider_mobile").mCustomScrollbar({
+              axis:"x", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+          });
+        }
+      });
+        // }
+      $(document).ready(function(){
+      var winWidth = $(window).width();
+      // showWidth( "window", $( window ).width() );
+        if (winWidth>991) {
+           $("#vertical_slider_mobile2").mCustomScrollbar({
+              axis:"y", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+    
+          });
+        }
+        else{
+          $("#vertical_slider_mobile2").mCustomScrollbar({
+              axis:"x", // horizontal scrollbar
+              scrollButtons:{enable:true},
+              theme:"light-thick",
+              scrollbarPosition:"outside"
+          });
+        }
+      });
 
 
         // hero slider js

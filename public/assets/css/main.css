@@ -148,6 +148,7 @@ ul li, ol li {
 }
 /*.room-info p .fa-bath:after{
   content: "\f2cd";
+
 }*/
 a.room-price i:before {
     content: "\f156";
@@ -482,7 +483,9 @@ a.back-to-top:hover, a.back-to-top:focus {
   margin-top: 18px;
   border-color: #00b4d9 !important;
 }
-
+.horizontal_slider img {
+    height: 290px;
+}
 .timeline li:first-child i {
   font-size: 20px;
   float: left;
@@ -496,7 +499,24 @@ a.back-to-top:hover, a.back-to-top:focus {
   height: 50px;
   text-align: center;
 }
-
+.vertical_slides_mobile{
+  display: none;
+}
+.vertical_slides_mobile2{
+  display: none;
+}
+.vertical_slides .mCSB_outside + .mCSB_scrollTools{
+  right: -12px;
+}
+.vertical_slides2 .mCSB_outside + .mCSB_scrollTools {
+    right: -12px;
+}
+.vertical_slides2 {
+    display: inline-block;
+    float: left;
+    width: 300px;
+    padding-top: 20px;
+}
 .navbar-brand {
   position: relative;
   padding: 0px;
@@ -2448,6 +2468,9 @@ header#header {
 .flexslider {
     border: 0;
 }
+.header_wrapper_mobile{
+  display: none;
+}
 @media (max-width: 768px) {
   /*#about img {
     margin: 50px 0;
@@ -2463,8 +2486,8 @@ header#header {
     padding-top: 20px;
 }
 .horizontal_slider{
-  width: calc(100% - 340px);
-  float: right;
+  width: calc(100% - 640px);
+  float: left;
 }
 .header_wrapper {
     padding: 80px 0 20px;
@@ -2480,13 +2503,14 @@ header#header {
 }
 div#hero_slider {
     width: 100%;
-    padding-top: 25px;
+    padding-top: 35px;
+    padding-left: 20px;
     padding-right: 15px;
 }
 .horizontal_slider .item p {
     background: #00b3d7;
     padding: 6px 20px;
-    min-height: 58px;
+    min-height: 70px;
     font-size: 15px;
 }
 header#header {
@@ -2506,7 +2530,20 @@ header#header {
 .vertical_slides .mCSB_scrollTools .mCSB_buttonDown {
     transform: rotate(45deg);
 }
+.vertical_slides2 .mCSB_scrollTools .mCSB_buttonUp, 
+.vertical_slides2 .mCSB_scrollTools .mCSB_buttonDown {
+    height: 15px;
+    width: 15px;
+    border: 2px solid #000;
+    border-left: 0;
+    border-top: 0;
+    transform: rotate(-135deg);
+    margin-top: 5px;
+}
 
+.vertical_slides2 .mCSB_scrollTools .mCSB_buttonDown {
+    transform: rotate(45deg);
+}
 .slides li {
     padding: 4px 15px;
 }
@@ -2747,6 +2784,11 @@ header#header {
 }
 .share_with a{
   color: #fff;
+  display: inline-block;
+  width: 100%;
+  line-height: 27px;
+  height: 100%;
+  vertical-align: middle;
 }
 .fixed-social-icon .social-icon li {
     display: block;

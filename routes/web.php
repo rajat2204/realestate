@@ -24,6 +24,7 @@ Route::post('contactussubmission','HomeController@contactUs');
 Route::post('subscribe', 'HomeController@Subscribe');
 Route::get('featuredplots', 'HomeController@featuredPlots');
 Route::get('services', 'HomeController@allServices');
+Route::get('plot/{id}','HomeController@singlePlotView');
 
 /***********************Admin-Section****************************/
 

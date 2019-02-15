@@ -42,6 +42,7 @@ class HomeController extends Controller
         $data['view']='front.all-featured-plots';
         $where = 'featured = "1" AND status = "active"';
         $data['plot_featured'] = _arefy(Plots::list('array',$where,['*'],'id-desc'));
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -51,12 +52,22 @@ class HomeController extends Controller
         $data['view']='front.all-services';
         $where = 'status = "active"';
         $data['service_load'] = _arefy(Services::list('array',$where,['*'],'id-asc'));
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        return view('front_home',$data);
+    }
+
+    public function singlePlotView(Request $request)
+    {
+        $data['view'] = 'front.single-plot-view';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
     }
 
     public function aboutUs(Request $request){
     	$data['view']='front.aboutus';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
 		return view('front_home',$data);
     }

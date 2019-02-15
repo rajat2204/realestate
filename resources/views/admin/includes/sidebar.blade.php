@@ -62,7 +62,7 @@
         </li>
         <li class="active">
           <a href="{{url('admin/service')}}">
-            <i class="fa fa-fw fa-quote-right"></i> <span>Services</span>
+            <i class="fa fa-bandcamp"></i> <span>Services</span>
           </a>
         </li>
         <li class="active">

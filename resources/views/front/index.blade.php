@@ -7,22 +7,33 @@
             <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
                 @foreach($slider as $sliders)
-                  <li>
-                      <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
-                      <p>{{$sliders['title']}}</p>
-                  </li>
+                <li>
+                    <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
+                    <p>{{$sliders['title']}}</p>
+                </li>
                 @endforeach
             </ul>
         </div>
         <div class="horizontal_slider">
             <div id="hero_slider" class="owl-carousel">
-               @foreach($slider as $sliders)
-                  <div class="item">
-                      <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
-                      <p>{{strip_tags($sliders['description'])}}</p>
-                  </div>
+              @foreach($slider as $sliders)
+                <div class="item">
+                    <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
+                    <p>{{strip_tags($sliders['description'])}}</p>
+                </div>
                 @endforeach
             </div>
+        </div>
+        <div class="vertical_slides2">
+            <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
+                data-mcs-theme="dark">
+                @foreach($slider as $sliders)
+                <li>
+                    <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
+                    <p>{{$sliders['title']}}</p>
+                </li>
+                @endforeach
+            </ul>
         </div>
     </div>
 </header>
@@ -328,7 +339,7 @@
   </div>
 </section>
     <!-- Portfolio Section -->
-<!-- <section id="gallery" class="gallery-wrap">
+<section id="gallery" class="gallery-wrap">
   
   <div class="container"> 
   <div class="row">
@@ -463,7 +474,7 @@
       </div>
     </div>
   </div>
-</section> -->
+</section>
     <!-- Portfolio Section Ends -->
      
 <section class="review-section set-bg" style="background-image: url(assets/img/review-bg.jpg); background-size: cover;">
