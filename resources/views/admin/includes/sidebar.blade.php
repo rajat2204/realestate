@@ -47,7 +47,7 @@
         </li>
         <li class="active">
           <a href="{{url('admin/sliders')}}">
-            <i class="fa fa-fw fa-sliders"></i> <span>Sliders</span>
+            <i class="fa fa-sliders"></i> <span>Sliders</span>
           </a>
         </li>
         <li class="active">

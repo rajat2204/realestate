@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Plots;
 use App\Models\Agents;
-use App\Models\Plots_Gallery;
 use Illuminate\Http\Request;
+use App\Models\Plots_Gallery;
+use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -27,9 +28,9 @@ class PlotController extends Controller
 
     public function index(Request $request, Builder $builder){
         $data['view'] = 'admin.plot.list';
-        
-        $plots  = _arefy(Plots::where('status','!=','trashed')->get());
-       
+
+        $where = 'status != "trashed"';
+        $plots  = _arefy(Plots::list('array',$where));
         if ($request->ajax()) {
             return DataTables::of($plots)
             ->editColumn('action',function($item){
@@ -61,6 +62,12 @@ class PlotController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
+            ->editColumn('category_id',function($item){
+                return ucfirst($item['category']['name']);
+            })
+            ->editColumn('agent_id',function($item){
+                return ucfirst($item['agent']['name']);
+            })
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
@@ -89,12 +96,14 @@ class PlotController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'featured_image', 'name' => 'featured_image',"render"=> 'data','title' => 'Plot Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'category_id','name' => 'category_id','title' => 'Category','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Plot Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'area','name' => 'area','title' => 'Plot Area','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'location','name' => 'location','title' => 'Plot Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'property_type','name' => 'property_type','title' => 'Plot Type','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'price','name' => 'price','title' => 'Plot Price','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'agent_id','name' => 'agent_id','title' => 'Agent','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -109,6 +118,7 @@ class PlotController extends Controller
     {
         $data['view'] = 'admin.plot.add';
         $data['agent'] = Agents::where('status', '=', 'active')->get();
+        $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
         return view('admin.home',$data);
     }
 
@@ -185,7 +195,7 @@ class PlotController extends Controller
         $data['plot'] = _arefy(Plots::list('single',$where));
         $data['gallery'] = _arefy(Plots_Gallery::where('plot_id',$id)->get());
         $data['agent'] = Agents::where('status', '=', 'active')->get();
-        // dd($data['plot']);
+        $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
         return view('admin.home',$data);
     }
 

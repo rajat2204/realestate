@@ -85,6 +85,7 @@ class Validate
 
 	public function addPlot($action='add'){
 		$validations = [
+			'category_id'		=> $this->validation('name'),
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('plots')]),
 			'price'  			=> $this->validation('price'),
@@ -93,8 +94,11 @@ class Validate
 			'gallery.*'			=> $this->validation('gallery'),
 			'property_type'		=> $this->validation('name'),
 			'bedrooms'			=> $this->validation('name'),
+			'bathroom'			=> $this->validation('name'),
+			'garage'			=> $this->validation('name'),
 			'area'				=> $this->validation('area'),
 			'location'			=> $this->validation('name'),
+			'agent_id'			=> $this->validation('name'),
 			'description'		=> $this->validation('description'),
 			'key_points'		=> $this->validation('key_points'),
     	];
@@ -108,6 +112,7 @@ class Validate
 			]);
 		}
     	$validator = \Validator::make($this->data->all(), $validations,[
+    		'category_id.required'			=> 'Property Category is required.',
         	'name.required'     			=> 'Plot Name is Required.',
         	'slug.required'     			=> 'Plot Slug is Required.',
         	'slug.unique'     				=> 'This Plot Slug has already been taken.',
@@ -122,9 +127,12 @@ class Validate
 			'gallery.*.max' 				=> 'Gallery Images should not be greater than 2MB.',
 			'property_type.required'		=> 'Plot Type is required.',
 			'bedrooms.required'				=> 'Number of bedrooms in a plot is required.',
+			'bathroom.required'				=> 'Number of bathroom in a plot is required.',
+			'garage.required'				=> 'Number of garage in a plot is required.',
 			'area.required'					=> 'Area of a plot is required.',
 			'area.numeric'					=> 'Area of a plot must be numeric.',
 			'location.required'				=> 'Location of a plot is required.',
+			'agent_id.required'				=> 'Property Agent is required.',
 			'description.required'			=> 'Description of a Plot is required.',
 			'key_points.required'			=> 'Key Points for a plot is required.',
         ]);
@@ -134,6 +142,9 @@ class Validate
 	public function addslider($action='add'){
     	$validations = [
             'image' 		        => $this->validation('photo'),
+            'position'				=> $this->validation('name'),
+            'title'					=> $this->validation('name'),
+            'description'			=> $this->validation('name'),
     	];
 		if($action == 'edit'){
 			$validations['image'] 	= $this->validation('photo_null');
@@ -141,6 +152,9 @@ class Validate
         $validator = \Validator::make($this->data->all(), $validations,[
         	'image.required'     			=> 'Slider Image is required.',
         	'image.mimes'					=> 'Slider Should be in .jpg,.jpeg,.png format.',
+        	'title.required'				=> 'Slider Title is required.',
+        	'description.required'			=> 'Slider Description is required.',
+        	'position.required'				=> 'Slider position is required.',
         ]);
 		return $validator;
 	}

@@ -27,6 +27,16 @@
           <textarea id="description" name="description" rows="6" cols="80"></textarea>
         </div>
 
+        <div class="form-group">
+          <label>Select Slider Position:</label>
+          <select class="form-control" name="position">
+            <option value="">Select Slider Position</option>
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+            <option value="center">Center</option>
+          </select>
+        </div>
+
         <div class="box-footer">
           <a href="{{url('admin/sliders')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-slider"]' class="btn btn-info pull-right">Submit</button>

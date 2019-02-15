@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Agents;
 use App\Models\Plots;
-use App\Models\Sliders;
+use App\Models\Agents;
+use App\Models\Contact;
 use App\Models\Services;
 use App\Models\ContactUs;
-use App\Models\Contact;
 use App\Models\SocialMedia;
 use App\Models\Subscribers;
 use App\Models\Testimonials;
 use Illuminate\Http\Request;
+use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
 use Validations\Validate as Validations;
 
@@ -27,7 +27,7 @@ class HomeController extends Controller
         $data['testimonial'] = _arefy(Testimonials::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('status','active')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
-        $data['slider'] = _arefy(Sliders::where('status','active')->get());
+        $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
         $data['plot'] = _arefy(Plots::list('array',$where,['*'],'id-desc',6));
         $data['plot_featured'] = _arefy(Plots::list('array',$where,['*'],'id-desc'));
@@ -84,6 +84,16 @@ class HomeController extends Controller
             $data['message']            =!empty($request->message)?$request->message:'';
             
             $inserId = ContactUs::add($data);
+            if($inserId){
+               $emailData               = ___email_settings();
+               $emailData['name']       = !empty($request->name)?$request->name:'';
+               $emailData['email']      = !empty($request->email)?$request->email:'';
+               $emailData['subject']    = !empty($request->subject)?$request->subject:'';
+               $emailData['message']    = !empty($request->message)?$request->message:'';
+               $emailData['date']       = date('Y-m-d H:i:s');
+
+               $emailData['custom_text'] = 'Your Enquiry has been submitted successfully';
+               ___mail_sender($emailData['email'],$request->name,"enquiry_email",$emailData);
 
                 $this->status   = true;
                 $this->modal    = true;
@@ -91,6 +101,7 @@ class HomeController extends Controller
                 $this->message  = "Enquiry has been submitted successfully.";
                 $this->redirect = url('/');
             }
+        }
         return $this->populateresponse();
     }
 

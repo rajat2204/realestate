@@ -1,11 +1,12 @@
-<-- header section html -->
-
 <header id="hero-area">
     <!-- Place somewhere in the <body> of your page -->
     <div class="header_wrapper clearfix">
         <div class="vertical_slides">
             <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
+                @php
+                  $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
+                @endphp  
                 @foreach($slider as $sliders)
                 <li>
                     <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
@@ -16,10 +17,13 @@
         </div>
         <div class="horizontal_slider">
             <div id="hero_slider" class="owl-carousel">
-              @foreach($slider as $sliders)
+              @php
+                $sliders = \App\Models\Sliders::where('position','center')->where('status','active')->get();
+              @endphp
+              @foreach($sliders as $sliderscenter)
                 <div class="item">
-                    <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
-                    <p>{{strip_tags($sliders['description'])}}</p>
+                    <img src="{{url('assets/img/Sliders')}}/{{$sliderscenter['image']}}" />
+                    <p>{{strip_tags($sliderscenter['description'])}}</p>
                 </div>
                 @endforeach
             </div>
@@ -27,10 +31,13 @@
         <div class="vertical_slides2">
             <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
-                @foreach($slider as $sliders)
+                @php
+                  $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
+                @endphp
+                @foreach($sliderright as $slidersrit)
                 <li>
-                    <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
-                    <p>{{$sliders['title']}}</p>
+                    <img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" />
+                    <p>{{$slidersrit['title']}}</p>
                 </li>
                 @endforeach
             </ul>
@@ -82,12 +89,10 @@
                             </div>
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
                               <select class=" form-control" name="filter_propertycategory">
-                                <option value="*">Property Category</option>
-                                <option value="63">Villas</option>
-                                <option value="64">Luxury flats</option>
-                                <option value="65">Office</option>
-                                <option value="66">Complex</option>
-                                <option value="67">Lands</option>
+                                <option value="">Property Category</option>
+                                @foreach($categories as $category)
+                                  <option value="{{!empty($category['id'])?$category['id']:''}}">{{!empty($category['name'])?$category['name']:''}}</option>
+                                @endforeach
                               </select>
                             </div>
                           <!--static code start-->
@@ -149,25 +154,25 @@
                             <label for="input-filter_bed_rooms">Bedrooms</label>
                             <select class="form-control" name="filter_bed_rooms" id="input-filter_bed_rooms">
                               <option value="*">--Select Bedroom--</option>
-                                                              <option value="1">1</option> 
-                          
-                                                              <option value="2">2</option> 
-                          
-                                                              <option value="3">3</option> 
-                          
-                                                              <option value="4">4</option> 
-                          
-                                                              <option value="5">5</option> 
-                          
-                                                              <option value="6">6</option> 
-                          
-                                                              <option value="7">7</option> 
-                          
-                                                              <option value="8">8</option> 
-                          
-                                                              <option value="9">9</option> 
-                          
-                                                              <option value="10">10</option> 
+                                              <option value="1">1</option> 
+          
+                                              <option value="2">2</option> 
+          
+                                              <option value="3">3</option> 
+          
+                                              <option value="4">4</option> 
+          
+                                              <option value="5">5</option> 
+          
+                                              <option value="6">6</option> 
+          
+                                              <option value="7">7</option> 
+          
+                                              <option value="8">8</option> 
+          
+                                              <option value="9">9</option> 
+          
+                                              <option value="10">10</option> 
                           
                                             </select>
                           </div>

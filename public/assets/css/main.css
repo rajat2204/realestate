@@ -515,7 +515,7 @@ a.back-to-top:hover, a.back-to-top:focus {
     display: inline-block;
     float: left;
     width: 300px;
-    padding-top: 20px;
+    padding-top: 0;
 }
 .navbar-brand {
   position: relative;
@@ -2483,14 +2483,14 @@ header#header {
     display: inline-block;
     float: left;
     width: 300px;
-    padding-top: 20px;
+    padding-top: 0;
 }
 .horizontal_slider{
   width: calc(100% - 640px);
   float: left;
 }
 .header_wrapper {
-    padding: 80px 0 20px;
+    /* padding: 80px 0 20px; */
 }
 .slides li img {
     max-width: 100%;
@@ -2503,7 +2503,7 @@ header#header {
 }
 div#hero_slider {
     width: 100%;
-    padding-top: 35px;
+    padding-top: 10px;
     padding-left: 20px;
     padding-right: 15px;
 }
@@ -2747,6 +2747,7 @@ header#header {
 }
 .noticeboard_sec {
     padding: 15px;
+    margin-top: 20px;
     padding-top: 0;
 }
 
@@ -2903,6 +2904,9 @@ header#header {
     z-index: 10;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
+}
+#header-wrap {
+    height: 107px;
 }
 .feature-text {
     border-left: 1px solid #ebebeb;

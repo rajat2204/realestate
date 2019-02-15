@@ -14,6 +14,16 @@
           </div>
         </div>
         <div class="form-group">
+          <label>Select Category:</label>
+          <select class="form-control" name="category_id" id="category_id">
+            <option value="">Select Category</option>
+            @foreach($category as $categories)
+              <option value="{{!empty($categories['id'])?$categories['id']:''}}" @if($categories['id'] == $plot['category_id']) selected @endif >{{!empty($categories['name'])?$categories['name']:''}}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <div class="form-group">
           <label>Plot Name:</label>
           <input type="text" class="form-control" placeholder="Enter Plot Name..." name="name" value="{{!empty($plot['name'])?$plot['name']:''}}">
         </div>

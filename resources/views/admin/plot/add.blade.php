@@ -7,6 +7,17 @@
     <div class="box-body">
       <form role="add-plot" method="POST" action="{!! action('Admin\PlotController@store') !!}">
         {{csrf_field()}}
+
+        <div class="form-group">
+          <label>Select Category:</label>
+          <select class="form-control" name="category_id" id="category_id">
+            <option value="">Select Category</option>
+            @foreach($category as $categories)
+              <option value="{{!empty($categories->id)?$categories->id:''}}">{{!empty($categories->name)?$categories->name:''}}</option>
+            @endforeach
+          </select>
+        </div>
+
         <div class="form-group">
           <label>Plot Name:</label>
           <input type="text" class="form-control" placeholder="Enter Plot Name..." name="name">

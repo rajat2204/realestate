@@ -33,6 +33,16 @@
           <textarea id="description" name="description" rows="6" cols="80">{{!empty($slider['description'])?$slider['description']:''}}</textarea>
         </div>
 
+        <div class="form-group">
+          <label>Select Slider Position:</label>
+          <select class="form-control" name="position">
+            <option value="">Select Slider Position</option>
+            <option <?php if($slider['position'] == 'left'){echo("selected");}?>>Left</option>
+            <option <?php if($slider['position'] == 'right'){echo("selected");}?>>Right</option>
+            <option <?php if($slider['position'] == 'center'){echo("selected");}?>>Center</option>
+          </select>
+        </div>
+
         <div class="box-footer">
           <a href="{{url('admin/sliders')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="edit-slider"]' class="btn btn-info pull-right">Submit</button>

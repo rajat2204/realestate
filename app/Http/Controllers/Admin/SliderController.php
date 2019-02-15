@@ -59,6 +59,9 @@ class SliderController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
+            ->editColumn('position',function($item){
+                return ucfirst($item['position']);
+            })
             ->editColumn('title',function($item){
                 if (!empty($item['title'])) {
                     return ucfirst($item['title']);
@@ -89,6 +92,7 @@ class SliderController extends Controller
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Slider Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'title', 'name' => 'title','title' => 'Slider Title','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'position', 'name' => 'position','title' => 'Slider Position','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Slider Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
