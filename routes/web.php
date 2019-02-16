@@ -22,7 +22,7 @@ Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
 Route::post('contactussubmission','HomeController@contactUs');
 Route::post('subscribe', 'HomeController@Subscribe');
-Route::get('featuredplots', 'HomeController@featuredPlots');
+Route::get('featuredproperty', 'HomeController@featuredProperty');
 Route::get('services', 'HomeController@allServices');
 Route::get('plot/{id}','HomeController@singlePlotView');
 
@@ -45,9 +45,9 @@ Route::resource('categories', 'CategoryController');
 
 /***********************Plot-Section****************************/
 
-Route::resource('plot', 'PlotController');
-	Route::group(['prefix' => 'plot'],function(){
-		Route::post('/status', 'PlotController@changeStatus');
+Route::resource('property', 'PropertyController');
+	Route::group(['prefix' => 'property'],function(){
+		Route::post('/status', 'PropertyController@changeStatus');
 	});
 
 /***********************Sliders-Section****************************/

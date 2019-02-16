@@ -83,11 +83,11 @@ class Validate
         return $validator;		
 	}
 
-	public function addPlot($action='add'){
+	public function addProperty($action='add'){
 		$validations = [
 			'category_id'		=> $this->validation('name'),
             'name' 		        => $this->validation('name'),
-			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('plots')]),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('property')]),
 			'price'  			=> $this->validation('price'),
 			'featured_image'  	=> $this->validation('photo'),
 			'gallery'			=> $this->validation('id'),
@@ -106,7 +106,7 @@ class Validate
 			$validations['featured_image'] 	= $this->validation('photo_null');
 			$validations['gallery'] = $this->validation('gallery_null');
 			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
-				Rule::unique('plots')->where(function($query){
+				Rule::unique('property')->where(function($query){
 					$query->where('id','!=',$this->data->id);
 				})
 			]);

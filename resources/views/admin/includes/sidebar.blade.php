@@ -41,8 +41,8 @@
           </a>
         </li>
         <li class="active">
-          <a href="{{url('admin/plot')}}">
-            <i class="fa fa-fw fa-file-image-o"></i> <span>Plot</span>
+          <a href="{{url('admin/property')}}">
+            <i class="fa fa-fw fa-file-image-o"></i> <span>Property</span>
           </a>
         </li>
         <li class="active">

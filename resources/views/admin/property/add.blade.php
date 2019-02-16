@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="box box-warning">
     <div class="box-header with-border">
-      <h3 class="box-title">Add Plot</h3>
+      <h3 class="box-title">Add Property</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <form role="add-plot" method="POST" action="{!! action('Admin\PlotController@store') !!}">
+      <form role="add-property" method="POST" action="{!! action('Admin\PropertyController@store') !!}">
         {{csrf_field()}}
 
         <div class="form-group">
@@ -19,22 +19,22 @@
         </div>
 
         <div class="form-group">
-          <label>Plot Name:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Name..." name="name">
+          <label>Property Name:</label>
+          <input type="text" class="form-control" placeholder="Enter Property Name..." name="name">
         </div>
 
         <div class="form-group">
-          <label>Plot Slug:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Slug..." name="slug">
+          <label>Property Slug:</label>
+          <input type="text" class="form-control" placeholder="Enter Property Slug..." name="slug">
         </div>
 
         <div class="form-group">
-          <label>Plot Price:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Value..." name="price">
+          <label>Property Price:</label>
+          <input type="text" class="form-control" placeholder="Enter Property Value..." name="price">
         </div>
 
         <div class="form-group">
-          <label for="image">Plot Featured Image:</label>
+          <label for="image">Property Featured Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="featured_image" type="file">
           </div>
@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-group">
-          <label for="image">Plot Gallery Images:</label>
+          <label for="image">Property Gallery Images:</label>
           <div>
               <input type="file" id="gallery" accept="image/*" name="gallery[]" multiple/>
               <br>
@@ -53,11 +53,21 @@
         </div>
 
         <div class="form-group">
-          <label>Select Plot Type:</label>
-          <select class="form-control" name="property_type">
-            <option value="">Select Plot Type</option>
+          <label>Select Property Purpose:</label>
+          <select class="form-control" name="property_purpose">
+            <option value="">Select Property Purpose</option>
             <option value="sale">Sale</option>
             <option value="rent">Rent</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Select Property Type:</label>
+          <select class="form-control" name="property_type">
+            <option value="">Select Property Type</option>
+            <option value="flat">Flat</option>
+            <option value="plot">Plot</option>
+            <option value="house">House</option>
           </select>
         </div>
 
@@ -107,13 +117,13 @@
         </div>
 
         <div class="form-group">
-          <label>Plot Area:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Area..." name="area">
+          <label>Property Area:</label>
+          <input type="text" class="form-control" placeholder="Enter Property Area..." name="area">
         </div>
 
         <div class="form-group">
-          <label>Plot Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Plot Location..." name="location" id="autocomplete">
+          <label>Property Location:</label>
+          <input type="text" class="form-control" placeholder="Enter Property Location..." name="location" id="autocomplete">
           <input type="hidden" name="city" id="city">
           <input type="hidden" name="latitude" id="cityLat">
           <input type="hidden" name="longitude" id="cityLng">
@@ -130,7 +140,7 @@
         </div>
 
         <div class="form-group">
-          <label>Plot Description:</label>
+          <label>Property Description:</label>
           <textarea id="description" name="description" rows="6" cols="80"></textarea>
         </div>
 
@@ -149,8 +159,8 @@
         </div>
 
         <div class="box-footer">
-          <a href="{{url('admin/plot')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-plot"]' class="btn btn-info pull-right">Submit</button>
+          <a href="{{url('admin/property')}}" class="btn btn-default">Cancel</a>
+          <button type="button" data-request="ajax-submit" data-target='[role="add-property"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>

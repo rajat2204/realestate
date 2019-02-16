@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plots;
+use App\Models\Property;
 use App\Models\Agents;
 use App\Models\Contact;
 use App\Models\Services;
@@ -29,19 +29,19 @@ class HomeController extends Controller
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
-        $data['plot'] = _arefy(Plots::list('array',$where,['*'],'id-desc',6));
-        $data['plot_featured'] = _arefy(Plots::list('array',$where,['*'],'id-desc'));
+        $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',6));
+        $data['property_featured'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
         $where = 'status = "active"';
         $data['service'] = _arefy(Services::list('array',$where,['*'],'id-asc',6));
         $data['service_load'] = _arefy(Services::list('array',$where,['*'],'id-asc'));
 		return view('front_home',$data);
     }
 
-    public function featuredPlots(Request $request)
+    public function featuredProperty(Request $request)
     {
-        $data['view']='front.all-featured-plots';
+        $data['view']='front.all-featured-properties';
         $where = 'featured = "1" AND status = "active"';
-        $data['plot_featured'] = _arefy(Plots::list('array',$where,['*'],'id-desc'));
+        $data['property_featured'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);

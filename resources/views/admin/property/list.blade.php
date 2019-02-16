@@ -1,14 +1,14 @@
 <div class="content-wrapper">
 	<ol class="breadcrumb">
-		<li><a href="#">
+		<li><a href="{{url('admin/home')}}">
 			<em class="fa fa-home"></em>
 		</a></li>
-		<li class="active">Plots</li>
+		<li class="active">Property</li>
 	</ol>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Plots</h1>
+			<h1 class="page-header">Property</h1>
 		</div>
 	</div><!--/.row-->
 	<div class="page-content">
@@ -19,10 +19,10 @@
 				<div class="portlet light">
 					<div class="portlet-title">
 						<div class="actions">
-							<a href="{{url('admin/plot/create')}}" class="btn btn-default btn-circle">
+							<a href="{{url('admin/property/create')}}" class="btn btn-default btn-circle">
 							<i class="fa fa-plus"></i>
 							<span class="hidden-480">
-							Add Plot</span>
+							Add Property</span>
 							</a>
 						</div>
 					</div>

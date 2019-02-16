@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Plots extends Model
+class Property extends Model
 {
-    protected $table = 'plots';
-    protected $fillable = ['category_id','name','agent_id','slug','featured_image','price','location','latitude','longitude','property_type','bedrooms','bathroom','garage','area','description','key_points','status','featured','created_at','updated_at'];
+    protected $table = 'property';
+    protected $fillable = ['category_id','name','agent_id','slug','featured_image','price','location','latitude','longitude','property_type','property_purpose','bedrooms','bathroom','garage','area','description','key_points','status','featured','created_at','updated_at'];
 
     public static function change($userID,$data){
         $isUpdated = false;
-        $table_plot = \DB::table('plots');
+        $table_plot = \DB::table('property');
         if(!empty($data)){
             $table_plot->where('id','=',$userID);
             $isUpdated = $table_plot->update($data); 
