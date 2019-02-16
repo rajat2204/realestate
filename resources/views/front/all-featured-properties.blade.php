@@ -1,4 +1,4 @@
-<section class="featured-properties-area" id="property">
+<section class="featured-properties-section" id="property">
   <div class="container">
       <div class="row">
           <div class="col-12">

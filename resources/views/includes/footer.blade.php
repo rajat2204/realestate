@@ -37,7 +37,7 @@
             <h3><span style="color: #00b4d9">O</span>ther <span style="color: #00b4d9">M</span>enus</h3>
           </div>
           <ul class="menus_footer">
-            <li><a href="javascript:void(0);"><i class="fa fa-info-circle"></i>About Us</li>
+            <li><a href="{{url('aboutus')}}"><i class="fa fa-info-circle"></i>About Us</li>
             <li><a href="javascript:void(0);"><i class="fa fa-building"></i>Privacy & Policy</a></li>
             <li><a href="javascript:void(0);"><i class="fa fa-phone"></i>Contact Us</a></li>
           </ul>
