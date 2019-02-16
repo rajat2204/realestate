@@ -223,7 +223,7 @@
             <div class="property-thumb">
               <img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature">
               <div class="tag">
-                  <span>For {{$properties['property_type']}}</span>
+                  <span>For {{$properties['property_purpose']}}</span>
               </div>
               <div class="list-price">
                   <p><i class="fa fa-rupee-sign"></i>{{$properties['price']}}</p>
@@ -238,11 +238,11 @@
                 <div class="room-info">
                   <div class="rf-left">
                     <p><i class="fa fa-th-large"></i> {{$properties['area']}} Square foot</p>
-                    <p><i class="fa fa-bed"></i> {{$properties['bedrooms']}} Bedrooms</p>
+                    <p><i class="fa fa-bed"></i> {{$properties['bedrooms']}} Bedroom(s)</p>
                   </div>
                   <div class="rf-right">
-                    <p><i class="fa fa-car"></i> {{$properties['garage']}} Garages</p>
-                    <p><i class="fa fa-bed"></i> {{$properties['bathroom']}} Bathrooms</p>
+                    <p><i class="fa fa-car"></i> {{$properties['garage']}} Garage(s)</p>
+                    <p><i class="fa fa-bed"></i> {{$properties['bathroom']}} Bathroom(s)</p>
                   </div>  
                 </div>
                 <div class="room-info">
@@ -359,26 +359,27 @@
           <a class="filter active btn btn-common" data-filter="all">
             All 
           </a>
-          <a class="filter btn btn-common" data-filter=".flats">
+          <a class="filter btn btn-common">
             Flats 
           </a>
-          <a class="filter btn btn-common" data-filter=".plots">
+          <a class="filter btn btn-common">
             Plots
           </a>
-          <a class="filter btn btn-common" data-filter=".house">
+          <a class="filter btn btn-common">
             Houses 
           </a>
         </div>
       </div>
       <div class="col-md-12">
         <div id="portfolio" class="row wow fadeInDown" data-wow-delay="0.4s">
-          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mix plots house">
+        @foreach($remarkablework as $remarkableworks)
+          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
             <div class="portfolio-item">
               <div class="shot-item">
-                <img src="{{url('assets/img/services/service-5.jpg')}}" alt="projects"/>  
+                <img src="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects"/>  
                 <div class="overlay">
                   <div class="icons">
-                    <a class="lightbox preview" href="{{url('assets/img/services/service-5.jpg')}}">
+                    <a class="lightbox preview" href="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}">
                       <i class="icon-eye"></i>
                     </a>
                   </div>
@@ -386,6 +387,7 @@
               </div>
             </div>
           </div>
+        @endforeach
         </div>
       </div>
     </div>
