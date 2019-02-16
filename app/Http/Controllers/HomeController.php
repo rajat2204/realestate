@@ -30,6 +30,8 @@ class HomeController extends Controller
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
         $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',6));
+        $where = 'status = "active"';
+        $data['remarkablework'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
         $data['property_featured'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
         $where = 'status = "active"';
         $data['service'] = _arefy(Services::list('array',$where,['*'],'id-asc',6));
