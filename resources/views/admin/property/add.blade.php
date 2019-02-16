@@ -51,71 +51,79 @@
               <p class="small-label">Multiple Image Allowed</p>
           </div>
         </div>
-
-        <div class="form-group">
-          <label>Select Property Purpose:</label>
-          <select class="form-control" name="property_purpose">
-            <option value="">Select Property Purpose</option>
-            <option value="sale">Sale</option>
-            <option value="rent">Rent</option>
-          </select>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Property Purpose:</label>
+              <select class="form-control" name="property_purpose">
+                <option value="">Select Property Purpose</option>
+                <option value="sale">Sale</option>
+                <option value="rent">Rent</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Property Type:</label>
+              <select class="form-control" name="property_type">
+                <option value="">Select Property Type</option>
+                <option value="flat">Flat</option>
+                <option value="plot">Plot</option>
+                <option value="house">House</option>
+              </select>
+            </div>
+          </div>
         </div>
-
-        <div class="form-group">
-          <label>Select Property Type:</label>
-          <select class="form-control" name="property_type">
-            <option value="">Select Property Type</option>
-            <option value="flat">Flat</option>
-            <option value="plot">Plot</option>
-            <option value="house">House</option>
-          </select>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bedrooms:</label>
+              <select class="form-control" name="bedrooms">
+                <option value="">Select Bedrooms</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bathrooms:</label>
+              <select class="form-control" name="bathroom">
+                <option value="">Select Bathrooms</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Garage:</label>
+              <select class="form-control" name="garage">
+                <option value="">Select Garage</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+          </div>
         </div>
-
-        <div class="form-group">
-          <label>Bedrooms:</label>
-          <select class="form-control" name="bedrooms">
-            <option value="">Select Bedrooms</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Bathrooms:</label>
-          <select class="form-control" name="bathroom">
-            <option value="">Select Bathrooms</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Garage:</label>
-          <select class="form-control" name="garage">
-            <option value="">Select Garage</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-          </select>
-        </div>
-
         <div class="form-group">
           <label>Property Area:</label>
           <input type="text" class="form-control" placeholder="Enter Property Area..." name="area">
