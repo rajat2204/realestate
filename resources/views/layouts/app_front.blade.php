@@ -72,6 +72,14 @@
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
     <!-- [ SLIDER SCRIPT ] -->
     <script type="text/javascript">
+
+      $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },isLocal: false
+        });
+      });
        $('.review-slider').owlCarousel({
         loop: true,
         margin: 0,
@@ -118,5 +126,6 @@
           });
        });
     </script>
+    @yield('requirejs')
     </body>
 </html>

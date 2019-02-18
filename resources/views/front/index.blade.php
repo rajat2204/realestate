@@ -146,7 +146,6 @@
                       </div>
                     </div>
                     <!--static code end-->  
-                          
                   
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                       <label for="input-filter_bed_rooms">Bedrooms</label>
@@ -218,26 +217,25 @@
     <div class="row">
       @foreach($property as $properties)
       <div class="col-12 col-md-6 col-xl-4">
-        <a href="{{url('properties')}}/{{___encrypt($properties['id'])}}">
           <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
             <div class="property-thumb">
-              <img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature">
+              <a href="{{url('properties')}}/{{___encrypt($properties['id'])}}"><img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature"></a>
               <div class="tag">
                   <span>For {{$properties['property_purpose']}}</span>
               </div>
-              <div class="list-price">
+              <!-- <div class="list-price">
                   <p><i class="fa fa-rupee-sign"></i>{{$properties['price']}}</p>
-              </div>
+              </div> -->
             </div>
             <div class="feature-text">
               <div class="text-center feature-title">
-                <h5>{{$properties['name']}}</h5>
+                <h5 title="{{$properties['name']}}">{{str_limit($properties['name'],30)}}</h5>
                 <p title="{{$properties['location']}}"><i class="fa fa-map-marker"></i> {{str_limit($properties['location'],40)}}</p>
               </div>
               <div class="room-info-warp">
                 <div class="room-info">
                   <div class="rf-left">
-                    <p><i class="fa fa-th-large"></i> {{$properties['area']}} Square foot</p>
+                    <p><i class="fa fa-th-large"></i> {{number_format($properties['area'])}} Square foot</p>
                     <p><i class="fa fa-bed"></i> {{$properties['bedrooms']}} Bedroom(s)</p>
                   </div>
                   <div class="rf-right">
@@ -254,7 +252,11 @@
                   </div>  
                 </div>
               </div>
-              <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>1,600/month</a>
+              @if($properties['property_purpose'] == 'sale')
+                <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}</a>
+              @else
+                <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
+              @endif
             </div>
           </div>
         </a>
@@ -347,7 +349,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
-            <h2>My Remarkable Works</h2>
+            <h2>Our Remarkable Works</h2>
             <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -356,38 +358,30 @@
     <div class="row">
       <div class="col-md-12">
         <div class="controls text-center">
-          <a class="filter active btn btn-common" data-filter="all">
-            All 
-          </a>
-          <a class="filter btn btn-common">
-            Flats 
-          </a>
-          <a class="filter btn btn-common">
-            Plots
-          </a>
-          <a class="filter btn btn-common">
-            Houses 
-          </a>
+          <button class="filter active btn btn-common filter_type" id="all" data-filter="all">All</button>
+          <button class="filter btn btn-common filter_type" id="flat" data-filter="flats">Flats </button>
+          <button class="filter btn btn-common filter_type" id="plot" data-filter="plots">Plots</button>
+          <button class="filter btn btn-common filter_type" id="house" data-filter="houses">Houses</button>
         </div>
       </div>
-      <div class="col-md-12">
+      <div class="col-md-12 remarkablework" >
         <div id="portfolio" class="row wow fadeInDown" data-wow-delay="0.4s">
-        @foreach($remarkablework as $remarkableworks)
-          <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-            <div class="portfolio-item">
-              <div class="shot-item">
-                <img src="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects"/>  
-                <div class="overlay">
-                  <div class="icons">
-                    <a class="lightbox preview" href="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}">
-                      <i class="icon-eye"></i>
-                    </a>
+          @foreach($remarkablework as $remarkableworks)
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+              <div class="portfolio-item">
+                <div class="shot-item">
+                  <img src="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects"/>  
+                  <div class="overlay">
+                    <div class="icons">
+                      <a class="lightbox preview" href="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}">
+                        <i class="icon-eye"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        @endforeach
+          @endforeach
         </div>
       </div>
     </div>
@@ -517,4 +511,23 @@
     </div>
   </div>   
 </section>
-<!-- Contact Section End
+<!-- Contact Section End -->
+
+@section('requirejs')
+<script type="text/javascript">
+  $(document).ready(function(){
+   $(".filter_type").click(function(){
+    var $value = $(this).attr("id");
+        $.ajax({
+            type: 'POST',
+            url: "{{url('remarkablework')}}",
+            data:{value:$value},
+            success: function(data) {
+                $(".remarkablework").html(data);
+
+            }
+        });
+    });
+  });
+</script>
+@endsection

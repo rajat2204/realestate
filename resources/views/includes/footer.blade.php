@@ -64,7 +64,7 @@
 <!-- </div> -->
 <footer class="footer-bottom footer-area">
   <div class="text-center copyright_footer">
-     <p>Copyright © <a href="https://www.igniterpro.com/">Igniterpro</a> 2018 All Right Reserved</p>
+     <p>Copyright © <a href="https://www.igniterpro.com/" target="_blank">Igniterpro</a> 2018 All Right Reserved</p>
   </div>
 </footer>
 <!-- Footer Section End -->

@@ -49,6 +49,17 @@ class HomeController extends Controller
         return view('front_home',$data);
     }
 
+    public function remarkableWork(Request $request)
+    {
+        $where = 'status = "active"';
+        if($request->value !='all'){
+            $where.=' AND property_type = '."'$request->value'";
+        }
+        $data['remarkablework'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+        $html = view('front.ajaxremarkablework',$data);
+        return response($html);
+    }
+
     public function allServices(Request $request)
     {
         $data['view']='front.all-services';

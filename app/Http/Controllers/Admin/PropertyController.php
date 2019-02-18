@@ -69,7 +69,7 @@ class PropertyController extends Controller
                 return ucfirst($item['agent']['name']);
             })
             ->editColumn('name',function($item){
-                return ucfirst($item['name']);
+                return ucfirst(str_limit($item['name'],30));
             })
             ->editColumn('property_type',function($item){
                 return ucfirst($item['property_type']);

@@ -23,14 +23,45 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label>Property Name:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Name..." name="name" value="{{!empty($property['name'])?$property['name']:''}}">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Name:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Name..." name="name" value="{{!empty($property['name'])?$property['name']:''}}">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Slug:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Slug..." name="slug" value="{{!empty($property['slug'])?$property['slug']:''}}">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Property Slug:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Slug..." name="slug" value="{{!empty($property['slug'])?$property['slug']:''}}">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Property Purpose:</label>
+              <select class="form-control" name="property_purpose">
+                <option value="">Select Property Purpose</option>
+                <option <?php if($property['property_purpose'] == 'sale'){echo("selected");}?>>Sale</option>
+                <option <?php if($property['property_purpose'] == 'rent'){echo("selected");}?>>Rent</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Property Type:</label>
+              <select class="form-control" name="property_type">
+                <option value="">Select Property Type</option>
+                <option <?php if($property['property_type'] == 'flat'){echo("selected");}?>>Flat</option>
+                <option <?php if($property['property_type'] == 'plot'){echo("selected");}?>>Plot</option>
+                <option <?php if($property['property_type'] == 'house'){echo("selected");}?>>House</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -71,101 +102,113 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Select Property Purpose:</label>
-          <select class="form-control" name="property_purpose">
-            <option value="">Select Property Purpose</option>
-            <option <?php if($property['property_purpose'] == 'sale'){echo("selected");}?>>Sale</option>
-            <option <?php if($property['property_purpose'] == 'rent'){echo("selected");}?>>Rent</option>
-          </select>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bedrooms:</label>
+              <select class="form-control" name="bedrooms">
+                <option value="">Select Bedrooms</option>
+                <option <?php if($property['bedrooms'] == '1'){echo("selected");}?>>1</option>
+                <option <?php if($property['bedrooms'] == '2'){echo("selected");}?>>2</option>
+                <option <?php if($property['bedrooms'] == '3'){echo("selected");}?>>3</option>
+                <option <?php if($property['bedrooms'] == '4'){echo("selected");}?>>4</option>
+                <option <?php if($property['bedrooms'] == '5'){echo("selected");}?>>5</option>
+                <option <?php if($property['bedrooms'] == '6'){echo("selected");}?>>6</option>
+                <option <?php if($property['bedrooms'] == '7'){echo("selected");}?>>7</option>
+                <option <?php if($property['bedrooms'] == '8'){echo("selected");}?>>8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Bathrooms:</label>
+              <select class="form-control" name="bathroom">
+                <option value="">Select Bathrooms</option>
+                <option <?php if($property['bathroom'] == '1'){echo("selected");}?>>1</option>
+                <option <?php if($property['bathroom'] == '2'){echo("selected");}?>>2</option>
+                <option <?php if($property['bathroom'] == '3'){echo("selected");}?>>3</option>
+                <option <?php if($property['bathroom'] == '4'){echo("selected");}?>>4</option>
+                <option <?php if($property['bathroom'] == '5'){echo("selected");}?>>5</option>
+                <option <?php if($property['bathroom'] == '6'){echo("selected");}?>>6</option>
+                <option <?php if($property['bathroom'] == '7'){echo("selected");}?>>7</option>
+                <option <?php if($property['bathroom'] == '8'){echo("selected");}?>>8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Garage:</label>
+              <select class="form-control" name="garage">
+                <option value="">Select Garage</option>
+                <option <?php if($property['garage'] == '1'){echo("selected");}?>>1</option>
+                <option <?php if($property['garage'] == '2'){echo("selected");}?>>2</option>
+                <option <?php if($property['garage'] == '3'){echo("selected");}?>>3</option>
+                <option <?php if($property['garage'] == '4'){echo("selected");}?>>4</option>
+                <option <?php if($property['garage'] == '5'){echo("selected");}?>>5</option>
+                <option <?php if($property['garage'] == '6'){echo("selected");}?>>6</option>
+                <option <?php if($property['garage'] == '7'){echo("selected");}?>>7</option>
+                <option <?php if($property['garage'] == '8'){echo("selected");}?>>8</option>
+              </select>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Select Property Type:</label>
-          <select class="form-control" name="property_type">
-            <option value="">Select Property Type</option>
-            <option <?php if($property['property_type'] == 'flat'){echo("selected");}?>>Flat</option>
-            <option <?php if($property['property_type'] == 'plot'){echo("selected");}?>>Plot</option>
-            <option <?php if($property['property_type'] == 'house'){echo("selected");}?>>House</option>
-          </select>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Area:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Area..." name="area" value="{{!empty($property['area'])?$property['area']:''}}">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Agent:</label>
+              <select class="form-control" name="agent_id" id="agent_id">
+                <option value="">Select Agent</option>
+                @foreach($agent as $agents)
+                  <option value="{{!empty($agents['id'])?$agents['id']:''}}" @if($agents['id'] == $property['agent_id']) selected @endif >{{!empty($agents['name'])?$agents['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label>Bedrooms:</label>
-          <select class="form-control" name="bedrooms">
-            <option value="">Select Bedrooms</option>
-            <option <?php if($property['bedrooms'] == '1'){echo("selected");}?>>1</option>
-            <option <?php if($property['bedrooms'] == '2'){echo("selected");}?>>2</option>
-            <option <?php if($property['bedrooms'] == '3'){echo("selected");}?>>3</option>
-            <option <?php if($property['bedrooms'] == '4'){echo("selected");}?>>4</option>
-            <option <?php if($property['bedrooms'] == '5'){echo("selected");}?>>5</option>
-            <option <?php if($property['bedrooms'] == '6'){echo("selected");}?>>6</option>
-            <option <?php if($property['bedrooms'] == '7'){echo("selected");}?>>7</option>
-            <option <?php if($property['bedrooms'] == '8'){echo("selected");}?>>8</option>
-          </select>
-        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Location:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Location..." name="location" value="{{!empty($property['location'])?$property['location']:''}}" id="autocomplete">
+              <input type="hidden" name="city" id="city" value="{{!empty($property['city'])?$property['city']:''}}">
+              <input type="hidden" name="latitude" id="cityLat" value="{{!empty($property['latitude'])?$property['latitude']:''}}">
+              <input type="hidden" name="longitude" id="cityLng" value="{{!empty($property['longitude'])?$property['longitude']:''}}">
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label>Bathrooms:</label>
-          <select class="form-control" name="bathroom">
-            <option value="">Select Bathrooms</option>
-            <option <?php if($property['bathroom'] == '1'){echo("selected");}?>>1</option>
-            <option <?php if($property['bathroom'] == '2'){echo("selected");}?>>2</option>
-            <option <?php if($property['bathroom'] == '3'){echo("selected");}?>>3</option>
-            <option <?php if($property['bathroom'] == '4'){echo("selected");}?>>4</option>
-            <option <?php if($property['bathroom'] == '5'){echo("selected");}?>>5</option>
-            <option <?php if($property['bathroom'] == '6'){echo("selected");}?>>6</option>
-            <option <?php if($property['bathroom'] == '7'){echo("selected");}?>>7</option>
-            <option <?php if($property['bathroom'] == '8'){echo("selected");}?>>8</option>
-          </select>
-        </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Pin Code:</label>
+              <input type="text" class="form-control" placeholder="Enter Pin Code..." name="pincode" value="{{$property['pincode']}}">
+            </div>
+          </div>
+        </div> 
 
-        <div class="form-group">
-          <label>Garage:</label>
-          <select class="form-control" name="garage">
-            <option value="">Select Garage</option>
-            <option <?php if($property['garage'] == '1'){echo("selected");}?>>1</option>
-            <option <?php if($property['garage'] == '2'){echo("selected");}?>>2</option>
-            <option <?php if($property['garage'] == '3'){echo("selected");}?>>3</option>
-            <option <?php if($property['garage'] == '4'){echo("selected");}?>>4</option>
-            <option <?php if($property['garage'] == '5'){echo("selected");}?>>5</option>
-            <option <?php if($property['garage'] == '6'){echo("selected");}?>>6</option>
-            <option <?php if($property['garage'] == '7'){echo("selected");}?>>7</option>
-            <option <?php if($property['garage'] == '8'){echo("selected");}?>>8</option>
-          </select>
-        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Description:</label>
+              <textarea id="description" name="description" rows="6" cols="80">{{!empty($property['description'])?$property['description']:''}}</textarea>
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label>Property Area:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Area..." name="area" value="{{!empty($property['area'])?$property['area']:''}}">
-        </div>
-
-        <div class="form-group">
-          <label>Property Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Location..." name="location" value="{{!empty($property['location'])?$property['location']:''}}" id="autocomplete">
-          <input type="hidden" name="city" id="city" value="{{!empty($property['city'])?$property['city']:''}}">
-          <input type="hidden" name="latitude" id="cityLat" value="{{!empty($property['latitude'])?$property['latitude']:''}}">
-          <input type="hidden" name="longitude" id="cityLng" value="{{!empty($property['longitude'])?$property['longitude']:''}}">
-        </div>
-
-        <div class="form-group">
-          <label>Select Agent:</label>
-          <select class="form-control" name="agent_id" id="agent_id">
-            <option value="">Select Agent</option>
-            @foreach($agent as $agents)
-              <option value="{{!empty($agents['id'])?$agents['id']:''}}" @if($agents['id'] == $property['agent_id']) selected @endif >{{!empty($agents['name'])?$agents['name']:''}}</option>
-            @endforeach
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Property Description:</label>
-          <textarea id="description" name="description" rows="6" cols="80">{{!empty($property['description'])?$property['description']:''}}</textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Key Points:</label>
-          <textarea id="key_points" name="key_points" rows="6" cols="80">{{!empty($property['key_points'])?$property['key_points']:''}}</textarea>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Key Points:</label>
+              <textarea id="key_points" name="key_points" rows="6" cols="80">{{!empty($property['key_points'])?$property['key_points']:''}}</textarea>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

@@ -25,6 +25,7 @@ Route::post('subscribe', 'HomeController@Subscribe');
 Route::get('featuredproperty', 'HomeController@featuredProperty');
 Route::get('services', 'HomeController@allServices');
 Route::get('properties/{id}','HomeController@singlePlotView');
+Route::post('remarkablework','HomeController@remarkableWork');
 
 /***********************Admin-Section****************************/
 
@@ -82,6 +83,6 @@ Route::resource('service', 'ServiceController');
 Route::resource('social', 'SocialMediaController');
 
 /***********************Contact-Address-Section****************************/
-Route::resource('contact', 'ContactController');
 
+Route::resource('contact', 'ContactController');
 });
