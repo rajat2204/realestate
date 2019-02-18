@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 remarkablework" >
   <div id="portfolio" class="row wow fadeInDown" data-wow-delay="0.4s">
     @foreach($remarkablework as $remarkableworks)
       <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">

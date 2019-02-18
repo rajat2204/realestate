@@ -516,18 +516,18 @@
 @section('requirejs')
 <script type="text/javascript">
   $(document).ready(function(){
-   $(".filter_type").click(function(){
-    var $value = $(this).attr("id");
-        $.ajax({
-            type: 'POST',
-            url: "{{url('remarkablework')}}",
-            data:{value:$value},
-            success: function(data) {
-                $(".remarkablework").html(data);
+    $(".filter_type").click(function(){
+      var $value = $(this).attr("id");
+          $.ajax({
+              type: 'POST',
+              url: "{{url('remarkablework')}}",
+              data:{value:$value},
+              success: function(data) {
+                  $(".remarkablework").html(data);
 
-            }
-        });
-    });
+              }
+          });
+      });
   });
 </script>
 @endsection

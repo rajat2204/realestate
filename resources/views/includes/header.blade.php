@@ -20,7 +20,7 @@
             <span class="icon-menu"></span>
             <span class="icon-menu"></span>
           </button>
-          <a href="index.html" class="navbar-brand"><img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes"></a>
+          <a href="{{url('/')}}" class="navbar-brand"><img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes"></a>
         </div> 
          <div class="collapse navbar-collapse" id="main-navbar">
               <ul class="onepage-nev navbar-nav mr-auto w-100 justify-content-end clearfix">
