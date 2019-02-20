@@ -1,0 +1,11 @@
+//var _contextPath = 'https://www.magicbricks.com/357767'; 
+
+var actionString = "https://www.magicbricks.com/bricks/micrositeSendMail.html"
+//var actionString = "https://www.magicbricks.com/property/faces/formmail/sendmail.jsp";
+
+var pathname 	= window.location.pathname;
+var contextPath = pathname.substring( 0, pathname.indexOf("/html") );
+contextPath = "https://www.magicbricks.com/bricks/micrositePropertyListing.html?from=submit&searchType=1&ownerId=";
+//contextPath = "https://www.magicbricks.com/property/faces/jsp/microsite/micrositePropertyListing.jsp?oid=";
+
+

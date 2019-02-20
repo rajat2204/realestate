@@ -3301,6 +3301,108 @@ a.room-price {
 .p-all{
   padding: 30px 10px;
 }
+
+#content_s{
+  height:100%;
+  width:100%;
+  position:relative;
+}
+#content_s .behind{
+position: absolute;
+top:0;
+left:0;
+opacity: 0.6;
+background-color: #000;
+right:0;
+bottom:0;
+
+}
+#content_s .text_s
+{
+  position: absolute;
+  top:10%;
+  opacity: 0.9;
+  line-height:1.813;
+  left:37px;
+  right:0;
+  bottom:0;
+  color:white;
+}
+#content_s  .text_s .btn{
+color:magenta;
+margin-top: 75px;
+
+}
+.text_s ul li{
+  font-size: 16px;
+  list-style-type: disc;
+  list-style-position: inside;
+  font-weight:400;
+}
+
+ .text_s .btn:hover{
+  color: white;
+  animation-name: example;
+  animation-duration:4s;
+}
+.text_s span.marking{
+    width: 82px;
+    height: 15px;
+    border-radius: 0px 8px 8px 0px;
+    background-color: #f8e81c;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    position: absolute;
+    text-transform: uppercase;
+    padding: 0px 3px;
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    letter-spacing: 0px;
+    line-height: 15px;
+ }
+ .detai_l{
+    height: 288.8px;
+    background-color: #ffffff;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+    width:100%;
+   
+     }
+    .detai_l{
+      padding: 39px;
+    } 
+.item_list li{
+    color:grey;
+    opacity: 0.8;
+    list-style-type: none;
+ }
+ .item_list li:hover{
+    color:black;
+    font-weight: bold;
+    cursor:pointer;
+    }
+
+@keyframes example{
+  0%{
+    opacity: 0.9;
+    background:linear-gradient(to right, red ,transparent);  
+  }
+  100%{
+    opacity: 0.9;
+    animation-fill-mode: forwards;
+    background:linear-gradient(to right, red ,transparent);  
+  }  
+  }
+   .margiN{
+    margin-left: 119px;
+    padding: 22px;
+    display: block;
+  }
+.margiN img{
+background-color: lightcyan;
+}
+
 @media screen and (max-width: 768px) {
   .navbar-header {
     width: 100%;

@@ -1,0 +1,91 @@
+var contactFormBeanOnLoad = new Object();
+var tempImageList = new Array();
+
+
+
+
+function readCookie(name){
+	  var ca = document.cookie.split(';');
+	  var nameEQ = name + "=";
+	  for(var i=0; i < ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0)==' ') c = c.substring(1, c.length); //delete spaces
+	    if (c.indexOf(nameEQ) == 0){
+	    	retVal=c.substring(nameEQ.length, c.length);
+	    	if(name=='userType' && retVal.indexOf(",")>0)
+	    		return retVal.substring(0, retVal.indexOf(","));
+	    	else if(name=='userEmail'){
+		    	return retVal.replace(/^"(.\*)"$/, '$1');
+		    }
+		    else if(name=='userName'){
+		    	return retVal.replace(/^"(.\*)"$/, '$1');
+		    }
+	    	else
+	    		return retVal;
+	    }
+	   }
+	  return null;
+}
+
+
+function fillContactFormWithCookieData(){
+	var tempName = readCookie("userName");
+	var tempEmail = readCookie("userEmail");
+	var tempMobile = readCookie("userMobile");
+	var tempUserType = readCookie("userType");
+	var tempUserCity = readCookie("userCity");
+	var userMobileCountryVal =  readCookie("userMobileCountry");
+	if(tempName)
+    	document.getElementById("userName").value = tempName;
+    if(tempEmail)
+	    document.getElementById("userEmail").value = tempEmail;
+	if(tempMobile)
+	    document.getElementById("userMobile").value = tempMobile;
+	if(tempUserCity)
+    	document.getElementById("City").value = tempUserCity;
+	    
+		//hide  
+}
+
+
+function createCookie(name, value, hour){
+	var expires = "";
+	if(name=='userType' && value.indexOf(",")>0) {
+		value=value.substring(0, value.indexOf(","));
+	}
+	if (hour) {
+		var date = new Date();
+	    date.setTime(date.getTime()+(hour*60*60*1000));
+	    expires ="";
+	}
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function fillNameAndEmailFromCookies(){
+                var tempName = readCookie("userName");
+                if(!tempName){
+                                tempName = readCookie("userNameflSlider");
+                }
+                var tempEmail = readCookie("userEmail");
+                if(!tempEmail){
+                                tempEmail = readCookie("userEmailflSlider");
+                }
+                var tempMobile = readCookie("userMobile");
+                if(!tempMobile){
+                                tempMobile = readCookie("userMobileflSlider");
+                }
+                if(tempName && tempEmail && tempMobile ){
+                                document.getElementsByName("Name")[0].value = tempName;
+                                document.getElementsByName("Mobile")[0].value = tempMobile; 
+                                tempEmail = tempEmail.replace(/(\r\n|\n|\r)/gm,"");
+                tempEmail= tempEmail.replace(new RegExp('\"', 'g'),"");
+                                document.getElementsByName("Email")[0].value = tempEmail;
+                }
+}
+
+window.onload = fillNameAndEmailFromCookies();
+
+	
+	function trim(s) {
+		return s.replace( /^\s*/, "" ).replace( /\s*$/, "" );
+	}
