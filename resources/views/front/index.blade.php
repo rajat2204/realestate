@@ -9,8 +9,11 @@
           @endphp  
           @foreach($slider as $sliders)
           <li>
-            <img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" />
-            <p>{{$sliders['title']}}</p>
+            <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+            <div class="sliderwrap clearfix">
+              <p class="slider_title">{{$sliders['title']}}</p>
+              <p class="contact_number">+91-{{$sliders['mobile']}}</p>
+            </div>
           </li>
           @endforeach
       </ul>
@@ -36,8 +39,11 @@
         @endphp
         @foreach($sliderright as $slidersrit)
           <li>
-            <img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" />
-            <p>{{$slidersrit['title']}}</p>
+            <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+            <div class="sliderwrap clearfix">
+              <p class="slider_title">{{$slidersrit['title']}}</p>
+              <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
+            </div>
           </li>
         @endforeach
       </ul>
@@ -471,7 +477,7 @@
                     <div class="clearfix"></div> 
                   </div>
                 </div>
-              </div>            
+              </div>
             </form>
           </div>
         </div>

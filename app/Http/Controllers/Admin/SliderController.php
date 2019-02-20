@@ -70,6 +70,14 @@ class SliderController extends Controller
                     return 'N/A';
                 }
             })
+            ->editColumn('mobile',function($item){
+                if (!empty($item['mobile'])) {
+                    return ('+91-'.$item['mobile']);
+                }
+                else{
+                    return 'N/A';
+                }
+            })
             ->editColumn('description',function($item){
                 if (!empty($item['description'])) {
                     return str_limit(strip_tags($item['description']),50);
@@ -92,7 +100,10 @@ class SliderController extends Controller
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Slider Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'title', 'name' => 'title','title' => 'Slider Title','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Slider Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'position', 'name' => 'position','title' => 'Slider Position','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Contact Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Slider Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);

@@ -29,6 +29,8 @@ Route::get('properties','HomeController@allProperties');
 Route::get('testimonials','HomeController@testimonials');
 Route::get('contact','HomeController@contact');
 Route::post('contactussubmission','HomeController@contactUs');
+Route::get('sliders/{slug}','HomeController@enquiry');
+Route::post('enquirysubmission','HomeController@enquirySubmission');
 
 /***********************Admin-Section****************************/
 

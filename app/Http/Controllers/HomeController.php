@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Agents;
 use App\Models\Notice;
 use App\Models\Contact;
+use App\Models\Sliders;
+use App\Models\Enquiry;
 use App\Models\Services;
 use App\Models\Property;
 use App\Models\ContactUs;
@@ -100,10 +102,41 @@ class HomeController extends Controller{
     }
 
     public function aboutUs(Request $request){
-    	$data['view']='front.aboutus';
+        $data['view']='front.aboutus';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
-		return view('front_home',$data);
+        return view('front_home',$data);
+    }
+
+    public function enquiry(Request $request,$slug){
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['slider'] = _arefy(Sliders::where('slug',$slug)->first());
+        $data['view'] = 'front.enquiry';
+        return view('front_home',$data);
+    }
+
+    public function enquirySubmission(Request $request)
+    {
+        $validation = new Validations($request);
+        $validator  = $validation->enquiry();
+        if($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data['slider_name']        =!empty($request->slider_name)?$request->slider_name:'';
+            $data['slider_contact']     =!empty($request->slider_contact)?$request->slider_contact:'';
+            $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
+            $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
+            $data['email']              =!empty($request->email)?$request->email:'';
+            $data['message']            =!empty($request->message)?$request->message:'';
+            
+            $inserId = Enquiry::add($data);
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Enquiry has been submitted successfully.";
+                $this->redirect = url('/');
+            }
+        return $this->populateresponse();
     }
 
     public function contactUs(Request $request){

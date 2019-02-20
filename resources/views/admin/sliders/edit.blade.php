@@ -23,24 +23,60 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Slider Title:</label>
+              <input type="text" class="form-control" placeholder="Enter Slider Title..." name="title" value="{{!empty($slider['title'])?$slider['title']:''}}">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Slider Slug:</label>
+              <input type="text" class="form-control" placeholder="Enter Slider Slug..." name="slug" value="{{!empty($slider['slug'])?$slider['slug']:''}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Slider Position:</label>
+              <select class="form-control" name="position"  id="position">
+                <option value="">Select Slider Position</option>
+                <option value="left" <?php if($slider['position'] == 'left'){echo("selected");}?>>Left</option>
+                <option value="right" <?php if($slider['position'] == 'right'){echo("selected");}?>>Right</option>
+                <option value="center" <?php if($slider['position'] == 'center'){echo("selected");}?>>Center</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            @if($slider['position'] != 'center')
+              <div class="form-group" id="number">
+                <label>Contact Number:</label>
+                <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
+              </div>
+            @else
+              <div class="form-group" id="number" style="display: none;">
+                <label>Contact Number:</label>
+                <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
+              </div>
+            @endif
+          </div>
+        </div>
+
         <div class="form-group">
-          <label>Slider Title:</label>
-          <input type="text" class="form-control" placeholder="Enter Slider Title..." name="title" value="{{!empty($slider['title'])?$slider['title']:''}}">
+          <label>Location:</label>
+          <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete" value="{{!empty($slider['location'])?$slider['location']:''}}">
+          <input type="hidden" name="city" id="city" value="{{!empty($slider['city'])?$slider['city']:''}}">
+          <input type="hidden" name="latitude" id="cityLat" value="{{!empty($slider['latitude'])?$slider['latitude']:''}}">
+          <input type="hidden" name="longitude" id="cityLng" value="{{!empty($slider['longitude'])?$slider['longitude']:''}}">
         </div>
 
         <div class="form-group">
           <label>Slider Description:</label>
           <textarea id="description" name="description" rows="6" cols="80">{{!empty($slider['description'])?$slider['description']:''}}</textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Select Slider Position:</label>
-          <select class="form-control" name="position">
-            <option value="">Select Slider Position</option>
-            <option <?php if($slider['position'] == 'left'){echo("selected");}?>>Left</option>
-            <option <?php if($slider['position'] == 'right'){echo("selected");}?>>Right</option>
-            <option <?php if($slider['position'] == 'center'){echo("selected");}?>>Center</option>
-          </select>
         </div>
 
         <div class="box-footer">
@@ -63,8 +99,21 @@
             }
             reader.readAsDataURL(input.files[0]);
         }
-    }
+      }
 
     CKEDITOR.replace("description");
+
+  $(document).ready(function(){
+    $('#position').on('change', function () {
+       if ( this.value == 'center')
+        {
+          $("#number").hide();
+        }
+        else
+        {
+          $("#number").show();
+        }
+     });
+  });
 </script>
 @endsection

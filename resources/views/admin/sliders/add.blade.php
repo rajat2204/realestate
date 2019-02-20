@@ -17,24 +17,54 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Slider Title:</label>
+              <input type="text" class="form-control" placeholder="Enter Slider Title..." name="title">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Slider Slug:</label>
+              <input type="text" class="form-control" placeholder="Enter Slider Slug..." name="slug">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Slider Position:</label>
+              <select class="form-control" name="position" id="position">
+                <option value="">Select Slider Position</option>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+                <option value="center">Center</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group" id="number">
+              <label>Contact Number:</label>
+              <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile">
+            </div>
+          </div>
+        </div>
+
         <div class="form-group">
-          <label>Slider Title:</label>
-          <input type="text" class="form-control" placeholder="Enter Slider Title..." name="title">
+          <label>Location:</label>
+          <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete">
+          <input type="hidden" name="city" id="city">
+          <input type="hidden" name="latitude" id="cityLat">
+          <input type="hidden" name="longitude" id="cityLng">
         </div>
 
         <div class="form-group">
           <label>Slider Description:</label>
           <textarea id="description" name="description" rows="6" cols="80"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Select Slider Position:</label>
-          <select class="form-control" name="position">
-            <option value="">Select Slider Position</option>
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="center">Center</option>
-          </select>
         </div>
 
         <div class="box-footer">
@@ -60,5 +90,18 @@
     }
 
     CKEDITOR.replace("description");
+
+  $(document).ready(function(){
+    $('#position').on('change', function() {
+      if ( this.value == 'center')
+      {
+        $("#number").hide();
+      }
+      else
+      {
+        $("#number").show();
+      }
+    });
+});
 </script>
 @endsection
