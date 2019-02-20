@@ -53,18 +53,15 @@
   </div>
   <div class="noticeboard_slider">
     <div id="notice_slider" class="owl-carousel">
+      @php
+        $serial_no = 1;
+      @endphp
+    @foreach($notice as $notices)
       <div class="item clearfix">
-        <span class="badge badge-light numbering">1</span>
-        <p class="float-left">Regular Pramotion</p>
+        <span class="badge badge-light numbering">{{$serial_no++}}</span>
+        <p class="float-left">{{$notices['text']}}</p>
       </div>
-      <div class="item clearfix">
-        <span class="badge badge-light numbering">2</span>
-        <p class="float-left">Offers</p>
-      </div>
-      <div class="item clearfix">
-        <span class="badge badge-light numbering">3</span>
-        <p class="float-left">Messages for Company Employee, Customer & Associates</p>
-      </div>
+    @endforeach
     </div>
   </div>
 </section>
@@ -219,7 +216,7 @@
       <div class="col-12 col-md-6 col-xl-4">
           <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
             <div class="property-thumb">
-              <a href="{{url('properties')}}/{{___encrypt($properties['id'])}}"><img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature"></a>
+              <a href="{{url('properties')}}/{{($properties['slug'])}}"><img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature"></a>
               <div class="tag">
                   <span>For {{$properties['property_purpose']}}</span>
               </div>
@@ -235,7 +232,7 @@
               <div class="room-info-warp">
                 <div class="room-info">
                   <div class="rf-left">
-                    <p><i class="fa fa-th-large"></i> {{number_format($properties['area'])}} Square foot</p>
+                    <p><i class="fa fa-building"></i> {{number_format($properties['area'])}} Square foot</p>
                     <p><i class="fa fa-bed"></i> {{$properties['bedrooms']}} Bedroom(s)</p>
                   </div>
                   <div class="rf-right">
@@ -253,9 +250,9 @@
                 </div>
               </div>
               @if($properties['property_purpose'] == 'sale')
-                <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}</a>
+                <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}</a>
               @else
-                <a href="javascript:void(0);" class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
+                <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
               @endif
             </div>
           </div>
@@ -442,7 +439,7 @@
 <section id="contact" class="contact-section">
   <div class="contact-form">
     <div class="container">
-      <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">          
+      <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">
         <div class="col-md-6 col-lg-6 col-sm-12">
           <div class="contact-block">
             <h2>Contact Form</h2>
@@ -523,8 +520,7 @@
               url: "{{url('remarkablework')}}",
               data:{value:$value},
               success: function(data) {
-                  $(".remarkablework").html(data);
-
+                $(".remarkablework").html(data);
               }
           });
       });

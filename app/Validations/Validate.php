@@ -273,4 +273,25 @@ class Validate
 		]);
 		return $validator;
 	}
+
+	public function createNotice($action='add'){
+        $validations = [
+            'text' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('notice')]),
+    	];
+		if($action =='edit'){
+			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+				Rule::unique('notice')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'text.required'     			=> 'Category Name is Required.',
+        	'slug.required'     			=> 'Category Slug is Required.',
+        	'slug.unique'     				=> 'This Category Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        ]);
+        return $validator;		
+	}
 }
