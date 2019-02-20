@@ -24,44 +24,44 @@
         </div> 
          <div class="collapse navbar-collapse" id="main-navbar">
               <ul class="onepage-nev navbar-nav mr-auto w-100 justify-content-end clearfix">
-                <li class="nav-item">
+                <li class="nav-item @if(Request::segment(1)=='') active @endif">
                   <a class="nav-link" href="{{url('/')}}">
                     Home
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item @if(Request::segment(1)=='aboutus') active @endif">
                   <a class="nav-link" href="{{url('aboutus')}}">
                     About Us
                     <!-- <i class="fa fa-search"></i> -->
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#property" class="page-scroll">
+                <li class="nav-item @if(Request::segment(1)=='properties') active @endif">
+                  <a class="nav-link" href="{{url('/properties')}}">
                     Properties
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#service" class="page-scroll">
+                <li class="nav-item @if(Request::segment(1)=='services') active @endif">
+                  <a class="nav-link" href="{{url('/services')}}">
                     Services
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#gallery" class="page-scroll">
+                  <a class="nav-link" href="javascript:void(0);">
                     Projects
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#testimonials" class="page-scroll">
+                <li class="nav-item @if(Request::segment(1)=='testimonials') active @endif">
+                  <a class="nav-link" href="{{url('/testimonials')}}">
                     Testimonials
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#contact" class="page-scroll">
+                <li class="nav-item @if(Request::segment(1)=='contact') active @endif">
+                  <a class="nav-link" href="{{url('/contact')}}">
                     Contact Us
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#filter-search" class="page-scroll">
+                  <a class="nav-link" href="javascript:void(0);-search">
                     <i class="fa fa-search"></i>
                   </a>
                 </li>

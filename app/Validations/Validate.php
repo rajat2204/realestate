@@ -147,20 +147,38 @@ class Validate
 	public function addslider($action='add'){
     	$validations = [
             'image' 		        => $this->validation('photo'),
-            'position'				=> $this->validation('name'),
             'title'					=> $this->validation('name'),
+            'slug'					=> array_merge($this->validation('slug_no_space'),[Rule::unique('sliders')]),
+            'position'				=> $this->validation('name'),
+            'location'				=> $this->validation('name'),
             'description'			=> $this->validation('name'),
     	];
 		if($action == 'edit'){
 			$validations['image'] 	= $this->validation('photo_null');
+			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+				Rule::unique('sliders')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
 		}
         $validator = \Validator::make($this->data->all(), $validations,[
         	'image.required'     			=> 'Slider Image is required.',
         	'image.mimes'					=> 'Slider Should be in .jpg,.jpeg,.png format.',
         	'title.required'				=> 'Slider Title is required.',
+        	'slug.required'     			=> 'Slider Slug is Required.',
+        	'slug.unique'     				=> 'This Slider Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in Slider slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        	'position.required'				=> 'Slider Position is required.',
+        	'location.required'				=> 'Location of a Slider is required.',
         	'description.required'			=> 'Slider Description is required.',
-        	'position.required'				=> 'Slider position is required.',
         ]);
+       
+        if($this->data->position != 'center'){
+        	if(empty($this->data->mobile)){
+		    	$validator->after(function ($validator){
+				   $validator->errors()->add('mobile', 'Contact Number is required.');
+				});
+			}        }
 		return $validator;
 	}
 
@@ -178,6 +196,20 @@ class Validate
     		'subject.required' 		=>  'Subject is required.',
     		'message.required' 		=>  'Message is required.',
 
+    	]);
+        return $validator;		
+	}
+
+	public function enquiry($action='add'){
+        $validations = [
+        	'customer_name' 		=> $this->validation('name'),
+			'customer_contact'  	=> $this->validation('mobile_number'),
+    	];
+    	
+        $validator = \Validator::make($this->data->all(), $validations,[
+    		'customer_name.required' 		=>  'Customer Name is required.',
+    		'customer_contact.required' 	=>  'Customer Contact is required.',
+    		'customer_contact.numeric' 		=>  'Contact Number should be numeric.',
     	]);
         return $validator;		
 	}
@@ -272,5 +304,26 @@ class Validate
 			'phone.required'				=> 	'Please enter your Contact Number.',
 		]);
 		return $validator;
+	}
+
+	public function createNotice($action='add'){
+        $validations = [
+            'text' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('notice')]),
+    	];
+		if($action =='edit'){
+			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+				Rule::unique('notice')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'text.required'     			=> 'Category Name is Required.',
+        	'slug.required'     			=> 'Category Slug is Required.',
+        	'slug.unique'     				=> 'This Category Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        ]);
+        return $validator;		
 	}
 }

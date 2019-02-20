@@ -20,12 +20,17 @@ Route::get('/config', function() { $exitCode = Artisan::call('config:cache'); $e
 
 Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
-Route::post('contactussubmission','HomeController@contactUs');
 Route::post('subscribe', 'HomeController@Subscribe');
 Route::get('featuredproperty', 'HomeController@featuredProperty');
 Route::get('services', 'HomeController@allServices');
-Route::get('properties/{id}','HomeController@singlePlotView');
+Route::get('properties/{slug}','HomeController@singlePlotView');
 Route::post('remarkablework','HomeController@remarkableWork');
+Route::get('properties','HomeController@allProperties');
+Route::get('testimonials','HomeController@testimonials');
+Route::get('contact','HomeController@contact');
+Route::post('contactussubmission','HomeController@contactUs');
+Route::get('sliders/{slug}','HomeController@enquiry');
+Route::post('enquirysubmission','HomeController@enquirySubmission');
 
 /***********************Admin-Section****************************/
 
@@ -85,4 +90,11 @@ Route::resource('social', 'SocialMediaController');
 /***********************Contact-Address-Section****************************/
 
 Route::resource('contact', 'ContactController');
+
+/***********************Notice-Section****************************/
+
+Route::resource('notice', 'NoticeController');
+	Route::group(['prefix' => 'notice'],function(){
+		Route::post('/status', 'NoticeController@changeStatus');
+	});
 });
