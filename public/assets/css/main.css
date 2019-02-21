@@ -3316,10 +3316,15 @@ a.room-price {
 }
 
 #content_s{
-  height:100%;
-  width:100%;
+  /*  height:100%;*/
+  /*width:100%;*/
   position:relative;
 }
+.fg{
+  position: fixed;
+  height:600px;
+}
+
 #content_s .behind{
 position: absolute;
 top:0;
@@ -3328,7 +3333,6 @@ opacity: 0.6;
 background-color: #000;
 right:0;
 bottom:0;
-
 }
 #content_s .text_s
 {
@@ -3341,9 +3345,19 @@ bottom:0;
   bottom:0;
   color:white;
 }
+.imageDetail {
+    margin: 0 0 0 -15px;
+}
+ul.item_list {
+    margin-bottom: 30px;
+}
 #content_s  .text_s .btn{
 color:magenta;
 margin-top: 75px;
+
+}
+.sectionDetails{
+  margin-bottom: 60px;
 
 }
 .text_s ul li{
@@ -3375,16 +3389,31 @@ margin-top: 75px;
     letter-spacing: 0px;
     line-height: 15px;
  }
+ .detai_l h4{
+    font-size: 30px;
+ }
  .detai_l{
-    height: 288.8px;
+    height:238.8px;
     background-color: #ffffff;
     box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
-    width:100%;
-   
-     }
-    .detai_l{
-      padding: 39px;
-    } 
+    padding:50px;
+    margin: 0 auto;
+    width:fit-content;
+    
+   }
+   .detai_l input{
+    border:none;
+    display: block;
+    border-bottom: 2px solid #eee;
+    /*border-bottom: 5px black;*/
+   } 
+   .detai_l .btn{
+    margin: 18px auto;
+    display: block;
+    font-size:12px;
+    padding:5px 9px ;
+   }
+
 .item_list li{
     color:grey;
     opacity: 0.8;
@@ -3395,7 +3424,11 @@ margin-top: 75px;
     font-weight: bold;
     cursor:pointer;
     }
+.datas_show{
+  padding-left:28px;
+  border-left: 1px solid #eee;
 
+}
 @keyframes example{
   0%{
     opacity: 0.9;
@@ -3408,13 +3441,10 @@ margin-top: 75px;
   }  
   }
    .margiN{
-    margin-left: 119px;
+    margin-left:  119px;
     padding: 22px;
     display: block;
   }
-.margiN img{
-background-color: lightcyan;
-}
 
 @media screen and (max-width: 768px) {
   .navbar-header {

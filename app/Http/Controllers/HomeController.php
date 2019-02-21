@@ -71,10 +71,13 @@ class HomeController extends Controller{
         return view('front_home',$data);
     }
 
-    public function singlePlotView(Request $request){
+    public function singlePlotView(Request $request,$slug){
         $data['view'] = 'front.single-plot-view';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $where = 'slug = "'.$slug.'"';
+        $data['property'] = _arefy(Property::list('single',$where));
+        // dd($data['property']);
         return view('front_home',$data);
     }
 
