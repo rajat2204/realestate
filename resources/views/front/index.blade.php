@@ -142,7 +142,7 @@
                       </div>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">  
-                      <label for="input-area"> Area(<span class="sub">Sq Ft</span>)</label>
+                      <label for="input-area"> Area:(<span class="sub">Sq Ft</span>)</label>
                       <div class="attribute price-filter">
                         <input type="hidden" name="route" value="property/category">
 
@@ -151,7 +151,7 @@
                     <!--static code end-->  
                   
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                      <label for="input-filter_bed_rooms">Bedrooms</label>
+                      <label for="input-filter_bed_rooms">Bedrooms:</label>
                       <select class="form-control" name="filter_bed_rooms" id="input-filter_bed_rooms">
                         <option value="*">--Select Bedroom--</option>
                                         <option value="1">1</option> 
@@ -177,7 +177,7 @@
                                       </select>
                     </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <label for="input-filter_bath_rooms">Bathrooms</label>
+                    <label for="input-filter_bath_rooms">Bathrooms:</label>
                       <select class="form-control" name="filter_bath_rooms" id="input-filter_bath_rooms">
                         <option value="*">--Select Bathroom--</option>
                         <option value="1">1</option>            

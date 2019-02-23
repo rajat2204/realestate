@@ -2154,6 +2154,9 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   padding: 8px 10px;
   border: 1px solid #e1e1e1;
 }
+img.form-control.slide-image {
+    height: 170px;
+}
 .submit-button {
     margin-bottom: 20px;
 }
@@ -2882,7 +2885,7 @@ p.contact_number {
     z-index: 1;
 }
 .single-featured-property .property-thumb img{
-  max-height: 230px;
+  height: 230px;
   width: 100%;
 }
 .single-featured-property .property-content .location {

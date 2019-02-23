@@ -67,6 +67,8 @@
     <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
     <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+    <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
