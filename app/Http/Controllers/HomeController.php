@@ -204,4 +204,9 @@ class HomeController extends Controller{
         }
         return $this->populateresponse();
     }
+    public function propertyFinder(){
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['view'] = 'front.property-list';
+        return view('front_home',$data);
+    }
 }
