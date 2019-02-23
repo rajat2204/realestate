@@ -84,6 +84,7 @@ class HomeController extends Controller{
     public function allProperties(Request $request){
         $where = 'status = "active"';
         $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['view'] = 'front.allproperties';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
@@ -92,6 +93,7 @@ class HomeController extends Controller{
     public function testimonials(Request $request){
         $where = 'status = "active"';
         $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc'));
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['view'] = 'front.testimonials';
         return view('front_home',$data); 
@@ -112,14 +114,14 @@ class HomeController extends Controller{
     }
 
     public function enquiry(Request $request,$slug){
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['slider'] = _arefy(Sliders::where('slug',$slug)->first());
         $data['view'] = 'front.enquiry';
         return view('front_home',$data);
     }
 
-    public function enquirySubmission(Request $request)
-    {
+    public function enquirySubmission(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->enquiry();
         if($validator->fails()){
@@ -127,6 +129,8 @@ class HomeController extends Controller{
         }else{
             $data['slider_name']        =!empty($request->slider_name)?$request->slider_name:'';
             $data['slider_contact']     =!empty($request->slider_contact)?$request->slider_contact:'';
+            $data['description']        =!empty($request->description)?$request->description:'';
+            $data['location']            =!empty($request->location)?$request->location:'';
             $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
             $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
             $data['email']              =!empty($request->email)?$request->email:'';
