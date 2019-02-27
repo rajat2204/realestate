@@ -64,8 +64,11 @@ class CompanyController extends Controller
                 return ucfirst($item['name']);
             })
             ->editColumn('image',function($item){
-                $imageurl = asset("assets/img/Company/".$item['image']);
+                $imageurl = asset("assets/img/company/".$item['image']);
                 return '<img src="'.$imageurl.'" height="70px" width="100px">';
+            })
+            ->editColumn('description',function($item){
+                return str_limit(strip_tags($item['description']),50);
             })
             ->rawColumns(['image','action'])
             ->make(true);
@@ -78,6 +81,7 @@ class CompanyController extends Controller
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Company Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Company Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Company Slug','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Company Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -112,8 +116,8 @@ class CompanyController extends Controller
 
             if ($file = $request->file('image')){
                 $photo_name = time().$request->file('image')->getClientOriginalName();
-                $file->move('assets/img/Company',$photo_name);
-                $data['image'] = $photo_name;
+                $file->move('assets/img/company',$photo_name);
+                $company['image'] = $photo_name;
             }
             $company->save();
 
@@ -158,8 +162,7 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $id = ___decrypt($id);
         $validation = new Validations($request);
         $validator  = $validation->createCompany('edit');
@@ -171,8 +174,9 @@ class CompanyController extends Controller
 
             if ($file = $request->file('image')){
                 $photo_name = time().$request->file('image')->getClientOriginalName();
-                $file->move('assets/img/Company',$photo_name);
-                $data['image'] = $photo_name;
+                //pp($photo_name);
+                $file->move('assets/img/company',$photo_name);
+                $input['image'] = $photo_name;
             }
 
             $company->update($input);
