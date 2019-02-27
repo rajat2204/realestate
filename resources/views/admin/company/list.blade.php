@@ -26,14 +26,17 @@
 							</a>
 							<a href="{{url('admin/company/export')}}" class="btn btn-default btn-circle">
 							<i class="fa fa-file-image-o"></i>
-							<span class="hidden-480">
+							<span class="hidden-480" id="btnopen" >
 							Export Company</span>
+
 							</a>
+
 						</div>
 					</div>
+					
 					<div class="portlet-body">
 						<div class="table-container">
-							<table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+							<table class="table table-striped table-bordered table-hover" id="datatable_ajax" class="lifo">
 								{!! $html->table() !!}
 							</table>
 						</div>

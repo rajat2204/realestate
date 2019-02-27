@@ -41,6 +41,17 @@
 	  	<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 	  	<!-- Google Font -->
 	  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	  	
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">  
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">  
+
+	  	<!--Export css-->
+	  	<link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery-ui.css')}}">
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"> 
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">  
+		<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		<link href= "https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css">
 	</head>
 
 	<body class="hold-transition skin-blue sidebar-mini">
@@ -48,9 +59,8 @@
 	    <div class="wrapper">
 	            @yield('content')
 	    </div>
-
 	    <!-- jQuery 3 -->
-		<script src="{{asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
+		<script src="{{asset('assets/js/jquery-min.js')}}"></script>
 		<!-- jQuery UI 1.11.4 -->
 		<script src="{{asset('assets/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
 		<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -90,9 +100,28 @@
 		<script src="{{asset('assets/dist/js/pages/dashboard.js')}}"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="{{asset('assets/dist/js/demo.js')}}"></script>
-		
+		<!-- export js-->	
+
+		<script type="text/javascript" src="{{asset('assets/js/jquery-3.3.1.js')}}"></script>
+		<script type="text/javascript" src="{{asset('assets/js/jquery-ui.js')}}"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js">
+		</script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js">
+		</script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js">	
+		</script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+		<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+
+
+		<!-- export js-->	
 		<script src="{{asset('assets/js/script.js')}}"></script>
 		<script type="text/javascript">
+
+
 		$(function () {
 		    $.ajaxSetup({
 		        headers: {
@@ -100,11 +129,43 @@
 		        },isLocal: false
 		    });
 		});  
-
 		$(document).ready(function(){
+
 		    setTimeout(function(){
 		        $('#cover').fadeOut(500);
-		    },1000)
+		    },1000);
+		$('.lifo').DataTable({
+	        dom: 'Bfrtip',
+    	    buttons: [
+            'excelHtml5',
+            'csvHtml5',
+	    } );	
+
+	    /*	var table = $('.lifo').DataTable();
+			var buttons = new $.fn.dataTable.Buttons(table, {
+			    buttons: [
+			       'copyHtml5',
+			       'excelHtml5',
+			       'csvHtml5',
+			       'pdfHtml5'
+			    ]
+			}).container().appendTo($('#buttons'));
+			});*/
+			// $('.lifo').DataTable( {
+		 //         dom: 'Bfrtip',
+		 //         buttons: [
+		 //              'excel'
+		 //         ]
+		 //     });
+		 // var table = $('.lifo').DataTable();
+			// var buttons = new $.fn.dataTable.Buttons(table, {
+			//     buttons: [
+			//        'copy',
+			//        'excel',
+			//        'csv',
+			//     ]
+			// }).container().appendTo($('#buttons'));
+		
 		});
 		</script>
 <script type="text/javascript">
