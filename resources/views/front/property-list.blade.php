@@ -11,7 +11,7 @@
 			  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 				<div class="head_g clearfix">
 		 			<p >3554 Apartments/Flats for Sale in Lucknow</p>
-		  				<button class="btn btn-sm btn-default text-dark text-small ">
+		  				<button class="btn btn-sm btn-default text-dark ">
 		  					Sort By
 		  				<select class = " hovs">
 							<option> Relevence  </option>
