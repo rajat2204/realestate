@@ -1,10 +1,10 @@
 <div class="content-wrapper">
-	<ol class="breadcrumb">
+	<!-- <ol class="breadcrumb">
 		<li><a href="{{url('admin/home')}}">
 			<em class="fa fa-home"></em>
 		</a></li>
 		<li class="active">Sliders</li>
-	</ol>
+	</ol> -->
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">

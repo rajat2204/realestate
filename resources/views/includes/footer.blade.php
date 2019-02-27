@@ -39,7 +39,7 @@
           <ul class="menus_footer">
             <li><a href="{{url('aboutus')}}"><i class="fa fa-info-circle"></i>About Us</li>
             <li><a href="javascript:void(0);"><i class="fa fa-building"></i>Privacy & Policy</a></li>
-            <li><a href="javascript:void(0);"><i class="fa fa-phone"></i>Contact Us</a></li>
+            <li><a href="{{url('contact')}}"><i class="fa fa-phone"></i>Contact Us</a></li>
           </ul>
         </div>
       </div>

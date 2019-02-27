@@ -130,7 +130,7 @@ class HomeController extends Controller{
             $data['slider_name']        =!empty($request->slider_name)?$request->slider_name:'';
             $data['slider_contact']     =!empty($request->slider_contact)?$request->slider_contact:'';
             $data['description']        =!empty($request->description)?$request->description:'';
-            $data['location']            =!empty($request->location)?$request->location:'';
+            $data['location']           =!empty($request->location)?$request->location:'';
             $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
             $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
             $data['email']              =!empty($request->email)?$request->email:'';
@@ -193,8 +193,8 @@ class HomeController extends Controller{
             if ($subscribe) {
                 $emailData               = ___email_settings();
                 $emailData['email']      = !empty($request->email)?$request->email:'';
-                $data['created_at']          = date('Y-m-d H:i:s');
-                $data['updated_at']          = date('Y-m-d H:i:s');
+                $data['created_at']      = date('Y-m-d H:i:s');
+                $data['updated_at']      = date('Y-m-d H:i:s');
 
             $emailData['custom_text'] = 'You are subscribed successfully';
                ___mail_sender($emailData['email'],$request->date,"subscription",$emailData);
