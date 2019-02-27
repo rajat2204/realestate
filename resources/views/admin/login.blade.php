@@ -24,50 +24,46 @@
 	  	<link rel="stylesheet" href="{{asset('assets/css/sweetalert2.css')}}">
 	  	<!-- Google Font -->
 	</head>
-
-	<body class="hold-transition skin-blue sidebar-mini">
-
-		<div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">SIGN IN TO ENTER</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="login" action="{{url('admin/login')}}" class="form-horizontal" method="post" data-request="enable-enter">
-            	{{csrf_field()}}
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                  <div class="col-sm-10">
-                    <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                  <div class="col-sm-10">
-                    <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Remember me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="button" class="btn btn-default">Forgot Password?</button>
-                <button type="button" data-request="ajax-submit" data-target='[role="login"]' class="btn btn-info pull-right login">Sign in</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
-        </div>
+	
+	<body  class="loginpg">
+		<div class="container ">
+			<div class="row">
+				<div class="box_xs">
+	     	       <form role="login" action="{{url('admin/login')}}"  method="post" data-request="enable-enter">
+	            	{{ csrf_field() }}
+		                <h3 class=" text-center ">Sign in to Proceed</h3>   
+		                <div class="form-row "> 
+		                  <div class="form-group col-md-4  ">
+		                    <label for="inputEmail3" class="control-label whites">Email</label>
+		         		  </div>			
+		                  <div class="form-group col-md-8 ">
+		                    <input type="email" name="email" class=" form-control" id="inputEmail3" placeholder="Email">
+		                   </div> 
+		                 </div>
+		                 <div class="form-row "> 
+		                  <div class="form-group col-md-4 mr-3 text-light">
+		                  	<label for="inputPassword3" class=" control-label whites">Password</label>
+		                   </div>
+		                	<div class="form-group col-md-8"> 
+		                    <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+		                   </div> 
+		                 </div>  
+		                 <div class="form-row "> 
+		                  <div class="form-group col-md-12 whites">
+		                        <input type ="checkbox"> Remember me
+		                   </div>
+		                  </div>	
+		                 <div class="form-row "> 
+		                  <div class="form-group col-md-12">
+		         			<small><a class="nav-link whites">Forget Password ?</a></small>	
+							<button type ="button" class="btn btn-sm login " data-request ="ajax-submit" data-target='[role="login"]' style="background-color: #fc5c65 ;color:whitesmoke"> Sign In</button>	
+		                   </div>
+		                  </div> 
+		            	</form>
+     		         </div>            
+			       </div>
+           	   	</div>
+         	  </div>
 
 	    <!-- jQuery 3 -->
 		<script src="{{asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>

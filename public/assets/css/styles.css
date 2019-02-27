@@ -1,7 +1,6 @@
 body {
 
     /*background: #e8e8e8;*/
-    background-color: #f3f2f2;
     padding-top: 0;
     font-size: 14px;
     color: #444444;
@@ -1845,14 +1844,6 @@ section#products1 {
         position: relative;
     }
 }
-
-
-
-
-
-
-
-
 /*Update CSS*/
 .homepage_wrapper {
     /*padding-top: 80px;*/
@@ -1875,5 +1866,35 @@ section#products1 {
     background: #585757;
     border: 1px solid #585757;
     color: #fff!important;
+}
+body.loginpg{
+background:linear-gradient(rgb(0,0,0,0.7), rgba(0,0,0,0.9) ) ,url('../img/properties/loginpg.jpg') ;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center ,center;
+height:100vh;
+width: 100%;
+}
+.box_xs{
+    margin: 120px auto;
+    height: 300px;
+    width:40%;
+    background-color: #d1d8e0;
+    padding:20px 6px;
+    border-radius: 7px;
+-webkit-box-shadow: 12px 14px 50px 9px rgba(0,0,0,0.75);
+-moz-box-shadow: 12px 14px 50px 9px rgba(0,0,0,0.75);
+box-shadow: 12px 14px 50px 9px rgba(0,0,0,0.75);}
+.box_xs h3{
+    margin-top: 10px;
+    margin-bottom: 18px;
+}
+.form-group label.whites{
+    color:#833471;
+    font-color:white;
+}
+.box_xs .form-row{
+font-size: 14px;
+margin-bottom: 9px;
 }
 /* End Update CSS*/
