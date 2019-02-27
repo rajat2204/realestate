@@ -30,7 +30,7 @@ class Validate
 			'description'       => ['required','string','max:1500'],
 			'key_points'       	=> ['required','string','max:1500'],
 			'title'             => ['required','string'],
-			'profile_picture'   => ['required','mimes:doc,docx,pdf','max:2048'],
+			'profile_picture'   => ['required','mimes:doc,docx,pdf'],
 			'pin_code' 			=> ['nullable','max:6','min:4'],
 			'type' 	            => ['required','string'],
 			'phone' 	        => ['required','string','numeric'],
@@ -38,14 +38,14 @@ class Validate
 			'password'          => ['required','string','max:50'],
 			'price'				=> ['required','numeric'],
 			'start_from'		=> ['required'],
-			'photo'				=> ['required','mimes:jpg,jpeg,png','max:2408'],
+			'photo'				=> ['required','mimes:jpg,jpeg,png'],
 			'photomimes'		=> ['mimes:jpg,jpeg,png','max:2408'],
 			'photo_null'		=> ['nullable'],
 			'slug_no_space'		=> ['required','alpha_dash','max:255'],
 			'password_check'	=> ['required'],
 			'newpassword'		=> ['required','max:10'],
 			'area'				=> ['required','numeric'],
-			'gallery'			=> ['required','mimes:jpg,jpeg,png','max:2048'],
+			'gallery'			=> ['required','mimes:jpg,jpeg,png'],
 			'gallery_null'		=> ['nullable'],
 			'url' 				=> ['required','url'],
 			'pincode' 			=> ['required','min:6','max:6'],
@@ -84,6 +84,33 @@ class Validate
         return $validator;		
 	}
 
+	public function createCompany($action='add'){
+        $validations = [
+            'name' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('company')]),
+            'image' 		    => $this->validation('photo'),
+            'description' 		=> $this->validation('description'),
+    	];
+		if($action =='edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+			$validations['slug'] 	= array_merge($this->validation('slug_no_space'),[
+				Rule::unique('company')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'name.required'     			=> 'Company Name is Required.',
+        	'slug.required'     			=> 'Company Slug is Required.',
+        	'slug.unique'     				=> 'This Company Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in Company slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        	'image.required'				=> 'Company Image is required.',
+        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'description.required'			=> 'Description of a Company is required.',
+        ]);
+        return $validator;		
+	}
+
 	public function addProperty($action='add'){
 		$validations = [
 			'category_id'		=> $this->validation('name'),
@@ -92,6 +119,7 @@ class Validate
 			'property_purpose'	=> $this->validation('name'),
 			'property_type'		=> $this->validation('name'),
 			'price'  			=> $this->validation('price'),
+			'company_id'  		=> $this->validation('name'),
 			'featured_image'  	=> $this->validation('photo'),
 			'gallery'			=> $this->validation('id'),
 			'gallery.*'			=> $this->validation('gallery'),
@@ -102,6 +130,7 @@ class Validate
 			'agent_id'			=> $this->validation('name'),
 			'location'			=> $this->validation('name'),
 			'pincode'			=> $this->validation('pincode'),
+			'possession'		=> $this->validation('id'),
 			'description'		=> $this->validation('description'),
 			'key_points'		=> $this->validation('key_points'),
     	];
@@ -124,12 +153,11 @@ class Validate
 			'property_type.required'		=> 'Property Type is required.',
         	'price.required'				=> 'Price of Property is required.',
         	'price.numeric'					=> 'Price of the Property must be numeric.',
+        	'company_id.required'			=> 'Company is required.',
         	'featured_image.required'		=> 'Property Image is required.',
         	'featured_image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
-        	'featured_image.max' 			=> 'Images should not be greater than 2MB.',
         	'gallery.*.required' 			=> 'Gallery Images are required.',
 			'gallery.*.mimes' 				=> 'Gallery Images should be in jpg,jpeg,png format.',
-			'gallery.*.max' 				=> 'Gallery Images should not be greater than 2MB.',
 			'bedrooms.required'				=> 'Number of bedrooms in a Property is required.',
 			'bathroom.required'				=> 'Number of bathroom in a Property is required.',
 			'garage.required'				=> 'Number of garage in a Property is required.',
@@ -138,6 +166,7 @@ class Validate
 			'agent_id.required'				=> 'Property Agent is required.',
 			'location.required'				=> 'Location of a Property is required.',
 			'pincode.required'				=> 'Pin Code is required.',
+			'possession.required'			=> 'Possession Time is required.',
 			'description.required'			=> 'Description of a Property is required.',
 			'key_points.required'			=> 'Key Points for a Property is required.',
         ]);

@@ -34,7 +34,7 @@
             <!-- /.box-header -->
             <!-- form start -->
             <form role="login" action="{{url('admin/login')}}" class="form-horizontal" method="post" data-request="enable-enter">
-            	{{ csrf_field() }}
+            	{{csrf_field()}}
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Email</label>

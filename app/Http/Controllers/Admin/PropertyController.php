@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Property;
+use App\Models\Company;
 use App\Models\Agents;
 use Illuminate\Http\Request;
 use App\Models\Property_Gallery;
@@ -68,6 +69,9 @@ class PropertyController extends Controller
             ->editColumn('agent_id',function($item){
                 return ucfirst($item['agent']['name']);
             })
+            ->editColumn('company_id',function($item){
+                return ucfirst($item['company']['name']);
+            })
             ->editColumn('name',function($item){
                 return ucfirst(str_limit($item['name'],30));
             })
@@ -100,6 +104,7 @@ class PropertyController extends Controller
             ])
             ->addColumn(['data' => 'featured_image', 'name' => 'featured_image',"render"=> 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'category_id','name' => 'category_id','title' => 'Category','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'company_id','name' => 'company_id','title' => 'Company','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Property Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'area','name' => 'area','title' => 'Property Area','orderable' => false, 'width' => 120])
@@ -121,8 +126,9 @@ class PropertyController extends Controller
     public function create()
     {
         $data['view'] = 'admin.property.add';
-        $data['agent'] = Agents::where('status', '=', 'active')->get();
-        $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
+        $data['agent'] = _arefy(Agents::where('status', '=', 'active')->get());
+        $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
+        $data['category'] = _arefy(PropertyCategories::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 
@@ -197,8 +203,10 @@ class PropertyController extends Controller
         $id = ___decrypt($id);
         $where = ' id = '.$id;
         $data['property'] = _arefy(Property::list('single',$where));
+        // dd($data['property']['possession']);
         $data['gallery'] = _arefy(Property_Gallery::where('plot_id',$id)->get());
         $data['agent'] = Agents::where('status', '=', 'active')->get();
+        $data['company'] = Company::where('status', '=', 'active')->get();
         $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
         return view('admin.home',$data);
     }

@@ -64,9 +64,25 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Property Price:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Value..." name="price" value="{{!empty($property['price'])?$property['price']:''}}">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Price:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Value..." name="price" value="{{!empty($property['price'])?$property['price']:''}}">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Company:</label>
+              <select class="form-control" name="company_id" id="company_id">
+                <option value="">Select Company</option>
+                @foreach($company as $companies)
+                  <option value="{{!empty($companies['id'])?$companies['id']:''}}" @if($companies['id'] == $property['company_id']) selected @endif >{{!empty($companies['name'])?$companies['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -193,7 +209,12 @@
               <input type="text" class="form-control" placeholder="Enter Pin Code..." name="pincode" value="{{$property['pincode']}}">
             </div>
           </div>
-        </div> 
+        </div>
+
+        <div class="form-group">
+          <label>Possession Date:</label>
+          <input type="date" class="form-control" name="possession" value="{{$property['possession']}}">
+        </div>
 
         <div class="row">
           <div class="col-md-6">

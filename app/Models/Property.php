@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $table = 'property';
-    protected $fillable = ['category_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_purpose','bedrooms','bathroom','garage','area','description','key_points','status','featured','created_at','updated_at'];
+    protected $fillable = ['category_id','company_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_purpose','bedrooms','bathroom','garage','area','possession','description','key_points','status','featured','created_at','updated_at'];
 
     public static function change($userID,$data){
         $isUpdated = false;
@@ -27,6 +27,10 @@ class Property extends Model
         return $this->hasOne('App\Models\PropertyCategories','id','category_id');
     }
 
+    public function company(){
+        return $this->hasOne('App\Models\Company','id','company_id');
+    }
+
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit='',$featured=''){
         $table_plots = self::select($keys)
         ->with([
@@ -34,6 +38,9 @@ class Property extends Model
                 $q->select('id','name','image');
             },
             'category' => function($q){
+                $q->select('id','name');
+            },
+            'company' => function($q){
                 $q->select('id','name');
             },
         ]);

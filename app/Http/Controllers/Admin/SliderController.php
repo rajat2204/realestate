@@ -139,7 +139,7 @@ class SliderController extends Controller
             $slider->fill($request->all());
 
             if ($file = $request->file('image')){
-                $photo_name = str_random(3).$request->file('image')->getClientOriginalName();
+                $photo_name = time().$request->file('image')->getClientOriginalName();
                 $file->move('assets/img/Sliders',$photo_name);
                 $slider['image'] = $photo_name;
             }

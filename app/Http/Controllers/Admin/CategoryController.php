@@ -103,7 +103,6 @@ class CategoryController extends Controller
             $propertycategory = new PropertyCategories;
             $propertycategory->fill($request->all());
 
-            $propertycategory['status'] = 'active';
             $propertycategory->save();
            
             $this->status   = true;

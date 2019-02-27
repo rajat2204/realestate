@@ -13,7 +13,7 @@
           <select class="form-control" name="category_id" id="category_id">
             <option value="">Select Category</option>
             @foreach($category as $categories)
-              <option value="{{!empty($categories->id)?$categories->id:''}}">{{!empty($categories->name)?$categories->name:''}}</option>
+              <option value="{{!empty($categories['id'])?$categories['id']:''}}">{{!empty($categories['name'])?$categories['name']:''}}</option>
             @endforeach
           </select>
         </div>
@@ -58,9 +58,25 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Property Price:</label>
-          <input type="text" class="form-control" placeholder="Enter Property Value..." name="price">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Price:</label>
+              <input type="text" class="form-control" placeholder="Enter Property Value..." name="price">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Property Company:</label>
+              <select class="form-control" name="company_id" id="company_id">
+                <option value="">Select Company</option>
+                @foreach($company as $companies)
+                  <option value="{{!empty($companies['id'])?$companies['id']:''}}">{{!empty($companies['name'])?$companies['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
@@ -147,7 +163,7 @@
               <select class="form-control" name="agent_id" id="agent_id">
                 <option value="">Select Agent</option>
                 @foreach($agent as $agents)
-                  <option value="{{!empty($agents->id)?$agents->id:''}}">{{!empty($agents->name)?$agents->name:''}}</option>
+                  <option value="{{!empty($agents['id'])?$agents['id']:''}}">{{!empty($agents['name'])?$agents['name']:''}}</option>
                 @endforeach
               </select>
             </div>
@@ -171,6 +187,11 @@
               <input type="number" class="form-control" placeholder="Enter Pin Code..." name="pincode">
             </div>
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>Possession Date:</label>
+          <input type="date" class="form-control" name="possession">
         </div>
 
         <div class="row">

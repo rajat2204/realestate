@@ -41,6 +41,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/company')}}">
+            <i class="fa fa-building"></i><span>Company</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/property')}}">
             <i class="fa fa-fw fa-file-image-o"></i> <span>Property</span>
           </a>

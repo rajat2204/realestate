@@ -78,6 +78,13 @@ Route::resource('agent', 'AgentController');
 		Route::post('/status', 'AgentController@changeStatus');
 	});
 
+/***********************Company-Section****************************/
+
+Route::resource('company', 'CompanyController');
+	Route::group(['prefix' => 'company'],function(){
+		Route::post('/status', 'CompanyController@changeStatus');
+	});
+
 /***********************Services-Section****************************/
 
 Route::resource('service', 'ServiceController');

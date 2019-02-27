@@ -172,7 +172,7 @@ class TestimonialController extends Controller
             $data = $request->all();
 
             if ($file = $request->file('image')){
-                $photo_name = str_random(3).$request->file('image')->getClientOriginalName();
+                $photo_name = time().$request->file('image')->getClientOriginalName();
                 $file->move('assets/img/testimonials',$photo_name);
                 $data['image'] = $photo_name;
             }
