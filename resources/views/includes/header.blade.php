@@ -4,9 +4,16 @@
           <i class="fa fa-phone"></i>
           <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
       </div>
-      <ul>
-        <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
-        <li><button type="button">Log In</button></li>
+      <ul class="shubhX">
+        @if(Auth::user())
+          <p>Hello,{{Auth::user()->first_name }}&nbsp;&nbsp;</p>
+          <span>  <a href="javascript:void(0);" class="text-warning">
+            <i class="fa fa-sign-out " ></i><span>Logout</span>
+          </a></span>
+        @else
+          <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
+          <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#exampleModalCenter">Log In</button></li>
+        @endif
       </ul>
   </div>
   

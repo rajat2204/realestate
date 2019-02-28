@@ -555,6 +555,47 @@
     </div>
   </div>
 </div>
+<!-- login section-->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{url('login')}}" role="login">
+        {{csrf_field()}}
+        <div class="container far27" >
+          <div class="form-row ">
+            <div class="form-group col-md-12">
+              <label >Username:</label>
+              <input type ="text" placeholder ="Enter your Number"  class="form-control" name ="phone">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12 ">
+              <label> Password:</label>
+              <input type ="password" placeholder ="Enter Password "  class="form-control" name ="password">
+              
+            </div>
+          </div>
+         </div>
+        </div>  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm " data-request="ajax-submit" data-target='[role="login"]'>Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+
+
 
 @section('requirejs')
 <script type="text/javascript">

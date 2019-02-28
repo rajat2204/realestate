@@ -24,7 +24,6 @@ h1, h2, h3, h4 {
   font-weight: 700;
   font-family: "Source Sans Pro", sans-serif;
 }
-
 .script-font {
   font-family: 'Shadows Into Light', cursive;
 }
@@ -3434,6 +3433,16 @@ margin-top: 75px;
  padding:;
   border-left: 1px solid #eee;
 
+}
+.far27{
+  padding:6px 6px;
+}
+ul.shubhX{
+    display: -webkit-inline-box;
+    padding:0px 14px;
+  }
+ul.shubhX p{
+  margin-right:8px;
 }
 @keyframes example{
   0%{

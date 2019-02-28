@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
 use Validations\Validate as Validations;
+use Auth;
 
 class HomeController extends Controller{
     public function __construct(Request $request){
@@ -213,7 +214,7 @@ class HomeController extends Controller{
 
     public function signUp(Request $request){
         $validation = new Validations($request);
-        $validator  = $validation->signUp();
+        $validator  = $validation->signup();
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
@@ -236,7 +237,35 @@ class HomeController extends Controller{
                 $this->message  = "Customer Registered successfully.";
                 $this->redirect = url('/');
         }
-        return $this->populateresponse();    
+        return $this->populateresponse();
+    }
+
+   public function authentication(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->custLogin();
+        if($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+             if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+
+               if(\Auth::user()->user_type == 'user'){
+
+                    $this->status   = true;
+                    $this->modal    = true;
+                    $this->alert    = true;
+                    $this->message  = "Login Successfull!";
+                    $this->redirect = url('/');
+               }else{
+                    \Session::flush();
+                    $this->message  =  $validator->errors()->add('password', 'you are not authorised user.');
+                    return $this->populateresponse();
+               }
+            }
+            else{
+                    $this->message  =  $validator->errors()->add('password', 'User Email or Password is Incorrect.');
+                } 
+        }
+        return $this->populateresponse();
     }
 
     public function propertyFinder(){

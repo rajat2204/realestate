@@ -63,23 +63,37 @@ class Validate
         return $validator;		
 	}
 
-	public function signUp(){
+	public function custLogin(){
+        $validations = [
+            'phone' 		       	 => $this->validation('phone'),
+						'password'       	   => $this->validation('password'),
+			    ];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'phone.required'  		 =>	'Phone is required.',
+        	'phone.numeric'  			 =>	'Phone should be in numeric format',
+					'password.required'    => 'Password is required',
+
+				]);
+        return $validator;		
+	}
+
+	public function signup(){
         $validations = [
             'first_name' 		       => $this->validation('name'),
-						'last_name'       	   => $this->validation('name'),
-						'email'								 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
-						'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
-						'password'       	   	 => $this->validation('password'),
-    		];
+			'last_name'       	   => $this->validation('name'),
+			'email'								 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
+			'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+			'password'       	   	 => $this->validation('password'),
+];
         $validator = \Validator::make($this->data->all(), $validations,[
-					'first_name.required'			=> 'Please Enter your First Name',        	
-					'last_name.required'			=> 'Please Enter your Last Name',      	
-					'email.unique'						=> 'Email is already registered.',   	
-					'phone.required'					=> 'Phone Number is required.',   	
-					'phone.numeric'						=> 'Phone Number should be numeric.',	
-					'phone.unique'						=> 'Phone Number is already registered.',	
-					'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
-					'password.required'				=> 'Password is required.',  	
+			'first_name.required'			=> 'Please Enter your First Name',        	
+			'last_name.required'			=> 'Please Enter your Last Name',      	
+			'email.unique'						=> 'Email is already registered.',   	
+			'phone.required'					=> 'Phone Number is required.',   	
+			'phone.numeric'						=> 'Phone Number should be numeric.',	
+			'phone.unique'						=> 'Phone Number is already registered.',	
+			'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
+			'password.required'				=> 'Password is required.',  	
         ]);
         return $validator;		
 	}
