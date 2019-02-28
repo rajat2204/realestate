@@ -7,7 +7,7 @@
             <img src="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects"/>  
             <div class="overlay">
               <div class="icons">
-                <a class="lightbox preview" href="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}">
+                <a class="lightbox preview" href="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects">
                   <i class="icon-eye"></i>
                 </a>
               </div>

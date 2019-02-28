@@ -4,11 +4,12 @@
           <i class="fa fa-phone"></i>
           <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
       </div>
-     <ul>
-         <li><a href="javascript:void(0)">Sign Up</a></li>
-         <li><a href="javascript:void(0)">Log In</a></li>
-     </ul>
+      <ul>
+        <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
+        <li><button type="button">Log In</button></li>
+      </ul>
   </div>
+  
   <!-- Navbar Start -->
   <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
       <div class="container-fluid">

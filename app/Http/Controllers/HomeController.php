@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Agents;
 use App\Models\Notice;
 use App\Models\Contact;
@@ -208,6 +209,34 @@ class HomeController extends Controller{
         }
         return $this->populateresponse();
     }
+
+    public function signUp(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->signUp();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
+            $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
+            $data['email']                     =!empty($request->email)?$request->email:'';
+            $data['phone']                     =!empty($request->phone)?$request->phone:'';
+            $data['password']                  =!empty($request->password)?$request->password:'';
+            $data['user_type']                 ='user';
+            $data['created_at']                = date('Y-m-d H:i:s');
+            $data['updated_at']                = date('Y-m-d H:i:s');
+
+            $enquiry = Enquiry::add($data);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Customer Registered successfully.";
+                $this->redirect = url('/');
+            }
+        }
+        return $this->populateresponse();    
+    }
+
     public function propertyFinder(){
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['view'] = 'front.property-list';

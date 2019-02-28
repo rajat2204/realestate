@@ -515,6 +515,46 @@
   </div>   
 </section>
 <!-- Contact Section End -->
+<div class="modal modalWrapper fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <h3 class="modal-title">Customer Signup</h3>
+      </div>
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <label for="usr">First Name:</label>
+            <input name="first_name" placeholder="Enter your name..." class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Last Name:</label>
+            <input name="last_name" placeholder="Enter your name..." class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Email:</label>
+            <input name="email" placeholder="Enter your E-mail..." class="form-control" type="email">
+          </div>
+          <div class="form-group">
+            <label for="usr">Mobile Number:</label>
+            <input name="phone" placeholder="Enter your mobile number" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Password:</label>
+            <input name="password" placeholder="Enter your password" class="form-control" type="password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="signup" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 @section('requirejs')
 <script type="text/javascript">

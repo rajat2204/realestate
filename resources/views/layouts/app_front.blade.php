@@ -14,7 +14,7 @@
 
       
         <meta charset="utf-8"/>
-        <title>Devdrishti Infrahomes Pvt Ltd</title>
+        <title>Devdrishti Infrahomes Pvt. Ltd.</title>
         
   <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
         
