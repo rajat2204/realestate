@@ -16,39 +16,39 @@ class Validate
 
 	private function validation($key){
 		$validation = [
-			'id'				=> ['required'],
-			'email'				=> ['nullable','email'],
-			'req_email'			=> ['required','email'],
-			'first_name' 		=> ['required','string'],
-			'name' 				=> ['required','string'],
-			'last_name' 		=> ['nullable','string'],
-			'phone_code' 		=> ['nullable','required_with:mobile_number','string'],
-			'mobile_number' 	=> ['required','numeric'],
+			'id'								=> ['required'],
+			'email'							=> ['nullable','email'],
+			'req_email'					=> ['required','email'],
+			'first_name' 				=> ['required','string'],
+			'name' 							=> ['required','string'],
+			'last_name' 				=> ['nullable','string'],
+			'phone_code' 				=> ['nullable','required_with:mobile_number','string'],
+			'mobile_number' 		=> ['required','numeric'],
 			'req_mobile_number' => ['required','required_with:phone_code','numeric'],
-			'country' 			=> ['required','string'],
+			'country' 					=> ['required','string'],
 			'address'           => ['nullable','string','max:1500'],
 			'description'       => ['required','string','max:1500'],
 			'key_points'       	=> ['required','string','max:1500'],
 			'title'             => ['required','string'],
 			'profile_picture'   => ['required','mimes:doc,docx,pdf'],
-			'pin_code' 			=> ['nullable','max:6','min:4'],
+			'pin_code' 					=> ['nullable','max:6','min:4'],
 			'type' 	            => ['required','string'],
-			'phone' 	        => ['required','string','numeric'],
+			'phone' 	        	=> ['required','string','numeric','digits:10'],
 			'location' 	        => ['required','string'],
 			'password'          => ['required','string','max:50'],
-			'price'				=> ['required','numeric'],
-			'start_from'		=> ['required'],
-			'photo'				=> ['required','mimes:jpg,jpeg,png'],
-			'photomimes'		=> ['mimes:jpg,jpeg,png','max:2408'],
-			'photo_null'		=> ['nullable'],
-			'slug_no_space'		=> ['required','alpha_dash','max:255'],
-			'password_check'	=> ['required'],
-			'newpassword'		=> ['required','max:10'],
-			'area'				=> ['required','numeric'],
-			'gallery'			=> ['required','mimes:jpg,jpeg,png'],
-			'gallery_null'		=> ['nullable'],
-			'url' 				=> ['required','url'],
-			'pincode' 			=> ['required','min:6','max:6'],
+			'price'							=> ['required','numeric'],
+			'start_from'				=> ['required'],
+			'photo'							=> ['required','mimes:jpg,jpeg,png'],
+			'photomimes'				=> ['mimes:jpg,jpeg,png','max:2408'],
+			'photo_null'				=> ['nullable'],
+			'slug_no_space'			=> ['required','alpha_dash','max:255'],
+			'password_check'		=> ['required'],
+			'newpassword'				=> ['required','max:10'],
+			'area'							=> ['required','numeric'],
+			'gallery'						=> ['required','mimes:jpg,jpeg,png'],
+			'gallery_null'			=> ['nullable'],
+			'url' 							=> ['required','url'],
+			'pincode' 					=> ['required','min:6','max:6'],
 
 		];
 		return $validation[$key];
@@ -57,9 +57,30 @@ class Validate
 	public function login(){
         $validations = [
             'email' 		       => $this->validation('req_email'),
-			'password'       	   => $this->validation('password'),
-    	];
+						'password'       	   => $this->validation('password'),
+			    ];
         $validator = \Validator::make($this->data->all(), $validations,[]);
+        return $validator;		
+	}
+
+	public function signUp(){
+        $validations = [
+            'first_name' 		       => $this->validation('name'),
+						'last_name'       	   => $this->validation('name'),
+						'email'								 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
+						'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+						'password'       	   	 => $this->validation('password'),
+    		];
+        $validator = \Validator::make($this->data->all(), $validations,[
+					'first_name.required'			=> 'Please Enter your First Name',        	
+					'last_name.required'			=> 'Please Enter your Last Name',      	
+					'email.unique'						=> 'Email is already registered.',   	
+					'phone.required'					=> 'Phone Number is required.',   	
+					'phone.numeric'						=> 'Phone Number should be numeric.',	
+					'phone.unique'						=> 'Phone Number is already registered.',	
+					'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
+					'password.required'				=> 'Password is required.',  	
+        ]);
         return $validator;		
 	}
 
@@ -87,8 +108,8 @@ class Validate
 	public function createCompany($action='add'){
         $validations = [
             'name' 		        => $this->validation('name'),
-			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('company')]),
-            'image' 		    => $this->validation('photo'),
+						'slug'  					=> array_merge($this->validation('slug_no_space'),[Rule::unique('company')]),
+            'image' 		    	=> $this->validation('photo'),
             'description' 		=> $this->validation('description'),
     	];
 		if($action =='edit'){

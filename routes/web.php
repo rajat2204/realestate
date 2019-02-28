@@ -32,6 +32,7 @@ Route::post('contactussubmission','HomeController@contactUs');
 Route::get('sliders/{slug}','HomeController@enquiry');
 Route::post('enquirysubmission','HomeController@enquirySubmission');
 Route::get('search-properties','HomeController@propertyFinder');
+Route::post('signup','HomeController@signUp');
 
 /***********************Admin-Section****************************/
 
