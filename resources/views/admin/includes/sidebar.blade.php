@@ -61,6 +61,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/leads')}}">
+            <i class="fa fa-tasks"></i> <span>Leads</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/social')}}">
             <i class="fa fa-fw fa-linkedin-square"></i> <span>Social Media</span>
           </a>

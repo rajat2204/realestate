@@ -56,7 +56,7 @@ class Validate
 
 	public function login(){
         $validations = [
-            'email' 		       => $this->validation('req_email'),
+            'email' 		       	 => $this->validation('req_email'),
 						'password'       	   => $this->validation('password'),
 			    ];
         $validator = \Validator::make($this->data->all(), $validations,[]);
