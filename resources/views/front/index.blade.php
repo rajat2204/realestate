@@ -548,7 +548,7 @@
             <input name="password" placeholder="Enter your password" class="form-control" type="password">
           </div>
           <div class="modal-footer">
-            <button type="button" id="signup" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
           </div>
         </form>
       </div>

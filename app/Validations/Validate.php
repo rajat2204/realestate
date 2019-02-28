@@ -33,7 +33,7 @@ class Validate
 			'profile_picture'   => ['required','mimes:doc,docx,pdf'],
 			'pin_code' 					=> ['nullable','max:6','min:4'],
 			'type' 	            => ['required','string'],
-			'phone' 	        	=> ['required','string','numeric'],
+			'phone' 	        	=> ['required','string','numeric','digits:10'],
 			'location' 	        => ['required','string'],
 			'password'          => ['required','string','max:50'],
 			'price'							=> ['required','numeric'],
@@ -67,10 +67,20 @@ class Validate
         $validations = [
             'first_name' 		       => $this->validation('name'),
 						'last_name'       	   => $this->validation('name'),
-						'phone'       	   		 => $this->validation('phone'),
+						'email'								 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
+						'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
 						'password'       	   	 => $this->validation('password'),
     		];
-        $validator = \Validator::make($this->data->all(), $validations,[]);
+        $validator = \Validator::make($this->data->all(), $validations,[
+					'first_name.required'			=> 'Please Enter your First Name',        	
+					'last_name.required'			=> 'Please Enter your Last Name',      	
+					'email.unique'						=> 'Email is already registered.',   	
+					'phone.required'					=> 'Phone Number is required.',   	
+					'phone.numeric'						=> 'Phone Number should be numeric.',	
+					'phone.unique'						=> 'Phone Number is already registered.',	
+					'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
+					'password.required'				=> 'Password is required.',  	
+        ]);
         return $validator;		
 	}
 
@@ -98,8 +108,8 @@ class Validate
 	public function createCompany($action='add'){
         $validations = [
             'name' 		        => $this->validation('name'),
-			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('company')]),
-            'image' 		    => $this->validation('photo'),
+						'slug'  					=> array_merge($this->validation('slug_no_space'),[Rule::unique('company')]),
+            'image' 		    	=> $this->validation('photo'),
             'description' 		=> $this->validation('description'),
     	];
 		if($action =='edit'){
