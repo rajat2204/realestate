@@ -23,7 +23,7 @@ class Leads extends Model
         return $this->hasOne('App\Models\Property','id','property_id');
     }
 
-    public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
+    public static function list($fetch='array',$where='',$keys=['*'],$order='id-asc',$limit=''){
         $table_leads = self::select($keys)
         ->with([
             'property' => function($q){

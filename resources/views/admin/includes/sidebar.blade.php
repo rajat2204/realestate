@@ -46,6 +46,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/project')}}">
+            <i class="fa fa-folder-open"></i> <span>Projects</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/property')}}">
             <i class="fa fa-fw fa-file-image-o"></i> <span>Property</span>
           </a>

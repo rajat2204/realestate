@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Property;
 use App\Models\Company;
+use App\Models\Project;
 use App\Models\Agents;
 use Illuminate\Http\Request;
 use App\Models\Property_Gallery;
@@ -127,8 +128,9 @@ class PropertyController extends Controller
     {
         $data['view'] = 'admin.property.add';
         $data['agent'] = _arefy(Agents::where('status', '=', 'active')->get());
-        $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
+        $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
         $data['category'] = _arefy(PropertyCategories::where('status', '=', 'active')->get());
+        $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 
@@ -203,10 +205,10 @@ class PropertyController extends Controller
         $id = ___decrypt($id);
         $where = ' id = '.$id;
         $data['property'] = _arefy(Property::list('single',$where));
-        // dd($data['property']['possession']);
         $data['gallery'] = _arefy(Property_Gallery::where('plot_id',$id)->get());
         $data['agent'] = Agents::where('status', '=', 'active')->get();
         $data['company'] = Company::where('status', '=', 'active')->get();
+        $data['project'] = Project::where('status', '=', 'active')->get();
         $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
         return view('admin.home',$data);
     }

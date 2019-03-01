@@ -52,6 +52,13 @@ Route::resource('categories', 'CategoryController');
 		Route::post('/status', 'CategoryController@changeStatus');
 	});
 
+/***********************Project-Section****************************/
+
+Route::resource('project', 'ProjectController');
+	Route::group(['prefix' => 'project'],function(){
+		Route::post('/status', 'ProjectController@changeStatus');
+	});
+
 /***********************Plot-Section****************************/
 
 Route::resource('property', 'PropertyController');

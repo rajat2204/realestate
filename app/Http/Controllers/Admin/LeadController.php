@@ -170,7 +170,7 @@ class LeadController extends Controller
     {
         $data['view'] = 'admin.leads.edit';
         $id = ___decrypt($id);
-        $where = ' id = '.$id;
+        $where = 'id = '.$id;
         $data['lead'] = _arefy(Leads::list('single',$where));
         // dd($data['lead']);
         $data['property'] = _arefy(Property::where('status', '=', 'active')->get());

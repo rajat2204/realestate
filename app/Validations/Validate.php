@@ -438,4 +438,33 @@ class Validate
         ]);
         return $validator;		
 	}
+
+	public function createProject($action='add'){
+        $validations = [
+            'name' 		        => $this->validation('name'),
+			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
+			'image'  			=> $this->validation('photo'),
+			'location'  		=> $this->validation('name'),
+			'description'		=> $this->validation('name'),
+    	];
+		if($action =='edit'){
+			$validations['image'] 	= $this->validation('photo_null');
+			$validations['slug'] 	= array_merge($this->validation('slug_no_space'),[
+				Rule::unique('project')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+		}
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'name.required'     			=> 'Project Name is Required.',
+        	'slug.required'     			=> 'Project Slug is Required.',
+        	'slug.unique'     				=> 'This Project Slug has already been taken.',
+        	'slug.alpha_dash'     			=> 'No spaces allowed in project slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        	'image.required'				=> 'Project Image is required.',
+        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'location.required'				=> 'Location of a Project is required.',
+        	'description.required'			=> 'Project Description is required.',
+        ]);
+        return $validator;		
+	}
 }
