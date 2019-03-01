@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Leads extends Model
 {
     protected $table = 'lead';
-    protected $fillable = ['property_id','name','phone','available','address','followup','remarks','status','created_at','updated_at'];
+    protected $fillable = ['property_id','email','name','phone','available','address','followup','remarks','status','created_at','updated_at'];
 
     public static function change($userID,$data){
         $isUpdated = false;
@@ -23,7 +23,7 @@ class Leads extends Model
         return $this->hasOne('App\Models\Property','id','property_id');
     }
 
-    public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
+    public static function list($fetch='array',$where='',$keys=['*'],$order='id-asc',$limit=''){
         $table_leads = self::select($keys)
         ->with([
             'property' => function($q){

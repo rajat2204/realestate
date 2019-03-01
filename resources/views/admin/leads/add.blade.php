@@ -77,9 +77,9 @@
               <label>Status:</label>
               <select class="form-control" name="status">
                 <option value="">Select Status</option>
-                <option value="process">In Process</option>
-                <option value="visited">Site Visited</option>
-                <option value="documents">Documents Collected</option>
+                <option value="in process">In Process</option>
+                <option value="site visited">Site Visited</option>
+                <option value="documents collected">Documents Collected</option>
               </select>
             </div>
           </div>
@@ -101,16 +101,6 @@
 
 @section('requirejs')
 <script type="text/javascript">
-function readURL(input) {
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $('#adminimg').attr('src', e.target.result);
-      }
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
 CKEDITOR.replace("description");
 </script>
 @endsection

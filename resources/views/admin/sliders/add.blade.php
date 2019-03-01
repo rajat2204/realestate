@@ -49,7 +49,7 @@
           <div class="col-md-6">
             <div class="form-group" id="number">
               <label>Contact Number:</label>
-              <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile">
+              <input type="text" class="form-control" placeholder="Enter Contact Number..." name="mobile">
             </div>
           </div>
         </div>

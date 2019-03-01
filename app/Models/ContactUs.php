@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContactUs extends Model
 {
     protected $table = 'contactus';
-    protected $fillable = ['name','email','subject','message','created_at','updated_at'];
+    protected $fillable = ['name','email','subject','number','message','status','created_at','updated_at'];
 
     public static function add($data){
         if(!empty($data)){

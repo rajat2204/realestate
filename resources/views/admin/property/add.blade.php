@@ -8,14 +8,30 @@
       <form role="add-property" method="POST" action="{!! action('Admin\PropertyController@store') !!}">
         {{csrf_field()}}
 
-        <div class="form-group">
-          <label>Select Category:</label>
-          <select class="form-control" name="category_id" id="category_id">
-            <option value="">Select Category</option>
-            @foreach($category as $categories)
-              <option value="{{!empty($categories['id'])?$categories['id']:''}}">{{!empty($categories['name'])?$categories['name']:''}}</option>
-            @endforeach
-          </select>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Category:</label>
+              <select class="form-control" name="category_id" id="category_id">
+                <option value="">Select Category</option>
+                @foreach($category as $categories)
+                  <option value="{{!empty($categories['id'])?$categories['id']:''}}">{{!empty($categories['name'])?$categories['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Select Project:</label>
+              <select class="form-control" name="project_id" id="project_id">
+                <option value="">Select Project</option>
+                @foreach($project as $projects)
+                  <option value="{{!empty($projects['id'])?$projects['id']:''}}">{{!empty($projects['name'])?$projects['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
         </div>
 
         <div class="row">
