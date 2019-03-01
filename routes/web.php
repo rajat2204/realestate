@@ -81,7 +81,7 @@ Route::resource('agent', 'AgentController');
 	});
 
 /***********************Leads-Section****************************/
-
+Route::get('contactleads','LeadController@contactLead');
 Route::resource('leads', 'LeadController');
 	Route::group(['prefix' => 'leads'],function(){
 		Route::post('/status', 'LeadController@changeStatus');

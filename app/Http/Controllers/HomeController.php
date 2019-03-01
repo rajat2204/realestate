@@ -140,6 +140,24 @@ class HomeController extends Controller{
             $data['message']            =!empty($request->message)?$request->message:'';
             
             $inserId = Enquiry::add($data);
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+                $message="You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name'])." and their contact number is ".$data['customer_contact'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+
+                $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $pingurl);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['slider_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+               
+                curl_close($ch);
+
                 $this->status   = true;
                 $this->modal    = true;
                 $this->alert    = true;
@@ -158,26 +176,28 @@ class HomeController extends Controller{
             $data['name']               =!empty($request->name)?$request->name:'';
             $data['email']              =!empty($request->email)?$request->email:'';
             $data['subject']            =!empty($request->subject)?$request->subject:'';
+            $data['number']             =!empty($request->number)?$request->number:'';
             $data['message']            =!empty($request->message)?$request->message:'';
             
             $inserId = ContactUs::add($data);
-            if($inserId){
-               $emailData               = ___email_settings();
-               $emailData['name']       = !empty($request->name)?$request->name:'';
-               $emailData['email']      = !empty($request->email)?$request->email:'';
-               $emailData['subject']    = !empty($request->subject)?$request->subject:'';
-               $emailData['message']    = !empty($request->message)?$request->message:'';
-               $emailData['date']       = date('Y-m-d H:i:s');
+            // if($inserId){
+            //    $emailData               = ___email_settings();
+            //    $emailData['name']       = !empty($request->name)?$request->name:'';
+            //    $emailData['email']      = !empty($request->email)?$request->email:'';
+            //    $emailData['subject']    = !empty($request->subject)?$request->subject:'';
+            //    $emailData['number']     = !empty($request->number)?$request->number:'';
+            //    $emailData['message']    = !empty($request->message)?$request->message:'';
+            //    $emailData['date']       = date('Y-m-d H:i:s');
 
-               $emailData['custom_text'] = 'Your Enquiry has been submitted successfully';
-               ___mail_sender($emailData['email'],$request->name,"enquiry_email",$emailData);
+            //    $emailData['custom_text'] = 'Your Enquiry has been submitted successfully';
+            //    ___mail_sender($emailData['email'],$request->name,"enquiry_email",$emailData);
 
                 $this->status   = true;
                 $this->modal    = true;
                 $this->alert    = true;
                 $this->message  = "Enquiry has been submitted successfully.";
                 $this->redirect = url('/');
-            }
+            // }
         }
         return $this->populateresponse();
     }
