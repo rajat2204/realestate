@@ -273,4 +273,30 @@ class HomeController extends Controller{
         $data['view'] = 'front.property-list';
         return view('front_home',$data);
     }
+
+   
+
+    public function searchProperty(Request $request){
+
+        if(!empty($request->filter_propertystatus)){
+            $where = 'property_purpose = "'.$request->filter_propertystatus.'"';
+        }
+        if(!empty($request->filter_propertycategory)){
+            $where .= ' AND category_id = "'.$request->filter_propertycategory.'"';
+        }
+        if(!empty($request->filter_bed_rooms)){
+             $where .= ' AND bedrooms = "'.$request->filter_bed_rooms.'"';
+        }
+        if(!empty($request->filter_bath_rooms)){
+             $where .= ' AND bathrooms = "'.$request->filter_bath_rooms.'"';
+        }
+        $data['property_type'] = $request->filter_propertystatus;
+        $data['social']   = _arefy(SocialMedia::where('status','active')->get());
+        $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+        $data['count'] = count($data['property']);
+        $data['city']=$request->filter_city;
+        $data['view'] = 'front.property-list';
+        return view('front_home',$data);
+
+    }
 }

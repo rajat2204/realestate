@@ -79,14 +79,15 @@
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="advanced-search-form main-form">
-          <form class="form-horizontal" enctype="multipart/form-data" method="post">
+          <form role='filter' action="{{url('search/property')}}" class="form-horizontal" enctype="multipart/form-data" method="post">
+            {{csrf_field()}}
             <div class="form-group">
               <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                   <select class="form-control" name="filter_propertystatus">
-                    <option value="*">Property Type</option>
-                    <option value="1">RENT</option> 
-                    <option value="2">SALE</option> 
+                    <option value="">Property Type</option>
+                    <option value="rent">RENT</option> 
+                    <option value="sale">SALE</option> 
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
@@ -153,7 +154,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                       <label for="input-filter_bed_rooms">Bedrooms:</label>
                       <select class="form-control" name="filter_bed_rooms" id="input-filter_bed_rooms">
-                        <option value="*">--Select Bedroom--</option>
+                        <option value="">--Select Bedroom--</option>
                                         <option value="1">1</option> 
     
                                         <option value="2">2</option> 
@@ -179,7 +180,7 @@
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <label for="input-filter_bath_rooms">Bathrooms:</label>
                       <select class="form-control" name="filter_bath_rooms" id="input-filter_bath_rooms">
-                        <option value="*">--Select Bathroom--</option>
+                        <option value="">--Select Bathroom--</option>
                         <option value="1">1</option>            
                         <option value="2">2</option>            
                         <option value="3">3</option>            
@@ -195,7 +196,7 @@
                 </div>
               </div>
                 <div class="searchwrap">
-                  <button class="btn button_search1 text-right" type="button" id="button-filter"><i class="fa fa-search"></i> Search</button>
+                  <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} class="btn button_search1 text-right" type="submit" ><i class="fa fa-search"></i> Search</button>
                 </div>
             </div>
           </form>
