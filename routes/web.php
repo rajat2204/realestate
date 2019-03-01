@@ -53,6 +53,13 @@ Route::resource('categories', 'CategoryController');
 		Route::post('/status', 'CategoryController@changeStatus');
 	});
 
+/***********************Purchase-Section****************************/
+
+Route::resource('purchase', 'PurchaseController');
+	Route::group(['prefix' => 'purchase'],function(){
+		Route::post('/status', 'PurchaseController@changeStatus');
+	});
+
 /***********************Project-Section****************************/
 
 Route::resource('project', 'ProjectController');

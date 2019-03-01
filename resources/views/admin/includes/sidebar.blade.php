@@ -56,6 +56,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/purchase')}}">
+            <i class="fa fa-shopping-cart"></i> <span>Purchase</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/sliders')}}">
             <i class="fa fa-sliders"></i> <span>Sliders</span>
           </a>
