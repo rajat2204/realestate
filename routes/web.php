@@ -34,6 +34,7 @@ Route::post('enquirysubmission','HomeController@enquirySubmission');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
 Route::post('login','HomeController@authentication');
+Route::post('search/property','HomeController@searchProperty');
 
 /***********************Admin-Section****************************/
 
