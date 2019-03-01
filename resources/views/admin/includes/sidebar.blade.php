@@ -46,6 +46,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/project')}}">
+            <i class="fa fa-folder-open"></i> <span>Projects</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/property')}}">
             <i class="fa fa-fw fa-file-image-o"></i> <span>Property</span>
           </a>
@@ -60,10 +65,17 @@
             <i class="fa fa-bell"></i> <span>Notice</span>
           </a>
         </li>
-        <li class="active">
-          <a href="{{url('admin/leads')}}">
-            <i class="fa fa-tasks"></i> <span>Leads</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-rocket fa-fw"></i> <span>Leads</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('admin/leads')}}"><i class="fa fa-tasks"></i> Admin Lead</a></li>
+            <li><a href="{{url('admin/contactleads')}}"><i class="fa fa-envelope"></i> Enquiry Leads</a></li>
+          </ul>
         </li>
         <li class="active">
           <a href="{{url('admin/social')}}">

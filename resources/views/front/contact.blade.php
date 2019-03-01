@@ -18,9 +18,15 @@
                     <input type="text" placeholder="E-mail" id="email" class="form-control" name="email">
                   </div> 
                 </div>
-                 <div class="col-md-12">
+                <div class="col-md-6">
                   <div class="form-group">
                     <input type="text" placeholder="Subject" id="msg_subject" class="form-control" name="subject">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="text" placeholder="Number" id="number" class="form-control" name="number">
                   </div>
                 </div>
                 <div class="col-md-12">

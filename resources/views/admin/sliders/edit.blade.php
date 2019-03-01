@@ -55,12 +55,12 @@
             @if($slider['position'] != 'center')
               <div class="form-group" id="number">
                 <label>Contact Number:</label>
-                <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
+                <input type="text" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
               </div>
             @else
               <div class="form-group" id="number" style="display: none;">
                 <label>Contact Number:</label>
-                <input type="number" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
+                <input type="text" class="form-control" placeholder="Enter Contact Number..." name="mobile" value="{{!empty($slider['mobile'])?$slider['mobile']:''}}">
               </div>
             @endif
           </div>

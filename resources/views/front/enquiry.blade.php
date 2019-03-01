@@ -35,7 +35,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Customer Contact:</label> 
-                          <input type="number" class="form-control" id="customer_contact" placeholder="Enter your Mobile Number..." name="customer_contact">
+                          <input type="text" class="form-control" id="customer_contact" placeholder="Enter your Mobile Number..." name="customer_contact">
                         </div>
                       </div>
                       <div class="col-md-6">
