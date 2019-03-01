@@ -145,18 +145,18 @@ class HomeController extends Controller{
             $password="AMREESH@25";
             $sender="AMRESH";
 
-                $message="You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name'])." and their contact number is ".$data['customer_contact'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+            $message="You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
-                $pingurl = "skycon.bulksms5.com/sendmessage.php";
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $pingurl);
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['slider_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                $result = curl_exec($ch);
-               
-                curl_close($ch);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['slider_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
 
                 $this->status   = true;
                 $this->modal    = true;
