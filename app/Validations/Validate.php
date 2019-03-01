@@ -76,7 +76,6 @@ class Validate
 				]);
         return $validator;		
 	}
-
 	public function signup(){
         $validations = [
             'first_name' 		     => $this->validation('name'),
@@ -369,17 +368,36 @@ class Validate
 	public function addAgent($action='add')
 	{
 		$validations = [
-        	'name' 				=> $this->validation('name'),
         	'image' 			=> $this->validation('photo'),
-        	'designation' 		=> $this->validation('name'),
+        	'name' 				=> $this->validation('name'),
+        	'email'				=> array_merge($this->validation('req_email'),[Rule::unique('agent')]),
+        	'address'			=> $this->validation('name'),
+        	'mobile'			=> array_merge($this->validation('phone'),[Rule::unique('agent')]),
+          	'designation' 		=> $this->validation('name'),
     	];
     	if($action == 'edit'){
 			$validations['image'] 	= $this->validation('photo_null');
+			$validations['email'] = array_merge($this->validation('req_email'),[
+				Rule::unique('agent')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+			$validations['mobile'] = array_merge($this->validation('phone'),[
+				Rule::unique('agent')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
 		}
 		$validator = \Validator::make($this->data->all(), $validations,[
-			'name.required'     	=> 'Agent Name is Required.',
 			'image.required'		=> 'Agent Image is required.',
         	'image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
+			'name.required'     	=> 'Agent Name is Required.',
+			'email.required'		=> 'Agent E-mail is required.',
+			'email.unique'			=> 'E-mail is already registered.',
+			'address.required' 		=> 'Please enter your address.',
+			'mobile.required'		=> 'Please enter your Contact Number.',
+			'mobile.numeric'		=> 'Phone Number should be numeric.',
+			'mobile.unique'			=> 'Phone Number is already registered.',
         	'designation.required'	=> 'Agent Description is required.',
 		]);
 		return $validator;

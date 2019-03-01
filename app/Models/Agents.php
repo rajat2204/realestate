@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agents extends Model
 {
    	protected $table = 'agent';
-   	protected $fillable = ['name','image','designation','status','created_at','updated_at'];
+   	protected $fillable = ['name','address','email','mobile','image','designation','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;

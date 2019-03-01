@@ -15,11 +15,6 @@
         </div>
 
         <div class="form-group">
-          <label>Agent Name:</label>
-          <input type="text" class="form-control" placeholder="Enter Agents Name..." name="name" value="{{$agent['name']}}">
-        </div>
-
-        <div class="form-group">
           <label for="image">Agent's Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
@@ -27,12 +22,40 @@
           <div>
             <img style="max-width: 250px;" src="{{url('assets/img/agent')}}/{{$agent['image']}}" id="adminimg" alt="No Featured Image Added">
           </div>
+       </div> 
+       <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Agent Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Agents Name..." name="name" value="{{!empty($agent['name'])?$agent['name']:''}}">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Agent email:</label>
+            <input type="email" class="form-control" placeholder="Enter Agents email..." name="email" value="{{!empty($agent['email'])?$agent['email']:''}}">
+          </div>
+        </div> 
+       </div>   
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Agent's address:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents address" name="address" value="{{!empty($agent['address'])?$agent['address']:''}}">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+                <label>Agent's mobile:</label>
+                <input type="text" class="form-control" placeholder="Enter Agents Mobile" name="mobile" value="{{!empty($agent['mobile'])?$agent['mobile']:''}}">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
-          <label>Agent's Designation:</label>
-          <input type="text" class="form-control" placeholder="Enter Designation..." name="designation" value="{{$agent['designation']}}">
-        </div>
+           <label>Agent's Designation:</label>
+          <input type="text" class="form-control" placeholder="Enter Agents Designation" name="designation" value="{{!empty($agent['designation'])?$agent['designation']:''}}">
+         </div>
 
         <div class="box-footer">
           <a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>

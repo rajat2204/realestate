@@ -76,6 +76,9 @@ class AgentController extends Controller
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Agent Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Agent E-mail','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'designation', 'name' => 'designation','title' => 'Agent Designation','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
