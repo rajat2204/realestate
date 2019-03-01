@@ -107,7 +107,7 @@ class PropertyController extends Controller
             ->addColumn(['data' => 'category_id','name' => 'category_id','title' => 'Category','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'company_id','name' => 'company_id','title' => 'Company','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Property Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
+            // ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'area','name' => 'area','title' => 'Property Area','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'location','name' => 'location','title' => 'Property Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'property_type','name' => 'property_type','title' => 'Property Type','orderable' => false, 'width' => 120])
