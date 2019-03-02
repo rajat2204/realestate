@@ -103,6 +103,11 @@
           </a>
         </li>
         <li class="active">
+          <a href="{{url('admin/changepassword')}}">
+            <i class="fa fa-key"></i> <span>Change Password</span>
+          </a>
+        </li>
+        <li class="active">
           <a href="{{url('admin/logout')}}">
             <i class="fa fa-fw fa-sign-out"></i> <span>Logout</span>
           </a>

@@ -76,6 +76,7 @@ class Validate
 				]);
         return $validator;		
 	}
+
 	public function signup(){
         $validations = [
             'first_name' 		     => $this->validation('name'),
@@ -83,7 +84,7 @@ class Validate
 			'email'					 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
 			'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
 			'password'       	   	 => $this->validation('password'),
-];
+		];
         $validator = \Validator::make($this->data->all(), $validations,[
 			'first_name.required'			=> 'Please Enter your First Name',        	
 			'last_name.required'			=> 'Please Enter your Last Name',      	
@@ -154,6 +155,47 @@ class Validate
         	'followup.required'     		=> 'Follow Up date is Required.',
         	'status.required'     			=> 'Lead Status is Required.',
         	'remarks.required'     			=> 'Lead Remarks is Required.',
+        ]);
+        return $validator;		
+	}
+
+	public function addPurchase($action='add'){
+        $validations = [
+            'project_id' 		=> $this->validation('name'),
+            'property_id' 		=> $this->validation('name'),
+            'seller_name' 		=> $this->validation('name'),
+            'seller_address' 	=> $this->validation('name'),
+            'seller_email' 		=> $this->validation('req_email'),
+            'seller_mobile' 	=> $this->validation('phone'),
+            'area' 				=> $this->validation('area'),
+            'price' 			=> $this->validation('price'),
+            'description' 		=> $this->validation('description'),
+    	];
+		// if($action =='edit'){
+		// 	$validations['email'] = array_merge($this->validation('req_email'),[
+		// 		Rule::unique('lead')->where(function($query){
+		// 			$query->where('id','!=',$this->data->id);
+		// 		})
+		// 	]);
+		// 	$validations['phone'] = array_merge($this->validation('phone'),[
+		// 		Rule::unique('lead')->where(function($query){
+		// 			$query->where('id','!=',$this->data->id);
+		// 		})
+		// 	]);
+		// }
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'project_id.required'     				=> 'Project Name is Required.',
+        	'property_id.required'     				=> 'Property Name is Required.',
+        	'seller_name.required'     				=> 'Seller Name is Required.',
+        	'seller_address.required'     			=> 'Sellers address is required.',
+        	'seller_email.required'     			=> 'Sellers E-mail is required.',
+        	'seller_mobile.required'     			=> 'Sellers Phone Number is Required.',
+        	'seller_mobile.numeric'     			=> 'Sellers Phone Number should be numeric.',
+        	'area.required'     					=> 'Area is Required.',
+        	'area.numeric'     						=> 'Area should be numeric.',
+        	'price.required'						=> 'Price is required.',
+        	'price.numeric'							=> 'Price must be numeric.',
+        	'description.required'					=> 'Description is required.',
         ]);
         return $validator;		
 	}
@@ -346,8 +388,7 @@ class Validate
 		return $validator;
 	}
 
-	public function addTestimonial($action='add')
-	{
+	public function addTestimonial($action='add'){
 		$validations = [
         	'name' 				=> $this->validation('name'),
         	'image' 			=> $this->validation('photo'),
@@ -365,8 +406,7 @@ class Validate
 		return $validator;
 	}
 
-	public function addAgent($action='add')
-	{
+	public function addAgent($action='add'){
 		$validations = [
         	'image' 			=> $this->validation('photo'),
         	'name' 				=> $this->validation('name'),
@@ -483,6 +523,22 @@ class Validate
         	'location.required'				=> 'Location of a Project is required.',
         	'description.required'			=> 'Project Description is required.',
         ]);
+        return $validator;		
+	}
+
+	public function changepassword($action='add'){
+        $validations = [
+        	'password' 					=> $this->validation('password'),
+			'new_password'  					=> $this->validation('password'),
+            'confirm_password' 		    		=> $this->validation('password'),
+    	];
+    	
+        $validator = \Validator::make($this->data->all(), $validations,[
+    		'password.required' 	=>  'Current Password is required.',
+    		'new_password.required' 		=>  'New password is required.',
+    		'confirm_password.required' 	=>  'Confirm Password is required.',
+
+    	]);
         return $validator;		
 	}
 }

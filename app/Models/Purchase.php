@@ -34,7 +34,7 @@ class Purchase extends Model
                 $q->select('id','name');
             },
             'property' => function($q){
-                $q->select('id','name');
+                $q->select('id','name','featured_image');
             },
         ]);
         if($where){

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
+use Hash;
+use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Validations\Validate as Validations;
-use Auth;
 
 class LoginController extends Controller
 {
@@ -52,4 +55,43 @@ class LoginController extends Controller
     	$data['view'] = 'admin.dashboard';
         return view('admin.home',$data);
     }
+
+    public function changePassword(Request $request)
+    {
+        $data['view'] = 'admin.changepassword';
+        $data['admin'] = _arefy(Users::find(Auth::user()->id));
+        return view('admin.home',$data);
+    }
+
+    public function adminchangePass(Request $request)
+    {
+        $validation = new Validations($request);
+        $validator  = $validation->changepassword();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $user = Users::findOrFail(Auth::user()->id);
+          if ($request->password){
+            if (Hash::check($request->password, $user->password)){
+                if ($request->new_password == $request->confirm_password){
+                    $input['password'] = Hash::make($request->new_password);
+                }else{
+                    $this->message  =  $validator->errors()->add('confirm_password', 'Confirm Password Does not match.');
+                    return $this->populateresponse();
+                }
+            }else{
+                $this->message  =  $validator->errors()->add('confirm_password', 'Current Password Does not match.');
+                    return $this->populateresponse();
+            }
+        }
+        $user->update($input);
+       
+        $this->message = 'Admin Password has been Updated Successfully.';
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->status = true;
+        $this->redirect = url('admin/changepassword');
+    }
+    return $this->populateresponse();
+  }
 }

@@ -40,6 +40,8 @@ Route::post('search/property','HomeController@searchProperty');
 
 Route::get('admin/login','Admin\LoginController@login');
 Route::post('admin/login','Admin\LoginController@authentication');
+Route::get('admin/changepassword','Admin\LoginController@changePassword');
+Route::post('admin/changepassword','Admin\LoginController@adminchangePass');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin','middleware'=>'admin'],function(){
 	Route::get('home','LoginController@home');
 	Route::get('logout',function(){
@@ -56,6 +58,9 @@ Route::resource('categories', 'CategoryController');
 /***********************Purchase-Section****************************/
 
 Route::resource('purchase', 'PurchaseController');
+	Route::group(['prefix' => 'property'],function(){
+			Route::post('ajaxproperty', 'PurchaseController@ajaxProperty');
+	});
 	Route::group(['prefix' => 'purchase'],function(){
 		Route::post('/status', 'PurchaseController@changeStatus');
 	});

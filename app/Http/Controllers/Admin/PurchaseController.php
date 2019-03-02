@@ -30,8 +30,8 @@ class PurchaseController extends Controller
         $data['view'] = 'admin.purchase.list';
         
         $where = 'status != "trashed"';
-        $purchase  = _arefy(Purchase::where('status','!=','trashed')->get());
-       
+        $purchase  = _arefy(Purchase::list('array',$where));
+
         if ($request->ajax()) {
             return DataTables::of($purchase)
             ->editColumn('action',function($item){
@@ -63,7 +63,20 @@ class PurchaseController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
-            ->rawColumns(['action'])
+            ->editColumn('description',function($item){
+                return str_limit(strip_tags($item['description']),50);
+            })
+            ->editColumn('project_id',function($item){
+                return ucfirst($item['project']['name']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('property_id',function($item){
+                $imageurl = asset("assets/img/properties/".$item['property']['featured_image']);
+                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+            })
+            ->rawColumns(['image','action'])
             ->make(true);
         }
 
@@ -71,6 +84,7 @@ class PurchaseController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id',"render"=> 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'project_id', 'name' => 'project_id','title' => 'Project Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'seller_name', 'name' => 'seller_name','title' => 'Seller Name','orderable' => false, 'width' => 120])
@@ -97,6 +111,15 @@ class PurchaseController extends Controller
         return view('admin.home',$data);
     }
 
+    public function ajaxProperty(Request $request)
+    {
+      $id = $request->id;
+      $property = Property::where('project_id',$id)->get();
+      $propertyview = view('admin.template.ajaxproperty',compact('property'));
+
+      return Response($propertyview);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -105,7 +128,23 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = new Validations($request);
+        $validator  = $validation->addPurchase();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $purchase = new Purchase();
+            $purchase->fill($request->all());
+
+            $purchase->save();
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Purchase has been Added successfully.";
+            $this->redirect = url('admin/purchase');
+        }
+         return $this->populateresponse();
     }
 
     /**

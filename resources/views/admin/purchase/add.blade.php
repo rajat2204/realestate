@@ -14,6 +14,9 @@
               <label>Select Project Name:</label>
               <select class="form-control" name="project_id" id="project_id">
                 <option value="">Select Project</option>
+                @foreach($project as $projects)
+                  <option value="{{!empty($projects['id'])?$projects['id']:''}}">{{!empty($projects['name'])?$projects['name']:''}}</option>
+                @endforeach
                 <option></option>
               </select>
             </div>
@@ -22,9 +25,8 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Select Property Name:</label>
-              <select class="form-control" name="property_id" id="property_id">
-                <option value="">Select Project</option>
-                <option></option>
+              <select class="form-control" name="property_id" id="properties">
+                <option value=" ">Select Property</option>
               </select>
             </div>
           </div>
@@ -106,5 +108,18 @@
     }
 
     CKEDITOR.replace("description");
+
+    $(document).ready(function(){
+        $('#project_id').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/property/ajaxproperty?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                    $('#properties').html(data).prev().css("display","block");
+                }
+            });
+        });
+    });
 </script>
 @endsection
