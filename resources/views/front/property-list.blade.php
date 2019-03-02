@@ -11,7 +11,8 @@
 			  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 				<div class="head_g clearfix">
 					
-		 			<p >{{$count}} Apartments/Flats for {{$property_type}} in {{$city}}</p>
+		 			<p >{{$count}} Apartments/Flats for {{$property_type}} in {{$city}}
+		 			</p>
 		  				<button class="btn btn-sm btn-default text-dark ">
 		  					Sort By
 		  				<select class = " hovs">
@@ -30,6 +31,8 @@
 				 	  	  		 	<div class="col-md-2 ">
 						  				<div class="boxd">
 						  				<img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
+						  				<span class="bulge">20 photos</span> 
+										<p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p>			
 						  				</div>
 						  			</div>
 								 	<div class="col-md-2 trims">	
@@ -84,8 +87,7 @@
 						  		</div>			  		
 						  	</div>	
 					      </div>
-					    </div>
-				      
+					    </div>				      
 			     </div>
 			 </div>
 			    @endforeach
