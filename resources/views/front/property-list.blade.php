@@ -15,7 +15,7 @@
 		 			</p>
 		  				<button class="btn btn-sm btn-default text-dark ">
 		  					Sort By
-		  				<select class = " hovs">
+		  				<select class = "hovs">
 							<option> Relevence  </option>
 							<option> Price -high to low  </option>
 							<option> Price -high to low  </option>
@@ -31,7 +31,7 @@
 				 	  	  		 	<div class="col-md-2 ">
 						  				<div class="boxd">
 						  				<img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
-						  				<span class="bulge">20 photos</span> 
+						  				<span class="bulge">{{count($value['property_gallery'])}} photo(s)</span> 
 										<p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p>			
 						  				</div>
 						  			</div>
