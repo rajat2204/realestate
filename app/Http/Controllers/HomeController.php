@@ -12,6 +12,7 @@ use App\Models\Sliders;
 use App\Models\Enquiry;
 use App\Models\Services;
 use App\Models\Property;
+use App\Models\Property_Gallery;
 use App\Models\ContactUs;
 use App\Models\Subscribers;
 use App\Models\SocialMedia;
@@ -322,6 +323,7 @@ class HomeController extends Controller{
             $data['property_type'] = $request->filter_propertystatus;
             $data['social']   = _arefy(SocialMedia::where('status','active')->get());
             $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+            // dd($data['property']);
             $data['count']    = count($data['property']);
             $data['city']     = $request->filter_city;
             $data['view']     = 'front.property-list';

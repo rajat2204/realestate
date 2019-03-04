@@ -35,6 +35,10 @@ class Property extends Model
         return $this->hasOne('App\Models\Project','id','project_id');
     }
 
+    public function propertyGallery(){
+        return $this->hasMany('App\Models\Property_Gallery','plot_id','id');
+    }
+
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit='',$featured=''){
         $table_plots = self::select($keys)
         ->with([
@@ -49,6 +53,9 @@ class Property extends Model
             },
             'project' => function($q){
                 $q->select('id','name');
+            },
+            'propertyGallery' => function($q){
+                $q->select('plot_id','images');
             },
         ]);
         if($where){
