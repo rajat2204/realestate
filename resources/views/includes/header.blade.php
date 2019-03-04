@@ -6,7 +6,7 @@
       </div>
       <ul class="shubhX">
         @if(Auth::user())
-          <p>Hello,{{Auth::user()->first_name }}&nbsp;&nbsp;</p>
+          <p>Hello,{{ Auth::user()->first_name }}&nbsp;&nbsp;</p>
           <span>  <a href="javascript:void(0);" class="text-warning">
             <i class="fa fa-sign-out " ></i><span>Logout</span>
           </a></span>

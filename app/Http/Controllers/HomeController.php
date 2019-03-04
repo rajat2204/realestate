@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Hash;
 use App\Models\Users;
 use App\Models\Agents;
@@ -19,7 +20,6 @@ use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
 use Validations\Validate as Validations;
-use Auth;
 
 class HomeController extends Controller{
     public function __construct(Request $request){
@@ -277,7 +277,7 @@ class HomeController extends Controller{
                     $this->redirect = url('/');
                }else{
                     \Session::flush();
-                    $this->message  =  $validator->errors()->add('password', 'you are not authorised user.');
+                    $this->message  =  $validator->errors()->add('password', 'You are not authorised user.');
                     return $this->populateresponse();
                }
             }
@@ -293,8 +293,6 @@ class HomeController extends Controller{
         $data['view'] = 'front.property-list';
         return view('front_home',$data);
     }
-
-   
 
     public function searchProperty(Request $request){
 
@@ -313,7 +311,6 @@ class HomeController extends Controller{
         $data['property_type'] = $request->filter_propertystatus;
         $data['social']   = _arefy(SocialMedia::where('status','active')->get());
         $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
-        // dd($data['property']);
         $data['count'] = count($data['property']);
         $data['city']=$request->filter_city;
         $data['view'] = 'front.property-list';

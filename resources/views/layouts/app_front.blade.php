@@ -46,11 +46,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
 <!-- ====================================[ DEFAULT STYLESHEET ]==================================== -->
 </head>
-    <body class="page-md login">
+    <body class="page-md login loadingInProgress">
         <div id="cover"></div>
-        <div class="wrapper">
-                @yield('content')
-        </div>
+          <div class="wrapper">
+                  @yield('content')
+          </div>
         
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('assets/js/jquery-min.js')}}"></script>
@@ -127,6 +127,12 @@
             }
           });
        });
+
+$(window).load(function(){
+  setTimeout(function(){
+      $('#cover').fadeOut(500);
+  },500)
+});
     </script>
     @yield('requirejs')
     </body>

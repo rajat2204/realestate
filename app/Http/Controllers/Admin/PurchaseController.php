@@ -32,6 +32,7 @@ class PurchaseController extends Controller
         $where = 'status != "trashed"';
         $purchase  = _arefy(Purchase::list('array',$where));
 
+        // dd($purchase);
         if ($request->ajax()) {
             return DataTables::of($purchase)
             ->editColumn('action',function($item){
@@ -63,20 +64,29 @@ class PurchaseController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
-            ->editColumn('description',function($item){
-                return str_limit(strip_tags($item['description']),50);
+            ->editColumn('price',function($item){
+                return 'Rs.'. ' ' .number_format(($item['price']));
+            })
+            ->editColumn('seller_mobile',function($item){
+                return '+91-'. ' ' .($item['seller_mobile']);
+            })
+            ->editColumn('area',function($item){
+                return $item['area']. ' ' . 'sq.ft.';
             })
             ->editColumn('project_id',function($item){
                 return ucfirst($item['project']['name']);
             })
-            ->editColumn('property_id',function($item){
+            ->editColumn('property',function($item){
                 return ucfirst($item['property']['name']);
             })
-            ->editColumn('property_id',function($item){
+            ->editColumn('description',function($item){
+                return str_limit(strip_tags($item['description']),50);
+            })
+            ->editColumn('property_image',function($item){
                 $imageurl = asset("assets/img/properties/".$item['property']['featured_image']);
                 return '<img src="'.$imageurl.'" height="70px" width="100px">';
             })
-            ->rawColumns(['image','action'])
+            ->rawColumns(['property_image','action'])
             ->make(true);
         }
 
@@ -84,9 +94,9 @@ class PurchaseController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'property_id', 'name' => 'property_id',"render"=> 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_image', 'name' => 'property_image','render' => 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property', 'name' => 'property','title' => 'Property Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'project_id', 'name' => 'project_id','title' => 'Project Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'seller_name', 'name' => 'seller_name','title' => 'Seller Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'seller_address', 'name' => 'seller_address','title' => 'Seller Address','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'seller_mobile', 'name' => 'seller_mobile','title' => 'Seller Mobile','orderable' => false, 'width' => 120])
