@@ -3616,7 +3616,7 @@ i.bd{
   border-radius:50px;
 }
 .tex_t{
-padding:30px 10px;  
+padding:30px 10px 10px 0px;
 }
 .head_g p{
   float:left;
