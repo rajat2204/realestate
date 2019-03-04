@@ -42,15 +42,15 @@
 								<p>By Intra developers</p>
 							</div>
 							<div class="project-pric float-right">
-								<h3><i class="fa fa-rupee"></i>56 Lac - 73 Lac</h3>
+								<h3><i class="fa fa-rupee"></i>40 Lacs - 50 Lacs</h3>
 							</div>
 						</div>
 						<div class="project-content">
 							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
 						</div>
 						<ul class="projectContent">
-							<li>2 BHK Flat</li>
-							<li>1350 - 1380 sqft</li>
+							<li>1 BHK Flat</li>
+							<li>1200 - 13850 sqft</li>
 							<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
 							<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
 						</ul>
