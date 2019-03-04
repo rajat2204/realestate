@@ -3463,7 +3463,14 @@ ul.shubhX{
     padding:0px 14px;
   }
 ul.shubhX p{
-  margin-right:8px;
+  margin-right: 8px;
+  font-size: 15px;
+  color: #fff;
+}
+.shubhX .text-warning {
+    color: #fff!important;
+    font-size: 15px;
+    line-height: 27px;
 }
 @keyframes example{
   0%{
