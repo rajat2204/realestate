@@ -1,0 +1,10 @@
+.user-panel>.image>img {
+    width: 100%;
+    max-width: 53px;
+    height: 51px;
+    /* height: auto; */
+}
+.skin-blue .user-panel>.info, .skin-blue .user-panel>.info>a {
+    color: #fff;
+    line-height: 37px;
+}
