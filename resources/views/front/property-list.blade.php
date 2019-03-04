@@ -38,38 +38,36 @@
 								 	<div class="col-md-2 trims">	
 					   				  <div class ="tex_t text-light ">	
 										<i class="fa fa-rupee text-danger" ></i>
-										<span>{{$value['price']}}</span>
+										<span>{{number_format($value['price'])}}</span>
 										<small><i class="fa fa-rupee " ></i>5347 per sqft </small>
 						 			  </div>
 							  		</div>
 							  	
 						  <div class="col-md-8 ">		 
 							 <div class="row ">
-							 	<h6 class="mt-2"><b>1 House</b> for sale in place name
-						  		<span><i class="fa fa-map-marker text "></i>
-								What's near By </span>		
-							  	</h6>
+							 	<h6 class="mt-2"><b>1 {{ucfirst($value['property_type'])}}</b> for {{$value['property_purpose']}} in {{$value['location']}}
+						  		<span><i class="fa fa-map-marker text "></i>What's near By </span></h6>
 							 </div>	 
 						  	 <div class="row ">	
 						  		<div class="col-md-3 sims">
-						  			<span class="text-secondary">Super area </span>
-						  			<span class="text-dark">sd</span>
+						  			<span class="text-secondary">Carpet area </span>
+						  			<span class="text-dark">{{$value['area']. ' '}}sqft.</span>
 						  		</div>
 						  		<div class="col-md-3 sims">
-						  			<span class="text-secondary">Super area </span>
-						  			<span class="text-dark">sd</span>
+						  			<span class="text-secondary">Status</span>
+						  			<span class="text-dark">Possession By {{' ' .$value['possession']}}</span>
 						  		</div>				
 								<div class="col-md-3 sims">
-						  			<span class="text-secondary">Super area </span>
-						  			<span class="text-dark">sd</span>
+						  			<span class="text-secondary">Property Name</span>
+						  			<span class="text-dark">{{$value['name']}}</span>
 								</div>
 						  		<div class="col-md-3 sims">
-						  			<span class="text-secondary">Super area </span>
-						  			<span class="text-dark">sd</span>
+						  			<span class="text-secondary">Agent Name</span>
+						  			<span class="text-dark">{{$value['agent']['name']}}</span>
 						  		</div>		  				  		
 						  	</div>
 						  	<div class="row">
-						  		<p>{{strip_tags($value['description'])}} </p>
+						  		<p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),80)}} </p>
 						  	</div>
 						  	<div class="row">
 						  		<div class="col-md-3 sim">
@@ -82,8 +80,8 @@
 						  			<i class="fa fa-heart bd text-danger mr-1"></i><small>Share Feedback</small>
 						  		</div>
 						  		<div class="col-md-3 sim disabl">
-						  			<small class=""> Owner</small>
-						  			<small >Name </small>
+						  			<small class=""> Company/Owner Name</small>
+						  			<small >{{$value['company']['name']}}</small>
 						  		</div>			  		
 						  	</div>	
 					      </div>
