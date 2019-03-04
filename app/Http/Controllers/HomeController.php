@@ -323,6 +323,7 @@ class HomeController extends Controller{
             $data['property_type'] = $request->filter_propertystatus;
             $data['social']   = _arefy(SocialMedia::where('status','active')->get());
             $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
             // dd($data['property']);
             $data['count']    = count($data['property']);
             $data['city']     = $request->filter_city;
