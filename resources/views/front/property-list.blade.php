@@ -1,5 +1,5 @@
 
-	<section class ="bg">	
+	<section class ="bg property-section" id="property-section">	
 		<div class="container">
 			<nav >
 			  <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -37,7 +37,7 @@
 						  			</div>
 								 	<div class="col-md-2 trims">	
 					   				  <div class ="tex_t text-light ">	
-										<i class="fa fa-rupee text-danger" ></i>
+										<i class="fa fa-rupee text-blue" ></i>
 										<span>{{$value['price']}}</span>
 										<small><i class="fa fa-rupee " ></i>5347 per sqft </small>
 						 			  </div>
@@ -69,17 +69,19 @@
 						  		</div>		  				  		
 						  	</div>
 						  	<div class="row">
-						  		<p>{{strip_tags($value['description'])}} </p>
+						  		<div class="property-desc">
+						  			<p>{{strip_tags($value['description'])}} </p>
+						  		</div>
 						  	</div>
 						  	<div class="row">
 						  		<div class="col-md-3 sim">
-						  			<button class="btn btn-danger">Contact Agent</button>
+						  			<button class="btn btn-blue">Contact Agent</button>
 						  		</div>
 		  						<div class="col-md-3 sim ">
 		  						<button class="btn btn-outline-default red">View Phone NO.</button>	  			
 						  		</div>
 						  		<div class="col-md-3 sim">
-						  			<i class="fa fa-heart bd text-danger mr-1"></i><small>Share Feedback</small>
+						  			<i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
 						  		</div>
 						  		<div class="col-md-3 sim disabl">
 						  			<small class=""> Owner</small>
@@ -93,7 +95,7 @@
 			    @endforeach
 			@endif
 			</div>			    
-				 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="	  nav-profile-tab">  
+				 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">  
 					  <div class="wrapper">			  	
 					  	<div class="row">
 					  	
