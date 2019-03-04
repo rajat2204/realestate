@@ -3327,7 +3327,12 @@ a.room-price {
 .p-all{
   padding: 30px 10px;
 }
-
+.text-blue{
+  color: #00b4d9;
+}
+.btn-blue{
+  background-color: #00b4d9;
+}
 #content_s{
   /*  height:100%;*/
   /*width:100%;*/
@@ -3448,6 +3453,11 @@ margin-top: 75px;
 .far27{
   padding:6px 6px;
 }
+ul.shubhX button {
+    border: none;
+    background: transparent;
+    color: #fff;
+}
 ul.shubhX{
     display: -webkit-inline-box;
     padding:0px 14px;
@@ -3479,13 +3489,22 @@ ul.shubhX p{
   }
   section.bg{
     background-color:whitesmoke;
-  }  
+  } 
+  .property-section{
+    padding: 30px 0;
+  } 
  #wraperr{
   clear:both;
-    margin:20px 0px;
+  border: 1px solid #d7d7d7;
+  margin:20px 0px;
   height:180px;
   background-color:white;
  }
+ #wraperr:hover{
+  box-shadow: 0px 7px 13px 0 rgba(78, 131, 187, 0.2);
+  -moz-box-shadow: 0px 7px 13px 0 rgba(78, 131, 187, 0.2);
+  -webkit-box-shadow: 9px 7px 13px 6 rgba(78, 131, 187, 0.2);
+}
 select.hovs{
    /*visibility:hidden;*/
     border:none;
@@ -3504,54 +3523,64 @@ select:hover .hovs{
   padding:12px;
 }
 p.utopia{
-font-size:12px;
-color:lightgrey;
-margin-top:18px;
+  font-size:12px;
+  color:#958f8f;
+  /*margin-top:18px;*/
 }
 
 .boxd img{
   width: 100%;
-height:98px;
-position: relative;
+  height: 130px;
+  position: relative;
 }
 .boxd .bulge{
-position: absolute;
-font-size: 12px;
-top:104px;
-background-color: white;
-color:red;
-padding:0px 7px; 
+  position: absolute;
+  font-size: 12px;
+  /* top: 104px; */
+  bottom: 45px;
+  left: 29px;
+  background-color: white;
+  color: red;
+  padding: 0px 7px; 
 }
 .tex_t small{
-  color: white;
-  margin-top:-8px;
-  word-spacing:0.104rem ;
+  color: #00b4d9;
+  margin-top: -5px;
+  font-size: 12px;
+  word-spacing:0.104rem;
   display: block;
 }
 .tex_t span ,span>i{
-  color: crimson;
+  color: #00b4d9;
   text-shadow: 1px 1px black;
   word-spacing: 0.13em;
   font-size: 18px;
 }
 .boxd {
-  padding: 30px 10px;
-  width:170px;
-  }
+  padding: 10px 10px;
+  width: 170px;
+}
 .trims.col-md-2{
   max-width: 14.266667%;
 }  
 .sims.col-md-3{
- background-color: #F5F5F5;
- padding:0px 0px;
- height: 40px;
+   background-color: #F5F5F5;
+   padding:0px 0px;
+   height: 40px;
+   margin: 8px 0;
 }
-
+.property-desc p{
+  font-size: 13px;
+}
+.property-desc {
+    height: 30px;
+    overflow: hidden;
+}
 .sims.col-md-3 span{
-font-size: 10px;
-display: block;
-padding:2px 5px; 
-margin-bottom:-13px;
+  font-size: 12px;
+  display: block;
+  padding:2px 5px; 
+  margin-bottom:-13px;
 }
 .sim.col-md-3 {
  padding:10px 0px;
@@ -3560,12 +3589,15 @@ margin-bottom:-13px;
 .sim i ,small{
   margin:auto auto;
 }
-.sim button
-{
-  padding:5px 14px;
-  margin-right: -10px;
-  font-size: 12px;
+.sharefeedback{
+  font-size: 13px;
 }
+.sim button
+  {
+    padding:5px 14px;
+    margin-right: -10px;
+    font-size: 13px;
+  }
 .sim.disabl small{
   display: block;
   font-size: 12px;
@@ -3574,12 +3606,13 @@ margin-bottom:-13px;
 }
 .sim button.red
 {
-color:red;
+  color: #00b4d9;
+  border: 1px solid;
 }
 i.bd{
   padding:4px;
   vertical-align: center;
-  border:1px solid salmon;
+  border: 1px solid #00b4d9;
   border-radius:50px;
 }
 .tex_t{
@@ -3594,8 +3627,114 @@ padding:30px 10px;
   float: right;
   background-color:#eee;
   padding:3px 10px;
-  font-size: 10px;
+  font-size: 12px;
 }
+/*------------------------projects list------------------------------*/
+.peojectnameList{
+
+}
+.peojectnameList ul{
+  list-style-type: none;
+  padding: 20px 0;
+  position: relative;
+}
+.project-heading h2{
+  font-size: 24px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0;
+}
+.projectsWrapper {
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #d7d7d7;
+    margin-bottom: 30px;
+}
+.peojectnameList ul li:first-child {
+    padding-left: 0;
+}
+.project-pric h3{
+  font-size: 20px;
+  color: #2a2a2a;
+  font-weight: 600;
+}
+.project-description h3{
+  font-size: 20px;
+  color: #2a2a2a;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.project-content p {
+    font-size: 12px;
+    line-height: 18px;
+    height: 40px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.contactNow {
+    padding: 7px 25px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+}
+.projectContent li{
+  display: inline-block;
+  width: 24%;
+  font-size: 15px;
+  padding: 10px;
+}
+.projectContent{
+  border-bottom:1px solid #d7d7d7;
+  background-color: #fff; 
+}
+.projectContent:hover{
+  background-color: #fbfafa;
+}
+.imgProject {
+    position: relative;
+    overflow: hidden;
+    transition: .5s ease-in;
+}
+.imgProject img:hover {
+    transform: scale(1.2);
+}
+.project-description p{
+  font-size: 14px;
+}
+.pd-right-none{
+  padding-right: 0;
+}
+.imgProject img {
+    width: 100%;
+    transition: .5s ease-in;
+    height: 220px;
+    /*padding: 10px;*/
+}
+.projectLocation.clearfix {
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.project-right button {
+    padding: 5px 10px;
+}
+.peojectnameList ul li a:after{
+  content: "\f105";
+  position: absolute;
+  font-size: 18px;
+  font-weight: 600;
+  /* left: 10px; */
+  padding: 0 10px;
+  font-family: fontAwesome;
+}
+.peojectnameList ul li{
+  padding: 0 10px;
+  display: inline-block;
+  color: #00b4d9;
+  font-size: 16px;
+  font-weight: 500;
+}
+/*------------------------end projects list------------------------------*/
 @media screen and (max-width: 768px) {
   .navbar-header {
     width: 100%;
