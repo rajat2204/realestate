@@ -51,7 +51,7 @@
             <p>Company</p>
           </div>
           <div class="icon">
-            <i class="fa fa-user-secret"></i>
+            <i class="fa fa-building"></i>
           </div>
           <a href="{{url('admin/company')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -65,7 +65,7 @@
             <p>Project</p>
           </div>
           <div class="icon">
-            <i class="fa fa-user-secret"></i>
+            <i class="fa fa-folder-open"></i>
           </div>
           <a href="{{url('admin/project')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
@@ -93,7 +93,7 @@
             <p>Purchases</p>
           </div>
           <div class="icon">
-            <i class="fa fa-fw fa-file-image-o"></i>
+            <i class="fa fa-shopping-cart"></i>
           </div>
           <a href="{{url('admin/purchase')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>

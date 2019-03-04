@@ -9,7 +9,6 @@
 <div class="tab-content" id="nav-tabContent">
  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 <div class="head_g clearfix">
-
 <p >{{$count}} Apartments/Flats for {{$property_type}} in {{$city}}
 </p>
  	<button class="btn btn-sm btn-default text-dark ">
@@ -38,8 +37,11 @@
    <div class ="tex_t text-light ">	
 
 <i class="fa fa-rupee text-blue" ></i>
-<span>{{number_format($value['price'])}}</span>
-
+@if($value['property_type'] == 'sale')
+	<span>{{number_format($value['price'])}}</span>
+@else
+	<span>{{number_format($value['price'])}}/month</span>
+@endif
  </div>
  	</div>
  	
