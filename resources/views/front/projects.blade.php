@@ -48,18 +48,26 @@
 						<div class="project-content">
 							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
 						</div>
-						<ul class="projectContent">
+						<table class="projectContent">
+							<tr>
+							<td>2 BHK Flat</td>
+							<td>1350 - 1380 sqft</td>
+							<td><i class="fa fa-rupee"></i>56Lac - 73Lac</td>
+							<td><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></td>
+							</tr>
+							<tr>
+							<td>2 BHK Flat</td>
+							<td>1350 - 1380 sqft</td>
+							<td><i class="fa fa-rupee"></i>56Lac - 73Lac</td>
+							<td><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></td>
+							</tr>
+						</table>
+						{{-- <table class="projectContent">
 							<li>2 BHK Flat</li>
 							<li>1350 - 1380 sqft</li>
 							<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
 							<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-						</ul>
-						<ul class="projectContent">
-							<li>2 BHK Flat</li>
-							<li>1350 - 1380 sqft</li>
-							<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-							<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-						</ul>
+						</table> --}}
 					</div>
 				</div>
 			</div>
