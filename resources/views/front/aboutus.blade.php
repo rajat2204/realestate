@@ -1,4 +1,4 @@
-<section id="about" class="section-padding wrapper-section">
+<section id="about" class="section-padding">
     <div class="container">
      <div class="row">
         <div class="col-12">
