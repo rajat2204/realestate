@@ -6,6 +6,9 @@
   .services-item .services-content h3 a {
     font-size: 14px;
   }
+  .contactNow{
+    padding: 7px 15px;
+  }
 }
 
 @media (max-width: 1024px) {
