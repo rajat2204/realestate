@@ -107,7 +107,7 @@
             <p>Sliders</p>
           </div>
           <div class="icon">
-            <i class="fa fa-fw fa-file-image-o"></i>
+            <i class="fa fa-sliders"></i>
           </div>
           <a href="{{url('admin/sliders')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>

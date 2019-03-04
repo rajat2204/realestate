@@ -37,7 +37,7 @@
    <div class ="tex_t text-light ">	
 
 <i class="fa fa-rupee text-blue" ></i>
-@if($value['property_type'] == 'sale')
+@if($value['property_purpose'] == 'sale')
 	<span>{{number_format($value['price'])}}</span>
 @else
 	<span>{{number_format($value['price'])}}/month</span>
