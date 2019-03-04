@@ -111,6 +111,9 @@ Route::resource('leads', 'LeadController');
 	Route::group(['prefix' => 'leads'],function(){
 		Route::post('/status', 'LeadController@changeStatus');
 	});
+	Route::group(['prefix' => 'contactleads'],function(){
+		Route::post('/status', 'LeadController@changeStatusContacts');
+	});
 
 /***********************Company-Section****************************/
 

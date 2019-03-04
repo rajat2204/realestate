@@ -55,6 +55,9 @@ class LeadController extends Controller
             ->editColumn('available',function($item){
                 return ucfirst($item['available']);
             })
+            ->editColumn('phone',function($item){
+                return '+91-'.''.($item['phone']);
+            })
             ->editColumn('property_id',function($item){
                 return ucfirst($item['property']['name']);
             })
@@ -87,12 +90,29 @@ class LeadController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/contactleads/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> ';
                 $html   .= '</div>';
                                 
                 return $html;
             })
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('subject',function($item){
+                return ucfirst($item['subject']);
+            })
+            ->editColumn('message',function($item){
+                return ucfirst(str_limit($item['message'],50));
+            })
+            ->editColumn('number',function($item){
+                return '+91-'.''.($item['number']);
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -102,11 +122,14 @@ class LeadController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
+            // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'email', 'name' => 'email','title' => 'E-mail','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'subject', 'name' => 'subject','title' => 'Subject','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'message', 'name' => 'message','title' => 'Message','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'number', 'name' => 'number','title' => 'Phone Number','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
@@ -219,6 +242,23 @@ class LeadController extends Controller
     public function changeStatus(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = Leads::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted lead successfully.';
+            }else{
+                $this->message = 'Updated lead successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusContacts(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = ContactUs::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
