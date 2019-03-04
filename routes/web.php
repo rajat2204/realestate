@@ -26,6 +26,7 @@ Route::get('services', 'HomeController@allServices');
 Route::get('properties/{slug}','HomeController@singlePlotView');
 Route::post('remarkablework','HomeController@remarkableWork');
 Route::get('properties','HomeController@allProperties');
+Route::get('projects','HomeController@allProjects');
 Route::get('testimonials','HomeController@testimonials');
 Route::get('contact','HomeController@contact');
 Route::post('contactussubmission','HomeController@contactUs');
@@ -33,8 +34,12 @@ Route::get('sliders/{slug}','HomeController@enquiry');
 Route::post('enquirysubmission','HomeController@enquirySubmission');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
-Route::post('login','HomeController@authentication');
+Route::post('login','HomeController@customerLogin');
 Route::post('search/property','HomeController@searchProperty');
+Route::get('logout',function(){
+		\Auth::logout();
+          return redirect('/');
+	});
 
 /***********************Admin-Section****************************/
 

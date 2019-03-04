@@ -124,6 +124,13 @@ class HomeController extends Controller{
         return view('front_home',$data);
     }
 
+    public function allProjects(Request $request){
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['view'] = 'front.projects';
+        return view('front_home',$data);
+    }
+
     public function enquirySubmission(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->enquiry();
@@ -254,26 +261,25 @@ class HomeController extends Controller{
                 $this->status   = true;
                 $this->modal    = true;
                 $this->alert    = true;
-                $this->message  = "Customer Registered successfully.";
+                $this->message  = "User Registered successfully.";
                 $this->redirect = url('/');
         }
         return $this->populateresponse();
     }
 
-   public function authentication(Request $request){
+   public function customerLogin(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->custLogin();
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
              if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
-
                if(\Auth::user()->user_type == 'user'){
 
                     $this->status   = true;
                     $this->modal    = true;
                     $this->alert    = true;
-                    $this->message  = "Login Successfull!";
+                    $this->message  = "User Logged In Successfully !!!";
                     $this->redirect = url('/');
                }else{
                     \Session::flush();
@@ -295,26 +301,32 @@ class HomeController extends Controller{
     }
 
     public function searchProperty(Request $request){
-
-        if(!empty($request->filter_propertystatus)){
-            $where = 'property_purpose = "'.$request->filter_propertystatus.'"';
-        }
-        if(!empty($request->filter_propertycategory)){
-            $where .= ' AND category_id = "'.$request->filter_propertycategory.'"';
-        }
-        if(!empty($request->filter_bed_rooms)){
-             $where .= ' AND bedrooms = "'.$request->filter_bed_rooms.'"';
-        }
-        if(!empty($request->filter_bath_rooms)){
-             $where .= ' AND bathrooms = "'.$request->filter_bath_rooms.'"';
-        }
-        $data['property_type'] = $request->filter_propertystatus;
-        $data['social']   = _arefy(SocialMedia::where('status','active')->get());
-        $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
-        $data['count'] = count($data['property']);
-        $data['city']=$request->filter_city;
-        $data['view'] = 'front.property-list';
-        return view('front_home',$data);
-
+        // $validation = new Validations($request);
+        // $validator  = $validation->search();
+        // if($validator->fails()){
+        //     $this->message = $validator->errors();
+        // }else{
+            $where = 1;
+            if(!empty($request->filter_propertystatus)){
+                $where .= ' AND property_purpose = "'.$request->filter_propertystatus.'"';
+            }
+            if(!empty($request->filter_propertycategory)){
+                $where .= ' AND category_id = "'.$request->filter_propertycategory.'"';
+            }
+            if(!empty($request->filter_bed_rooms)){
+                 $where .= ' AND bedrooms = "'.$request->filter_bed_rooms.'"';
+            }
+            if(!empty($request->filter_bath_rooms)){
+                 $where .= ' AND bathroom = "'.$request->filter_bath_rooms.'"';
+            }
+            $data['property_type'] = $request->filter_propertystatus;
+            $data['social']   = _arefy(SocialMedia::where('status','active')->get());
+            $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
+            $data['count']    = count($data['property']);
+            $data['city']     = $request->filter_city;
+            $data['view']     = 'front.property-list';
+            return view('front_home',$data);
+        // }
+        //     return $this->populateresponse();
     }
 }

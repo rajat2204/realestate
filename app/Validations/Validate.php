@@ -59,41 +59,60 @@ class Validate
             'email' 		       	 => $this->validation('req_email'),
 						'password'       	   => $this->validation('password'),
 			    ];
-        $validator = \Validator::make($this->data->all(), $validations,[]);
+        $validator = \Validator::make($this->data->all(), $validations,[
+        		'email.required'     => 'E-mail is required.',
+        		'password.required'  => 'Password is required.',
+        ]);
         return $validator;		
 	}
 
 	public function custLogin(){
         $validations = [
             'phone' 		       	 => $this->validation('phone'),
-			'password'       	   => $this->validation('password'),
+						'password'       	   => $this->validation('password'),
 			    ];
         $validator = \Validator::make($this->data->all(), $validations,[
         	'phone.required'  		 =>	'Phone is required.',
-        	'phone.numeric'  			 =>	'Phone should be in numeric format',
-					'password.required'    => 'Password is required',
+        	'phone.numeric'  			 =>	'Phone should be in numeric format.',
+					'password.required'    => 'Password is required.',
 
 				]);
         return $validator;		
 	}
 
+	public function search(){
+		$validations = [
+        	'filter_propertystatus'		  => $this->validation('name'),
+        	'filter_propertycategory' 	=> $this->validation('name'),
+        	'filter_city'               => $this->validation('name'),
+        	'filter_address'            => $this->validation('name'),
+        ];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'filter_propertystatus.required'   => 'Property Type is Required.',
+        	'filter_propertycategory.required' => 'Property Category is Required.',
+        	'filter_city.required'             => 'City is Required.',
+        	'filter_address.required'          => 'Address is Required.',
+        ]);
+        return $validator;
+	}
+
 	public function signup(){
         $validations = [
-            'first_name' 		     => $this->validation('name'),
-			'last_name'       	   	 => $this->validation('name'),
-			'email'					 => array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
-			'phone'       	   		 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
-			'password'       	   	 => $this->validation('password'),
-		];
+            'first_name' 		  => $this->validation('name'),
+						'last_name'       => $this->validation('name'),
+						'email'					 	=> array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
+						'phone'       	  => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+						'password'       	=> $this->validation('password'),
+				];
         $validator = \Validator::make($this->data->all(), $validations,[
-			'first_name.required'			=> 'Please Enter your First Name',        	
-			'last_name.required'			=> 'Please Enter your Last Name',      	
-			'email.unique'						=> 'Email is already registered.',   	
-			'phone.required'					=> 'Phone Number is required.',   	
-			'phone.numeric'						=> 'Phone Number should be numeric.',	
-			'phone.unique'						=> 'Phone Number is already registered.',	
-			'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
-			'password.required'				=> 'Password is required.',  	
+						'first_name.required'			=> 'Please Enter your First Name',        	
+						'last_name.required'			=> 'Please Enter your Last Name',      	
+						'email.unique'						=> 'Email is already registered.',   	
+						'phone.required'					=> 'Phone Number is required.',   	
+						'phone.numeric'						=> 'Phone Number should be numeric.',	
+						'phone.unique'						=> 'Phone Number is already registered.',	
+						'phone.digits'						=> 'Phone Number cannot be greater than 10 digits.',  	
+						'password.required'				=> 'Password is required.',  	
         ]);
         return $validator;		
 	}
@@ -101,23 +120,23 @@ class Validate
 	public function createpropertyCategory($action='add'){
         $validations = [
             'name' 		        => $this->validation('name'),
-			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('property_categories')]),
+						'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('property_categories')]),
     	];
-		if($action =='edit'){
-			$validations['slug'] = array_merge($this->validation('slug_no_space'),[
-				Rule::unique('property_categories')->where(function($query){
-					$query->where('id','!=',$this->data->id);
-				})
-			]);
+				if($action =='edit'){
+					$validations['slug'] = array_merge($this->validation('slug_no_space'),[
+						Rule::unique('property_categories')->where(function($query){
+							$query->where('id','!=',$this->data->id);
+						})
+					]);
+				}
+      $validator = \Validator::make($this->data->all(), $validations,[
+      	'name.required'     			=> 'Category Name is Required.',
+      	'slug.required'     			=> 'Category Slug is Required.',
+      	'slug.unique'     				=> 'This Category Slug has already been taken.',
+      	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
+      ]);
+      return $validator;		
 		}
-        $validator = \Validator::make($this->data->all(), $validations,[
-        	'name.required'     			=> 'Category Name is Required.',
-        	'slug.required'     			=> 'Category Slug is Required.',
-        	'slug.unique'     				=> 'This Category Slug has already been taken.',
-        	'slug.alpha_dash'     			=> 'No spaces allowed in category slug.The Slug may only contain letters, numbers, dashes and underscores.',
-        ]);
-        return $validator;		
-	}
 
 	public function addLead($action='add'){
         $validations = [

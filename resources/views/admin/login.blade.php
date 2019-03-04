@@ -46,6 +46,7 @@
 		                   </div>
 		                	<div class="form-group col-md-8"> 
 		                    <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+		                  	<input type="hidden" name="not_exists">
 		                   </div> 
 		                 </div>  
 		                 <div class="form-row "> 

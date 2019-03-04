@@ -6,7 +6,7 @@ use Auth;
 use Hash;
 use App\Models\Users;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+// use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Validations\Validate as Validations;
@@ -29,22 +29,20 @@ class LoginController extends Controller
             $this->message = $validator->errors();
         }else{
              if (\Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
                if(Auth::user()->user_type == 'super-admin'){
-
                     $this->status   = true;
                     $this->modal    = true;
                     $this->alert    = true;
-                    $this->message  = "Login Successfull!";
+                    $this->message  = "Login Successfully !!!";
                     $this->redirect = url('admin/home');
                }else{
                     \Session::flush();
-                    $this->message  =  $validator->errors()->add('not_exists', 'you are not authorised user.');
+                    $this->message  =  $validator->errors()->add('not_exists', 'You are not authorised user.');
                     return $this->populateresponse();
-               }
-            }
+                 }
+              }
             else{
-                    $this->message  =  $validator->errors()->add('not_exists', 'User Email or Password is Incorrect.');
+                    $this->message  =  $validator->errors()->add('not_exists', 'User Email or Password is Invalid.');
                 } 
         }
         return $this->populateresponse();

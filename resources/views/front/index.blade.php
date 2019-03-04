@@ -582,7 +582,6 @@
             <div class="form-group col-md-12 ">
               <label> Password:</label>
               <input type ="password" placeholder ="Enter Password "  class="form-control" name ="password">
-              
             </div>
           </div>
          </div>
