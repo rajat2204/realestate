@@ -19,10 +19,10 @@
 					<button class="btn btn-sm btn-default text-dark ">
 	  					Sort By
 		  				<select class = " hovs">
-							<option> Relevence  </option>
-							<option> Price -high to low  </option>
-							<option> Price -high to low  </option>
-							<option> Price -high to low  </option>
+							<option>Relevence</option>
+							<option>Price -high to low</option>
+							<option>Price -high to low</option>
+							<option>Price -high to low</option>
 						</select>
 					</button>
 				</div>
