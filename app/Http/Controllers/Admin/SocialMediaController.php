@@ -54,7 +54,7 @@ class SocialMediaController extends Controller
             ])
             ->addColumn(['data' => 'url','name' => 'url','title' => 'URL','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 

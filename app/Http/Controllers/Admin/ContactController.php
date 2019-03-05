@@ -56,7 +56,7 @@ class ContactController extends Controller
             ->addColumn(['data' => 'email','name' => 'email','title' => 'Contact E-mail','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'phone','name' => 'phone','title' => 'Contact Number','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 

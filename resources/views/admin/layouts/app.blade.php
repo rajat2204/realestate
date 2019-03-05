@@ -70,7 +70,7 @@
 	                $(this).parent().addClass('active');
 	            }
 	        });
-			}); 
+		});
 
 		$(document).ready(function(){
 		    setTimeout(function(){

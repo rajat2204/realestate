@@ -115,7 +115,7 @@ class PropertyController extends Controller
             ->addColumn(['data' => 'price','name' => 'price','title' => 'Property Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'agent_id','name' => 'agent_id','title' => 'Agent','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 

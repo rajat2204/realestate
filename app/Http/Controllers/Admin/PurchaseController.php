@@ -104,7 +104,7 @@ class PurchaseController extends Controller
             ->addColumn(['data' => 'price', 'name' => 'price','title' => 'Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description','name' => 'description','title' => 'Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 

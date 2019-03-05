@@ -106,7 +106,7 @@ class SliderController extends Controller
             ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Slider Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 

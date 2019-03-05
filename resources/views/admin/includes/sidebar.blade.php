@@ -83,6 +83,11 @@
           </ul>
         </li>
         <li>
+          <a href="{{url('admin/static_pages')}}">
+            <i class="fa fa-sliders"></i> <span>Static Pages</span>
+          </a>
+        </li>
+        <li>
           <a href="{{url('admin/social')}}">
             <i class="fa fa-fw fa-linkedin-square"></i> <span>Social Media</span>
           </a>

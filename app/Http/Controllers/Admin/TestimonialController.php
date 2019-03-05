@@ -81,7 +81,7 @@ class TestimonialController extends Controller
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Testimonial Title','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Testimonial Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
-            ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
