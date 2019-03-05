@@ -13,7 +13,7 @@
 		<div class="projects_list">
 			<div class="projectLocation clearfix">
 				<div class="project-heading float-left">
-					<h2>Residential Projects in Shaheed Path</h2>
+					<h2>Projects</h2>
 				</div>
 				<div class="project-right float-right">
 					<button class="btn btn-sm btn-default text-dark ">
@@ -27,42 +27,44 @@
 					</button>
 				</div>
 			</div>
-			<div class="projectsWrapper">
-				<div class="row">
-					<div class="col-md-4 pd-right-none">
-						<div class="imgProject">
-							<img src="{{url('assets/img/properties/1550311336slider7.jpg')}}" alt="project">
-						</div>
-					</div>
-					<div class="col-md-8">
-						<div class="clearfix">
-							<div class="project-description float-left">
-								<h3>Crystal Link Apartment</h3>
-								<p>Shaheed Path , Lucknow</p>
-								<p>By Intra developers</p>
+			@foreach($project as $projects)
+				<div class="projectsWrapper">
+						<div class="row">
+							<div class="col-md-4 pd-right-none">
+								<div class="imgProject">
+									<img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project">
+								</div>
 							</div>
-							<div class="project-pric float-right">
-								<h3><i class="fa fa-rupee"></i>40 Lacs - 50 Lacs</h3>
+							<div class="col-md-8">
+								<div class="clearfix">
+									<div class="project-description float-left">
+										<h3>{{$projects['name']}}</h3>
+										<p>{{$projects['location']}}</p>
+										<p>By Intra developers</p>
+									</div>
+									<div class="project-pric float-right">
+										<h3><i class="fa fa-rupee"></i>40 Lacs - 50 Lacs</h3>
+									</div>
+								</div>
+								<div class="project-content">
+									<p>{!!strip_tags($projects['description'])!!}</p>
+								</div>
+								<ul class="projectContent">
+									<li>1 BHK Flat</li>
+									<li>1200 - 13850 sqft</li>
+									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+								</ul>
+								<ul class="projectContent">
+									<li>2 BHK Flat</li>
+									<li>1350 - 1380 sqft</li>
+									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+								</ul>
 							</div>
 						</div>
-						<div class="project-content">
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-						</div>
-						<ul class="projectContent">
-							<li>1 BHK Flat</li>
-							<li>1200 - 13850 sqft</li>
-							<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-							<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-						</ul>
-						<ul class="projectContent">
-							<li>2 BHK Flat</li>
-							<li>1350 - 1380 sqft</li>
-							<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-							<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-						</ul>
-					</div>
 				</div>
-			</div>
+			@endforeach
 		</div>
 		<div>
 			
