@@ -64,8 +64,8 @@
 
 		$(document).ready(function(){
 		    setTimeout(function(){
-		        $('#cover').fadeOut(500);
-		    },1000)
+		        $('#cover').toggle(500); },
+		        1000)
 		});
 		</script>
 <script type="text/javascript">
@@ -123,7 +123,6 @@
 
 	      });
 	}
-
 	 google.maps.event.addDomListener(window, 'load', initialize); 
 </script>
 @yield('requirejs')

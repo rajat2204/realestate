@@ -1,3 +1,8 @@
+@php 
+  if(\Auth::user() && \Auth::user()->user_type=='super-admin'){
+  \Auth::logout();
+}
+@endphp
 <header id="header-wrap">
   <div class="header_strip">
       <div class="phone_header">
@@ -77,3 +82,81 @@
   </nav>
   <!-- Navbar End -->
 </header>
+
+<div class="modal modalWrapper fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <h3 class="modal-title">Customer Signup</h3>
+      </div>
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <label for="usr">First Name:</label>
+            <input name="first_name" placeholder="Enter your name..." class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Last Name:</label>
+            <input name="last_name" placeholder="Enter your name..." class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Email:</label>
+            <input name="email" placeholder="Enter your E-mail..." class="form-control" type="email">
+          </div>
+          <div class="form-group">
+            <label for="usr">Mobile Number:</label>
+            <input name="phone" placeholder="Enter your mobile number" class="form-control" type="text">
+          </div>
+          <div class="form-group">
+            <label for="usr">Password:</label>
+            <input name="password" placeholder="Enter your password" class="form-control" type="password">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Sign In</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="{{url('login')}}" role="login">
+        {{csrf_field()}}
+        <div class="container far27" >
+          <div class="form-row ">
+            <div class="form-group col-md-12">
+              <label >Username:</label>
+              <input type ="text" placeholder ="Enter your Number"  class="form-control" name ="phone">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12 ">
+              <label> Password:</label>
+              <input type ="password" placeholder ="Enter Password "  class="form-control" name ="password">
+            </div>
+          </div>
+         </div>
+        </div>  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-sm " data-request="ajax-submit" data-target='[role="login"]'>Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal -->

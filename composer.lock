@@ -3658,22 +3658,22 @@
         },
         {
             "name": "yajra/laravel-datatables-fractal",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables-fractal.git",
-                "reference": "79d9e2c6c358b65b18ca392a1063c1a4631b4700"
+                "reference": "796c5f49527900032886dc02864e5aa88e5a99bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables-fractal/zipball/79d9e2c6c358b65b18ca392a1063c1a4631b4700",
-                "reference": "79d9e2c6c358b65b18ca392a1063c1a4631b4700",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables-fractal/zipball/796c5f49527900032886dc02864e5aa88e5a99bf",
+                "reference": "796c5f49527900032886dc02864e5aa88e5a99bf",
                 "shasum": ""
             },
             "require": {
                 "league/fractal": "^0.17.0",
                 "php": ">=7.0",
-                "yajra/laravel-datatables-oracle": "8.*"
+                "yajra/laravel-datatables-oracle": "8.*|9.*"
             },
             "require-dev": {
                 "mockery/mockery": "0.9.*",
@@ -3712,7 +3712,7 @@
                 "fractal",
                 "laravel"
             ],
-            "time": "2018-11-15T01:09:11+00:00"
+            "time": "2019-03-05T01:33:25+00:00"
         },
         {
             "name": "yajra/laravel-datatables-html",
