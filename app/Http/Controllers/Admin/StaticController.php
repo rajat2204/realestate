@@ -106,7 +106,7 @@ class StaticController extends Controller
         $data['view'] = 'admin.staticpages.edit';
         $id = ___decrypt($id);
         $data['staticpage'] = _arefy(Static_pages::where('id',$id)->first());
-        dd($data['staticpage']);
+        // dd($data['staticpage']);
         return view('admin.home',$data);
     }
 
