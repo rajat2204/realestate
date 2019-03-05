@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $table = 'project';
-   	protected $fillable = ['name','slug','image','location','latitude','longitude','description','status','created_at','updated_at'];
+   	protected $fillable = ['company_id','name','slug','price','image','location','latitude','longitude','description','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;
@@ -19,8 +19,17 @@ class Project extends Model
         return (bool)$isUpdated;
     }
 
+    public function company(){
+        return $this->hasOne('App\Models\Company','id','company_id');
+    }
+
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
-        $table_projects = self::select($keys);
+        $table_projects = self::select($keys)
+        ->with([
+            'company' => function($q){
+                $q->select('id','name');
+            },
+        ]);
         if($where){
             $table_projects->whereRaw($where);
         }

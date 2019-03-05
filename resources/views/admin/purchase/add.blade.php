@@ -17,7 +17,6 @@
                 @foreach($project as $projects)
                   <option value="{{!empty($projects['id'])?$projects['id']:''}}">{{!empty($projects['name'])?$projects['name']:''}}</option>
                 @endforeach
-                <option></option>
               </select>
             </div>
           </div>

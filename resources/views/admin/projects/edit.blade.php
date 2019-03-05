@@ -14,6 +14,16 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <label>Company Name:</label>
+          <select class="form-control" name="company_id" id="company_id">
+            <option value="">Company Name</option>
+            @foreach($company as $companies)
+              <option value="{{!empty($companies['id'])?$companies['id']:''}}" @if($companies['id'] == $project['company_id']) selected @endif>{{!empty($companies['name'])?$companies['name']:''}}</option>
+            @endforeach
+          </select>
+        </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -40,12 +50,23 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete" value="{{!empty($project['location'])?$project['location']:''}}">
-          <input type="hidden" name="city" id="city" value="{{!empty($project['city'])?$project['city']:''}}">
-          <input type="hidden" name="latitude" id="cityLat" value="{{!empty($project['latitude'])?$project['latitude']:''}}">
-          <input type="hidden" name="longitude" id="cityLng" value="{{!empty($project['longitude'])?$project['longitude']:''}}">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Location:</label>
+              <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete" value="{{!empty($project['location'])?$project['location']:''}}">
+              <input type="hidden" name="city" id="city" value="{{!empty($project['city'])?$project['city']:''}}">
+              <input type="hidden" name="latitude" id="cityLat" value="{{!empty($project['latitude'])?$project['latitude']:''}}">
+              <input type="hidden" name="longitude" id="cityLng" value="{{!empty($project['longitude'])?$project['longitude']:''}}">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Price:</label>
+              <input type="text" class="form-control" placeholder="Enter Price..." name="price" value="{{!empty($project['price'])?$project['price']:''}}">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

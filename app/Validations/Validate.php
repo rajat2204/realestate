@@ -518,10 +518,12 @@ class Validate
 
 	public function createProject($action='add'){
         $validations = [
+        	'company_id'		=> $this->validation('name'),
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
 			'image'  			=> $this->validation('photo'),
 			'location'  		=> $this->validation('name'),
+			'price'  			=> $this->validation('price'),
 			'description'		=> $this->validation('name'),
     	];
 		if($action =='edit'){
@@ -533,6 +535,7 @@ class Validate
 			]);
 		}
         $validator = \Validator::make($this->data->all(), $validations,[
+        	'company_id.required'			=> 'Company Name is Required.',
         	'name.required'     			=> 'Project Name is Required.',
         	'slug.required'     			=> 'Project Slug is Required.',
         	'slug.unique'     				=> 'This Project Slug has already been taken.',
@@ -540,6 +543,8 @@ class Validate
         	'image.required'				=> 'Project Image is required.',
         	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
         	'location.required'				=> 'Location of a Project is required.',
+        	'price.required'				=> 'Project Price is required.',
+        	'price.numeric'					=> 'Project Price should be numeric.',
         	'description.required'			=> 'Project Description is required.',
         ]);
         return $validator;		

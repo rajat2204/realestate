@@ -39,15 +39,15 @@
 								<div class="clearfix">
 									<div class="project-description float-left">
 										<h3>{{$projects['name']}}</h3>
-										<p>{{$projects['location']}}</p>
-										<p>By Intra developers</p>
+										<p title="{{$projects['location']}}">{{str_limit($projects['location'],95)}}</p>
+										<p>{{$projects['company']['name']}}</p>
 									</div>
 									<div class="project-pric float-right">
-										<h3><i class="fa fa-rupee"></i>40 Lacs - 50 Lacs</h3>
+										<h3><i class="fa fa-rupee"></i>{{number_format($projects['price'])}}</h3>
 									</div>
 								</div>
 								<div class="project-content">
-									<p>{!!strip_tags($projects['description'])!!}</p>
+									<p title="{!!strip_tags($projects['description'])!!}">{{str_limit(strip_tags($projects['description']),280)}}</p>
 								</div>
 								<ul class="projectContent">
 									<li>1 BHK Flat</li>

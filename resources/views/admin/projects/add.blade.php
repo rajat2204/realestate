@@ -8,6 +8,16 @@
       <form role="add-project" method="POST" action="{!! action('Admin\ProjectController@store') !!}">
         {{csrf_field()}}
 
+        <div class="form-group">
+          <label>Company Name:</label>
+          <select class="form-control" name="company_id" id="company_id">
+            <option value="">Company Name</option>
+            @foreach($company as $companies)
+              <option value="{{!empty($companies['id'])?$companies['id']:''}}">{{!empty($companies['name'])?$companies['name']:''}}</option>
+            @endforeach
+          </select>
+        </div>
+
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -34,12 +44,23 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Location:</label>
-          <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete">
-          <input type="hidden" name="city" id="city">
-          <input type="hidden" name="latitude" id="cityLat">
-          <input type="hidden" name="longitude" id="cityLng">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Location:</label>
+              <input type="text" class="form-control" placeholder="Enter Location..." name="location" id="autocomplete">
+              <input type="hidden" name="city" id="city">
+              <input type="hidden" name="latitude" id="cityLat">
+              <input type="hidden" name="longitude" id="cityLng">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Price:</label>
+              <input type="text" class="form-control" placeholder="Enter Price..." name="price">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

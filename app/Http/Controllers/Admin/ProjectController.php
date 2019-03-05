@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -63,12 +64,18 @@ class ProjectController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('price',function($item){
+                return 'Rs.'. ' ' .number_format($item['price']);
+            })
             ->editColumn('image',function($item){
                 $imageurl = asset("assets/img/Projects/".$item['image']);
                 return '<img src="'.$imageurl.'" height="70px" width="100px">';
             })
             ->editColumn('description',function($item){
                 return str_limit(strip_tags($item['description']),50);
+            })
+            ->editColumn('company_id',function($item){
+                return ucfirst($item['company']['name']);
             })
             ->rawColumns(['image','action'])
             ->make(true);
@@ -79,9 +86,11 @@ class ProjectController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Project Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'company_id', 'name' => 'company_id','title' => 'Company Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Project Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Project Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Project Location','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'price', 'name' => 'price','title' => 'Project Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Project Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -96,6 +105,7 @@ class ProjectController extends Controller
     public function create()
     {
         $data['view'] = 'admin.projects.add';
+        $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 
@@ -154,6 +164,7 @@ class ProjectController extends Controller
         $id = ___decrypt($id);
         $where = 'id = '.$id;
         $data['project'] = _arefy(Project::list('single',$where));
+        $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 
