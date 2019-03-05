@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use App\Models\Users;
+use App\Models\Project;
 use App\Models\Agents;
 use App\Models\Notice;
 use App\Models\Contact;
@@ -128,6 +129,9 @@ class HomeController extends Controller{
     public function allProjects(Request $request){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $where = 'status = "active"';
+        $data['project'] = _arefy(Project::list('array',$where,['*'],'id-desc'));
+        // dd($data['project']);
         $data['view'] = 'front.projects';
         return view('front_home',$data);
     }
