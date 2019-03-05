@@ -40,15 +40,15 @@
 	    <!-- jQuery 3 -->
 		<script src="{{asset('assets/bower_components/jquery/dist/jquery.min.js')}}"></script>
 		<!-- jQuery UI 1.11.4 -->
-		<script>
+		<!-- <script>
 		  $.widget.bridge('uibutton', $.ui.button);
-		</script>
+		</script> -->
 		<!-- Bootstrap 3.3.7 -->
 		<script src="{{asset('assets/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 		<script src="{{asset('assets/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js')}}"></script>
 		<script src="{{asset('assets/bower_components/datatables.net/js/jquery.dataTables.js')}}"></script>
 		<script src="{{asset('assets/js/sweetalert2.js')}}"></script>
-		<script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+		<!-- <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script> -->
 		<script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
 		<!-- AdminLTE App -->
 		<script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
@@ -60,7 +60,17 @@
 		            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
 		        },isLocal: false
 		    });
-		});  
+		});
+
+		$(function(){
+	    var url = window.location.pathname, 
+	        urlRegExp = new RegExp(url.replace(/\/$/,'') + "$");
+	        $('.nav_active_menu a').each(function(){
+	            if(urlRegExp.test(this.href.replace(/\/$/,''))){
+	                $(this).parent().addClass('active');
+	            }
+	        });
+			}); 
 
 		$(document).ready(function(){
 		    setTimeout(function(){
