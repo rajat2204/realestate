@@ -57,7 +57,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Select Property Purpose:</label>
               <select class="form-control" name="property_purpose">
@@ -68,7 +68,7 @@
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Select Property Type:</label>
               <select class="form-control" name="property_type">
@@ -76,6 +76,18 @@
                 <option <?php if($property['property_type'] == 'flat'){echo("selected");}?>>Flat</option>
                 <option <?php if($property['property_type'] == 'plot'){echo("selected");}?>>Plot</option>
                 <option <?php if($property['property_type'] == 'house'){echo("selected");}?>>House</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Select Property Construct:</label>
+              <select class="form-control" name="property_construct">
+                <option value="">Select Property Construct</option>
+                <option <?php if($property['property_construct'] == 'residential'){echo("selected");}?>>Residential</option>
+                <option <?php if($property['property_construct'] == 'commercial'){echo("selected");}?>>Commercial</option>
+                <option <?php if($property['property_construct'] == 'others'){echo("selected");}?>>Others</option>
               </select>
             </div>
           </div>

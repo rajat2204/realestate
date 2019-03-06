@@ -9,7 +9,7 @@
 <div class="tab-content" id="nav-tabContent">
  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 <div class="head_g clearfix">
-<p >{{$count}} Apartments/Flats for {{$property_type}} in {{$city}}
+<p >{{$count}} Properties
 </p>
  	<button class="btn btn-sm btn-default text-dark ">
  	Sort By

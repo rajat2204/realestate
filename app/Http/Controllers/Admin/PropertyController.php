@@ -86,10 +86,18 @@ class PropertyController extends Controller
                 return ucfirst(str_limit($item['location'],30));
             })
             ->editColumn('price',function($item){
-                return 'Rs.'.' ' .($item['price']);
+                if(!empty($item['price'])){
+                    return 'Rs.'.' ' .number_format($item['price']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('area',function($item){
-                return ($item['area']). ' ' . 'sq.ft.';
+                if (!empty($item['area'])) {
+                    return ($item['area']). ' ' . 'sq.ft.';                    
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('featured_image',function($item){
                 $imageurl = asset("assets/img/properties/".$item['featured_image']);
