@@ -34,9 +34,7 @@
 									<li>Properties Availabale </li>
 									<li>Overview</li>
 									<li>Amenties </li>
-									<li>Specifications </li>
 									<li>Gallery </li>
-									<li>Map view </li>
 									<li>About the Builder </li>
 								</ul>
 							</div>	

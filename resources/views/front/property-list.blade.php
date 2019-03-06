@@ -29,7 +29,7 @@
     <div class="col-md-2 ">
   <div class="boxd">
   <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
-  <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span> 
+  <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span>
 <p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
   </div>
   </div>
@@ -50,7 +50,7 @@
   
  <div class="col-md-8 ">  
 <div class="row ">
-<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}
+<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
   <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
 </div>   
   <div class="row ">  
