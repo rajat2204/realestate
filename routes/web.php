@@ -36,6 +36,7 @@ Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
 Route::post('login','HomeController@customerLogin');
 Route::post('search/property','HomeController@searchProperty');
+Route::get('projectproperties/{id}','HomeController@projectProperties');
 Route::get('logout',function(){
 		\Auth::logout();
           return redirect('/');

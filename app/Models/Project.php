@@ -33,7 +33,7 @@ class Project extends Model
                 $q->select('id','name');
             },
             'property' => function($q){
-                $q->select('project_id','category_id','name','bedrooms','description','key_points','location','property_type','featured_image','property_construct','property_purpose','price','area');
+                $q->select('project_id','category_id','name','bedrooms','description','key_points','location','property_type','featured_image','property_construct','property_purpose','price','area','slug');
             },
         ]);
         if($where){

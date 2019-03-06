@@ -3,7 +3,7 @@
 <nav >
  <div class="nav nav-tabs" id="nav-tab" role="tablist">
    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-   <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+   <!-- <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a> -->
  </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -34,16 +34,19 @@
   </div>
   </div>
 <div class="col-md-2 trims">  
-   <div class ="tex_t text-light "> 
-
-<i class="fa fa-rupee text-blue" ></i>
-@if($value['property_purpose'] == 'sale')
-  <span>{{number_format($value['price'])}}</span>
-@else
-  <span>{{number_format($value['price'])}}/month</span>
-@endif
- </div>
+  <div class = "tex_t text-light "> 
+    <i class="fa fa-rupee text-blue"></i>
+      @if(!empty($value['price']))
+        @if($value['property_purpose'] == 'sale')
+          <span>{{number_format($value['price'])}}</span>
+        @else
+          <span>{{number_format($value['price'])}}/month</span>
+        @endif
+      @else
+        <span>N/A</span>
+      @endif
   </div>
+</div>
   
  <div class="col-md-8 ">  
 <div class="row ">
@@ -53,11 +56,11 @@
   <div class="row ">  
   <div class="col-md-3 sims">
   <span class="text-secondary">Carpet area</span>
-  <span class="text-dark">{{$value['area']. ' '}}sqft.</span>
+  <span class="text-dark">@if(!empty($value['area'])){{$value['area']. ' '}}sqft.@else N/A @endif</span>
   </div>
   <div class="col-md-3 sims">
   <span class="text-secondary">Status</span>
-  <span class="text-dark">Possession By {{' ' .$value['possession']}}</span>
+  <span class="text-dark">@if(!empty($value['possession']))Possession By {{' ' .$value['possession']}}@else N/A @endif</span>
   </div>  
 <div class="col-md-3 sims">
   <span class="text-secondary">Property Name</span>
