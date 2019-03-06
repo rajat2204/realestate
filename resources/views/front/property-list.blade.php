@@ -1,4 +1,4 @@
-<section class ="bg property-section" id="property-section">	
+<section class ="bg property-section" id="property-section">  
 <div class="container">
 <nav >
  <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -11,9 +11,9 @@
 <div class="head_g clearfix">
 <p >{{$count}} Properties
 </p>
- 	<button class="btn btn-sm btn-default text-dark ">
- 	Sort By
- 	<select class = "hovs">
+  <button class="btn btn-sm btn-default text-dark ">
+  Sort By
+  <select class = "hovs">
 <option> Relevence  </option>
 <option> Price -high to low  </option>
 <option> Price -high to low  </option>
@@ -25,88 +25,205 @@
 @foreach($property as  $value) 
 <div class="container ml-0 mr-0 pr-0 pl-0">
  <div id="wraperr">
- 	 	<div class ="row ">
- 	 	<div class="col-md-2 ">
- 	<div class="boxd">
- 	<img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
- 	<span class="bulge">{{count($value['property_gallery'])}} photo(s)</span> 
-<p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p>	
- 	</div>
- 	</div>
-<div class="col-md-2 trims">	
-  <div class = "tex_t text-light ">	
-    <i class="fa fa-rupee text-blue"></i>
-      @if(!empty($value['price']))
-        @if($value['property_purpose'] == 'sale')
-        	<span>{{number_format($value['price'])}}</span>
-        @else
-        	<span>{{number_format($value['price'])}}/month</span>
-        @endif
-      @else
-        <span>N/A</span>
-      @endif
+    <div class ="row ">
+    <div class="col-md-2 ">
+  <div class="boxd">
+  <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
+  <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span> 
+<p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
   </div>
-</div>
- 	
- <div class="col-md-8 ">	
+  </div>
+<div class="col-md-2 trims">  
+   <div class ="tex_t text-light "> 
+
+<i class="fa fa-rupee text-blue" ></i>
+@if($value['property_purpose'] == 'sale')
+  <span>{{number_format($value['price'])}}</span>
+@else
+  <span>{{number_format($value['price'])}}/month</span>
+@endif
+ </div>
+  </div>
+  
+ <div class="col-md-8 ">  
 <div class="row ">
 <h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}
- 	<span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
-</div>	 
- 	<div class="row ">	
- 	<div class="col-md-3 sims">
- 	<span class="text-secondary">Carpet area</span>
- 	<span class="text-dark">@if(!empty($value['area'])){{$value['area']. ' '}}sqft.@else N/A @endif</span>
- 	</div>
- 	<div class="col-md-3 sims">
- 	<span class="text-secondary">Status</span>
- 	<span class="text-dark">@if(!empty($value['possession']))Possession By {{' ' .$value['possession']}}@else N/A @endif</span>
- 	</div>	
+  <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
+</div>   
+  <div class="row ">  
+  <div class="col-md-3 sims">
+  <span class="text-secondary">Carpet area</span>
+  <span class="text-dark">{{$value['area']. ' '}}sqft.</span>
+  </div>
+  <div class="col-md-3 sims">
+  <span class="text-secondary">Status</span>
+  <span class="text-dark">Possession By {{' ' .$value['possession']}}</span>
+  </div>  
 <div class="col-md-3 sims">
- 	<span class="text-secondary">Property Name</span>
- 	<span class="text-dark">{{$value['name']}}</span>
+  <span class="text-secondary">Property Name</span>
+  <span class="text-dark">{{$value['name']}}</span>
 </div>
- 	<div class="col-md-3 sims">
- 	<span class="text-secondary">Agent Name</span>
- 	<span class="text-dark">{{$value['agent']['name']}}</span>
- 	</div>	 	 	
- 	</div>
+  <div class="col-md-3 sims">
+  <span class="text-secondary">Agent Name</span>
+  <span class="text-dark">{{$value['agent']['name']}}</span>
+  </div>      
+  </div>
 <div class="row">
 
 <div class="property-desc">
- 	<p title="{{strip_tags($value['description'])}}">@if(!empty($value['description'])) {{str_limit(strip_tags($value['description']),80)}} @else <strong>N/A</strong> @endif</p>
- 	</div>
+  <p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),80)}} </p>
+  </div>
 
- 	</div>
- 	<div class="row">
- 	<div class="col-md-3 sim">
- 	<button class="btn btn-blue">Contact Agent</button>
- 	</div>
- 	<div class="col-md-3 sim ">
- 	<button class="btn btn-outline-default red">View Phone No.</button>	 	
- 	</div>
- 	<div class="col-md-3 sim">
- 	<i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
- 	</div>
- 	<div class="col-md-3 sim disabl">
- 	<small class=""> Company/Owner Name</small>
- 	<small >{{$value['company']['name']}}</small>
- 	</div>	 	
- 	</div>	
+  </div>
+  <div class="row">
+  <div class="col-md-3 sim">
+  <button class="btn btn-blue" data-toggle="modal" data-target="#contactModal">Contact Agent</button>
+  </div>
+
+  <div class="col-md-3 sim ">
+  <button class="btn btn-outline-default red" data-toggle="modal" data-target="#vienumberModal">View Phone NO.</button>   
+  </div>
+  <div class="col-md-3 sim">
+  <i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
+  </div>
+  <div class="col-md-3 sim disabl">
+  <small class=""> Company/Owner Name</small>
+  <small >{{$value['company']['name']}}</small>
+  </div>    
+  </div>  
      </div>
-   </div>	     
+   </div>      
     </div>
 </div>
    @endforeach
 @endif
-</div>	   
+</div>
+<div class="modal contact-modal fade" id="contactModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+         
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <span class="modal-title property-name-modal">Aarohan Infra Developers Pvt. Ltd.</span>
+        <div>
+        <span>Builder +91-97XXXXXXX11</span>
+        </div>
+      </div>
+
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <input name="selectoption"  class="" type="radio">
+                <label for="usr">Individual:</label>
+              </div>
+              <div class="col-md-6">
+               <input name="selectoption" class="" type="radio">
+                <label for="usr">Agent:</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group m-contact__fieldset">
+           
+            <input name="name" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Name:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="email" class="form-control m-contact__input" type="email">
+            <label for="usr" class="contact_label m-contact__label">Email:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="phone" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Mobile Number:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <select for="usr" class="m-contact__select">Interest in(optional):
+            <option>Visit</option>
+            <option>Visit</option>
+            <option>Visit</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>  
+
+{{-- modal second --}} 
+<div class="modal contact-modal fade" id="vienumberModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+         
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <span class="modal-title property-name-modal">Aarohan Infra Developers Pvt. Ltd.</span>
+        <div>
+        <span>Builder +91-97XXXXXXX11</span>
+        </div>
+      </div>
+
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <input name="selectoption"  class="" type="radio">
+                <label for="usr">Individual:</label>
+              </div>
+              <div class="col-md-6">
+               <input name="selectoption" class="" type="radio">
+                <label for="usr">Agent:</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group m-contact__fieldset">
+           
+            <input name="name" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Name:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="email" class="form-control m-contact__input" type="email">
+            <label for="usr" class="contact_label m-contact__label">Email:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="phone" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Mobile Number:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <select for="usr" class="m-contact__select">Interest in(optional):
+            <option>Visit</option>
+            <option>Visit</option>
+            <option>Visit</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}  
 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">  
- <div class="wrapper">	 	
- 	<div class="row">
- 	
- 	</div>
-     </div>	
+ <div class="wrapper">    
+  <div class="row">
+  
+  </div>
+     </div> 
  </div>
 </div>
 </div>
-</section> 
+</section>

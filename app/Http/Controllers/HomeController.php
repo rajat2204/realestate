@@ -127,6 +127,7 @@ class HomeController extends Controller{
     }
 
     public function allProjects(Request $request,$id){
+        
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $where = 'status = "active"';

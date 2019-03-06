@@ -3457,6 +3457,7 @@ ul.shubhX button {
     border: none;
     background: transparent;
     color: #fff;
+    cursor: pointer;
 }
 ul.shubhX{
     display: -webkit-inline-box;
@@ -3466,6 +3467,112 @@ ul.shubhX p{
   margin-right: 8px;
   font-size: 15px;
   color: #fff;
+}
+.modalWrapper .modal-title{
+  font-size: 22px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.property-name-modal{
+  font-size: 14px;
+  color: #303030;
+  font-weight: 600;
+  padding-bottom: 3px;
+}
+.contact-modal .popupmodal-body{
+  padding: 5px 30px;
+}
+.contact-modal .form-control{
+  display: block;
+    width: 100%;
+    padding: 7px 0 8px;
+    height: 35px;
+    font-size: 14px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border: none;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e2e2e2;
+    outline: none;
+    -webkit-text-fill-color: #303030;
+    color: #303030;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+.m-contact__fieldset {
+    position: relative;
+    display: block;
+}
+/*m-contact__input:focus + .contact_label{
+    top: -20px;
+}*/
+.contact_label{
+  top: -20px;
+}
+.m-contact__select{
+  width: 100%;
+}
+select:focus{
+  outline: none;
+}
+.contact_label{
+  display: block;
+    font-size: 14px;
+    width: 100%;
+    color: #909090;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    line-height: 27px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    cursor: text;
+}
+.contact-modal label{
+  margin-bottom: 0;
+  margin-top: -13px;
+}
+.contact-modal select{
+  border: none;
+  height: 30px;
+  border-bottom: 1px solid #e2e2e2;
+}
+.contact-modal .modal-footer{
+  border: none;
+}
+.contact-modal .form-group{
+  /*margin-bottom: 5px;*/
+  border: 0;
+  /*border-bottom: 1px solid #e2e2e2;*/
+}
+.contact-modal .modal-header{
+  padding: 5px;
+}
+.contact-modal .modal-dialog {
+    max-width: 430px;
+}
+.modal-header-btm{
+  padding: 10px 20px 0;
+}
+.contact-modal .modal-header .close{
+  margin: 0;
+}
+.contact-modal .modal-header img{
+  width: 90px;
+}
+.modalWrapper .form-group{
+  margin-bottom: 10px;
+}
+.modalWrapper .form-control{
+  margin-bottom: 10px;
+}
+.modalWrapper .popupmodal-body{
+  padding: 20px 40px;
+}
+.modalWrapper .modal-header {
+    padding: 5px;
+    border-bottom: 0;
 }
 .shubhX .text-warning {
     color: #fff!important;
