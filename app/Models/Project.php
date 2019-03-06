@@ -22,6 +22,9 @@ class Project extends Model
     public function company(){
         return $this->hasOne('App\Models\Company','id','company_id');
     }
+    public function property(){
+        return $this->hasMany('App\Models\Property','project_id','id');
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
         $table_projects = self::select($keys)
@@ -29,11 +32,13 @@ class Project extends Model
             'company' => function($q){
                 $q->select('id','name');
             },
+            'property' => function($q){
+                $q->select('project_id','category_id','name','bedrooms','description','key_points','location','property_type','featured_image','property_construct','property_purpose','price','area');
+            },
         ]);
         if($where){
             $table_projects->whereRaw($where);
         }
-                
         if(!empty($order)){
             $order = explode('-', $order);
             $table_projects->orderBy($order[0],$order[1]);
