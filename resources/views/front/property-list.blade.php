@@ -77,10 +77,11 @@
  	</div>
  	<div class="row">
  	<div class="col-md-3 sim">
- 	<button class="btn btn-blue">Contact Agent</button>
+ 	<button class="btn btn-blue" data-toggle="modal" data-target="#contactModal">Contact Agent</button>
  	</div>
+
  	<div class="col-md-3 sim ">
- 	<button class="btn btn-outline-default red">View Phone NO.</button>	 	
+ 	<button class="btn btn-outline-default red" data-toggle="modal" data-target="#vienumberModal">View Phone NO.</button>	 	
  	</div>
  	<div class="col-md-3 sim">
  	<i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
@@ -96,7 +97,126 @@
 </div>
    @endforeach
 @endif
-</div>	   
+</div>
+<div class="modal contact-modal fade" id="contactModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+         
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <span class="modal-title property-name-modal">Aarohan Infra Developers Pvt. Ltd.</span>
+        <div>
+        <span>Builder +91-97XXXXXXX11</span>
+        </div>
+      </div>
+
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <input name="selectoption"  class="" type="radio">
+                <label for="usr">Individual:</label>
+              </div>
+              <div class="col-md-6">
+               <input name="selectoption" class="" type="radio">
+                <label for="usr">Agent:</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group m-contact__fieldset">
+           
+            <input name="name" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Name:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="email" class="form-control m-contact__input" type="email">
+            <label for="usr" class="contact_label m-contact__label">Email:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="phone" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Mobile Number:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <select for="usr" class="m-contact__select">Interest in(optional):
+            <option>Visit</option>
+            <option>Visit</option>
+            <option>Visit</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>	
+
+{{-- modal second --}} 
+<div class="modal contact-modal fade" id="vienumberModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+         
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-header-btm">
+        <span class="modal-title property-name-modal">Aarohan Infra Developers Pvt. Ltd.</span>
+        <div>
+        <span>Builder +91-97XXXXXXX11</span>
+        </div>
+      </div>
+
+      <div class="modal-body popupmodal-body">
+        <form role="signup" action="{{url('signup')}}" method="POST">
+          {{csrf_field()}}
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <input name="selectoption"  class="" type="radio">
+                <label for="usr">Individual:</label>
+              </div>
+              <div class="col-md-6">
+               <input name="selectoption" class="" type="radio">
+                <label for="usr">Agent:</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group m-contact__fieldset">
+           
+            <input name="name" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Name:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="email" class="form-control m-contact__input" type="email">
+            <label for="usr" class="contact_label m-contact__label">Email:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <input name="phone" class="form-control m-contact__input" type="text">
+            <label for="usr" class="contact_label m-contact__label">Mobile Number:</label>
+          </div>
+          <div class="form-group m-contact__fieldset">
+            <select for="usr" class="m-contact__select">Interest in(optional):
+            <option>Visit</option>
+            <option>Visit</option>
+            <option>Visit</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end modal --}}  
 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">  
  <div class="wrapper">	 	
  	<div class="row">
