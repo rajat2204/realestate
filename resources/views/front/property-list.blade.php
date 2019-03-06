@@ -50,8 +50,8 @@
   
  <div class="col-md-8 ">  
 <div class="row ">
-<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.</h6>
-  <!-- <span><i class="fa fa-map-marker text "></i>What's near By:</span> -->
+<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
+  <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
 </div>   
   <div class="row ">  
   <div class="col-md-3 sims">
