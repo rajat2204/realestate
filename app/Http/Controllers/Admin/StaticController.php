@@ -45,7 +45,7 @@ class StaticController extends Controller
                 return ucfirst($item['title']);
             })
             ->editColumn('description',function($item){
-                return str_limit(($item['description']),50);
+                return strip_tags(str_limit(($item['description']),50));
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -106,7 +106,6 @@ class StaticController extends Controller
         $data['view'] = 'admin.staticpages.edit';
         $id = ___decrypt($id);
         $data['staticpage'] = _arefy(Static_pages::where('id',$id)->first());
-        // dd($data['staticpage']);
         return view('admin.home',$data);
     }
 
@@ -117,9 +116,31 @@ class StaticController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->staticpage('edit');
+      if ($validator->fails()) {
+          $this->message = $validator->errors();
+      }else{
+          $staticpage = Static_pages::findOrFail($id);
+          $input = $request->all();
+
+          if ($file = $request->file('image')){
+            $photo_name = str_random(3).$request->file('image')->getClientOriginalName();
+            $file->move('assets/img/staticpage',$photo_name);
+            $input['image'] = $photo_name;
+          }
+
+          $staticpage->update($input);
+
+          $this->status   = true;
+          $this->modal    = true;
+          $this->alert    = true;
+          $this->message  = "Static Page has been Updated successfully.";
+          $this->redirect = url('admin/static_pages');
+      }
+      return $this->populateresponse();
     }
 
     /**

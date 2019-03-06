@@ -8,7 +8,7 @@
 						<div class="text_s">
 							<h2>{{$property['name']}}</h2>
 							<p>By <b>{{$property['company']['name']}}</b> • {{$property['location']}} </p>
-							<p><b> {{number_format($property['price'])}}</b> onwards • Area:</b> {{number_format($property['area'])}} sqft.</p>
+							<p><b><i class="fa fa-rupee"></i> {{number_format($property['price'])}}</b> onwards • <b>{{$property['bedrooms']}}</b> BHK <b>{{$property['category']['name']}}</b> • Area:</b> {{number_format($property['area'])}} sqft.</p>
 							<ul>
 								<li> Possession <span>: {{$property['possession']}}</span></li>
 							</ul>

@@ -38,9 +38,9 @@
 							<div class="col-md-8">
 								<div class="clearfix">
 									<div class="project-description float-left">
-										<h3>{{$projects['name']}}</h3>
+										<h3 title="{{$projects['name']}}">{{$projects['name']}}</h3>
 										<p title="{{$projects['location']}}">{{str_limit($projects['location'],95)}}</p>
-										<p>{{$projects['company']['name']}}</p>
+										<p title="{{$projects['company']['name']}}">{{$projects['company']['name']}}</p>
 									</div>
 									<div class="project-pric float-right">
 										<h3><i class="fa fa-rupee"></i>{{number_format($projects['price'])}}</h3>

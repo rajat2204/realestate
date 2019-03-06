@@ -51,7 +51,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Select Property Purpose:</label>
               <select class="form-control" name="property_purpose">
@@ -61,7 +61,7 @@
               </select>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Select Property Type:</label>
               <select class="form-control" name="property_type">
@@ -69,6 +69,17 @@
                 <option value="flat">Flat</option>
                 <option value="plot">Plot</option>
                 <option value="house">House</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Select Property Construct:</label>
+              <select class="form-control" name="property_construct">
+                <option value="">Select Property Construct</option>
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial</option>
+                <option value="others">Others</option>
               </select>
             </div>
           </div>

@@ -239,12 +239,14 @@
               <div class="room-info-warp">
                 <div class="room-info">
                   <div class="rf-left">
-                    <p><i class="fa fa-building"></i> {{number_format($properties['area'])}} Square foot</p>
-                    <p><i class="fa fa-bed"></i> {{$properties['bedrooms']}} Bedroom(s)</p>
+                    <p><i class="fa fa-building"></i>@if(!empty($properties['area'])) {{number_format($properties['area'])}} Square foot</p>
+                      @else N/A @endif
+                    <p><i class="fa fa-bed"></i>@if(!empty($properties['bedrooms'])) {{$properties['bedrooms']}} Bedroom(s)</p>
+                    @else N/A @endif
                   </div>
                   <div class="rf-right">
-                    <p><i class="fa fa-car"></i> {{$properties['garage']}} Garage(s)</p>
-                    <p><i class="fa fa-bed"></i> {{$properties['bathroom']}} Bathroom(s)</p>
+                    <p><i class="fa fa-car"></i>@if(!empty($properties['garage'])) {{$properties['garage']}} Garage(s)</p>@else N/A @endif
+                    <p><i class="fa fa-bed"></i>@if(!empty($properties['bathroom'])) {{$properties['bathroom']}} Bathroom(s)</p>@else N/A @endif
                   </div>  
                 </div>
                 <div class="room-info">
@@ -256,10 +258,14 @@
                   </div>  
                 </div>
               </div>
-              @if($properties['property_purpose'] == 'sale')
-                <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}</a>
+              @if(!empty($properties['price']))
+                @if($properties['property_purpose'] == 'sale')
+                  <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}</a>
+                @else
+                  <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
+                @endif
               @else
-                <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
+                  <a class="room-price"><i class="fa fa-rupee-sign" ></i></a>
               @endif
             </div>
           </div>
