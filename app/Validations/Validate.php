@@ -138,6 +138,18 @@ class Validate
       return $validator;		
 		}
 
+		public function staticpage($action='edit'){
+        $validations = [
+            'title' 					=> $this->validation('name'),
+            'description' 		=> $this->validation('description'),
+    	];
+      $validator = \Validator::make($this->data->all(), $validations,[
+      	'title.required'     			=> 'Title is Required.',
+      	'description.required'    => 'Description is Required.',
+      ]);
+      return $validator;		
+		}
+
 	public function addLead($action='add'){
         $validations = [
             'name' 		        => $this->validation('name'),

@@ -145,6 +145,5 @@ Route::resource('notice', 'NoticeController');
 /***********************staticPage-Section****************************/
 
 Route::resource('static_pages', 'StaticController');
-
 });
 
