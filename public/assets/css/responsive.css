@@ -75,16 +75,72 @@
     font-size: 30px;
     margin-bottom: 30px;
   }
+  #hero-area{
+    padding-top: 0;
+  }
+  .featured-properties-area {
+      padding: 40px 0 20px;
+  }
+  .gallery-wrap {
+      padding: 30px 0 14px;
+  }
+  #contact{
+    padding: 10px 0 30px;
+  }
+  #agents {
+    padding: 35px 0 50px;
+  }
+  #services {
+    padding: 15px 0;
+  }
+  #header-wrap {
+      height: 95px;
+  }
+  .vertical_slides{
+    display: none;
+  }
+  .vertical_slides2{
+    display: none;
+  }
   .services-item .services-content h3 a {
     font-size: 14px;
   }
   .advanced-search-form{
     padding: 40px 20px;
   }
-  .vertical_slides {
+  /*.vertical_slides {
     float: none;
     display: block;
-    /*width: 100%;*/
+  }*/
+  .vertical_slides_mobile{
+    display: block;
+  }
+  .vertical_slides_mobile .mCSB_outside + .mCSB_scrollTools{
+      right: -12px;
+  }
+  .vertical_slides_mobile .mCSB_outside + .mCSB_scrollTools {
+      right: -12px;
+  }
+  .vertical_slides_mobile {
+      display: inline-block;
+      /*float: left;*/
+      width: 300px;
+      padding-top: 20px;
+  }
+  .vertical_slides_mobile2{
+    display: block;
+  }
+  .vertical_slides_mobile2 .mCSB_outside + .mCSB_scrollTools{
+    right: -12px;
+  }
+  .vertical_slides_mobile2 .mCSB_outside + .mCSB_scrollTools {
+      right: -12px;
+  }
+  .vertical_slides_mobile2 {
+      display: inline-block;
+      /*float: left;*/
+      width: 300px;
+      padding-top: 20px;
   }
   .horizontal_slider {
       width: 100%;
@@ -95,17 +151,19 @@
   .horizontal_slider .item p {
       font-size: 13px;
   }
-  .header_wrapper {
+  .header_wrapper_mobile {
       display: flex;
-      flex-direction: column;
-      padding: 80px 0 40px;
+      flex-direction: row;
   }
 
-  .vertical_slides {
+  /*.vertical_slides {
       order: 2;
       padding-top: 20px;
   }
-
+  .vertical_slides2{
+    order: 2;
+    float: unset;
+  }*/
   .horizontal_slider {
       order: 1;
   }
@@ -116,6 +174,7 @@
   div#hero_slider {
       padding-top: 10px;
       padding-right:0;
+      padding-left: 0;
   }
 
 }
@@ -146,6 +205,10 @@
   .section-sub {
     font-size: 16px;
   }
+  #header-wrap {
+      height: 90px;
+  }
+
   .navbar-brand img {
     margin: 5px 0;
   }

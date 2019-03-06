@@ -1862,7 +1862,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .navbar-header {
     width: 100%;
   }
@@ -1881,7 +1881,7 @@ a.back-to-top:hover, a.back-to-top:focus {
     display: block;
   }
   .slicknav_nav .active a {
-    background: #E91E63;
+    /*background: #E91E63;*/
     color: #fff;
   }
   .slicknav_nav a:hover,
@@ -3871,10 +3871,6 @@ i.fa.fa-map-marker.text {
     display: none;
   }
   
-  .slicknav_nav .active a {
-    background: #E91E63;
-    color: #fff;
-  }
   .slicknav_nav a:hover,
   .slicknav_nav a:focus,
   .slicknav_nav .active {

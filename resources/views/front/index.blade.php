@@ -49,6 +49,52 @@
       </ul>
     </div>
   </div>
+  <!-- for mobile -->
+           <div class="header_wrapper_mobile clearfix">
+              <div class="vertical_slides_mobile">
+                  <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
+                      data-mcs-theme="dark">
+                      <li>
+                          <img src="assets/img/gallery/slide1.jpg" />
+                          <p>Asian Paints</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide2.jpg" />
+                          <p>RR Cables</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide3.jpg" />
+                          <p>CP Tiles</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide4.jpg" />
+                          <p>Water Purifier</p>
+                      </li>
+                  </ul>
+              </div>
+             
+              <div class="vertical_slides_mobile2">
+                  <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
+                      data-mcs-theme="dark">
+                      <li>
+                          <img src="assets/img/gallery/slide1.jpg" />
+                          <p>Asian Paints</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide2.jpg" />
+                          <p>RR Cables</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide3.jpg" />
+                          <p>CP Tiles</p>
+                      </li>
+                      <li>
+                          <img src="assets/img/gallery/slide4.jpg" />
+                          <p>Water Purifier</p>
+                      </li>
+                  </ul>
+              </div>
+          </div>
 </header>
 <!-- header section html ends-->
 
