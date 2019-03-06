@@ -3653,7 +3653,7 @@ p.utopia{
   font-size: 12px;
   /* top: 104px; */
   bottom: 45px;
-  left: 29px;
+  left: 20px;
   background-color: white;
   color: red;
   padding: 0px 7px; 
@@ -3674,6 +3674,7 @@ p.utopia{
 .boxd {
   padding: 10px 0px 10px 10px;
   width: 170px;
+  position: relative;
 }
 .trims.col-md-2{
   max-width: 14.266667%;
