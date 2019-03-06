@@ -126,12 +126,14 @@ class HomeController extends Controller{
         return view('front_home',$data);
     }
 
-    public function allProjects(Request $request){
+    public function allProjects(Request $request,$id){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $where = 'status = "active"';
         $data['project'] = _arefy(Project::list('array',$where,['*'],'id-desc'));
-        // dd($data['project']);
+        $whereProperty = 'status = "active"';
+        $data['properties'] = _arefy(Property::list('array',$whereProperty,['*'],'id-desc'));
+        // dd($data['properties']);
         $data['view'] = 'front.projects';
         return view('front_home',$data);
     }

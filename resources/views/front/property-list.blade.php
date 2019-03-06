@@ -34,16 +34,19 @@
  	</div>
  	</div>
 <div class="col-md-2 trims">	
-   <div class ="tex_t text-light ">	
-
-<i class="fa fa-rupee text-blue" ></i>
-@if($value['property_purpose'] == 'sale')
-	<span>{{number_format($value['price'])}}</span>
-@else
-	<span>{{number_format($value['price'])}}/month</span>
-@endif
- </div>
- 	</div>
+  <div class = "tex_t text-light ">	
+    <i class="fa fa-rupee text-blue"></i>
+      @if(!empty($value['price']))
+        @if($value['property_purpose'] == 'sale')
+        	<span>{{number_format($value['price'])}}</span>
+        @else
+        	<span>{{number_format($value['price'])}}/month</span>
+        @endif
+      @else
+        <span>N/A</span>
+      @endif
+  </div>
+</div>
  	
  <div class="col-md-8 ">	
 <div class="row ">
@@ -53,11 +56,11 @@
  	<div class="row ">	
  	<div class="col-md-3 sims">
  	<span class="text-secondary">Carpet area</span>
- 	<span class="text-dark">{{$value['area']. ' '}}sqft.</span>
+ 	<span class="text-dark">@if(!empty($value['area'])){{$value['area']. ' '}}sqft.@else N/A @endif</span>
  	</div>
  	<div class="col-md-3 sims">
  	<span class="text-secondary">Status</span>
- 	<span class="text-dark">Possession By {{' ' .$value['possession']}}</span>
+ 	<span class="text-dark">@if(!empty($value['possession']))Possession By {{' ' .$value['possession']}}@else N/A @endif</span>
  	</div>	
 <div class="col-md-3 sims">
  	<span class="text-secondary">Property Name</span>
@@ -71,7 +74,7 @@
 <div class="row">
 
 <div class="property-desc">
- 	<p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),80)}} </p>
+ 	<p title="{{strip_tags($value['description'])}}">@if(!empty($value['description'])) {{str_limit(strip_tags($value['description']),80)}} @else <strong>N/A</strong> @endif</p>
  	</div>
 
  	</div>
@@ -80,7 +83,7 @@
  	<button class="btn btn-blue">Contact Agent</button>
  	</div>
  	<div class="col-md-3 sim ">
- 	<button class="btn btn-outline-default red">View Phone NO.</button>	 	
+ 	<button class="btn btn-outline-default red">View Phone No.</button>	 	
  	</div>
  	<div class="col-md-3 sim">
  	<i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>

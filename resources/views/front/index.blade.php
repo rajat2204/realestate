@@ -265,7 +265,7 @@
                   <a class="room-price"><i class="fa fa-rupee-sign"></i>{{number_format($properties['price'])}}/month</a>
                 @endif
               @else
-                  <a class="room-price"><i class="fa fa-rupee-sign" ></i></a>
+                  <a class="room-price"><i class="fa fa-rupee-sign"></i></a>
               @endif
             </div>
           </div>
