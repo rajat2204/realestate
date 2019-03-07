@@ -8,7 +8,6 @@
       <form role="changepwd" method="POST" action="{{url('admin/client/'.___encrypt($client['id']).'/changepassword')}}">
       {{csrf_field()}}
 
-      <input type="hidden" value="PUT" name="_method">
         <div class="col-md-12">
           <div class="form-group">
             <input type="hidden" id="id" name="id" class="form-control" value="{{!empty($client['id'])?$client['id']:''}}">

@@ -194,17 +194,17 @@ class ClientController extends Controller
             if ($file = $request->file('photo')){
                 $photo_name = time().$request->file('photo')->getClientOriginalName();
                 $file->move('assets/img/Clients',$photo_name);
-                $client['photo'] = $photo_name;
+                $input['photo'] = $photo_name;
             }
             if ($file = $request->file('id_proof')){
                 $id_proof = time().$request->file('id_proof')->getClientOriginalName();
                 $file->move('assets/img/Id Proof',$id_proof);
-                $client['id_proof'] = $id_proof;
+                $input['id_proof'] = $id_proof;
             }
             if ($file = $request->file('address_proof')){
                 $address_proof = time().$request->file('address_proof')->getClientOriginalName();
                 $file->move('assets/img/Address Proof',$address_proof);
-                $client['address_proof'] = $address_proof;
+                $input['address_proof'] = $address_proof;
             }
 
             $client->update($input);
@@ -233,12 +233,12 @@ class ClientController extends Controller
     {
       $data['view'] = 'admin.clients.changepassword';
       $id = ___decrypt($id);
-      $where = ' id = '.$id;
+      $where = 'id = '.$id;
       $data['client'] = _arefy(Clients::list('single',$where));
       return view('admin.home',$data);
     }
 
-    public function changePasswordForm($id,Request $request)
+    public function changePasswordForm(Request $request,$id)
     {
       $id = ___decrypt($id);
       $validation = new Validations($request);
@@ -260,7 +260,7 @@ class ClientController extends Controller
                     return $this->populateresponse();
             }
         }
-        $user->update($input);
+        $client->update($input);
        
         $this->message = 'Client Password has been Updated Successfully.';
         $this->modal    = true;
