@@ -11,12 +11,13 @@
         <meta name="_token" content="{{ csrf_token() }}">
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+       
 
       
         <meta charset="utf-8"/>
         <title>Devdrishti Infrahomes Pvt. Ltd.</title>
         
-  <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
+    <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
         
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}" >
@@ -37,6 +38,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}" >
     <!-- mcustomscroll css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" >
     <!-- Animate -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
@@ -44,6 +46,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
+
+    
 <!-- ====================================[ DEFAULT STYLESHEET ]==================================== -->
 </head>
     <body class="page-md login loadingInProgress">
@@ -54,25 +58,37 @@
         
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('assets/js/jquery-min.js')}}"></script>
+
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
     <script src="{{asset('assets/js/jquery.mixitup.js')}}"></script>
     <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
     <script src="{{asset('assets/js/wow.js')}}"></script>
     <script src="{{asset('assets/js/jquery.nav.js')}}"></script>
+
     <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>  
     <script src="{{asset('assets/js/nivo-lightbox.js')}}"></script>
     <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
+
+    {{-- <script src="{{asset('assets/js/idangerous.swiper.min.js')}}"></script> --}}
     <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js.map"></script> --}}
+    
     <!-- [ SLIDER SCRIPT ] -->
+
+
     <script type="text/javascript">
 
       $(function () {
@@ -92,14 +108,14 @@
       });
 
        $(".price-filter").ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: 0,
-        max: 1000,
-        from: 0,
-        to: 200
-        // prefix: "$"
-    });
+            type: "double",
+            grid: true,
+            min: 0,
+            max: 1000,
+            from: 0,
+            to: 200
+            // prefix: "$"
+        });
        $(document).ready(function() {
           $('#our-agent').owlCarousel({
             loop: true,
@@ -126,14 +142,37 @@
               }
             }
           });
-       });
+        });
 
-$(window).load(function(){
-  setTimeout(function(){
-      $('#cover').fadeToggle();
-  },500)
-});
+    $(window).load(function(){
+      setTimeout(function(){
+          $('#cover').fadeToggle();
+      },500)
+    });
+    </script>
+    <script>
+      var galleryThumbs = new Swiper('.gallery-thumbs', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        loop: true,
+        freeMode: true,
+        loopedSlides: 5, //looped slides should be the same
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+      });
+      var galleryTop = new Swiper('.gallery-top', {
+        spaceBetween: 10,
+        loop:true,
+        loopedSlides: 5, //looped slides should be the same
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        thumbs: {
+          swiper: galleryThumbs,
+        },
+      });
     </script>
     @yield('requirejs')
-    </body>
+  </body>
 </html>

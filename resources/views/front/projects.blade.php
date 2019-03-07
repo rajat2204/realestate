@@ -1,13 +1,14 @@
+
 <section class="bg project-section">
 	<div class="container">
 		<div class="peojectnameList">
 			<ul class="list-project">
-				<!-- <li>
+				<li>
 					<a href="javascript:void(0);">Home</a>
 				</li>
 				<li>
 					<a href="javascript:void(0);">New Projects in Lucknow</a>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 		<div class="projects_list">
@@ -31,8 +32,12 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img title="{{$projects['image']}}" src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
-									<span class="bulge">{{count($projects['property'])}} properties</span>
+									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
+									<a href="#viewphotos" data-toggle="modal">
+										<div class="property-caption">
+											<span class="bulge">{{count($projects['property'])}} properties</span>
+										</div>
+									</a>
 								</div>
 							</div>
 							<div class="col-md-8">
@@ -63,6 +68,51 @@
 								</ul>
 							</div>
 						</div>
+					{{-- view photo popup --}}
+
+					<div class="modal modalphotos fade" id="viewphotos" role="dialog">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					      </div>
+					      
+					      <div class="modal-body popupmodal-body">
+					        <div class="swiper-container gallery-top">
+							    <div class="swiper-wrapper">
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
+							    </div>
+							    <!-- Add Arrows -->
+							    <div class="swiper-button-next swiper-button-white"></div>
+							    <div class="swiper-button-prev swiper-button-white"></div>
+							  </div>
+							  <div class="swiper-container gallery-thumbs">
+							    <div class="swiper-wrapper">
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+							      <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
+							    </div>
+							  </div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 				</div>
 			@endforeach
 		</div>
@@ -70,4 +120,7 @@
 			
 		</div>
 	</div>
+
 </section>
+
+
