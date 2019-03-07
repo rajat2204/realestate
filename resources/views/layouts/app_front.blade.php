@@ -11,12 +11,13 @@
         <meta name="_token" content="{{ csrf_token() }}">
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+       
 
       
         <meta charset="utf-8"/>
         <title>Devdrishti Infrahomes Pvt. Ltd.</title>
         
-  <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
+    <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
         
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}" >
@@ -44,6 +45,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.css" rel="stylesheet">
 <!-- ====================================[ DEFAULT STYLESHEET ]==================================== -->
 </head>
     <body class="page-md login loadingInProgress">
@@ -65,14 +68,22 @@
     <script src="{{asset('assets/js/nivo-lightbox.js')}}"></script>
     <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
+
+    {{-- <script src="{{asset('assets/js/idangerous.swiper.min.js')}}"></script> --}}
     <script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/js/swiper.min.js.map"></script> --}}
+    
     <!-- [ SLIDER SCRIPT ] -->
+
+
     <script type="text/javascript">
 
       $(function () {
@@ -92,14 +103,14 @@
       });
 
        $(".price-filter").ionRangeSlider({
-        type: "double",
-        grid: true,
-        min: 0,
-        max: 1000,
-        from: 0,
-        to: 200
-        // prefix: "$"
-    });
+            type: "double",
+            grid: true,
+            min: 0,
+            max: 1000,
+            from: 0,
+            to: 200
+            // prefix: "$"
+        });
        $(document).ready(function() {
           $('#our-agent').owlCarousel({
             loop: true,
@@ -126,6 +137,8 @@
               }
             }
           });
+
+           
        });
 
 $(window).load(function(){
@@ -133,7 +146,9 @@ $(window).load(function(){
       $('#cover').fadeOut(500);
   },500)
 });
-    </script>
+</script>
+
+
     @yield('requirejs')
     </body>
 </html>
