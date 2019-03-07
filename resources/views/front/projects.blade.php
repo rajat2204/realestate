@@ -28,11 +28,11 @@
 				</div>
 			</div>
 			@foreach($project as $projects)
-				<div class="projectsWrapper">
+			<div class="projectsWrapper">
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
+									<a href="{{url('project-properties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
 									<a href="#viewphotos" data-toggle="modal">
 										<div class="property-caption">
 											<span class="bulge">{{count($projects['property'])}} properties</span>

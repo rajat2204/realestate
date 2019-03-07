@@ -1,10 +1,11 @@
 <div class="content-wrapper">
   <div class="box box-warning">
     <div class="box-header with-border">
-      <h3 class="box-title">Add Agent</h3>
+
+      <h3 class="box-title">Edit Agent</h3>
     </div>
     <!-- /.box-header -->
-    <div class="box-body">
+    <div class="box-body ">
       <form role="edit-agent" method="POST" action="{{url('admin/agent/'.___encrypt($agent['id']))}}">
         {{csrf_field()}}
         <input type="hidden" value="PUT" name="_method">
@@ -52,11 +53,20 @@
           </div>
         </div>
 
-        <div class="form-group">
-           <label>Agent's Designation:</label>
-          <input type="text" class="form-control" placeholder="Enter Agents Designation" name="designation" value="{{!empty($agent['designation'])?$agent['designation']:''}}">
-         </div>
-
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+               <label>Agent's Designation:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents Designation" name=" designation" value="{{!empty($agent['designation'])?$agent['designation']:''}}">
+            </div>
+          </div>
+         <div class="col-md-6">
+            <div class="form-group">
+                <label>Commission:</label>
+                <input type="text" class="form-control" placeholder="Enter Agents Commission" name="commission" value="{{!empty($agent['commission'])?$agent['commission']:''}}">
+            </div>
+          </div>
+        </div>
         <div class="box-footer">
           <a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="edit-agent"]' class="btn btn-info pull-right">Submit</button>

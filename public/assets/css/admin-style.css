@@ -18,3 +18,17 @@
     background-size: 100px;
     color: #797979;
 }
+form.pisi{
+    padding: 22px 5px;
+    color:grey;
+    min-height:100vh;
+
+}
+.bodr_s{
+    border:1px solid ;
+    box-shadow: 1px 1px white;
+}
+form.pisi label{
+    padding-right: 7px;
+
+}

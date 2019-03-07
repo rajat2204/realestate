@@ -45,11 +45,21 @@
             </div>
           </div>
         </div>
-
-        <div class="form-group">
-           <label>Agent's Designation:</label>
-          <input type="text" class="form-control" placeholder="Enter Agents Designation" name="designation">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label>Agent's Designation:</label>
+            <input type="text" class="form-control" placeholder="Enter Agents Designation" name="designation">
          </div>
+        </div>
+         <div class="col-md-6">
+            <div class="form-group">
+                <label>Commission:</label>
+                <input type="text" class="form-control" placeholder="Enter Commission" name="commission">
+            </div>
+          </div>
+        </div>
+
         <div class="box-footer">
           <a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-agent"]' class="btn btn-info pull-right">Submit</button>
