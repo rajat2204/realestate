@@ -78,7 +78,28 @@ Route::resource('project', 'ProjectController');
 		Route::post('/status', 'ProjectController@changeStatus');
 	});
 
-/***********************Plot-Section****************************/
+/***********************Expense-Section****************************/
+
+Route::resource('expenses', 'ExpenseController');
+	Route::group(['prefix' => 'expenses'],function(){
+		Route::post('/status', 'ExpenseController@changeStatus');
+	});
+
+/***********************Expense-Category-Section****************************/
+
+Route::resource('expensecategories', 'ExpenseCategoryController');
+	Route::group(['prefix' => 'expensecategories'],function(){
+		Route::post('/status', 'ExpenseCategoryController@changeStatus');
+	});
+
+/***********************Vendor-Section****************************/
+
+Route::resource('vendors', 'VendorController');
+	Route::group(['prefix' => 'vendors'],function(){
+		Route::post('/status', 'VendorController@changeStatus');
+	});
+
+/***********************Property-Section****************************/
 
 Route::resource('property', 'PropertyController');
 	Route::group(['prefix' => 'property'],function(){

@@ -33,7 +33,7 @@ class Validate
 			'profile_picture'   => ['required','mimes:doc,docx,pdf'],
 			'pin_code' 			=> ['nullable','max:6','min:4'],
 			'type' 	           	=> ['required','string'],
-			'phone' 	        => ['required','string','numeric','digits:10'],
+			'phone' 	        => ['required','numeric','digits:10'],
 			'location' 	        => ['required','string'],
 			'password'          => ['required','string','max:50'],
 			'price'				=> ['required','numeric'],
@@ -577,12 +577,37 @@ class Validate
 	public function addPlan($action='add'){
       $validations = [
       	'name' 				=> $this->validation('name'),
-		'installment'  		=> $this->validation('name'),
+				'installment'  		=> $this->validation('name'),
   		];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
   		'name.required' 		=>  'Plan Name is required.',
   		'installment.required' 	=>  'Plan Installment is required.',
+  	]);
+      return $validator;		
+	}
+
+	public function createvendor($action='add'){
+      $validations = [
+      	'name' 				=> $this->validation('name'),
+				'address' 		=> $this->validation('name'),
+				'contact' 		=> array_merge($this->validation('phone'),[Rule::unique('vendor')]),
+  		];
+
+  		if($action =='edit'){
+				$validations['contact'] 	= array_merge($this->validation('phone'),[
+					Rule::unique('vendor')->where(function($query){
+						$query->where('id','!=',$this->data->id);
+					})
+				]);
+			}
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'name.required' 		=>  'Vendor Name is required.',
+  		'address.required' 	=>  'Vendor Address is required.',
+  		'contact.required' 		=>  'Vendor Contact is required.',
+  		'contact.numeric' 		=>  'Vendor Contact should be numeric.',
+  		'contact.unique' 			=>  'This Vendor Contact has already been taken.',
   	]);
       return $validator;		
 	}
@@ -645,4 +670,15 @@ class Validate
 	  	]);
       return $validator;		
 		}
+
+		public function addExpenseCategory($action='add'){
+      $validations = [
+      	'name' 				=> $this->validation('name'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'name.required' 		=>  'Expense Category Name is required.',
+  	]);
+      return $validator;		
+	}
 }
