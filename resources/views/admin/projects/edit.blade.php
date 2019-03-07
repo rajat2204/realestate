@@ -64,10 +64,12 @@
             <div class="form-group">
               <label>Project Image:</label>
               <div>
-                  <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
-              </div>
-              <div>
-                <img style="max-width: 250px;" src="{{url('assets/img/Projects')}}/{{$project['image']}}" id="adminimg" alt="No Featured Image Added">
+                @if(!empty($images))
+                  @foreach($images as $image)
+                    <img style="max-width: 250px;" src="{{url('assets/img/Project Images')}}/{{$image['images']}}" id="adminimg" alt="No Featured Image Added">
+                  @endforeach
+                @endif
+                <input type="file" id="images" accept="image/*" name="images[]" value="Add More..">
               </div>
             </div>
           </div>
@@ -76,21 +78,26 @@
             <div class="form-group">
               <label>Project Layout Plan:</label>
               <div>
-                  <input onchange="readURLLayout(this)" id="layoutplan" accept="image/*" name="layout_plan" type="file">
-              </div>
-              <div>
-                <img style="max-width: 250px;" src="{{url('assets/img/Layout Plan')}}/{{$project['layout_plan']}}" id="layoutimg" alt="No Featured Image Added">
+                @if(!empty($layout))
+                  @foreach($layout as $layouts)
+                    <img style="max-width: 250px;" src="{{url('assets/img/Project Layouts')}}/{{$layouts['images']}}" id="layoutimg" alt="No Featured Image Added">
+                  @endforeach
+                @endif
+                <input type="file" id="layoutplan" accept="image/*" name="layoutplan[]" value="Add More..">  
               </div>
             </div>
           </div>
+
           <div class="col-md-4">
             <div class="form-group">
               <label>Project Location Map:</label>
               <div>
-                  <input onchange="readURLLocation(this)" id="locationmap" accept="image/*" name="location_map" type="file">
-              </div>
-              <div>
-                <img style="max-width: 250px;" src="{{url('assets/img/Location Map')}}/{{$project['location_map']}}" id="mapimg" alt="No Featured Image Added">
+                @if(!empty($location))
+                  @foreach($location as $locations)
+                    <img style="max-width: 250px;" src="{{url('assets/img/Project Location Maps')}}/{{$locations['images']}}" id="mapimg" alt="No Featured Image Added">
+                  @endforeach
+                @endif
+                <input type="file" id="locationmap" accept="image/*" name="locationmap[]" value="Add More..">  
               </div>
             </div>
           </div>

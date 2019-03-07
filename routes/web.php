@@ -86,10 +86,11 @@ Route::resource('property', 'PropertyController');
 	});
 
 /***********************Client-Section****************************/
-
 Route::resource('client', 'ClientController');
 	Route::group(['prefix' => 'client'],function(){
 		Route::post('/status', 'ClientController@changeStatus');
+		Route::get('/{id}/changepassword','ClientController@changePassword');
+		Route::post('/{id}/changepassword','ClientController@changePasswordForm');
 	});
 
 /***********************Sliders-Section****************************/

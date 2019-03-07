@@ -48,7 +48,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Client's Password:</label>
-              <input type="text" class="form-control" placeholder="Enter Client's Password..." name="password">
+              <input type="password" class="form-control" placeholder="Enter Client's Password..." name="password">
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Client's Occupation</label><small>(with detail):</small>
-              <input type="text" class="form-control" placeholder="Enter Clients Occupation..." name="address">
+              <input type="text" class="form-control" placeholder="Enter Clients Occupation..." name="occupation">
             </div>
           </div>
         </div>

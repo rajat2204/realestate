@@ -8,3 +8,4 @@ class ProjectLocationMap extends Model
 {
     protected $table = 'project_location';
    	protected $fillable = ['project_id','images','status','created_at','updated_at'];
+}

@@ -35,6 +35,7 @@ class ClientController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="'.url(sprintf('admin/client/%s/changepassword',___encrypt($item['id']))).'"  title="Change Password"><i class="fa fa-cog"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/client/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/client/status/?id=%s&status=trashed',$item['id'])).'" 
@@ -64,7 +65,14 @@ class ClientController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
-            ->rawColumns(['action'])
+            ->editColumn('phone',function($item){
+                return '+91-'.' ' .($item['phone']);
+            })
+            ->editColumn('photo',function($item){
+                $imageurl = asset("assets/img/Clients/".$item['photo']);
+                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+            })
+            ->rawColumns(['photo','action'])
             ->make(true);
         }
 
@@ -72,10 +80,11 @@ class ClientController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'photo', 'name' => 'photo','title' => 'Client photo','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'photo', 'name' => 'photo',"render"=> 'data','title' => 'Client photo','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Client Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Client E-mail','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'phone', 'name' => 'phone','title' => 'Client Mobile','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'dob', 'name' => 'dob','title' => 'Client DOB','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Client Address','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -106,6 +115,8 @@ class ClientController extends Controller
             $this->message = $validator->errors();
         }else{
             $client = new Clients();
+            $request['password'] = Hash::make($request['password']);
+
             $client->fill($request->all());
 
             if ($file = $request->file('photo')){
@@ -153,7 +164,12 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['view'] = 'admin.clients.edit';
+        $id = ___decrypt($id);
+        $where = ' id = '.$id;
+        $data['clients'] = _arefy(Clients::list('single',$where));
+        // dd($data['clients']);
+        return view('admin.home',$data);
     }
 
     /**
@@ -165,7 +181,40 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addClient('edit');
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $client = Clients::findOrFail($id);
+            $input = $request->all();
+
+            if ($file = $request->file('photo')){
+                $photo_name = time().$request->file('photo')->getClientOriginalName();
+                $file->move('assets/img/Clients',$photo_name);
+                $client['photo'] = $photo_name;
+            }
+            if ($file = $request->file('id_proof')){
+                $id_proof = time().$request->file('id_proof')->getClientOriginalName();
+                $file->move('assets/img/Id Proof',$id_proof);
+                $client['id_proof'] = $id_proof;
+            }
+            if ($file = $request->file('address_proof')){
+                $address_proof = time().$request->file('address_proof')->getClientOriginalName();
+                $file->move('assets/img/Address Proof',$address_proof);
+                $client['address_proof'] = $address_proof;
+            }
+
+            $client->update($input);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Client has been Updated successfully.";
+                $this->redirect = url('admin/client');
+            }
+            return $this->populateresponse();
     }
 
     /**
@@ -177,5 +226,64 @@ class ClientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changePassword($id)
+    {
+      $data['view'] = 'admin.clients.changepassword';
+      $id = ___decrypt($id);
+      $where = ' id = '.$id;
+      $data['client'] = _arefy(Clients::list('single',$where));
+      return view('admin.home',$data);
+    }
+
+    public function changePasswordForm($id,Request $request)
+    {
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+        $validator  = $validation->changepassword();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $client = Clients::findOrFail($id);
+          if ($request->password){
+            if (Hash::check($request->password, $client->password)){
+                if ($request->new_password == $request->confirm_password){
+                    $input['password'] = Hash::make($request->new_password);
+                }else{
+                    $this->message  =  $validator->errors()->add('confirm_password', 'Confirm Password Does not match.');
+                    return $this->populateresponse();
+                }
+            }else{
+                $this->message  =  $validator->errors()->add('confirm_password', 'Current Password Does not match.');
+                    return $this->populateresponse();
+            }
+        }
+        $user->update($input);
+       
+        $this->message = 'Client Password has been Updated Successfully.';
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->status   = true;
+        $this->redirect = url('admin/client');
+    }
+    return $this->populateresponse();
+  }
+
+    public function changeStatus(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Clients::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Clients successfully.';
+            }else{
+                $this->message = 'Updated Clients successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
     }
 }

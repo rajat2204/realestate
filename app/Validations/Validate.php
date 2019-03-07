@@ -527,12 +527,14 @@ class Validate
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
 			'location'  		=> $this->validation('name'),
-			'images'  			=> $this->validation('photo'),
-			'layoutplan'  		=> $this->validation('photo'),
-			'locationmap'  		=> $this->validation('photo'),
+			'images'			=> $this->validation('gallery'),
+			'layoutplan'		=> $this->validation('gallery'),
+			'locationmap'		=> $this->validation('gallery'),
     	];
 		if($action =='edit'){
-			$validations['image'] 	= $this->validation('photo_null');
+			$validations['images'] 			= $this->validation('gallery_null');
+			$validations['layoutplan'] 		= $this->validation('gallery_null');
+			$validations['locationmap'] 	= $this->validation('gallery_null');
 			$validations['slug'] 	= array_merge($this->validation('slug_no_space'),[
 				Rule::unique('project')->where(function($query){
 					$query->where('id','!=',$this->data->id);
@@ -559,8 +561,8 @@ class Validate
 	public function changepassword($action='add'){
         $validations = [
         	'password' 					=> $this->validation('password'),
-			'new_password'  					=> $this->validation('password'),
-            'confirm_password' 		    		=> $this->validation('password'),
+			'new_password'  			=> $this->validation('password'),
+            'confirm_password' 		    => $this->validation('password'),
     	];
     	
         $validator = \Validator::make($this->data->all(), $validations,[
@@ -590,7 +592,7 @@ class Validate
       	'name' 						=> $this->validation('name'),
       	'father_name' 		=> $this->validation('name'),
       	'dob' 						=> $this->validation('name'),
-				'phone'  					=> $this->validation('phone'),
+				'phone'  					=> array_merge($this->validation('phone'),[Rule::unique('client')]),
 				'email'  					=> array_merge($this->validation('req_email'),[Rule::unique('client')]),
 				'password'  			=> $this->validation('password'),
 				'address'  				=> $this->validation('name'),
@@ -601,7 +603,24 @@ class Validate
 				'photo'  					=> $this->validation('photo'),
 				'id_proof'  			=> $this->validation('photomimes'),
 				'address_proof'  	=> $this->validation('photomimes'),
-  		];
+		  ];
+
+		  	if($action =='edit'){
+						$validations['phone'] 	= array_merge($this->validation('phone'),[
+							Rule::unique('client')->where(function($query){
+								$query->where('id','!=',$this->data->id);
+							})
+						]);
+						$validations['email'] 	= array_merge($this->validation('req_email'),[
+							Rule::unique('client')->where(function($query){
+								$query->where('id','!=',$this->data->id);
+							})
+						]);
+						$validations['password'] 			= $this->validation('photo_null');
+						$validations['photo'] 				= $this->validation('photo_null');
+						$validations['id_proof'] 			= $this->validation('photo_null');
+						$validations['address_proof'] = $this->validation('photo_null');
+					}
   	
       $validator = \Validator::make($this->data->all(), $validations,[
 	  		'name.required' 				=>  'Client Name is required.',
@@ -610,6 +629,7 @@ class Validate
 	  		'phone.required' 				=>  'Clients Mobile Number is required.',
 	  		'phone.numeric' 				=>  'Mobile Number should be numeric.',
 	    	'phone.digits' 					=>  'Mobile Number should not be greater than 10 digits.',
+	    	'phone.unique' 					=>  'This Mobile Number is already registered.',
 	    	'email.required' 				=>  'E-mail is required.',
 	    	'email.unique' 					=>  'This E-mail is already registered.',
 	    	'password.required' 		=>  'Password is required.',
