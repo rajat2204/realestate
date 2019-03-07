@@ -527,9 +527,9 @@ class Validate
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
 			'location'  		=> $this->validation('name'),
-			'image'  			=> $this->validation('photo'),
-			'layout_plan'  		=> $this->validation('photomimes'),
-			'location_map'  	=> $this->validation('photomimes'),
+			'images'  			=> $this->validation('photo'),
+			'layoutplan'  		=> $this->validation('photo'),
+			'locationmap'  		=> $this->validation('photo'),
     	];
 		if($action =='edit'){
 			$validations['image'] 	= $this->validation('photo_null');
@@ -546,10 +546,12 @@ class Validate
         	'slug.unique'     				=> 'This Project Slug has already been taken.',
         	'slug.alpha_dash'     			=> 'No spaces allowed in project slug.The Slug may only contain letters, numbers, dashes and underscores.',
         	'location.required'				=> 'Location of a Project is required.',
-        	'image.required'				=> 'Project Image is required.',
-        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
-        	'layout_plan.mimes'				=> 'Layout Plan Image Should be in .jpg,.jpeg,.png format.',
-        	'location_map.mimes'			=> 'Location Map Image Should be in .jpg,.jpeg,.png format.',
+        	'images.required'				=> 'Project Image is required.',
+        	'images.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'layoutplan.required'			=> 'Project Layout Plan is required.',
+        	'layoutplan.mimes'				=> 'Project Layout Plan Image Should be in .jpg,.jpeg,.png format.',
+        	'locationmap.required'			=> 'Project Location Map is required.',
+        	'locationmap.mimes'				=> 'Project Location Map Image Should be in .jpg,.jpeg,.png format.',
         ]);
         return $validator;		
 	}

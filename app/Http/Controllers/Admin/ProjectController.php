@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
+use App\Models\ProjectImages;
+use App\Models\ProjectLayout;
+use App\Models\ProjectLocationMap;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -116,8 +119,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->createProject();
         if ($validator->fails()) {
@@ -126,22 +128,39 @@ class ProjectController extends Controller
             $project = new Project();
             $project->fill($request->all());
 
-            if ($file = $request->file('image')){
-                $photo_name = time().$request->file('image')->getClientOriginalName();
-                $file->move('assets/img/Projects',$photo_name);
-                $project['image'] = $photo_name;
-            }
-            if ($file = $request->file('layout_plan')){
-                $layout = time().$request->file('layout_plan')->getClientOriginalName();
-                $file->move('assets/img/Layout Plan',$layout);
-                $project['layout_plan'] = $layout;
-            }
-            if ($file = $request->file('location_map')){
-                $locationmap = time().$request->file('location_map')->getClientOriginalName();
-                $file->move('assets/img/Location Map',$locationmap);
-                $project['location_map'] = $locationmap;
-            }
             $project->save();
+            $lastid = $project->id;
+
+            if ($files = $request->file('images')){
+              foreach ($files as $file){
+                $projectimages = new ProjectImages;
+                $image_name = str_random(2).time().$file->getClientOriginalName();
+                $file->move('assets/img/Project Images',$image_name);
+                $projectimages['images'] = $image_name;
+                $projectimages['project_id'] = $lastid;
+                $projectimages->save();
+                }
+              }
+
+            if ($files = $request->file('layoutplan')){
+              foreach ($files as $file){
+                $layoutplan = new ProjectLayout;
+                $image_name = str_random(2).time().$file->getClientOriginalName();
+                $file->move('assets/img/Project Layouts',$image_name);
+                $layoutplan['images'] = $image_name;
+                $layoutplan['project_id'] = $lastid;
+                $layoutplan->save();
+                }
+              }
+
+            if ($files = $request->file('locationmap')){
+              foreach ($files as $file){
+                $locationmap = new ProjectLocationMap;
+                $image_name = str_random(2).time().$file->getClientOriginalName();
+                $file->move('assets/img/Prject Location Maps',$image_name);
+                $locationmap['images'] = $image_name;
+                $locationmap['project_id'] = $lastid;
+                $locationmap->save();
 
             $this->status   = true;
             $this->modal    = true;
@@ -149,6 +168,8 @@ class ProjectController extends Controller
             $this->message  = "Project has been Added successfully.";
             $this->redirect = url('admin/project');
         }
+      }
+    }
          return $this->populateresponse();
     }
 

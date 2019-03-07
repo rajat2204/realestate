@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $table = 'project';
-   	protected $fillable = ['company_id','name','slug','nearest_location','image','layout_plan','location_map','location','latitude','longitude','description','reach','purchase','status','created_at','updated_at'];
+   	protected $fillable = ['company_id','name','slug','nearest_location','location','latitude','longitude','description','reach','purchase','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;
