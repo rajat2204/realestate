@@ -40,7 +40,7 @@ class Validate
 			'pricing'			=> ['nullable','numeric'],
 			'start_from'		=> ['required'],
 			'photo'				=> ['required','mimes:jpg,jpeg,png'],
-			'photomimes'		=> ['mimes:jpg,jpeg,png','max:2408'],
+			'photomimes'		=> ['nullable','mimes:jpg,jpeg,png'],
 			'photo_null'		=> ['nullable'],
 			'slug_no_space'		=> ['required','alpha_dash','max:255'],
 			'password_check'	=> ['required'],
@@ -51,6 +51,7 @@ class Validate
 			'gallery_null'		=> ['nullable'],
 			'url' 				=> ['required','url'],
 			'pincode' 			=> ['nullable','min:6','max:6'],
+			'req_pincode' 			=> ['required','min:6','max:6'],
 
 		];
 		return $validation[$key];
@@ -525,10 +526,10 @@ class Validate
         	'company_id'		=> $this->validation('name'),
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
-			'image'  			=> $this->validation('photo'),
 			'location'  		=> $this->validation('name'),
-			'price'  			=> $this->validation('price'),
-			'description'		=> $this->validation('name'),
+			'image'  			=> $this->validation('photo'),
+			'layout_plan'  		=> $this->validation('photomimes'),
+			'location_map'  	=> $this->validation('photomimes'),
     	];
 		if($action =='edit'){
 			$validations['image'] 	= $this->validation('photo_null');
@@ -544,12 +545,11 @@ class Validate
         	'slug.required'     			=> 'Project Slug is Required.',
         	'slug.unique'     				=> 'This Project Slug has already been taken.',
         	'slug.alpha_dash'     			=> 'No spaces allowed in project slug.The Slug may only contain letters, numbers, dashes and underscores.',
+        	'location.required'				=> 'Location of a Project is required.',
         	'image.required'				=> 'Project Image is required.',
         	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
-        	'location.required'				=> 'Location of a Project is required.',
-        	'price.required'				=> 'Project Price is required.',
-        	'price.numeric'					=> 'Project Price should be numeric.',
-        	'description.required'			=> 'Project Description is required.',
+        	'layout_plan.mimes'				=> 'Layout Plan Image Should be in .jpg,.jpeg,.png format.',
+        	'location_map.mimes'			=> 'Location Map Image Should be in .jpg,.jpeg,.png format.',
         ]);
         return $validator;		
 	}
@@ -569,4 +569,58 @@ class Validate
     	]);
         return $validator;		
 	}
+
+	public function addPlan($action='add'){
+      $validations = [
+      	'name' 				=> $this->validation('name'),
+		'installment'  		=> $this->validation('name'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'name.required' 		=>  'Plan Name is required.',
+  		'installment.required' 	=>  'Plan Installment is required.',
+  	]);
+      return $validator;		
+	}
+
+	public function addClient($action='add'){
+      $validations = [
+      	'name' 						=> $this->validation('name'),
+      	'father_name' 		=> $this->validation('name'),
+      	'dob' 						=> $this->validation('name'),
+				'phone'  					=> $this->validation('phone'),
+				'email'  					=> array_merge($this->validation('req_email'),[Rule::unique('client')]),
+				'password'  			=> $this->validation('password'),
+				'address'  				=> $this->validation('name'),
+				'district'  			=> $this->validation('name'),
+				'state'  					=> $this->validation('name'),
+				'nationality'  		=> $this->validation('name'),
+				'pincode'  				=> $this->validation('req_pincode'),
+				'photo'  					=> $this->validation('photo'),
+				'id_proof'  			=> $this->validation('photomimes'),
+				'address_proof'  	=> $this->validation('photomimes'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+	  		'name.required' 				=>  'Client Name is required.',
+	  		'father_name.required' 	=>  'Clients Father/Husband/Wife name is required.',
+	  		'dob.required' 					=>  'Clients Date of Birth is required.',
+	  		'phone.required' 				=>  'Clients Mobile Number is required.',
+	  		'phone.numeric' 				=>  'Mobile Number should be numeric.',
+	    	'phone.digits' 					=>  'Mobile Number should not be greater than 10 digits.',
+	    	'email.required' 				=>  'E-mail is required.',
+	    	'email.unique' 					=>  'This E-mail is already registered.',
+	    	'password.required' 		=>  'Password is required.',
+	    	'address.required' 			=>  'Address is required.',
+	    	'district.required' 		=>  'District is required.',
+	    	'state.required' 				=>  'State is required.',
+	    	'nationality.required' 	=>  'Nationality is required.',
+	    	'pincode.required' 			=>  'Pincode is required.',
+	    	'photo.required' 				=>  'Clients Image is required.',
+	    	'photo.mimes' 					=>  'Clients Image should be in jpg,jpeg,png format.',
+	    	'id_proof.mimes' 				=>  'Image should be in jpg,jpeg,png format.',
+	    	'address_proof.mimes' 	=>  'Image should be in jpg,jpeg,png format.',
+	  	]);
+      return $validator;		
+		}
 }

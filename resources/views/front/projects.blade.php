@@ -16,13 +16,12 @@
 					<h2>Projects</h2>
 				</div>
 				<div class="project-right float-right">
-					<button class="btn btn-sm btn-default text-dark ">
-	  					Sort By
-		  				<select class = "hovs">
+					<button class="btn btn-sm btn-default text-dark">Sort By
+	  				<select class = "hovs">
 							<option>Relevence</option>
 							<option>Price -high to low</option>
 							<option>Price -low to high</option>
-							<option>Price -high to low</option>
+							<option>Most Recent</option>
 						</select>
 					</button>
 				</div>
@@ -32,7 +31,7 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
+									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img title="{{$projects['image']}}" src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
 									<span class="bulge">{{count($projects['property'])}} properties</span>
 								</div>
 							</div>

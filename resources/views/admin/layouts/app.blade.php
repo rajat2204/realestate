@@ -74,7 +74,7 @@
 
 		$(document).ready(function(){
 		    setTimeout(function(){
-		        $('#cover').toggle(500); },
+		        $('#cover').fadeToggle(); },
 		        1000)
 		});
 		</script>
