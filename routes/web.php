@@ -112,6 +112,7 @@ Route::resource('testimonial', 'TestimonialController');
 Route::resource('agent', 'AgentController');
 	Route::group(['prefix' => 'agent'],function(){
 		Route::post('/status', 'AgentController@changeStatus');
+	    Route::get('/wallet/{id}','AgentController@wallet');
 	});
 
 /***********************Plans-Section****************************/

@@ -51,7 +51,8 @@ class Validate
 			'gallery_null'		=> ['nullable'],
 			'url' 				=> ['required','url'],
 			'pincode' 			=> ['nullable','min:6','max:6'],
-			'req_pincode' 			=> ['required','min:6','max:6'],
+			'req_pincode' 		=> ['required','min:6','max:6'],
+			'commission' 		=> ['nullable','numeric','between:0,99.99'],
 
 		];
 		return $validation[$key];
@@ -438,6 +439,8 @@ class Validate
         	'address'			=> $this->validation('name'),
         	'mobile'			=> array_merge($this->validation('phone'),[Rule::unique('agent')]),
           	'designation' 		=> $this->validation('name'),
+          	'commission' 		=> $this->validation('commission'),
+          		
     	];
     	if($action == 'edit'){
 			$validations['image'] 	= $this->validation('photo_null');
@@ -644,5 +647,10 @@ class Validate
 	    	'address_proof.mimes' 	=>  'Image should be in jpg,jpeg,png format.',
 	  	]);
       return $validator;		
+		}
+
+		public function FunctionName($value='')
+		{
+			# code...
 		}
 }

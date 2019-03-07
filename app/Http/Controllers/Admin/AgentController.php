@@ -33,7 +33,10 @@ class AgentController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
+
                 $html   .= '<a href="'.url(sprintf('admin/agent/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/agent/wallet/%s',___encrypt($item['id']))).'"  title="Wallet"><i class="fa fa-shopping-cart"></i></a> | ';
+
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/agent/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -50,7 +53,7 @@ class AgentController extends Controller
                         data-url="'.url(sprintf('admin/agent/status/?id=%s&status=active',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/active-user.png').'"
-                        data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
+                        data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a> | ';
                 }
                 $html   .= '</div>';
                                 
@@ -80,6 +83,7 @@ class AgentController extends Controller
             ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'designation', 'name' => 'designation','title' => 'Agent Designation','orderable' => false, 'width' => 120])
+             ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -167,7 +171,8 @@ class AgentController extends Controller
         $validator  = $validation->addAgent('edit');
         if ($validator->fails()) {
             $this->message = $validator->errors();
-        }else{
+        }
+        else{
             $agent = Agents::findOrFail($id);
             $data = $request->all();
 
@@ -213,5 +218,25 @@ class AgentController extends Controller
             $this->jsondata = [];
         }
         return $this->populateresponse();
+    }
+
+    public function wallet(Request $request,$id)
+    {
+        $data['view'] = 'admin.agents.wallet';
+        $id = ___decrypt($id);
+        $data['agent'] = _arefy(Agents::where('id',$id)->first());
+        return view('admin.home',$data);
+    }
+
+    public function walletAmount(Request $request, $id)
+    {
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->addWallet();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+
+        }
     }
 }

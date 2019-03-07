@@ -48,7 +48,8 @@ class ClientController extends Controller
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/inactive-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
-                }elseif($item['status'] == 'inactive'){
+                }
+                elseif($item['status'] == 'inactive'){
                     $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/client/status/?id=%s&status=active',$item['id'])).'" 
                         data-request="ajax-confirm"
