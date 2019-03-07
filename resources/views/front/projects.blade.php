@@ -3,12 +3,12 @@
 	<div class="container">
 		<div class="peojectnameList">
 			<ul class="list-project">
-				<!-- <li>
+				<li>
 					<a href="javascript:void(0);">Home</a>
 				</li>
 				<li>
 					<a href="javascript:void(0);">New Projects in Lucknow</a>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 		<div class="projects_list">
@@ -17,13 +17,12 @@
 					<h2>Projects</h2>
 				</div>
 				<div class="project-right float-right">
-					<button class="btn btn-sm btn-default text-dark ">
-	  					Sort By
-		  				<select class = "hovs">
+					<button class="btn btn-sm btn-default text-dark">Sort By
+	  				<select class = "hovs">
 							<option>Relevence</option>
 							<option>Price -high to low</option>
 							<option>Price -low to high</option>
-							<option>Price -high to low</option>
+							<option>Most Recent</option>
 						</select>
 					</button>
 				</div>

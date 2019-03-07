@@ -64,15 +64,17 @@ class ProjectController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
-            ->editColumn('price',function($item){
-                return 'Rs.'. ' ' .number_format($item['price']);
-            })
             ->editColumn('image',function($item){
                 $imageurl = asset("assets/img/Projects/".$item['image']);
                 return '<img src="'.$imageurl.'" height="70px" width="100px">';
             })
             ->editColumn('description',function($item){
-                return str_limit(strip_tags($item['description']),50);
+                if (!empty($item['description'])) {
+                  return str_limit(strip_tags($item['description']),50);
+                }
+                else{
+                  return 'N/A';
+                }
             })
             ->editColumn('company_id',function($item){
                 return ucfirst($item['company']['name']);
@@ -90,7 +92,6 @@ class ProjectController extends Controller
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Project Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Project Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Project Location','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'price', 'name' => 'price','title' => 'Project Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Project Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -130,6 +131,16 @@ class ProjectController extends Controller
                 $file->move('assets/img/Projects',$photo_name);
                 $project['image'] = $photo_name;
             }
+            if ($file = $request->file('layout_plan')){
+                $layout = time().$request->file('layout_plan')->getClientOriginalName();
+                $file->move('assets/img/Layout Plan',$layout);
+                $project['layout_plan'] = $layout;
+            }
+            if ($file = $request->file('location_map')){
+                $locationmap = time().$request->file('location_map')->getClientOriginalName();
+                $file->move('assets/img/Location Map',$locationmap);
+                $project['location_map'] = $locationmap;
+            }
             $project->save();
 
             $this->status   = true;
@@ -164,6 +175,7 @@ class ProjectController extends Controller
         $id = ___decrypt($id);
         $where = 'id = '.$id;
         $data['project'] = _arefy(Project::list('single',$where));
+        // dd($data['project']);
         $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
@@ -190,6 +202,16 @@ class ProjectController extends Controller
             $photo_name = str_random(3).$request->file('image')->getClientOriginalName();
             $file->move('assets/img/Projects',$photo_name);
             $data['image'] = $photo_name;
+          }
+          if ($file = $request->file('layout_plan')){
+            $layout = time().$request->file('layout_plan')->getClientOriginalName();
+            $file->move('assets/img/Layout Plan',$layout);
+            $data['layout_plan'] = $layout;
+          }
+            if ($file = $request->file('location_map')){
+            $locationmap = time().$request->file('location_map')->getClientOriginalName();
+            $file->move('assets/img/Location Map',$locationmap);
+            $data['location_map'] = $locationmap;
           }
           $projects->update($data);
 

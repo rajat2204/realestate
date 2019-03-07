@@ -85,6 +85,13 @@ Route::resource('property', 'PropertyController');
 		Route::post('/status', 'PropertyController@changeStatus');
 	});
 
+/***********************Client-Section****************************/
+
+Route::resource('client', 'ClientController');
+	Route::group(['prefix' => 'client'],function(){
+		Route::post('/status', 'ClientController@changeStatus');
+	});
+
 /***********************Sliders-Section****************************/
 
 Route::resource('sliders', 'SliderController');
@@ -104,6 +111,13 @@ Route::resource('testimonial', 'TestimonialController');
 Route::resource('agent', 'AgentController');
 	Route::group(['prefix' => 'agent'],function(){
 		Route::post('/status', 'AgentController@changeStatus');
+	});
+
+/***********************Plans-Section****************************/
+
+Route::resource('plans', 'PlanController');
+	Route::group(['prefix' => 'plans'],function(){
+		Route::post('/status', 'PlanController@changeStatus');
 	});
 
 /***********************Leads-Section****************************/

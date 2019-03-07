@@ -143,7 +143,7 @@
 
 $(window).load(function(){
   setTimeout(function(){
-      $('#cover').fadeOut(500);
+      $('#cover').fadeToggle();
   },500)
 });
 </script>

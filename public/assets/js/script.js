@@ -20,6 +20,12 @@ $(document).on('click','[data-request="ajax-submit"]',function(){
     if($('#description').attr('name')!=undefined){
         $( "#description" ).val(CKEDITOR.instances.description.getData());
     }
+    if($('#reach').attr('name')!=undefined){
+        $( "#reach" ).val(CKEDITOR.instances.reach.getData());
+    }
+    if($('#purchase').attr('name')!=undefined){
+        $( "#purchase" ).val(CKEDITOR.instances.purchase.getData());
+    }
     if($('#key_points').attr('name')!=undefined){
         $( "#key_points" ).val(CKEDITOR.instances.key_points.getData());
     }

@@ -40,16 +40,6 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Project Image:</label>
-          <div>
-              <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
-          </div>
-          <div>
-            <img style="max-width: 250px;" src="{{url('assets/img/Projects')}}/{{$project['image']}}" id="adminimg" alt="No Featured Image Added">
-          </div>
-        </div>
-
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
@@ -63,8 +53,61 @@
 
           <div class="col-md-6">
             <div class="form-group">
-              <label>Price:</label>
-              <input type="text" class="form-control" placeholder="Enter Price..." name="price" value="{{!empty($project['price'])?$project['price']:''}}">
+              <label>Nearest Location:</label>
+              <input type="text" class="form-control" placeholder="Enter Nearest Location..." name="nearest_location" value="{{!empty($project['nearest_location'])?$project['nearest_location']:''}}">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Image:</label>
+              <div>
+                  <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
+              </div>
+              <div>
+                <img style="max-width: 250px;" src="{{url('assets/img/Projects')}}/{{$project['image']}}" id="adminimg" alt="No Featured Image Added">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Layout Plan:</label>
+              <div>
+                  <input onchange="readURLLayout(this)" id="layoutplan" accept="image/*" name="layout_plan" type="file">
+              </div>
+              <div>
+                <img style="max-width: 250px;" src="{{url('assets/img/Layout Plan')}}/{{$project['layout_plan']}}" id="layoutimg" alt="No Featured Image Added">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Project Location Map:</label>
+              <div>
+                  <input onchange="readURLLocation(this)" id="locationmap" accept="image/*" name="location_map" type="file">
+              </div>
+              <div>
+                <img style="max-width: 250px;" src="{{url('assets/img/Location Map')}}/{{$project['location_map']}}" id="mapimg" alt="No Featured Image Added">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>How to reach:</label>
+              <textarea id="reach" name="reach" rows="6" cols="80">{{!empty($project['reach'])?$project['reach']:''}}</textarea>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Why Purchase:</label>
+              <textarea id="purchase" name="purchase" rows="6" cols="80">{{!empty($project['purchase'])?$project['purchase']:''}}</textarea>
             </div>
           </div>
         </div>
@@ -94,7 +137,27 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+    function readURLLayout(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#layoutimg').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    function readURLLocation(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#mapimg').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
 
+    CKEDITOR.replace("reach");
+    CKEDITOR.replace("purchase");
     CKEDITOR.replace("description");
 </script>
 @endsection
