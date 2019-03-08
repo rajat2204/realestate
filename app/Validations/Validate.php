@@ -684,9 +684,4 @@ class Validate
 	  	]);
 	      return $validator;		
 		}
-		
-		public function FunctionName($value='')
-		{
-			# code...
-		}
 	}
