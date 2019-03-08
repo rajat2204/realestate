@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use App\Models\Agents_Wallets;
 
 class AgentController extends Controller
 {
@@ -233,10 +234,36 @@ class AgentController extends Controller
       $id = ___decrypt($id);
       $validation = new Validations($request);
       $validator  = $validation->addWallet();
-        if ($validator->fails()) {
+      
+      if ($validator->fails()) {
             $this->message = $validator->errors();
-        }else{
-
         }
+        else{
+            $data['agents_id']=$request->agent_id;
+            $data['email']=$request->email;
+            $data['mobile']=$request->mobile;
+            $data['amount']=$request->amount;
+            $data['action']=$request->action;
+            if($data['action']=='deduct'){
+                $balance = $request->balance-$request->amount;
+            }else{
+                $balance = $request->balance+$request->amount;
+            }
+            $data['balance']=$balance;
+            $data['remarks']=$request->remarks;
+            $data['status']='active';
+            $data['created_at']=$request->created_at;
+            $data['updated_at']=$request->updated_at;
+            
+            Agents_Wallets::insert($data);
+            $this->status   = true;
+            $this->modal =true;
+            $this->alert    = true;
+            $this->message  = "Wallet has been Updated successfully.";
+            $this->redirect = true;
+
+          }
+
+        return $this->populateresponse();
     }
 }
