@@ -708,7 +708,7 @@ class Validate
   		'balance.required' 				=>  'Expense Balance is required.',
   		'balance.numeric' 				=>  'Expense Balance Amount should be numeric.',
   	]);
-      if(($this->data->balance)>($this->data->amount)){
+      	if(($this->data->balance)>($this->data->amount)){
 		    $validator->after(function ($validator){
 				   $validator->errors()->add('balance', 'Due Balance Amount should not be greater than Invoice Amount.');
 			});

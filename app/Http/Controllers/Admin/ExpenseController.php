@@ -40,7 +40,10 @@ class ExpenseController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
                 $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-                $html   .= '<a href="'.url(sprintf('admin/expenses/payment/%s',___encrypt($item['id']))).'"  title="Expense Payment"><i class="fa fa-money"></i></a> | ';
+                if ($item['status'] != 'paid'){
+                  $html   .= '<a href="'.url(sprintf('admin/expenses/payment/%s',___encrypt($item['id']))).'"  title="Expense Payment"><i class="fa fa-money"></i></a> | ';
+                }
+                $html   .= '<a href="'.url(sprintf('admin/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment History"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/expenses/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -115,6 +118,59 @@ class ExpenseController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function showPayment(Request $request, Builder $builder,$id){
+        $data['view'] = 'admin.expenses.showpaymentlist';
+        
+        $id = ___decrypt($id);
+        $expensesPayment  = _arefy(Expense_Payment::where('expense_id',$id)->get());
+        if ($request->ajax()) {
+            return DataTables::of($expensesPayment)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                // $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/showpayment/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                // }
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.'. ' ' .number_format($item['amount']);
+            })
+            ->editColumn('payment_type',function($item){
+                return ucfirst($item['payment_type']);
+            })
+            ->editColumn('remarks',function($item){
+                if (!empty($item['remarks'])) {
+                  return ucfirst(item['remarks']);
+                }else{
+                  return 'N/A';
+                }
+            })
+            ->editColumn('invoice_no',function($item){
+                return $item['date'];
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'payment_type','name' => 'payment_type','title' => 'Payment Type','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'date','name' => 'date','title' => 'Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -144,6 +200,11 @@ class ExpenseController extends Controller
         }else{
           $data = new Expense();
           $data->fill($request->all());
+          if ($data['balance'] != 0) {
+            $data['status'] = 'partial';
+          }else{
+            $data['status'] = 'paid';
+          }
           
           $data->save();
 
@@ -202,7 +263,11 @@ class ExpenseController extends Controller
         }else{
           $expense = Expense::findOrFail($id);
           $input = $request->all();
-
+          if ($input['balance'] != 0) {
+            $input['status'] = 'partial';
+          }else{
+            $input['status'] = 'paid';
+          }
           $expense->update($input);
 
             $this->status   = true;
@@ -250,12 +315,17 @@ class ExpenseController extends Controller
           $expensepayment->save();
           $getBalance = Expense::where('id',$id)->first();
           $bal['balance'] = $getBalance['balance']-$request->amount;
+          if ($bal['balance'] != 0) {
+            $bal['status'] = 'partial';
+          }else{
+            $bal['status'] = 'paid';
+          }
           $upd = Expense::where('id',$id)->update($bal);
 
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
-            $this->message  = "ExpensePayment has been Added successfully.";
+            $this->message  = "Expense Payment has been Added successfully.";
             $this->redirect = url('admin/expenses');
         }
           return $this->populateresponse();

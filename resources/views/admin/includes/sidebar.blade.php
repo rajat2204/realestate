@@ -116,6 +116,21 @@
             <i class="fa fa-fw fa-linkedin-square"></i> <span>Social Media</span>
           </a>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-cogs fa-fw"></i> <span>Configurations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('admin/configuration')}}">General</a></li>
+            <li><a href="{{url('admin/currency')}}">Currency</a></li>
+            <li><a href="{{url('admin/tax')}}">Tax</a></li>
+            <li><a href="{{url('admin/units')}}">Units</a></li>
+            <li><a href="{{url('admin/logo')}}">Organizational Logo</a></li>
+          </ul>
+        </li>
         <li>
           <a href="{{url('admin/testimonial')}}">
             <i class="fa fa-fw fa-quote-right"></i> <span>Testimonials</span>
