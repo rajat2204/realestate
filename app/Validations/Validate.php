@@ -53,7 +53,8 @@ class Validate
 			'pincode' 			=> ['nullable','min:6','max:6'],
 			'req_pincode' 		=> ['required','min:6','max:6'],
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
-
+			'amount'			=> ['required','numeric'],
+			'action'			=> ['required']
 		];
 		return $validation[$key];
 	}
@@ -593,16 +594,16 @@ class Validate
 	public function createvendor($action='add'){
       $validations = [
       	'name' 				=> $this->validation('name'),
-				'address' 		=> $this->validation('name'),
-				'contact' 		=> array_merge($this->validation('phone'),[Rule::unique('vendor')]),
+		'address' 			=> $this->validation('name'),
+		'contact' 			=> array_merge($this->validation('phone'),
+								[Rule::unique('vendor')]),
   		];
 
   		if($action =='edit'){
-				$validations['contact'] 	= array_merge($this->validation('phone'),[
-					Rule::unique('vendor')->where(function($query){
-						$query->where('id','!=',$this->data->id);
-					})
-				]);
+		$validations['contact'] 	= array_merge($this->validation('phone'),
+			[Rule::unique('vendor')->where(function($query){
+			$query->where('id','!=',$this->data->id);
+					})]);
 			}
   	
       $validator = \Validator::make($this->data->all(), $validations,[
@@ -617,20 +618,22 @@ class Validate
 
 	public function addClient($action='add'){
       $validations = [
-      	'name' 						=> $this->validation('name'),
+      	'name' 				=> $this->validation('name'),
       	'father_name' 		=> $this->validation('name'),
-      	'dob' 						=> $this->validation('name'),
-				'phone'  					=> array_merge($this->validation('phone'),[Rule::unique('client')]),
-				'email'  					=> array_merge($this->validation('req_email'),[Rule::unique('client')]),
-				'password'  			=> $this->validation('password'),
-				'address'  				=> $this->validation('name'),
-				'district'  			=> $this->validation('name'),
-				'state'  					=> $this->validation('name'),
-				'nationality'  		=> $this->validation('name'),
-				'pincode'  				=> $this->validation('req_pincode'),
-				'photo'  					=> $this->validation('photo'),
-				'id_proof'  			=> $this->validation('photomimes'),
-				'address_proof'  	=> $this->validation('photomimes'),
+      	'dob' 				=> $this->validation('name'),
+		'phone'  			=> array_merge($this->validation('phone'),
+								[Rule::unique('client')]),
+		'email'  			=> array_merge($this->validation('req_email'),
+								[Rule::unique('client')]),
+		'password'  		=> $this->validation('password'),
+		'address'  			=> $this->validation('name'),
+		'district'  		=> $this->validation('name'),
+		'state'  			=> $this->validation('name'),
+		'nationality'  		=> $this->validation('name'),
+		'pincode'  			=> $this->validation('req_pincode'),
+		'photo'  			=> $this->validation('photo'),
+		'id_proof'  		=> $this->validation('photomimes'),
+		'address_proof'  	=> $this->validation('photomimes'),
 		  ];
 
 		  	if($action =='edit'){
@@ -700,6 +703,20 @@ class Validate
   		'amount.required' 				=>  'Expense Amount is required.',
   		'amount.numeric' 					=>  'Expense Amount should be numeric.',
   	]);
+      return $validator;		
+	}
+		
+		public function addWallet($action='add'){
+      $validations = [
+      	'amount' 		=> $this->validation('amount'),      	
+				'action' 		=> $this->validation('action')
+			];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+	  		'amount.required' 		=>  'Amount should not be blank ',
+	  		'amount.numeric' 			=>  'Amount should be numeric ',
+				'action.required' 		=>  'Action is required '  		
+  		]);
       return $validator;		
 	}
 }

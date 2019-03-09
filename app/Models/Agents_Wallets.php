@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agents_Wallets extends Model
 {
     protected $table = 'agents_wallet';
-   	protected $fillable = ['agents_id	','name	','email','mobile','balance','action','remarks','status','created_at','updated_at'];
+   	protected $fillable = ['agents_id','name','email','mobile','amount' , 'balance','action','remarks','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;
@@ -17,5 +17,6 @@ class Agents_Wallets extends Model
             $isUpdated = $table_agent->update($data); 
         }
         return (bool)$isUpdated;
+    }
 
 }
