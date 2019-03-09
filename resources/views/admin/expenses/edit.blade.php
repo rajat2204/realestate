@@ -61,10 +61,20 @@
           <label>Invoice Date:</label>
           <input type="date" class="form-control" placeholder="Enter Invoice Date..." name="invoice_date" value="{{!empty($expense['invoice_date'])?$expense['invoice_date']:''}}">
         </div>
+        <div class="row">
+          <div class="col-md-6"> 
+            <div class="form-group">
+              <label>Invoice Amount:</label>
+              <input type="text" class="form-control" placeholder="Enter Invoice Amount..." name="amount" value="{{!empty($expense['amount'])?$expense['amount']:''}}">
+            </div>
+          </div>
 
-        <div class="form-group">
-          <label>Invoice Amount:</label>
-          <input type="text" class="form-control" placeholder="Enter Invoice Amount..." name="amount" value="{{!empty($expense['amount'])?$expense['amount']:''}}">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Invoice Due Balance:</label>
+              <input type="text" class="form-control" placeholder="Enter Invoice Due Balance..." name="balance" value="{{!empty($expense['balance'])?$expense['balance']:''}}">
+            </div>
+          </div>
         </div>
 
         <div class="form-group">

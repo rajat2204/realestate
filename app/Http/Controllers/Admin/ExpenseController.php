@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Expense;
 use Illuminate\Http\Request;
 use App\Models\ExpenseCategory;
+use App\Models\Expense_Payment;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use App\Http\Controllers\Controller;
@@ -39,24 +40,13 @@ class ExpenseController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
                 $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/expenses/payment/%s',___encrypt($item['id']))).'"  title="Expense Payment"><i class="fa fa-money"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/expenses/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/delete.png').'"
-                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
-                if($item['status'] == 'active'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/expenses/status/?id=%s&status=inactive',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/inactive-user.png').'"
-                        data-ask="Would you like to change status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
-                }elseif($item['status'] == 'inactive'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/expenses/status/?id=%s&status=active',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/active-user.png').'"
-                        data-ask="Would you like to change status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
-                }
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                // }
                 $html   .= '</div>';
                                 
                 return $html;
@@ -72,6 +62,9 @@ class ExpenseController extends Controller
             })
             ->editColumn('amount',function($item){
                 return 'Rs.'. ' ' .number_format($item['amount']);
+            })
+            ->editColumn('balance',function($item){
+                return 'Rs.'. ' ' .number_format($item['balance']);
             })
             ->editColumn('invoice_no',function($item){
               if (!empty($item['invoice_no'])) {
@@ -95,7 +88,11 @@ class ExpenseController extends Controller
               }
             })
             ->editColumn('status',function($item){
-                return ucfirst($item['status']);
+              if ($item['balance'] != 0) {
+                return 'Partial';
+              }else{
+                return 'Paid';
+              }
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -106,12 +103,12 @@ class ExpenseController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'project_id','name' => 'project_id','title' => 'Project Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'category_id','name' => 'category_id','title' => 'Expense Category Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'vendor_id','name' => 'vendor_id','title' => 'Vendor Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'category_id','name' => 'category_id','title' => 'Category Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'vendor_id','name' => 'vendor_id','title' => 'Vendor/Staff','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'invoice_no','name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'invoice_date','name' => 'invoice_date','title' => 'Invoice Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Invoice Amount','orderable' => false, 'width' => 120])
-            // ->addColumn(['data' => '','name' => '','title' => 'Balance Due','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance Due','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -227,6 +224,42 @@ class ExpenseController extends Controller
     {
         //
     }
+
+    public function expensePayment(Request $request,$id)
+    {
+      $data['view'] = 'admin.expenses.payment';
+      $id = ___decrypt($id);
+      $where = 'id = '.$id;
+      $data['expenses'] = _arefy(Expense::list('single',$where));      
+      // dd($data['expenses']);
+      return view('admin.home',$data);
+    }
+
+    public function expensePaymentAmount(Request $request, $id)
+    {
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->addexpensepayment();
+      if ($validator->fails()) {
+        $this->message = $validator->errors();
+      }else{
+        // pp($request->all());
+          $expensepayment = new Expense_Payment();
+          $expensepayment->fill($request->all());
+
+          $expensepayment->save();
+          $getBalance = Expense::where('id',$id)->first();
+          $bal['balance'] = $getBalance['balance']-$request->amount;
+          $upd = Expense::where('id',$id)->update($bal);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "ExpensePayment has been Added successfully.";
+            $this->redirect = url('admin/expenses');
+        }
+          return $this->populateresponse();
+      }
 
     public function changeStatus(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];

@@ -244,11 +244,11 @@ class AgentController extends Controller
             $data['mobile']=$request->mobile;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
-            if($data['action']=='deduct'){
-                $balance = $request->balance-$request->amount;
-            }else{
-                $balance = $request->balance+$request->amount;
-            }
+              if($data['action']=='deduct'){
+                  $balance = $request->balance-$request->amount;
+              }else{
+                  $balance = $request->balance+$request->amount;
+              }
             $data['balance']=$balance;
             $data['remarks']=$request->remarks;
             $data['status']='active';

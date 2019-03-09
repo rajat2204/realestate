@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     protected $table = 'expense';
-    protected $fillable = ['project_id','category_id','vendor_id','invoice_no','invoice_date','amount','remarks','status','created_at','updated_at'];
+    protected $fillable = ['project_id','category_id','vendor_id','invoice_no','invoice_date','amount','balance','remarks','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;

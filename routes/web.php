@@ -83,6 +83,8 @@ Route::resource('project', 'ProjectController');
 Route::resource('expenses', 'ExpenseController');
 	Route::group(['prefix' => 'expenses'],function(){
 		Route::post('/status', 'ExpenseController@changeStatus');
+			Route::get('/payment/{id}','ExpenseController@expensePayment');
+			Route::post('/payment/{id}','ExpenseController@expensePaymentAmount');
 	});
 
 /***********************Inventory-Section****************************/

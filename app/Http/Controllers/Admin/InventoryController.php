@@ -107,7 +107,7 @@ class InventoryController extends Controller
             ->addColumn(['data' => 'vendor_id','name' => 'vendor_id','title' => 'Vendor/Staff','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'invoice_no','name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'invoice_date','name' => 'invoice_date','title' => 'Invoice Date','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Quantity','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'quantity','name' => 'quantity','title' => 'Quantity','orderable' => false, 'width' => 120])
             // ->addColumn(['data' => '','name' => '','title' => 'Balance Due','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
@@ -142,7 +142,7 @@ class InventoryController extends Controller
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
-          $data = new Expense();
+          $data = new Inventory();
           $data->fill($request->all());
           
           $data->save();
@@ -150,8 +150,8 @@ class InventoryController extends Controller
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
-            $this->message  = "Expense has been Added successfully.";
-            $this->redirect = url('admin/expenses');
+            $this->message  = "Inventory has been Added successfully.";
+            $this->redirect = url('admin/inventory');
         }
         return $this->populateresponse();
     }
@@ -175,7 +175,14 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['view'] = 'admin.inventory.edit';
+        $id = ___decrypt($id);
+        $where = 'id = '.$id;
+        $data['inventory'] = _arefy(Inventory::list('single',$where));
+        $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
+        $data['expensecategory'] = _arefy(ExpenseCategory::where('status', '=', 'active')->get());
+        $data['vendor'] = _arefy(Vendor::where('status', '=', 'active')->get());
+        return view('admin.home',$data);
     }
 
     /**
@@ -187,7 +194,24 @@ class InventoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addInventory();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $inventory = Inventory::findOrFail($id);
+          $input = $request->all();
+
+          $inventory->update($input);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Inventory has been Updated successfully.";
+            $this->redirect = url('admin/inventory');
+        }
+          return $this->populateresponse();
     }
 
     /**
@@ -199,5 +223,22 @@ class InventoryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Inventory::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Inventory successfully.';
+            }else{
+                $this->message = 'Updated Inventory successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
     }
 }

@@ -67,8 +67,8 @@
         </div>
 
         <div class="box-footer">
-          <a href="{{url('admin/expenses')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-expense"]' class="btn btn-info pull-right">Submit</button>
+          <a href="{{url('admin/inventory')}}" class="btn btn-default">Cancel</a>
+          <button type="button" data-request="ajax-submit" data-target='[role="add-inventory"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
