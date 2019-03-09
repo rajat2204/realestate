@@ -684,4 +684,22 @@ class Validate
 	  	]);
 	      return $validator;		
 		}
+
+		public function addExpense($action='add'){
+      $validations = [
+      	'project_id' 					=> $this->validation('name'),
+      	'category_id' 				=> $this->validation('name'),
+      	'vendor_id' 					=> $this->validation('name'),
+      	'amount' 							=> $this->validation('price'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'project_id.required' 		=>  'Project Name is required.',
+  		'category_id.required' 		=>  'Expense Category Name is required.',
+  		'vendor_id.required' 			=>  'Vendor Name is required.',
+  		'amount.required' 				=>  'Expense Amount is required.',
+  		'amount.numeric' 					=>  'Expense Amount should be numeric.',
+  	]);
+      return $validator;		
 	}
+}

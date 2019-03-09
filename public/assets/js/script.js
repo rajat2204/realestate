@@ -29,6 +29,9 @@ $(document).on('click','[data-request="ajax-submit"]',function(){
     if($('#key_points').attr('name')!=undefined){
         $( "#key_points" ).val(CKEDITOR.instances.key_points.getData());
     }
+    if($('#remarks').attr('name')!=undefined){
+        $( "#remarks" ).val(CKEDITOR.instances.remarks.getData());
+    }
     var $this       = $(this);
     var $target     = $this.data('target');
     var $url        = $($target).attr('action');
