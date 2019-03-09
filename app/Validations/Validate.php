@@ -719,21 +719,22 @@ class Validate
 	public function addexpensepayment($action='add'){
       $validations = [
       	'amount' 					=> $this->validation('amount'),      	
-				'payment_type' 		=> $this->validation('name'),
-				'date'				 		=> $this->validation('name'),
+		'payment_type' 				=> $this->validation('name'),
+		'date'						=> $this->validation('name'),
 			];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
-	  		'amount.required' 			=>  'Payment Amount is required.',
-	  		'amount.numeric' 				=>  'Amount should be numeric.',
-				'payment_type.required' =>  'Payment Type is required.',		
-				'date.required'					=>  'Date is required.',		
+	  	'amount.required' 			=>  'Payment Amount is required.',
+	  	'amount.numeric' 			=>  'Amount should be numeric.',
+		'payment_type.required' 	=>  'Payment Type is required.',		
+		'date.required'				=>  'Date is required.',		
   		]);
   		if(($this->data->amount)>($this->data->balance)){
-		    $validator->after(function ($validator){
-				   $validator->errors()->add('amount', 'Payment Amount should not be greater than Due Balance Amount.');
-			});
-		}
+	    $validator->after(function ($validator){
+	    $validator->errors()->add('amount', 'Payment Amount should not be greater than Due 
+	    Balance Amount.');
+	   });
+	  }
       return $validator;		
 	}
 
@@ -758,16 +759,27 @@ class Validate
 	}
 		
 		public function addWallet($action='add'){
-      $validations = [
+	      $validations = [
       	'amount' 		=> $this->validation('amount'),      	
 				'action' 		=> $this->validation('action'),
+				'remark'   	=> $this->validation('name'),
 			];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
 	  		'amount.required' 		=>  'Amount should not be blank.',
 	  		'amount.numeric' 			=>  'Amount should be numeric.',
 				'action.required' 		=>  'Action is required.',  		
+				'remark.required'			=>  'Remark is required'
+  			
   		]);
+  		if($this->data->action=='deduct')
+  		{
+  		if(($this->data->amount)>($this->data->balance)){
+		    $validator->after(function ($validator){
+	  	  $validator->errors()->add('amount', 'Payment Amount should not be greater than Due Balance Amount.');
+			});
+			}
+		}
       return $validator;		
 	}
 }

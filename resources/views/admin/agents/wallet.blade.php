@@ -38,10 +38,13 @@
             	$agent_balance = App\Models\Agents_Wallets::where('agents_id',$agent['id'])->get();
             	$addbal[]=0;
             	$deductbal[]=0;
+
             foreach($agent_balance as $balance){
             	if($balance['action']=='add'){
             		$addbal[] = $balance['amount'];	
-            	}else{
+            	}
+            	else
+            	{
             		$deductbal[] = $balance['amount'];
             	}
             }
@@ -68,7 +71,7 @@
 			</div>
 			<div class="form-group">
        	      <label class= "text-dark">Remarks :</label>
-	    	  <textarea value ="" placeholder="Write if any" class="form-control"></textarea>
+	    	  <textarea value ="" placeholder="Write if any" class="form-control" name="remark"></textarea>
             </div> 
             <div class="box-footer">
     	      	<a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>

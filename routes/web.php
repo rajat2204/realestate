@@ -139,6 +139,7 @@ Route::resource('testimonial', 'TestimonialController');
 
 /***********************Agents-Section****************************/
 
+			Route::get('agent/wallet_history','AgentController@walletHistory');
 Route::resource('agent', 'AgentController');
 	Route::group(['prefix' => 'agent'],function(){
 		Route::post('/status', 'AgentController@changeStatus');

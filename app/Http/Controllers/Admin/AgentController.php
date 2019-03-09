@@ -66,6 +66,13 @@ class AgentController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('balance',function($item){
+                if($item['balance'] != NULL){
+                  return 'Rs.'. ' ' .($item['balance']);
+                }else{
+                  return 'Rs.'. ' ' .'0';
+                }
+            })
             ->editColumn('image',function($item){
                 $imageurl = asset("assets/img/agent/".$item['image']);
                 return '<img src="'.$imageurl.'" height="100px" width="120px">';
@@ -87,6 +94,51 @@ class AgentController extends Controller
              ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function walletHistory(Request $request, Builder $builder){
+        $data['view'] = 'admin.agents.wallet_history';
+        
+        $wallet_history  = _arefy(Agents_Wallets::where('status','!=','trashed')->get());
+       // dd($wallet_history);
+        if ($request->ajax()) {
+            return DataTables::of($wallet_history)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('balance',function($item){
+                if($item['balance'] != NULL){
+                  return 'Rs.'. ' ' .($item['balance']);
+                }else{
+                  return 'Rs.'. ' ' .'0';
+                }
+            })
+            ->editColumn('action',function($item){
+                if($item['action'] == 'add'){
+                  return 'CR';
+                }else{
+                  return 'DR';
+                }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            // ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
+             ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Amount','orderable' => false, 'width' => 120])
+             ->addColumn(['data' => 'action','name' => 'action','title' => 'Action','orderable' => false, 'width' => 120]);
+             // ->addColumn(['data' => 'created_at','name' => 'created_at','title' => 'Created AT','orderable' => false, 'width' => 120]);
+            // ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
@@ -141,7 +193,7 @@ class AgentController extends Controller
      */
     public function show($id)
     {
-        //
+      //
     }
 
     /**
@@ -220,6 +272,15 @@ class AgentController extends Controller
         }
         return $this->populateresponse();
     }
+    public function wallet_history(Request $request,$id)
+    
+    {
+        $data['view'] = 'admin.agents.wallet_history';
+        $id = ___decrypt($id);
+        $data['agent'] = _arefy(Agents::where('id',$id)->first());
+        return view('admin.home',$data);
+    }
+
 
     public function wallet(Request $request,$id)
     {
@@ -244,8 +305,9 @@ class AgentController extends Controller
             $data['mobile']=$request->mobile;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
-         //to deduct on selecting action[deduct] and Add on selecting action[add]    
-            if($data['action']=='deduct')
+         //to deduct on selecting action[deduct] and Add on selecting action[add] 
+
+            if($data['action']=='deduct' )
             {
                 $balance = $request->balance-$request->amount;
             }else{
@@ -270,4 +332,6 @@ class AgentController extends Controller
 
         return $this->populateresponse();
     }
+
+
 }
