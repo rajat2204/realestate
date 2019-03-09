@@ -1,11 +1,11 @@
 <div class="content-wrapper">
   <div class="box box-warning">
     <div class="box-header with-border">
-      <h3 class="box-title">Add Expense</h3>
+      <h3 class="box-title">Add Inventory</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <form role="add-expense" method="POST" action="{!! action('Admin\ExpenseController@store') !!}">
+      <form role="add-inventory" method="POST" action="{!! action('Admin\InventoryController@store') !!}">
         {{csrf_field()}}
 
         <div class="row">
@@ -23,9 +23,9 @@
 
           <div class="col-md-4">
             <div class="form-group">
-              <label>Select Expense Category Name:</label>
-              <select class="form-control" name="category_id" id="category_id">
-                <option value="">Select Expense Category Name</option>
+              <label>Select Category Name:</label>
+              <select class="form-control" name="expense_category_id" id="expense_category_id">
+                <option value="">Select Category Name</option>
                 @foreach($expensecategory as $expensecategories)
                   <option value="{{!empty($expensecategories['id'])?$expensecategories['id']:''}}">{{!empty($expensecategories['name'])?$expensecategories['name']:''}}</option>
                 @endforeach
@@ -55,20 +55,10 @@
           <label>Invoice Date:</label>
           <input type="date" class="form-control" placeholder="Enter Invoice Date..." name="invoice_date">
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Invoice Amount:</label>
-              <input type="text" class="form-control" placeholder="Enter Invoice Amount..." name="amount">
-            </div>
-          </div>
 
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Invoice Due Balance:</label>
-              <input type="text" class="form-control" placeholder="Enter Invoice Due Balance..." name="balance">
-            </div>
-          </div>
+        <div class="form-group">
+          <label>Quantity:</label>
+          <input type="text" class="form-control" placeholder="Enter Quantity..." name="quantity">
         </div>
 
         <div class="form-group">
@@ -77,8 +67,8 @@
         </div>
 
         <div class="box-footer">
-          <a href="{{url('admin/expenses')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-expense"]' class="btn btn-info pull-right">Submit</button>
+          <a href="{{url('admin/inventory')}}" class="btn btn-default">Cancel</a>
+          <button type="button" data-request="ajax-submit" data-target='[role="add-inventory"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>

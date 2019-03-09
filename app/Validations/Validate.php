@@ -687,18 +687,87 @@ class Validate
 	  	]);
 	      return $validator;		
 		}
+
+		public function addExpense($action='add'){
+      $validations = [
+      	'project_id' 					=> $this->validation('name'),
+      	'category_id' 				=> $this->validation('name'),
+      	'vendor_id' 					=> $this->validation('name'),
+      	'invoice_date' 				=> $this->validation('name'),
+      	'amount' 							=> $this->validation('price'),
+      	'balance' 						=> $this->validation('price'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'project_id.required' 		=>  'Project Name is required.',
+  		'category_id.required' 		=>  'Expense Category Name is required.',
+  		'vendor_id.required' 			=>  'Vendor Name is required.',
+  		'invoice_date.required' 	=>  'Invoice Date is required.',
+  		'amount.required' 				=>  'Expense Amount is required.',
+  		'amount.numeric' 					=>  'Expense Amount should be numeric.',
+  		'balance.required' 				=>  'Expense Balance is required.',
+  		'balance.numeric' 				=>  'Expense Balance Amount should be numeric.',
+  	]);
+      if(($this->data->balance)>($this->data->amount)){
+		    $validator->after(function ($validator){
+				   $validator->errors()->add('balance', 'Due Balance Amount should not be greater than Invoice Amount.');
+			});
+		}
+      return $validator;		
+	}
+
+	public function addexpensepayment($action='add'){
+      $validations = [
+      	'amount' 					=> $this->validation('amount'),      	
+				'payment_type' 		=> $this->validation('name'),
+				'date'				 		=> $this->validation('name'),
+			];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+	  		'amount.required' 			=>  'Payment Amount is required.',
+	  		'amount.numeric' 				=>  'Amount should be numeric.',
+				'payment_type.required' =>  'Payment Type is required.',		
+				'date.required'					=>  'Date is required.',		
+  		]);
+  		if(($this->data->amount)>($this->data->balance)){
+		    $validator->after(function ($validator){
+				   $validator->errors()->add('amount', 'Payment Amount should not be greater than Due Balance Amount.');
+			});
+		}
+      return $validator;		
+	}
+
+	public function addInventory($action='add'){
+      $validations = [
+      	'project_id' 							=> $this->validation('name'),
+      	'expense_category_id' 		=> $this->validation('name'),
+      	'vendor_id' 							=> $this->validation('name'),
+      	'invoice_date' 						=> $this->validation('name'),
+      	'quantity' 								=> $this->validation('price'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'project_id.required' 		=>  'Project Name is required.',
+  		'category_id.required' 		=>  'Expense Category Name is required.',
+  		'vendor_id.required' 			=>  'Vendor Name is required.',
+  		'invoice_date.required' 	=>  'Invoice Date is required.',
+  		'quantity.required' 			=>  'Inventory Quantity is required.',
+  		'quantity.numeric' 				=>  'Inventory Quantity should be numeric.',
+  	]);
+      return $validator;		
+	}
 		
 		public function addWallet($action='add'){
       $validations = [
       	'amount' 		=> $this->validation('amount'),      	
-		'action' 		=> $this->validation('action')
-							];
+				'action' 		=> $this->validation('action'),
+			];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
-  		'amount.numeric' 		=>  'Amount should be numeric ',
-  		'amount.required' 		=>  'Amount should not be blank ',
-		'action.required' 		=>  'Action is required '  		
-  		  	]);
+	  		'amount.required' 		=>  'Amount should not be blank.',
+	  		'amount.numeric' 			=>  'Amount should be numeric.',
+				'action.required' 		=>  'Action is required.',  		
+  		]);
       return $validator;		
 	}
 }
