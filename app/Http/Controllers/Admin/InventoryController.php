@@ -137,7 +137,23 @@ class InventoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = new Validations($request);
+        $validator  = $validation->addInventory();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+          $data = new Expense();
+          $data->fill($request->all());
+          
+          $data->save();
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Expense has been Added successfully.";
+            $this->redirect = url('admin/expenses');
+        }
+        return $this->populateresponse();
     }
 
     /**
