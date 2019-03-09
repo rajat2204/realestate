@@ -80,6 +80,7 @@ Route::resource('project', 'ProjectController');
 
 /***********************Expense-Section****************************/
 
+Route::get('/showpayment/{id}','ExpenseController@showPayment');
 Route::resource('expenses', 'ExpenseController');
 	Route::group(['prefix' => 'expenses'],function(){
 		Route::post('/status', 'ExpenseController@changeStatus');
