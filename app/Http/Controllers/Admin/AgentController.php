@@ -244,11 +244,13 @@ class AgentController extends Controller
             $data['mobile']=$request->mobile;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
-              if($data['action']=='deduct'){
-                  $balance = $request->balance-$request->amount;
-              }else{
-                  $balance = $request->balance+$request->amount;
-              }
+         //to deduct on selecting action[deduct] and Add on selecting action[add]    
+            if($data['action']=='deduct')
+            {
+                $balance = $request->balance-$request->amount;
+            }else{
+                $balance = $request->balance+$request->amount;
+            }
             $data['balance']=$balance;
             $data['remarks']=$request->remarks;
             $data['status']='active';
@@ -256,11 +258,13 @@ class AgentController extends Controller
             $data['updated_at']=$request->updated_at;
             
             Agents_Wallets::insert($data);
+            $balan['balance']=$balance;
+            Agents::where('id',$request->agent_id)->update($balan);
             $this->status   = true;
             $this->modal =true;
             $this->alert    = true;
             $this->message  = "Wallet has been Updated successfully.";
-            $this->redirect = true;
+            $this->redirect = url('admin/agent');
 
           }
 
