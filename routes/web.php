@@ -85,6 +85,13 @@ Route::resource('expenses', 'ExpenseController');
 		Route::post('/status', 'ExpenseController@changeStatus');
 	});
 
+/***********************Inventory-Section****************************/
+
+Route::resource('inventory', 'InventoryController');
+	Route::group(['prefix' => 'inventory'],function(){
+		Route::post('/status', 'InventoryController@changeStatus');
+	});
+
 /***********************Expense-Category-Section****************************/
 
 Route::resource('expensecategories', 'ExpenseCategoryController');
