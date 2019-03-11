@@ -272,6 +272,7 @@ class AgentController extends Controller
         }
         return $this->populateresponse();
     }
+    
     public function wallet_history(Request $request,$id)
     
     {

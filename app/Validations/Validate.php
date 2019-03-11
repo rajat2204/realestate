@@ -35,7 +35,7 @@ class Validate
 			'type' 	           	=> ['required','string'],
 			'phone' 	        => ['required','numeric','digits:10'],
 			'location' 	        => ['required','string'],
-			'password'          => ['required','string','max:50'],
+			'password'          => ['required','string','max:50','min:6'],
 			'price'				=> ['required','numeric'],
 			'pricing'			=> ['nullable','numeric'],
 			'start_from'		=> ['required'],
@@ -54,7 +54,8 @@ class Validate
 			'req_pincode' 		=> ['required','min:6','max:6'],
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
 			'amount'			=> ['required','numeric'],
-			'action'			=> ['required']
+			'action'			=> ['required'],
+			'password_null' => ['nullable']
 		];
 		return $validation[$key];
 	}
@@ -62,7 +63,7 @@ class Validate
 	public function login(){
         $validations = [
             'email' 		       	 => $this->validation('req_email'),
-						'password'       	   => $this->validation('password'),
+			'password'       	   => $this->validation('password'),
 			    ];
         $validator = \Validator::make($this->data->all(), $validations,[
         		'email.required'     => 'E-mail is required.',
@@ -730,9 +731,9 @@ class Validate
 		'date.required'				=>  'Date is required.',		
   		]);
   		if(($this->data->amount)>($this->data->balance)){
-	    $validator->after(function ($validator){
-	    $validator->errors()->add('amount', 'Payment Amount should not be greater than Due 
-	    Balance Amount.');
+		    $validator->after(function ($validator){
+		    $validator->errors()->add('amount', 'Payment Amount should not be greater than Due 
+		    Balance Amount.');
 	   });
 	  }
       return $validator;		
@@ -740,21 +741,41 @@ class Validate
 
 	public function addInventory($action='add'){
       $validations = [
-      	'project_id' 							=> $this->validation('name'),
+      	'project_id' 				=> $this->validation('name'),
       	'expense_category_id' 		=> $this->validation('name'),
-      	'vendor_id' 							=> $this->validation('name'),
-      	'invoice_date' 						=> $this->validation('name'),
-      	'quantity' 								=> $this->validation('price'),
+      	'vendor_id' 				=> $this->validation('name'),
+      	'invoice_date' 				=> $this->validation('name'),
+      	'quantity' 					=> $this->validation('price'),
   		];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
   		'project_id.required' 		=>  'Project Name is required.',
   		'category_id.required' 		=>  'Expense Category Name is required.',
-  		'vendor_id.required' 			=>  'Vendor Name is required.',
+  		'vendor_id.required' 		=>  'Vendor Name is required.',
   		'invoice_date.required' 	=>  'Invoice Date is required.',
-  		'quantity.required' 			=>  'Inventory Quantity is required.',
-  		'quantity.numeric' 				=>  'Inventory Quantity should be numeric.',
+  		'quantity.required' 		=>  'Inventory Quantity is required.',
+  		'quantity.numeric' 			=>  'Inventory Quantity should be numeric.',
   	]);
+      return $validator;		
+	}
+
+	public function makeEntryBalance($action='add'){
+      $validations = [
+      	'qty' 					=> $this->validation('price'),
+      	'date'				 	=> $this->validation('name'),
+  		];
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'quantity.required' 		=>  'Inventory Quantity is required.',
+  		'quantity.numeric' 			=>  'Inventory Quantity should be numeric.',
+  		'invoice_date.required' 	=>  'Invoice Date is required.',
+  	]);
+      if(($this->data->qty)>($this->data->balance)){
+		$validator->after(function ($validator){
+		$validator->errors()->add('qty', 'Quantity should not be greater than Due 
+		    Balance Inventory.');
+	   });
+	  }
       return $validator;		
 	}
 		
@@ -780,6 +801,49 @@ class Validate
 			});
 			}
 		}
+      return $validator;		
+	}
+
+	public function createUser($action='add'){
+      $validations = [
+      	'user_type' 			 => $this->validation('name'),
+      	'username'				 => array_merge($this->validation('name'),[Rule::unique('users_realestate')]),
+      	'password'				 => $this->validation('password'),
+      	'first_name'			 => $this->validation('name'),
+      	'email'				 	 	 => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
+      	'phone'				 	 	 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+  		];
+  		if($action =='edit'){
+					$validations['username'] = array_merge($this->validation('name'),[
+						Rule::unique('users_realestate')->where(function($query){
+							$query->where('id','!=',$this->data->id);
+						})
+					]);
+  				$validations['password'] = $this->validation('password_null');
+					$validations['email'] = array_merge($this->validation('req_email'),[
+						Rule::unique('users_realestate')->where(function($query){
+							$query->where('id','!=',$this->data->id);
+						})
+					]);
+					$validations['phone'] = array_merge($this->validation('phone'),[
+						Rule::unique('users_realestate')->where(function($query){
+							$query->where('id','!=',$this->data->id);
+						})
+					]);
+				}
+  	
+      $validator = \Validator::make($this->data->all(), $validations,[
+  		'user_type.required' 		=>  'User Level is required.',
+  		'username.required' 		=>  'User Name is required.',
+  		'username.unique'	 		=>  'This User Name is already registered.',
+  		'password.required'	 		=>  'Password is required.',
+  		'first_name.required'	 	=>  'Name is required.',
+  		'email.required'	 		=>  'E-mail is required.',
+  		'email.unique'	 			=>  'This E-mail is already registered.',
+  		'phone.required'	 		=>  'Mobile Number is required.',
+  		'phone.numeric'	 			=>  'Mobile Number should be numeric.',
+  		'phone.unique'	 			=>  'This Mobile Number is already registered.',
+  	]);
       return $validator;		
 	}
 }

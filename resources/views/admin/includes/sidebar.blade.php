@@ -91,6 +91,18 @@
             <i class="fa fa-user-secret"></i><span>Agents</span>
           </a>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user fa-fw"></i> <span>User</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{url('admin/userlevel')}}">User Level</a></li>
+            <li><a href="{{url('admin/users')}}">Users</a></li>
+          </ul>
+        </li>
         <li>
           <a href="{{url('admin/company')}}">
             <i class="fa fa-building"></i><span>Company</span>
@@ -117,18 +129,18 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="javascript:void(0);">
             <i class="fa fa-cogs fa-fw"></i> <span>Configurations</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/configuration')}}">General</a></li>
-            <li><a href="{{url('admin/currency')}}">Currency</a></li>
-            <li><a href="{{url('admin/tax')}}">Tax</a></li>
-            <li><a href="{{url('admin/units')}}">Units</a></li>
-            <li><a href="{{url('admin/logo')}}">Organizational Logo</a></li>
+            <li><a href="javascript:void(0);">General</a></li>
+            <li><a href="javascript:void(0);">Currency</a></li>
+            <li><a href="javascript:void(0);">Tax</a></li>
+            <li><a href="javascript:void(0);">Units</a></li>
+            <li><a href="javascript:void(0);">Organizational Logo</a></li>
           </ul>
         </li>
         <li>

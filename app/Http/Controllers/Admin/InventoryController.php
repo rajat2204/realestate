@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Vendor;
 use App\Models\Project;
 use App\Models\Inventory;
+use App\Models\Inventory_balance;
 use Illuminate\Http\Request;
 use App\Models\ExpenseCategory;
 use Yajra\DataTables\DataTables;
@@ -39,24 +40,15 @@ class InventoryController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
                 $html   .= '<a href="'.url(sprintf('admin/inventory/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                if ($item['status'] != 'empty'){
+                  $html   .= '<a href="'.url(sprintf('admin/inventory/entry/%s',___encrypt($item['id']))).'"  title="Make Entry"><i class="fa fa-plus"></i></a> | ';
+                }
+                $html   .= '<a href="'.url(sprintf('admin/showinventory/%s',___encrypt($item['id']))).'"  title="Show Inventory"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/inventory/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/delete.png').'"
-                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
-                if($item['status'] == 'active'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/inventory/status/?id=%s&status=inactive',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/inactive-user.png').'"
-                        data-ask="Would you like to change status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
-                }elseif($item['status'] == 'inactive'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/inventory/status/?id=%s&status=active',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/active-user.png').'"
-                        data-ask="Would you like to change status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
-                }
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
                 $html   .= '</div>';
                                 
                 return $html;
@@ -108,10 +100,56 @@ class InventoryController extends Controller
             ->addColumn(['data' => 'invoice_no','name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'invoice_date','name' => 'invoice_date','title' => 'Invoice Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'quantity','name' => 'quantity','title' => 'Quantity','orderable' => false, 'width' => 120])
-            // ->addColumn(['data' => '','name' => '','title' => 'Balance Due','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance Due','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function showInventoryEntry(Request $request, Builder $builder,$id){
+        $data['view'] = 'admin.inventory.entrylist';
+        
+        $id = ___decrypt($id);
+        $enrtyList  = _arefy(Inventory_balance::where('inventory_id',$id)->get());
+
+        if ($request->ajax()) {
+            return DataTables::of($enrtyList)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                // $html   .= '<a href="javascript:void(0);" 
+                //         data-url="'.url(sprintf('admin/showinventory/status/?id=%s&status=trashed',$item['id'])).'" 
+                //         data-request="ajax-confirm"
+                //         data-ask_image="'.url('assets/img/delete.png').'"
+                //         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('remarks',function($item){
+              if (!empty($item['remarks'])) {
+                return str_limit(strip_tags($item['remarks']),30);
+              }else{
+                return 'N/A';
+              }
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'date','name' => 'date','title' => 'Entry Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'qty','name' => 'qty','title' => 'Quantity','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+            // ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
@@ -144,7 +182,12 @@ class InventoryController extends Controller
         }else{
           $data = new Inventory();
           $data->fill($request->all());
-          
+          if ($data['balance'] != 0) {
+            $data['status'] = 'available';
+          }else{
+            $data['status'] = 'empty';
+          }
+
           $data->save();
 
             $this->status   = true;
@@ -203,6 +246,12 @@ class InventoryController extends Controller
           $inventory = Inventory::findOrFail($id);
           $input = $request->all();
 
+          if ($input['balance'] != 0) {
+            $input['status'] = 'available';
+          }else{
+            $input['status'] = 'empty';
+          }
+
           $inventory->update($input);
 
             $this->status   = true;
@@ -220,6 +269,46 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function makeEntry(Request $request,$id){
+      $data['view'] = 'admin.inventory.entry';
+      $id = ___decrypt($id);
+      $where = 'id = '.$id;
+      $data['inventory'] = _arefy(Inventory::list('single',$where));      
+      // dd($data['inventory']);
+      return view('admin.home',$data);
+    }
+
+    public function makeEntryInventory(Request $request, $id){
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->makeEntryBalance();
+      if ($validator->fails()) {
+        $this->message = $validator->errors();
+      }else{
+          $entry = new Inventory_balance();
+          $entry->fill($request->all());
+
+          $entry->save();
+
+          $getBalance = Inventory::where('id',$id)->first();
+          $bal['balance'] = $getBalance['balance']-$request->qty;
+          if ($bal['balance'] != 0) {
+            $bal['status'] = 'available';
+          }else{
+            $bal['status'] = 'empty';
+          }
+          $upd = Inventory::where('id',$id)->update($bal);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Inventory Quantity has been Added successfully.";
+            $this->redirect = url('admin/inventory');
+        }
+          return $this->populateresponse();
+      }
+
     public function destroy($id)
     {
         //
@@ -234,6 +323,23 @@ class InventoryController extends Controller
                 $this->message = 'Deleted Inventory successfully.';
             }else{
                 $this->message = 'Updated Inventory successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusEntry(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Inventory_balance::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Inventory Entry successfully.';
+            }else{
+                $this->message = 'Updated Inventory Entry successfully.';
             }
             $this->status = true;
             $this->redirect = true;

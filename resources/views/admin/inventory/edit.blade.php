@@ -63,8 +63,13 @@
         </div>
 
         <div class="form-group">
-          <label>Invoice Amount:</label>
-          <input type="text" class="form-control" placeholder="Quantity..." name="quantity" value="{{!empty($inventory['quantity'])?$inventory['quantity']:''}}">
+          <label>Quantity:</label>
+          <input type="text" class="form-control" placeholder="Quantity..." name="quantity" id="qty" value="{{!empty($inventory['quantity'])?$inventory['quantity']:''}}">
+        </div>
+
+        <div class="form-group" style="display: none;">
+          <label>Balance:</label>
+          <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance" value="{{!empty($inventory['balance'])?$inventory['balance']:''}}">
         </div>
 
         <div class="form-group">
@@ -84,5 +89,12 @@
 @section('requirejs')
 <script type="text/javascript">
   CKEDITOR.replace("remarks")
+
+$(document).ready(function () {
+  $("#qty").keyup(function () {
+      var value = $(this).val();
+      $("#balance").val(value);
+  });
+});
 </script>
 @endsection
