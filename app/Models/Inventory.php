@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     protected $table = 'inventory';
-    protected $fillable = ['project_id','expense_category_id','vendor_id','invoice_no','invoice_date','quantity','remarks','status','created_at','updated_at'];
+    protected $fillable = ['project_id','expense_category_id','vendor_id','invoice_no','invoice_date','quantity','balance','remarks','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;

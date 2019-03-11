@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/cache', function() { $exitCode = Artisan::call('cache:clear'); $exitCode = Artisan::call('cache:clear'); $exitCode = Artisan::call('cache:clear'); return 'DONE'; //Return anything 
-});
-Route::get('/config', function() { $exitCode = Artisan::call('config:cache'); $exitCode = Artisan::call('config:cache'); $exitCode = Artisan::call('config:cache'); return 'DONE'; //Return anything 
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:clear');
+    $exitCode = Artisan::call('cache:clear');
+    $exitCode = Artisan::call('config:cache');
+    return 'DONE'; //Return anything
 });
 
 /***********************Front-Section****************************/
@@ -78,6 +80,17 @@ Route::resource('project', 'ProjectController');
 		Route::post('/status', 'ProjectController@changeStatus');
 	});
 
+/***********************Users-Section****************************/
+Route::get('userlevel','UserController@userlevellist');
+Route::get('userlevel/create','UserController@createUserLevel');
+Route::post('userleveladd','UserController@userLevel');
+Route::post('userlevel/status','UserController@changeStatusUserLevel');
+Route::get('setpermission/{id}','UserController@setPermissionList');
+Route::resource('users', 'UserController');
+	Route::group(['prefix' => 'users'],function(){
+		Route::post('/status', 'UserController@changeStatus');
+	});
+
 /***********************Expense-Section****************************/
 
 Route::get('/showpayment/{id}','ExpenseController@showPayment');
@@ -89,10 +102,13 @@ Route::resource('expenses', 'ExpenseController');
 	});
 
 /***********************Inventory-Section****************************/
-
+Route::get('/showinventory/{id}','InventoryController@showInventoryEntry');
+Route::post('/showinventory/{id}/status', 'InventoryController@changeStatusEntry');
 Route::resource('inventory', 'InventoryController');
 	Route::group(['prefix' => 'inventory'],function(){
 		Route::post('/status', 'InventoryController@changeStatus');
+			Route::get('/entry/{id}','InventoryController@makeEntry');
+			Route::post('/entry/{id}','InventoryController@makeEntryInventory');
 	});
 
 /***********************Expense-Category-Section****************************/
