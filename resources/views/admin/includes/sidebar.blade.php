@@ -72,6 +72,11 @@
             <i class="fa fa-users fa-fw"></i><span>Clients</span>
           </a>
         </li>
+        <li>
+          <a href="{{url('admin/deals')}}">
+            <i class="fa fa-thumbs-up fa-fw"></i><span>Deals</span>
+          </a>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-shopping-cart"></i> <span>Expense/Inventory</span>

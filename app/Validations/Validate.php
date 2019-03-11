@@ -806,7 +806,7 @@ class Validate
 
 	public function createUser($action='add'){
       $validations = [
-      	'user_type' 			 => $this->validation('name'),
+      	'user_level_id' 	 => $this->validation('name'),
       	'username'				 => array_merge($this->validation('name'),[Rule::unique('users_realestate')]),
       	'password'				 => $this->validation('password'),
       	'first_name'			 => $this->validation('name'),
@@ -833,17 +833,28 @@ class Validate
 				}
   	
       $validator = \Validator::make($this->data->all(), $validations,[
-  		'user_type.required' 		=>  'User Level is required.',
-  		'username.required' 		=>  'User Name is required.',
-  		'username.unique'	 		=>  'This User Name is already registered.',
-  		'password.required'	 		=>  'Password is required.',
-  		'first_name.required'	 	=>  'Name is required.',
-  		'email.required'	 		=>  'E-mail is required.',
-  		'email.unique'	 			=>  'This E-mail is already registered.',
-  		'phone.required'	 		=>  'Mobile Number is required.',
-  		'phone.numeric'	 			=>  'Mobile Number should be numeric.',
-  		'phone.unique'	 			=>  'This Mobile Number is already registered.',
+  		'user_level_id.required' 		=>  'User Level is required.',
+  		'username.required' 				=>  'User Name is required.',
+  		'username.unique'	 					=>  'This User Name is already registered.',
+  		'password.required'	 				=>  'Password is required.',
+  		'first_name.required'	 			=>  'Name is required.',
+  		'email.required'	 					=>  'E-mail is required.',
+  		'email.unique'	 						=>  'This E-mail is already registered.',
+  		'phone.required'	 					=>  'Mobile Number is required.',
+  		'phone.numeric'	 						=>  'Mobile Number should be numeric.',
+  		'phone.unique'	 						=>  'This Mobile Number is already registered.',
   	]);
       return $validator;		
 	}
+
+	public function createUserLevel($action='add'){
+	      $validations = [
+	      	'level_name' 				=> $this->validation('name'),
+	  		];
+	  	
+	      $validator = \Validator::make($this->data->all(), $validations,[
+	  		'level_name.required' 		=>  'User Level Name is required.',
+	  	]);
+	      return $validator;		
+		}
 }

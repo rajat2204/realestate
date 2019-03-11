@@ -10,11 +10,11 @@
 
         <div class="form-group">
           <label>User Level:</label>
-          <select class="form-control" name="user_type" id="user_type">
+          <select class="form-control" name="user_level_id" id="user_level_id">
             <option value="">Select User Level</option>
-            <option value="accountant">Accountant</option>
-            <option value="admin">Administrator</option>
-            <option value="manager">Manager</option>
+            @foreach($userlevel as $userlevels)
+              <option value="{{!empty($userlevels['id'])?$userlevels['id']:''}}">{{!empty($userlevels['level_name'])?$userlevels['level_name']:''}}</option>
+            @endforeach
           </select>
         </div>
 

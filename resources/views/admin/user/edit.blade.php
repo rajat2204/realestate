@@ -17,11 +17,11 @@
 
         <div class="form-group">
           <label>User Level:</label>
-          <select class="form-control" name="user_type" id="user_type">
+          <select class="form-control" name="user_level_id" id="user_level_id">
             <option value="">Select User Level</option>
-            <option value="accountant" <?php if($user['user_type'] == 'accountant'){echo("selected");}?>>Accountant</option>
-            <option value="admin" <?php if($user['user_type'] == 'admin'){echo("selected");}?>>Administrator</option>
-            <option value="manager" <?php if($user['user_type'] == 'manager'){echo("selected");}?>>Manager</option>
+            @foreach($userlevel as $userlevels)
+              <option value="{{!empty($userlevels['id'])?$userlevels['id']:''}}" @if($userlevels['id'] == $user['user_level_id']) selected @endif >{{!empty($userlevels['level_name'])?$userlevels['level_name']:''}}</option>
+            @endforeach
           </select>
         </div>
 

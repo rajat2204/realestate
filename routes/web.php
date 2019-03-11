@@ -81,7 +81,11 @@ Route::resource('project', 'ProjectController');
 	});
 
 /***********************Users-Section****************************/
-
+Route::get('userlevel','UserController@userlevellist');
+Route::get('userlevel/create','UserController@createUserLevel');
+Route::post('userleveladd','UserController@userLevel');
+Route::post('userlevel/status','UserController@changeStatusUserLevel');
+Route::get('setpermission/{id}','UserController@setPermissionList');
 Route::resource('users', 'UserController');
 	Route::group(['prefix' => 'users'],function(){
 		Route::post('/status', 'UserController@changeStatus');
@@ -152,7 +156,7 @@ Route::resource('testimonial', 'TestimonialController');
 
 /***********************Agents-Section****************************/
 
-			Route::get('agent/wallet_history','AgentController@walletHistory');
+Route::get('agent/wallet_history','AgentController@walletHistory');
 Route::resource('agent', 'AgentController');
 	Route::group(['prefix' => 'agent'],function(){
 		Route::post('/status', 'AgentController@changeStatus');

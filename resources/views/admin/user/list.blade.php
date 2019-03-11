@@ -24,11 +24,6 @@
 							<span class="hidden-480">
 							Add Users</span>
 							</a>
-							<a href="{{url('admin/users/create')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-plus"></i>
-							<span class="hidden-480">
-							Assign Form Rights</span>
-							</a>
 						</div>
 					</div>
 					<div class="portlet-body">
