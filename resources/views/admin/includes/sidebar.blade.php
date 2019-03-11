@@ -142,7 +142,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="javascript:void(0);">General</a></li>
-            <li><a href="javascript:void(0);">Currency</a></li>
+            <li><a href="{{url('admin/currencies')}}">Currency</a></li>
             <li><a href="javascript:void(0);">Tax</a></li>
             <li><a href="javascript:void(0);">Units</a></li>
             <li><a href="javascript:void(0);">Organizational Logo</a></li>
@@ -166,6 +166,12 @@
         <li>
           <a href="{{url('admin/changepassword')}}">
             <i class="fa fa-key"></i> <span>Change Password</span>
+          </a>
+        </li>
+        <li>
+        <li>
+          <a href="{{url('admin/help')}}">
+            <i class="fa fa-question-circle"></i><span>Help</span>
           </a>
         </li>
         <li>
