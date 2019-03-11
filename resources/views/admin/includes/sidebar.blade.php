@@ -125,7 +125,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{url('admin/configuration')}}">General</a></li>
-            <li><a href="{{url('admin/currency')}}">Currency</a></li>
+            <li><a href="{{url('admin/currencies')}}">Currency</a></li>
             <li><a href="{{url('admin/tax')}}">Tax</a></li>
             <li><a href="{{url('admin/units')}}">Units</a></li>
             <li><a href="{{url('admin/logo')}}">Organizational Logo</a></li>
@@ -149,6 +149,12 @@
         <li>
           <a href="{{url('admin/changepassword')}}">
             <i class="fa fa-key"></i> <span>Change Password</span>
+          </a>
+        </li>
+        <li>
+        <li>
+          <a href="{{url('admin/help')}}">
+            <i class="fa fa-question-circle"></i><span>Help</span>
           </a>
         </li>
         <li>

@@ -140,12 +140,12 @@ Route::resource('testimonial', 'TestimonialController');
 
 /***********************Agents-Section****************************/
 
-			Route::get('agent/wallet_history','AgentController@walletHistory');
+Route::get('agent/wallet_history','AgentController@walletHistory');
 Route::resource('agent', 'AgentController');
-	Route::group(['prefix' => 'agent'],function(){
-		Route::post('/status', 'AgentController@changeStatus');
-	    Route::get('/wallet/{id}','AgentController@wallet');
-	    Route::post('/wallet/{id}','AgentController@walletAmount');
+Route::group(['prefix' => 'agent'],function(){
+	Route::post('/status', 'AgentController@changeStatus');
+    Route::get('/wallet/{id}','AgentController@wallet');
+    Route::post('/wallet/{id}','AgentController@walletAmount');
 	});
 
 /***********************Plans-Section****************************/
@@ -195,5 +195,12 @@ Route::resource('notice', 'NoticeController');
 /***********************staticPage-Section****************************/
 
 Route::resource('static_pages', 'StaticController');
+
+/***********************configuration-Section****************************/
+Route::get('configuration','ConfigurationController@general');
+Route::get('help', 'ConfigurationController@help');
+Route::get('currencies','ConfigurationController@index');
+Route::get('currencies/create','ConfigurationController@createCurrencies');
+
 });
 

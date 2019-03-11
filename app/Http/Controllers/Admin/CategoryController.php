@@ -180,7 +180,8 @@ class CategoryController extends Controller
     }
 
     public function changeStatus(Request $request){
-        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $userData                = ['status' => $request->status, 
+                                   'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = PropertyCategories::change($request->id,$userData);
 
         if($isUpdated){

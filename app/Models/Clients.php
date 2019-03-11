@@ -39,6 +39,7 @@ class Clients extends Model
         elseif($fetch === 'paginate'){
             $list = $table_clients->paginate(1);
             return json_decode(json_encode($list ), true );
+            
         }else if($fetch === 'obj'){
             return $table_clients->limit($limit)->get();                
         }else if($fetch === 'single'){

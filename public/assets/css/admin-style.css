@@ -28,7 +28,63 @@ form.pisi{
     border:1px solid ;
     box-shadow: 1px 1px white;
 }
-form.pisi label{
+form.pisi label
+{
     padding-right: 7px;
 
+}
+h1.text-secondary{
+    font-family: "Times New Roman", Times, serif;
+    color: #5a5a5a;
+    font-weight: bolder;
+    font-size: 54px;
+}
+p.h4{
+  color: #8b848c;
+  font-weight: 500;
+    margin: 12px auto;
+}
+.box-body.order_b{
+    border:1px solid #eee;
+    box-shadow: 1px 1px lightgrey;
+}
+ul.ins
+{    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    padding-left: 22px;
+    padding-top: 9px;
+}
+ul.ins li{
+    margin-left: 0px;
+    font-size: 18px;
+    font-weight: 900;
+    font-family: "Times New Roman", Times, serif;
+    color: #7b7d70;
+}
+img.cust{
+    padding:-12px auto;
+}
+
+strong.g{
+        color: #df7264;
+}
+h3.dije{
+    color: #333;
+    background-color: #f5f5f5;
+  margin: -8px -10px;
+  font-weight: lighter;
+    padding: 6px 5px;
+    border-color: #ddd;
+}
+div.configs{
+    padding :10px 30px;
+}
+div.configs 
+{
+    padding:10px auto;
 }
