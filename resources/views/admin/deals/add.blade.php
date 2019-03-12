@@ -96,6 +96,49 @@
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Plan:</label>
+              <select class="form-control" name="plan_id" id="plan_id">
+                <option value="">Select Plan</option>
+                @foreach($plan as $plans)
+                  <option value="{{!empty($plans['id'])?$plans['id']:''}}">{{!empty($plans['name'])?$plans['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Payment Method:</label>
+              <select class="form-control" name="payment_method" id="payment_method">
+                <option value="">Select Payment Method</option>
+                <option value="manually">Manually</option>
+                <option value="monthly">Monthly</option>
+                <option value="quarterly">Quarterly</option>
+                <option value="halfyearly">Half Yearly</option>
+                <option value="yearly">Yearly</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Agent:</label><small>(if any)</small>
+              <select class="form-control" name="agent_id" id="agent_id">
+                <option value="">Select Agent</option>
+                @foreach($agent as $agents)
+                  <option value="{{!empty($agents['id'])?$agents['id']:''}}">{{!empty($agents['name'])?$agents['name']:''}}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Comments/Remarks:</label>
+          <textarea cols="80" rows="6" name="remarks" id="remarks"></textarea>
+        </div>
+
         <div class="box-footer">
           <a href="{{url('admin/property')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-property"]' class="btn btn-info pull-right">Submit</button>
@@ -107,18 +150,6 @@
 
 @section('requirejs')
 <script type="text/javascript">
-
-  function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#adminimg').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-  CKEDITOR.replace("description");
-  CKEDITOR.replace("key_points");
-
+  CKEDITOR.replace("remarks");
 </script>
 @endsection

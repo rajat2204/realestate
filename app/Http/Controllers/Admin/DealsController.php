@@ -114,7 +114,23 @@ class DealsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = new Validations($request);
+        $validator  = $validation->addDeal();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data = new Deals();
+            $data->fill($request->all());
+
+            $data->save();
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Deal has been Added successfully.";
+            $this->redirect = url('admin/deals');  
+        }
+        return $this->populateresponse();
     }
 
     /**
