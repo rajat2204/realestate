@@ -208,6 +208,13 @@ Route::resource('notice', 'NoticeController');
 	Route::group(['prefix' => 'notice'],function(){
 		Route::post('/status', 'NoticeController@changeStatus');
 	});
+
+/***********************Notice-Section****************************/
+
+Route::resource('deals', 'DealsController');
+	Route::group(['prefix' => 'deals'],function(){
+		Route::post('/status', 'DealsController@changeStatus');
+	});
 /***********************staticPage-Section****************************/
 
 Route::resource('static_pages', 'StaticController');

@@ -25,6 +25,9 @@ class Project extends Model
     public function property(){
         return $this->hasMany('App\Models\Property','project_id','id');
     }
+    public function projectImage(){
+        return $this->hasMany('App\Models\ProjectImages','project_id','id');
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
         $table_projects = self::select($keys)
@@ -34,6 +37,9 @@ class Project extends Model
             },
             'property' => function($q){
                 $q->select('project_id','category_id','name','bedrooms','description','key_points','location','property_type','featured_image','property_construct','property_purpose','price','area','slug');
+            },
+            'projectImage' => function($q){
+                $q->select('project_id','images');
             },
         ]);
         if($where){
