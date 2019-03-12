@@ -806,12 +806,12 @@ class Validate
 
 	public function createUser($action='add'){
       $validations = [
-      	'user_level_id' 	 => $this->validation('name'),
+      	'user_level_id' 	     => $this->validation('name'),
       	'username'				 => array_merge($this->validation('name'),[Rule::unique('users_realestate')]),
       	'password'				 => $this->validation('password'),
       	'first_name'			 => $this->validation('name'),
-      	'email'				 	 	 => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
-      	'phone'				 	 	 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+      	'email'				 	 => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
+      	'phone'				 	 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
   		];
   		if($action =='edit'){
 					$validations['username'] = array_merge($this->validation('name'),[
@@ -848,12 +848,26 @@ class Validate
 	}
 
 	public function createUserLevel($action='add'){
-	      $validations = [
+	    $validations = [
 	      	'level_name' 				=> $this->validation('name'),
 	  		];
 	  	
 	      $validator = \Validator::make($this->data->all(), $validations,[
 	  		'level_name.required' 		=>  'User Level Name is required.',
+	  	]);
+	      return $validator;		
+		}
+		
+    public function addCurrency($action ='add'){
+   		$validations = [
+	      'currency_name' 						=> $this->validation('name'),
+		   'image'								=> $this->validation('photo'),
+	  		];
+	  	
+	    $validator = \Validator::make($this->data->all(), $validations,[
+	  		'currency_name.required' 		=>  'Currency name should not be blank',
+	    	'image.required' 				=>  'Currency Image is required.',
+	    	'image.mimes' 					=>  'Currency Image should be in jpg,jpeg,png format.',
 	  	]);
 	      return $validator;		
 		}

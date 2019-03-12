@@ -67,18 +67,32 @@ public function createCurrencies()
       $data['view'] = 'admin.configuration.currencies.add';
       return view('admin.home',$data);
     }      
-public function currencyAdd(Request ,$request)
+public function currencyAdd(Request $request)
     {
-     $validation = new Validations($request);
-        $validator  = $validation->addProperty();
+        $validation = new Validations($request);
+        $validator  = $validation->addCurrency();
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $data = new Currency();
+            $data = new Currencies();//currency model
             $data->fill($request->all());
+
+            if ($file = $request->file('image')){
+                $photo_name = time().$request->file('image')->getClientOriginalName();
+                $file->move('assets/img/currency',$photo_name);
+                $data['image'] = $photo_name;
+            }
             
+            $data->save();
+              $this->status   = true;
+              $this->modal    = true;
+              $this->alert    = true;
+              $this->message  = "Currency has been Added successfully.";
+              $this->redirect = url('admin/currencies');
  
-    } 
+      } 
+      return $this->populateresponse();
+    }
 
    //************** Help page section************   
    public function help(Request $request)

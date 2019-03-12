@@ -12,12 +12,12 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Select Project Name:</label>
-              <select class="form-control" name="project_id" id="project_id">
-                <option value="">Select Project</option>
-                @foreach($project as $projects)
-                  <option value="{{!empty($projects['id'])?$projects['id']:''}}">{{!empty($projects['name'])?$projects['name']:''}}</option>
-                @endforeach
-              </select>
+                <select class="form-control" name="project_id" id="project_id">
+                  <option value="">Select Project</option>
+                  @foreach($project as $projects)
+                    <option value="{{!empty($projects['id'])?$projects['id']:''}}">{{!empty($projects['name'])?$projects['name']:''}}</option>
+                  @endforeach
+                </select>
             </div>
           </div>
 

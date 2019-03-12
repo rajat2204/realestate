@@ -217,6 +217,9 @@ Route::get('configuration','ConfigurationController@general');
 Route::get('help', 'ConfigurationController@help');
 Route::get('currencies','ConfigurationController@index');
 Route::get('currencies/create','ConfigurationController@createCurrencies');
+		Route::post('currencies/create', 'ConfigurationController@currencyAdd');
+	Route::get('tax','ConfigurationController@tax');
+
 
 });
 
