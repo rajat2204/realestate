@@ -73,7 +73,7 @@
           </a>
         </li>
         <li>
-          <a href="javascript:void(0);">
+          <a href="{{url('admin/deals')}}">
             <i class="fa fa-thumbs-up fa-fw"></i><span>Deals</span>
           </a>
         </li>

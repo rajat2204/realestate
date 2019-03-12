@@ -32,8 +32,8 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="{{url('project-properties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/projects')}}/{{$projects['image']}}" alt="project"></a>
-									<a href="#viewphotos" data-toggle="modal">
+									<a href="javascript:void(0);"><img src="{{url('assets/img/Project Images')}}/{{$projects['project_image'][0]['images']}}" alt="project"></a>
+									<a href="javascript:void(0);" data-toggle="modal">
 										<div class="property-caption">
 											<span class="bulge">{{count($projects['property'])}} properties</span>
 										</div>
@@ -46,9 +46,6 @@
 										<h3 title="{{$projects['name']}}">{{$projects['name']}}</h3>
 										<p title="{{$projects['location']}}">{{str_limit($projects['location'],95)}}</p>
 										<p title="{{$projects['company']['name']}}"><strong>{{$projects['company']['name']}}</strong></p>
-									</div>
-									<div class="project-pric float-right">
-										<h3><i class="fa fa-rupee"></i>{{number_format($projects['price'])}}</h3>
 									</div>
 								</div>
 								<div class="project-content">
@@ -117,10 +114,6 @@
 			@endforeach
 		</div>
 		<div>
-			
 		</div>
 	</div>
-
 </section>
-
-
