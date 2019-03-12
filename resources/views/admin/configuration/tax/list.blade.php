@@ -19,10 +19,10 @@
 				<div class="portlet light">
 					<div class="portlet-title">
 						<div class="actions">
-							<a href="{{url('admin/currencies/create')}}" class="btn btn-default btn-circle">
+							<a href="{{url('admin/tax/add')}}" class="btn btn-default btn-circle">
 							<i class="fa fa-plus"></i>
 							<span class="hidden-480">
-							Add Currency</span>
+							Add Tax</span>
 							</a>
 							
 						</div>

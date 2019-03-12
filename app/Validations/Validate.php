@@ -55,7 +55,7 @@ class Validate
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
 			'amount'			=> ['required','numeric'],
 			'action'			=> ['required'],
-			'password_null' => ['nullable']
+			'password_null' 	=> ['nullable']
 		];
 		return $validation[$key];
 	}
@@ -779,7 +779,7 @@ class Validate
       return $validator;		
 	}
 		
-		public function addWallet($action='add'){
+	public function addWallet($action='add'){
 	      $validations = [
       	'amount' 		=> $this->validation('amount'),      	
 				'action' 		=> $this->validation('action'),
@@ -864,11 +864,26 @@ class Validate
 		   'image'								=> $this->validation('photo'),
 	  		];
 	  	
-	    $validator = \Validator::make($this->data->all(), $validations,[
+	   $validator = \Validator::make($this->data->all(), $validations,[
 	  		'currency_name.required' 		=>  'Currency name should not be blank',
 	    	'image.required' 				=>  'Currency Image is required.',
 	    	'image.mimes' 					=>  'Currency Image should be in jpg,jpeg,png format.',
 	  	]);
 	      return $validator;		
 		}
+    public function addTax($action ='add'){
+   		$validations = [
+	      'tax_name' 						=> $this->validation('name'),
+		  'tax_percentage'	                => $this->validation('price'),
+	 		];
+	  	
+	    $validator = \Validator::make($this->data->all(), $validations,[
+	    	'tax_name.required'				=> 'Tax Name should not be blank',
+	    	'tax_percentage.required'		=> 'Tax Percentage is required'	,
+	    	'tax_percentage.numeric'		=> 'Tax should be numeric',
+	    						
+	  	]);
+	      return $validator;		
+		}
+
 }
