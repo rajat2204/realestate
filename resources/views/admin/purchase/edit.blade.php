@@ -33,7 +33,7 @@
               <label>Select Property Name:</label>
               <select class="form-control" name="property_id" id="properties">
                 <option value=" ">Select Property</option>
-                <option value="{{!empty($product['subcategory']['id'])?$product['subcategory']['id']:''}}" @if($product['subcategory']['id'] == $product['sub_id']) selected @endif>{{!empty($product['subcategory']['name'])?$product['subcategory']['name']:''}}</option>
+                <option value="{{!empty($purchase['property']['id'])?$purchase['property']['id']:''}}" @if($purchase['property']['id'] == $purchase['property_id']) selected @endif>{{!empty($purchase['property']['name'])?$purchase['property']['name']:''}}</option>
               </select>
             </div>
           </div>
@@ -72,25 +72,28 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Area(In Sq.ft.):</label>
               <input type="text" class="form-control" placeholder="Enter Property Area(In Sq.ft.)..." name="area" value="{{!empty($purchase['area'])?$purchase['area']:''}}">
             </div>
           </div>
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Price:</label>
               <input type="text" class="form-control" placeholder="Enter Property Price..." name="price" id="price" value="{{!empty($purchase['price'])?$purchase['price']:''}}">
             </div>
           </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Balance:</label>
+              <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance" value="{{!empty($purchase['balance'])?$purchase['balance']:''}}">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group" style="display: none;">
-          <label>Balance:</label>
-          <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance" value="{{!empty($purchase['balance'])?$purchase['balance']:''}}">
-        </div>
 
         <div class="form-group">
           <label>Project Description:</label>
@@ -99,7 +102,7 @@
 
         <div class="box-footer">
           <a href="{{url('admin/purchase')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-purchase"]' class="btn btn-info pull-right">Submit</button>
+          <button type="button" data-request="ajax-submit" data-target='[role="edit-purchase"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
@@ -110,14 +113,7 @@
 <script type="text/javascript">
 
     CKEDITOR.replace("description");
-
-  $(document).ready(function () {
-    $("#price").keyup(function () {
-        var value = $(this).val();
-        $("#balance").val(value);
-    });
-});
-
+    
     $(document).ready(function(){
         $('#project_id').on('change',function(){
             var value = $(this).val();

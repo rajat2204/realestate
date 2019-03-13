@@ -42,7 +42,6 @@ class DealsController extends Controller
                 $html    = '<div class="edit_details_box">';
 
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/deals/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -104,6 +103,15 @@ class DealsController extends Controller
         $data['project'] = _arefy(Project::where('status','!=','trashed')->get());
         // dd($data['project']);
         return view('admin.home',$data);
+    }
+
+    public function ajaxProperty(Request $request)
+    {
+      $id = $request->id;
+      $property = Property::where('project_id',$id)->get();
+      $propertyview = view('admin.template.ajaxproperty',compact('property'));
+
+      return Response($propertyview);
     }
 
     /**

@@ -64,7 +64,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Area(In Sq.ft.):</label>
               <input type="text" class="form-control" placeholder="Enter Property Area(In Sq.ft.)..." name="area">
@@ -72,18 +72,21 @@
           </div>
 
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Price:</label>
               <input type="text" class="form-control" placeholder="Enter Property Price..." name="price" id="price">
             </div>
           </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Balance:</label>
+              <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance">
+            </div>
+          </div>
         </div>
 
-        <div class="form-group" style="display: none;">
-          <label>Balance:</label>
-          <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance">
-        </div>
 
         <div class="form-group">
           <label>Project Description:</label>
@@ -103,13 +106,6 @@
 <script type="text/javascript">
 
     CKEDITOR.replace("description");
-
-  $(document).ready(function () {
-    $("#price").keyup(function () {
-        var value = $(this).val();
-        $("#balance").val(value);
-    });
-});
 
     $(document).ready(function(){
         $('#project_id').on('change',function(){

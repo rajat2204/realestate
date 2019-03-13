@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tax;
 use App\Models\Currencies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,13 +11,12 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
-use App\Models\Tax;
 class ConfigurationController extends Controller
 {
 
- public function __construct(Request $request)
+public function __construct(Request $request)
 {
-    parent::__construct($request);
+  parent::__construct($request);
 } 	
   public function index(Request $request, Builder $builder)
   {
@@ -44,6 +44,16 @@ class ConfigurationController extends Controller
             ->editColumn('currency_name',function($item){
                 return ucfirst($item['currency_name']);
             })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }
+            })
+            ->editColumn('image',function($item){
+                $imageurl = asset("assets/img/currency/".$item['image']);
+                return '<img src="'.$imageurl.'" height="20" width="25">';
+            })
+            ->rawColumns(['image','action'])
             ->make(true);
         }
 
@@ -53,9 +63,8 @@ class ConfigurationController extends Controller
             ])
             ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'currency_name', 'name' => 'currency_name','title' => 'Currency Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'image', 'name' => 'image','title' => 'Currency Image','orderable' => false, 'width' => 120])
-            // ->addColumn(['data' => 'dob', 'name' => 'dob','title' => 'Currency','orderable' => false, 'width' => 120])
-           
+            ->addColumn(['data' => 'image', 'name' => 'image',"render" => 'data','title' => 'Currency Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
             return view('admin.home')->with($data);
     }
@@ -80,7 +89,7 @@ class ConfigurationController extends Controller
             ->editColumn('action',function($item) {
                 
                 $html    = '<div class="edit_details_box">';
-                $html   .= '<a href="'.url(sprintf('admin/tax/%s/edit',___encrypt($item['id']))).'"  title="Edit Tax"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/tax/edit/%s/',___encrypt($item['id']))).'"  title="Edit Tax"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/tax/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -90,11 +99,18 @@ class ConfigurationController extends Controller
                                 
                 return $html;
             })
-            ->editColumn('tax_name',function($item){
-              
-                return ucfirst($item['tax_name']);
+            ->editColumn('name',function($item){
+                return ucfirst($item['name']);
             })
-        
+            ->editColumn('percentage',function($item){
+                return $item['percentage'].'%';
+            })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }
+            })
+            ->rawColumns(['action'])
             ->make(true);
         }
         $data['html'] = $builder
@@ -102,8 +118,9 @@ class ConfigurationController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'tax_name', 'name' => 'tax_name','title' => 'Tax Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'tax_percentage', 'name' => 'tax_percentage','title' => 'Tax Percentage','orderable' => false, 'width' => 120])          
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Tax Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'percentage', 'name' => 'percentage','title' => 'Tax Percentage','orderable' => false, 'width' => 120])        
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])        
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
    
@@ -134,7 +151,8 @@ public function currencyAdd(Request $request)
         } 
       return $this->populateresponse();
     }
-public function currencyAddForm(Request $request)
+
+    public function currencyAddForm(Request $request)
     {
         $data['view'] = 'admin.configuration.currencies.add';
         return view('admin.home',$data);  
@@ -147,13 +165,14 @@ public function currencyAddForm(Request $request)
    	return view('admin.home',$data);	
    }
   //*******Tax Page section*********
-public function taxAddForm(Request $request)
+
+    public function taxAddForm(Request $request)
     {
         $data['view'] = 'admin.configuration.tax.add';
         return view('admin.home',$data);  
     }
 
- public function taxAdd(Request $request)
+    public function taxAdd(Request $request)
     {
         $validation = new Validations($request);
         $validator  = $validation->addTax();
@@ -172,6 +191,71 @@ public function taxAddForm(Request $request)
  
       } 
       return $this->populateresponse();
+    }
+
+    public function taxEditForm(Request $request,$id)
+    {
+        $data['view'] = 'admin.configuration.tax.edit';
+        $id = ___decrypt($id);
+        $data['tax'] = _arefy(Tax::where('id',$id)->first());
+        // dd($data['tax']);
+        return view('admin.home',$data);
+    }
+
+    public function taxEdit(Request $request, $id)
+    {   
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addTax();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $tax = Tax::findOrFail($id);
+            $input = $request->all();
+
+            $tax->update($input);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Tax has been Updated successfully.";
+            $this->redirect = url('admin/tax');
+        }
+            return $this->populateresponse();
+    }
+
+    public function changeStatus(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Currencies::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Currencies successfully.';
+            }else{
+                $this->message = 'Updated Currencies successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusTax(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Currencies::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Tax successfully.';
+            }else{
+                $this->message = 'Updated Tax successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
     }
 
 }

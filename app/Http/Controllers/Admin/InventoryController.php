@@ -330,21 +330,4 @@ class InventoryController extends Controller
         }
         return $this->populateresponse();
     }
-
-    public function changeStatusEntry(Request $request){
-        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
-        $isUpdated               = Inventory_balance::change($request->id,$userData);
-
-        if($isUpdated){
-            if($request->status == 'trashed'){
-                $this->message = 'Deleted Inventory Entry successfully.';
-            }else{
-                $this->message = 'Updated Inventory Entry successfully.';
-            }
-            $this->status = true;
-            $this->redirect = true;
-            $this->jsondata = [];
-        }
-        return $this->populateresponse();
-    }
 }

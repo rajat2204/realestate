@@ -54,7 +54,8 @@ class Validate
 			'req_pincode' 		=> ['required','min:6','max:6'],
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
 			'amount'			=> ['required','numeric'],
-			'action'			=> ['required'],
+            'action'            => ['required'],
+			'percentage'		=> ['required','numeric','between:0,99.99'],
 			'password_null' 	=> ['nullable']
 		];
 		return $validation[$key];
@@ -206,20 +207,8 @@ class Validate
             'seller_mobile' 	=> $this->validation('phone'),
             'area' 				=> $this->validation('area'),
             'price' 			=> $this->validation('price'),
-            'description' 		=> $this->validation('description'),
+            // 'description' 		=> $this->validation('description'),
     	];
-		// if($action =='edit'){
-		// 	$validations['email'] = array_merge($this->validation('req_email'),[
-		// 		Rule::unique('lead')->where(function($query){
-		// 			$query->where('id','!=',$this->data->id);
-		// 		})
-		// 	]);
-		// 	$validations['phone'] = array_merge($this->validation('phone'),[
-		// 		Rule::unique('lead')->where(function($query){
-		// 			$query->where('id','!=',$this->data->id);
-		// 		})
-		// 	]);
-		// }
         $validator = \Validator::make($this->data->all(), $validations,[
         	'project_id.required'     				=> 'Project Name is Required.',
         	'property_id.required'     				=> 'Property Name is Required.',
@@ -232,7 +221,7 @@ class Validate
         	'area.numeric'     						=> 'Area should be numeric.',
         	'price.required'						=> 'Price is required.',
         	'price.numeric'							=> 'Price must be numeric.',
-        	'description.required'					=> 'Description is required.',
+        	// 'description.required'					=> 'Description is required.',
         ]);
         return $validator;		
 	}
@@ -271,7 +260,6 @@ class Validate
             'name' 		        	=> $this->validation('name'),
 			'slug'  				=> array_merge($this->validation('slug_no_space'),[Rule::unique('property')]),
 			'property_purpose'		=> $this->validation('name'),
-			'property_type'			=> $this->validation('name'),
 			'property_construct'	=> $this->validation('name'),
 			'price'  				=> $this->validation('pricing'),
 			'company_id'  			=> $this->validation('name'),
@@ -279,7 +267,7 @@ class Validate
 			'gallery'				=> $this->validation('id'),
 			'gallery.*'				=> $this->validation('gallery'),
 			'area'					=> $this->validation('areaProperty'),
-			'agent_id'				=> $this->validation('name'),
+			// 'agent_id'				=> $this->validation('name'),
 			'location'				=> $this->validation('name'),
 			'pincode'				=> $this->validation('pincode'),
     	];
@@ -300,7 +288,6 @@ class Validate
         	'slug.unique'     				=> 'This Property Slug has already been taken.',
         	'slug.alpha_dash'     			=> 'No spaces allowed in Property slug.The Slug may only contain letters, numbers, dashes and underscores.',
 			'property_purpose.required'		=> 'Property Type is required.',
-			'property_type.required'		=> 'Property Purpose is required.',
 			'property_construct.required'	=> 'Property Construct is required.',
         	'price.numeric'					=> 'Price of the Property must be numeric.',
         	'company_id.required'			=> 'Company is required.',
@@ -309,7 +296,7 @@ class Validate
         	'gallery.*.required' 			=> 'Gallery Images are required.',
 			'gallery.*.mimes' 				=> 'Gallery Images should be in jpg,jpeg,png format.',
 			'area.numeric'					=> 'Area of a Property must be numeric.',
-			'agent_id.required'				=> 'Property Agent is required.',
+			// 'agent_id.required'				=> 'Property Agent is required.',
 			'location.required'				=> 'Location of a Property is required.',
 			
         ]);
@@ -719,10 +706,32 @@ class Validate
 
 	public function addexpensepayment($action='add'){
       $validations = [
+        'amount'                    => $this->validation('amount'),         
+        'payment_type'              => $this->validation('name'),
+        'date'                      => $this->validation('name'),
+            ];
+    
+      $validator = \Validator::make($this->data->all(), $validations,[
+        'amount.required'           =>  'Payment Amount is required.',
+        'amount.numeric'            =>  'Amount should be numeric.',
+        'payment_type.required'     =>  'Payment Type is required.',        
+        'date.required'             =>  'Date is required.',        
+        ]);
+        if(($this->data->amount)>($this->data->balance)){
+            $validator->after(function ($validator){
+            $validator->errors()->add('amount', 'Payment Amount should not be greater than Due 
+            Balance Amount.');
+       });
+      }
+      return $validator;        
+    }
+
+    public function addpurchasepayment($action='add'){
+      $validations = [
       	'amount' 					=> $this->validation('amount'),      	
 		'payment_type' 				=> $this->validation('name'),
 		'date'						=> $this->validation('name'),
-			];
+	];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
 	  	'amount.required' 			=>  'Payment Amount is required.',
@@ -896,15 +905,14 @@ class Validate
 		}
     public function addTax($action ='add'){
    		$validations = [
-	      'tax_name' 						=> $this->validation('name'),
-		  'tax_percentage'	                => $this->validation('price'),
-	 		];
+	      'name' 						=> $this->validation('name'),
+		  'percentage'	                => $this->validation('percentage'),
+	 	];
 	  	
 	    $validator = \Validator::make($this->data->all(), $validations,[
-	    	'tax_name.required'				=> 'Tax Name should not be blank',
-	    	'tax_percentage.required'		=> 'Tax Percentage is required'	,
-	    	'tax_percentage.numeric'		=> 'Tax should be numeric',
-	    						
+	    	'name.required'				=> 'Tax Name should not be blank',
+	    	'percentage.required'		=> 'Tax Percentage is required'	,
+	    	'percentage.numeric'		=> 'Tax should be numeric',
 	  	]);
 	      return $validator;		
 		}

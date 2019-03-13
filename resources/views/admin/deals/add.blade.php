@@ -28,6 +28,7 @@
                 <option value="">Select Property Type</option>
                 <option value="residential">Residential</option>
                 <option value="commercial">Commercial</option>
+                <option value="others">Others</option>
               </select>
             </div>
           </div>
@@ -49,7 +50,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Select Property Name:</label>
-              <select class="form-control" name="property_id" id="property_id">
+              <select class="form-control" name="property_id" id="properties">
                 <option value="">Select Property Name</option>
               </select>
             </div>

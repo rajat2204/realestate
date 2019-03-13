@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tax extends Model
 {
     protected $table = 'tax';
-   	protected $fillable = ['tax_name','tax_percentage','created_at','updated_at'];
+   	protected $fillable = ['name','percentage','status','created_at','updated_at'];
 
    	public static function change($userID,$data){
         $isUpdated = false;

@@ -129,11 +129,11 @@ class ExpenseController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
                 // $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-                $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/showpayment/status/?id=%s&status=trashed',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/delete.png').'"
-                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                // $html   .= '<a href="javascript:void(0);" 
+                //         data-url="'.url(sprintf('admin/showpayment/status/?id=%s&status=trashed',$item['id'])).'" 
+                //         data-request="ajax-confirm"
+                //         data-ask_image="'.url('assets/img/delete.png').'"
+                //         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
                 // }
                 $html   .= '</div>';
                                 
@@ -143,7 +143,13 @@ class ExpenseController extends Controller
                 return 'Rs.'. ' ' .number_format($item['amount']);
             })
             ->editColumn('payment_type',function($item){
+              if ($item['payment_type'] == 'debit_card') {
+                return 'Debit Card';
+              }if ($item['payment_type'] == 'bank_transfer') {
+                return 'Bank Transfer';
+              }else{
                 return ucfirst($item['payment_type']);
+              }
             })
             ->editColumn('remarks',function($item){
                 if (!empty($item['remarks'])) {
@@ -152,8 +158,13 @@ class ExpenseController extends Controller
                   return 'N/A';
                 }
             })
-            ->editColumn('invoice_no',function($item){
+            ->editColumn('date',function($item){
                 return $item['date'];
+            })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }            
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -167,7 +178,7 @@ class ExpenseController extends Controller
             ->addColumn(['data' => 'payment_type','name' => 'payment_type','title' => 'Payment Type','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
-            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
@@ -340,6 +351,23 @@ class ExpenseController extends Controller
                 $this->message = 'Deleted Expenses successfully.';
             }else{
                 $this->message = 'Updated Expenses successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusEntry(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Expense_Payment::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Expense Entry successfully.';
+            }else{
+                $this->message = 'Updated Expense Entry successfully.';
             }
             $this->status = true;
             $this->redirect = true;

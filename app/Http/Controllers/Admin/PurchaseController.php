@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Property;
 use App\Models\Project;
 use App\Models\Purchase;
+use App\Models\Purchase_Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +40,10 @@ class PurchaseController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
                 $html   .= '<a href="'.url(sprintf('admin/purchase/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                if ($item['status'] != 'paid'){
+                  $html   .= '<a href="'.url(sprintf('admin/purchase/payment/%s',___encrypt($item['id']))).'"  title="Purchase Payment"><i class="fa fa-money"></i></a> | ';
+                }
+                $html   .= '<a href="'.url(sprintf('admin/purchase/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment History"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/purchase/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -70,7 +75,11 @@ class PurchaseController extends Controller
                 return ucfirst($item['property']['name']);
             })
             ->editColumn('description',function($item){
+              if (!empty($item['description'])) {
                 return str_limit(strip_tags($item['description']),50);
+              }else{
+                return 'N/A'; 
+              }
             })
             ->editColumn('property_image',function($item){
                 $imageurl = asset("assets/img/properties/".$item['property']['featured_image']);
@@ -99,6 +108,70 @@ class PurchaseController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function showPayment(Request $request, Builder $builder,$id){
+        $data['view'] = 'admin.purchase.showpaymentlist';
+        
+        $id = ___decrypt($id);
+        $purchasePayment  = _arefy(Purchase_Payment::where('purchase_id',$id)->get());
+        if ($request->ajax()) {
+            return DataTables::of($purchasePayment)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                // $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                // $html   .= '<a href="javascript:void(0);" 
+                //         data-url="'.url(sprintf('admin/showpayment/status/?id=%s&status=trashed',$item['id'])).'" 
+                //         data-request="ajax-confirm"
+                //         data-ask_image="'.url('assets/img/delete.png').'"
+                //         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                // }
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.'. ' ' .number_format($item['amount']);
+            })
+            ->editColumn('payment_type',function($item){
+              if ($item['payment_type'] == 'debit_card') {
+                return 'Debit Card';
+              }if ($item['payment_type'] == 'bank_transfer') {
+                return 'Bank Transfer';
+              }else{
+                return ucfirst($item['payment_type']);
+              }
+            })
+            ->editColumn('remarks',function($item){
+                if (!empty($item['remarks'])) {
+                  return ucfirst(item['remarks']);
+                }else{
+                  return 'N/A';
+                }
+            })
+            ->editColumn('date',function($item){
+                return $item['date'];
+            })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }            
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'payment_type','name' => 'payment_type','title' => 'Payment Type','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'date','name' => 'date','title' => 'Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -120,6 +193,47 @@ class PurchaseController extends Controller
 
       return Response($propertyview);
     }
+
+    public function purchasePayment(Request $request,$id)
+    {
+      $data['view'] = 'admin.purchase.payment';
+      $id = ___decrypt($id);
+      $where = 'id = '.$id;
+      $data['purchase'] = _arefy(Purchase::list('single',$where));      
+      // dd($data['purchase']);
+      return view('admin.home',$data);
+    }
+
+    public function purchasePaymentAmount(Request $request, $id)
+    {
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->addpurchasepayment();
+      if ($validator->fails()) {
+        $this->message = $validator->errors();
+      }else{
+        // pp($request->all());
+          $purchasepayment = new Purchase_Payment();
+          $purchasepayment->fill($request->all());
+
+          $purchasepayment->save();
+          $getBalance = Purchase::where('id',$id)->first();
+          $bal['balance'] = $getBalance['balance']-$request->amount;
+          if ($bal['balance'] != 0) {
+            $bal['status'] = 'partial';
+          }else{
+            $bal['status'] = 'paid';
+          }
+          $upd = Purchase::where('id',$id)->update($bal);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Purchase Payment has been Added successfully.";
+            $this->redirect = url('admin/purchase');
+        }
+          return $this->populateresponse();
+      }
 
     /**
      * Store a newly created resource in storage.
@@ -177,7 +291,7 @@ class PurchaseController extends Controller
         $where = 'id = '.$id;
         $data['purchase'] = _arefy(Purchase::list('single',$where));
         $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
-        $data['property'] = _arefy(Property::where('status', '=', 'active')->get());
+        $data['property'] = _arefy(Property::where('status', '=', 'active')->where('id',$id)->get());
         return view('admin.home',$data);
     }
 
@@ -190,7 +304,29 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addPurchase('edit');
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $purchase = Purchase::findOrFail($id);
+            $input = $request->all();
+            if ($input['balance'] != 0) {
+              $input['status'] = 'partial';
+            }else{
+              $input['status'] = 'paid';
+            }
+
+            $purchase->update($input);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Purchase has been Updated successfully.";
+            $this->redirect = url('admin/purchase');
+        }
+            return $this->populateresponse();
     }
 
     /**
