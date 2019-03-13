@@ -55,7 +55,7 @@ class Validate
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
 			'amount'			=> ['required','numeric'],
 			'action'			=> ['required'],
-			'password_null' => ['nullable']
+			'password_null' 	=> ['nullable']
 		];
 		return $validation[$key];
 	}
@@ -779,7 +779,7 @@ class Validate
       return $validator;		
 	}
 		
-		public function addWallet($action='add'){
+	public function addWallet($action='add'){
 	      $validations = [
       	'amount' 		=> $this->validation('amount'),      	
 				'action' 		=> $this->validation('action'),
@@ -806,12 +806,12 @@ class Validate
 
 	public function createUser($action='add'){
       $validations = [
-      	'user_level_id' 	 => $this->validation('name'),
+      	'user_level_id' 	     => $this->validation('name'),
       	'username'				 => array_merge($this->validation('name'),[Rule::unique('users_realestate')]),
       	'password'				 => $this->validation('password'),
       	'first_name'			 => $this->validation('name'),
-      	'email'				 	 	 => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
-      	'phone'				 	 	 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+      	'email'				 	 => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
+      	'phone'				 	 => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
   		];
   		if($action =='edit'){
 					$validations['username'] = array_merge($this->validation('name'),[
@@ -848,7 +848,7 @@ class Validate
 	}
 
 	public function createUserLevel($action='add'){
-	      $validations = [
+	    $validations = [
 	      	'level_name' 				=> $this->validation('name'),
 	  		];
 	  	
@@ -880,4 +880,33 @@ class Validate
 	  	]);
 	      return $validator;		
 		}
+		
+    public function addCurrency($action ='add'){
+   		$validations = [
+	      'currency_name' 						=> $this->validation('name'),
+		   'image'								=> $this->validation('photo'),
+	  		];
+	  	
+	   $validator = \Validator::make($this->data->all(), $validations,[
+	  		'currency_name.required' 		=>  'Currency name should not be blank',
+	    	'image.required' 				=>  'Currency Image is required.',
+	    	'image.mimes' 					=>  'Currency Image should be in jpg,jpeg,png format.',
+	  	]);
+	      return $validator;		
+		}
+    public function addTax($action ='add'){
+   		$validations = [
+	      'tax_name' 						=> $this->validation('name'),
+		  'tax_percentage'	                => $this->validation('price'),
+	 		];
+	  	
+	    $validator = \Validator::make($this->data->all(), $validations,[
+	    	'tax_name.required'				=> 'Tax Name should not be blank',
+	    	'tax_percentage.required'		=> 'Tax Percentage is required'	,
+	    	'tax_percentage.numeric'		=> 'Tax should be numeric',
+	    						
+	  	]);
+	      return $validator;		
+		}
+
 }

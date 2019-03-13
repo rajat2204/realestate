@@ -208,22 +208,20 @@ Route::resource('notice', 'NoticeController');
 	Route::group(['prefix' => 'notice'],function(){
 		Route::post('/status', 'NoticeController@changeStatus');
 	});
-
-/***********************Notice-Section****************************/
-
-Route::resource('deals', 'DealsController');
-	Route::group(['prefix' => 'deals'],function(){
-		Route::post('/status', 'DealsController@changeStatus');
-	});
 /***********************staticPage-Section****************************/
 
 Route::resource('static_pages', 'StaticController');
 
 /***********************configuration-Section****************************/
 Route::get('configuration','ConfigurationController@general');
-Route::get('help', 'ConfigurationController@help');
+Route::get('tax','ConfigurationController@tax');
+Route::get('tax/add','ConfigurationController@taxAddForm');
+	Route::post('tax/add','ConfigurationController@taxAdd');
+
 Route::get('currencies','ConfigurationController@index');
-Route::get('currencies/create','ConfigurationController@createCurrencies');
+Route::get('currencies/create','ConfigurationController@currencyAddForm');
+Route::post('currencies/store','ConfigurationController@currencyAdd');
+Route::get('help', 'ConfigurationController@help');
 
 });
 
