@@ -64,12 +64,8 @@
             <div class="form-group">
               <label>Project Image:</label>
               <div>
-                @if(!empty($images))
-                  @foreach($images as $image)
-                    <img style="max-width: 250px;" src="{{url('assets/img/Project Images')}}/{{$image['images']}}" id="adminimg" alt="No Featured Image Added">
-                  @endforeach
-                @endif
-                <input type="file" id="images" accept="image/*" name="images[]" value="Add More..">
+                <input type="file" id="images" accept="image/*" name="image">
+                <img style="max-width: 250px;" src="{{url('assets/img/Projects')}}/{{$project['image']}}" id="adminimg" alt="No Featured Image Added">
               </div>
             </div>
           </div>
@@ -78,12 +74,8 @@
             <div class="form-group">
               <label>Project Layout Plan:</label>
               <div>
-                @if(!empty($layout))
-                  @foreach($layout as $layouts)
-                    <img style="max-width: 250px;" src="{{url('assets/img/Project Layouts')}}/{{$layouts['images']}}" id="layoutimg" alt="No Featured Image Added">
-                  @endforeach
-                @endif
-                <input type="file" id="layoutplan" accept="image/*" name="layoutplan[]" value="Add More..">  
+                <input type="file" id="layoutplan" accept="image/*" name="layout">  
+                <img style="max-width: 250px;" src="{{url('assets/img/Project Layout')}}/{{$project['layout']}}" id="layoutimg" alt="No Featured Image Added">
               </div>
             </div>
           </div>
@@ -92,12 +84,8 @@
             <div class="form-group">
               <label>Project Location Map:</label>
               <div>
-                @if(!empty($location))
-                  @foreach($location as $locations)
-                    <img style="max-width: 250px;" src="{{url('assets/img/Project Location Maps')}}/{{$locations['images']}}" id="mapimg" alt="No Featured Image Added">
-                  @endforeach
-                @endif
-                <input type="file" id="locationmap" accept="image/*" name="locationmap[]" value="Add More..">  
+                <input type="file" id="locationmap" accept="image/*" name="locationmap">  
+                <img style="max-width: 250px;" src="{{url('assets/img/Project Location Map')}}/{{$project['locationmap']}}" id="mapimg" alt="No Featured Image Added">
               </div>
             </div>
           </div>

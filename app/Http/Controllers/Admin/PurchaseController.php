@@ -43,20 +43,7 @@ class PurchaseController extends Controller
                         data-url="'.url(sprintf('admin/purchase/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/delete.png').'"
-                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
-                if($item['status'] == 'active'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/purchase/status/?id=%s&status=inactive',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/inactive-user.png').'"
-                        data-ask="Would you like to change status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
-                }elseif($item['status'] == 'inactive'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/purchase/status/?id=%s&status=active',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/active-user.png').'"
-                        data-ask="Would you like to change status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
-                }
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
                 $html   .= '</div>';
                                 
                 return $html;
@@ -66,6 +53,9 @@ class PurchaseController extends Controller
             })
             ->editColumn('price',function($item){
                 return 'Rs.'. ' ' .number_format(($item['price']));
+            })
+            ->editColumn('balance',function($item){
+                return 'Rs.'. ' ' .number_format(($item['balance']));
             })
             ->editColumn('seller_mobile',function($item){
                 return '+91-'. ' ' .($item['seller_mobile']);
@@ -102,6 +92,7 @@ class PurchaseController extends Controller
             ->addColumn(['data' => 'seller_mobile', 'name' => 'seller_mobile','title' => 'Seller Mobile','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'area', 'name' => 'area','title' => 'Area','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'price', 'name' => 'price','title' => 'Price','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'balance', 'name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description','name' => 'description','title' => 'Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -145,6 +136,11 @@ class PurchaseController extends Controller
         }else{
             $purchase = new Purchase();
             $purchase->fill($request->all());
+            if ($purchase['balance'] != 0) {
+                $purchase['status'] = 'partial';
+            }else{
+                $purchase['status'] = 'paid';
+            }
 
             $purchase->save();
 
@@ -176,7 +172,13 @@ class PurchaseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['view'] = 'admin.purchase.edit';
+        $id = ___decrypt($id);
+        $where = 'id = '.$id;
+        $data['purchase'] = _arefy(Purchase::list('single',$where));
+        $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
+        $data['property'] = _arefy(Property::where('status', '=', 'active')->get());
+        return view('admin.home',$data);
     }
 
     /**
@@ -200,5 +202,22 @@ class PurchaseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Purchase::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Purchase successfully.';
+            }else{
+                $this->message = 'Updated Purchase successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
     }
 }

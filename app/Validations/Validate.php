@@ -532,14 +532,14 @@ class Validate
             'name' 		        => $this->validation('name'),
 			'slug'  			=> array_merge($this->validation('slug_no_space'),[Rule::unique('project')]),
 			'location'  		=> $this->validation('name'),
-			'images'			=> $this->validation('gallery'),
-			'layoutplan'		=> $this->validation('gallery'),
-			'locationmap'		=> $this->validation('gallery'),
+			'image'				=> $this->validation('photo'),
+			'layout'			=> $this->validation('photo'),
+			'locationmap'		=> $this->validation('photo'),
     	];
 		if($action =='edit'){
-			$validations['images'] 			= $this->validation('gallery_null');
-			$validations['layoutplan'] 		= $this->validation('gallery_null');
-			$validations['locationmap'] 	= $this->validation('gallery_null');
+			$validations['image'] 			= $this->validation('photo_null');
+			$validations['layout'] 			= $this->validation('photo_null');
+			$validations['locationmap'] 	= $this->validation('photo_null');
 			$validations['slug'] 	= array_merge($this->validation('slug_no_space'),[
 				Rule::unique('project')->where(function($query){
 					$query->where('id','!=',$this->data->id);
@@ -553,10 +553,10 @@ class Validate
         	'slug.unique'     				=> 'This Project Slug has already been taken.',
         	'slug.alpha_dash'     			=> 'No spaces allowed in project slug.The Slug may only contain letters, numbers, dashes and underscores.',
         	'location.required'				=> 'Location of a Project is required.',
-        	'images.required'				=> 'Project Image is required.',
-        	'images.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
-        	'layoutplan.required'			=> 'Project Layout Plan is required.',
-        	'layoutplan.mimes'				=> 'Project Layout Plan Image Should be in .jpg,.jpeg,.png format.',
+        	'image.required'				=> 'Project Image is required.',
+        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'layout.required'				=> 'Project Layout Plan is required.',
+        	'layout.mimes'					=> 'Project Layout Plan Image Should be in .jpg,.jpeg,.png format.',
         	'locationmap.required'			=> 'Project Location Map is required.',
         	'locationmap.mimes'				=> 'Project Location Map Image Should be in .jpg,.jpeg,.png format.',
         ]);
@@ -854,6 +854,29 @@ class Validate
 	  	
 	      $validator = \Validator::make($this->data->all(), $validations,[
 	  		'level_name.required' 		=>  'User Level Name is required.',
+	  	]);
+	      return $validator;		
+		}
+
+		public function addDeal($action='add'){
+	      $validations = [
+	      	'client_id' 				=> $this->validation('name'),
+	      	'property_type' 		=> $this->validation('name'),
+	      	'project_id' 				=> $this->validation('name'),
+	      	'property_id' 			=> $this->validation('name'),
+	      	'date' 							=> $this->validation('name'),
+	      	'plan_id' 					=> $this->validation('name'),
+	      	'payment_method' 		=> $this->validation('name'),
+	  		];
+	  	
+	      $validator = \Validator::make($this->data->all(), $validations,[
+	  		'client_id.required' 			=>  'Client Name is required.',
+	  		'property_type.required' 	=>  'Property Type is required.',
+	  		'project_id.required' 		=>  'Project Name is required.',
+	  		'property_id.required' 		=>  'Property Name is required.',
+	  		'date.required' 					=>  'Invoice Date is required.',
+	  		'plan_id.required' 				=>  'Plan is required.',
+	  		'payment_method.required' =>  'Please Select the Payment Method.',
 	  	]);
 	      return $validator;		
 		}

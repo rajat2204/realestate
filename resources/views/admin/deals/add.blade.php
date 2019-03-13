@@ -51,9 +51,6 @@
               <label>Select Property Name:</label>
               <select class="form-control" name="property_id" id="property_id">
                 <option value="">Select Property Name</option>
-                @foreach($property as $property_name)
-                  <option value="{{!empty($property_name['id'])?$property_name['id']:''}}">{{!empty($property_name['name'])?$property_name['name']:''}}</option>
-                @endforeach
               </select>
             </div>
           </div>
@@ -141,7 +138,7 @@
 
         <div class="box-footer">
           <a href="{{url('admin/property')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-property"]' class="btn btn-info pull-right">Submit</button>
+          <button type="button" data-request="ajax-submit" data-target='[role="add-deal"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
@@ -151,5 +148,18 @@
 @section('requirejs')
 <script type="text/javascript">
   CKEDITOR.replace("remarks");
+
+  $(document).ready(function(){
+        $('#project_id').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/property/ajaxproperty?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                    $('#properties').html(data).prev().css("display","block");
+                }
+            });
+        });
+    });
 </script>
 @endsection

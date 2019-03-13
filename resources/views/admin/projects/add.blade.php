@@ -58,7 +58,7 @@
             <div class="form-group">
               <label>Project Image:</label>
               <div>
-                <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="images" type="file">
+                <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
               </div>
               <div>
                 <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added">
@@ -70,7 +70,7 @@
             <div class="form-group">
               <label>Project Layout Plan:</label>
               <div>
-                  <input onchange="readURLLayout(this)" id="layoutplan" accept="image/*" name="layoutplan" type="file">
+                  <input onchange="readURLLayout(this)" id="layoutplan" accept="image/*" name="layout" type="file">
               </div>
               <div>
                 <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="layoutimg" alt="No Featured Image Added">
