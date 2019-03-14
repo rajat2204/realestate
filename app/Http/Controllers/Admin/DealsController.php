@@ -114,6 +114,15 @@ class DealsController extends Controller
       return Response($propertyview);
     }
 
+    public function ajaxArea(Request $request)
+    {
+      $id = $request->id;
+      $area = Property::where('id',$id)->first();
+      $areaview = view('admin.template.ajaxarea',compact('area'));
+
+      return Response($areaview);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -77,13 +77,13 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Area:</label>
-              <input type="text" name="area" class="form-control" placeholder="Enter Area...">
+              <input type="text" name="area" class="form-control" placeholder="Enter Area..." readonly id="area">
             </div>
           </div>
           <div class="col-md-4">
             <div class="form-group">
               <label>Amount:</label>
-              <input type="text" name="amount" class="form-control" placeholder="Enter Amount...">
+              <input type="text" name="amount" class="form-control" readonly placeholder="Enter Amount..." id="amount">
             </div>
           </div>
           <div class="col-md-4">
@@ -158,6 +158,20 @@
                 type:'POST',
                 success:function(data){
                     $('#properties').html(data).prev().css("display","block");
+                }
+            });
+        });
+    });
+
+  $(document).ready(function(){
+        $('#properties').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/area/ajaxarea?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                    $('#area').html(data);
+                    $('#amount').html(data);
                 }
             });
         });

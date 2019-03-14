@@ -266,7 +266,7 @@ class Validate
 			'featured_image'  		=> $this->validation('photo'),
 			'gallery'				=> $this->validation('id'),
 			'gallery.*'				=> $this->validation('gallery'),
-			'area'					=> $this->validation('areaProperty'),
+			'area'					=> $this->validation('area'),
 			// 'agent_id'				=> $this->validation('name'),
 			'location'				=> $this->validation('name'),
 			'pincode'				=> $this->validation('pincode'),
@@ -295,6 +295,7 @@ class Validate
         	'featured_image.mimes'			=> 'Image Should be in .jpg,.jpeg,.png format.',
         	'gallery.*.required' 			=> 'Gallery Images are required.',
 			'gallery.*.mimes' 				=> 'Gallery Images should be in jpg,jpeg,png format.',
+            'area.required'                 => 'Area of a Property is required.',
 			'area.numeric'					=> 'Area of a Property must be numeric.',
 			// 'agent_id.required'				=> 'Property Agent is required.',
 			'location.required'				=> 'Location of a Property is required.',
@@ -904,15 +905,26 @@ class Validate
 	      return $validator;		
 		}
     public function addTax($action ='add'){
+        $validations = [
+          'name'                        => $this->validation('name'),
+          'percentage'                  => $this->validation('percentage'),
+        ];
+        
+        $validator = \Validator::make($this->data->all(), $validations,[
+            'name.required'             => 'Tax Name should not be blank',
+            'percentage.required'       => 'Tax Percentage is required' ,
+            'percentage.numeric'        => 'Tax should be numeric',
+        ]);
+          return $validator;        
+        }
+
+        public function addUnits($action ='add'){
    		$validations = [
 	      'name' 						=> $this->validation('name'),
-		  'percentage'	                => $this->validation('percentage'),
 	 	];
 	  	
 	    $validator = \Validator::make($this->data->all(), $validations,[
-	    	'name.required'				=> 'Tax Name should not be blank',
-	    	'percentage.required'		=> 'Tax Percentage is required'	,
-	    	'percentage.numeric'		=> 'Tax should be numeric',
+	    	'name.required'				=> 'Unit Name should not be blank',
 	  	]);
 	      return $validator;		
 		}

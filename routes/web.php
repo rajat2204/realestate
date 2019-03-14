@@ -174,6 +174,7 @@ Route::resource('plans', 'PlanController');
 	});
 
 /***********************Leads-Section****************************/
+
 Route::get('contactleads','LeadController@contactLead');
 Route::resource('leads', 'LeadController');
 	Route::group(['prefix' => 'leads'],function(){
@@ -196,6 +197,9 @@ Route::resource('deals', 'DealsController');
 	Route::group(['prefix' => 'property'],function(){
 			Route::post('ajaxproperty', 'DealsController@ajaxProperty');
 	});
+	Route::group(['prefix' => 'area'],function(){
+			Route::post('ajaxarea', 'DealsController@ajaxArea');
+	});
 	Route::group(['prefix' => 'deals'],function(){
 		Route::post('/status', 'DealsController@changeStatus');
 	});
@@ -206,6 +210,10 @@ Route::resource('service', 'ServiceController');
 	Route::group(['prefix' => 'service'],function(){
 		Route::post('/status', 'ServiceController@changeStatus');
 	});
+
+/***********************staticPage-Section****************************/
+
+Route::resource('static_pages', 'StaticController');
 
 /***********************Social Media-Section****************************/
 Route::resource('social', 'SocialMediaController');
@@ -220,24 +228,28 @@ Route::resource('notice', 'NoticeController');
 	Route::group(['prefix' => 'notice'],function(){
 		Route::post('/status', 'NoticeController@changeStatus');
 	});
-/***********************staticPage-Section****************************/
-
-Route::resource('static_pages', 'StaticController');
 
 /***********************configuration-Section****************************/
-	Route::get('configuration','ConfigurationController@general');
-	Route::get('tax','ConfigurationController@tax');
-	Route::get('tax/add','ConfigurationController@taxAddForm');
-	Route::post('tax/add','ConfigurationController@taxAdd');
-	Route::get('tax/edit/{id}','ConfigurationController@taxEditForm');
-	Route::post('tax/edit/{id}','ConfigurationController@taxEdit');
-	Route::post('tax/status','ConfigurationController@changeStatusTax');
 
-	Route::get('currencies','ConfigurationController@index');
-	Route::get('currencies/create','ConfigurationController@currencyAddForm');
-	Route::post('currencies/store','ConfigurationController@currencyAdd');
-	Route::post('currencies/status','ConfigurationController@changeStatus');
-	Route::get('help', 'ConfigurationController@help');
+Route::get('currencies','ConfigurationController@index');
+Route::get('currencies/create','ConfigurationController@currencyAddForm');
+Route::post('currencies/store','ConfigurationController@currencyAdd');
+Route::post('currencies/status','ConfigurationController@changeStatus');
 
+Route::get('tax','ConfigurationController@tax');
+Route::get('tax/add','ConfigurationController@taxAddForm');
+Route::post('tax/add','ConfigurationController@taxAdd');
+Route::get('tax/edit/{id}','ConfigurationController@taxEditForm');
+Route::post('tax/edit/{id}','ConfigurationController@taxEdit');
+Route::post('tax/status','ConfigurationController@changeStatusTax');
+
+Route::get('units','ConfigurationController@units');
+Route::get('units/create','ConfigurationController@unitsAddForm');
+Route::post('units/create','ConfigurationController@unitsAdd');
+Route::get('units/edit/{id}','ConfigurationController@unitsEditForm');
+Route::post('units/edit/{id}','ConfigurationController@unitEdit');
+Route::post('units/status','ConfigurationController@changeStatusUnits');
+
+Route::get('help', 'ConfigurationController@help');
 });
 

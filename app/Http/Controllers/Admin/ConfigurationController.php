@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tax;
+use App\Models\Units;
 use App\Models\Currencies;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,13 +70,6 @@ public function __construct(Request $request)
             return view('admin.home')->with($data);
     }
 
- public function general(Request $request)
-   {
-   	 $data['view'] = 'admin.configuration.general';
-        return view('admin.home',$data);
-
-   }
-
  public function tax(Request $request, Builder $builder)
    {
          $data['view'] = 'admin.configuration.tax.list';
@@ -124,6 +118,52 @@ public function __construct(Request $request)
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
    
+   } 
+
+   public function units(Request $request, Builder $builder)
+   {
+         $data['view'] = 'admin.configuration.units.list';
+        \DB::statement(\DB::raw('set @rownum=0'));
+        $units = Units::where('status','!=','trashed')->get(['unit.*', 
+                    \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+        $units  = _arefy($units);
+        
+        if ($request->ajax()) {
+            return DataTables::of($units)
+            ->editColumn('action',function($item) {
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="'.url(sprintf('admin/units/edit/%s/',___encrypt($item['id']))).'"  title="Edit Units"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/units/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('name',function($item){
+                return ucfirst($item['name']);
+            })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Units Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])        
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+   
    }
 
 public function currencyAdd(Request $request)
@@ -156,6 +196,33 @@ public function currencyAdd(Request $request)
     {
         $data['view'] = 'admin.configuration.currencies.add';
         return view('admin.home',$data);  
+    }
+
+    public function unitsAddForm(Request $request)
+    {
+        $data['view'] = 'admin.configuration.units.add';
+        return view('admin.home',$data);  
+    }
+
+    public function unitsAdd(Request $request)
+    {
+        $validation = new Validations($request);
+        $validator  = $validation->addUnits();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data = new Units();
+            $data->fill($request->all());
+            
+            $data->save();
+
+              $this->status   = true;
+              $this->modal    = true;
+              $this->alert    = true;
+              $this->message  = "Unit has been Added successfully.";
+              $this->redirect = url('admin/units');
+        } 
+      return $this->populateresponse();
     }
 
    //************** Help page section************   
@@ -202,6 +269,37 @@ public function currencyAdd(Request $request)
         return view('admin.home',$data);
     }
 
+    public function unitsEditForm(Request $request,$id)
+    {
+        $data['view'] = 'admin.configuration.units.edit';
+        $id = ___decrypt($id);
+        $data['units'] = _arefy(Units::where('id',$id)->first());
+        // dd($data['tax']);
+        return view('admin.home',$data);
+    }
+
+    public function unitEdit(Request $request, $id)
+    {   
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addUnits();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $units = Units::findOrFail($id);
+            $input = $request->all();
+
+            $units->update($input);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Unit has been Updated successfully.";
+            $this->redirect = url('admin/units');
+        }
+            return $this->populateresponse();
+    }
+
     public function taxEdit(Request $request, $id)
     {   
         $id = ___decrypt($id);
@@ -243,13 +341,30 @@ public function currencyAdd(Request $request)
 
     public function changeStatusTax(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
-        $isUpdated               = Currencies::change($request->id,$userData);
+        $isUpdated               = Tax::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
                 $this->message = 'Deleted Tax successfully.';
             }else{
                 $this->message = 'Updated Tax successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusUnits(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Units::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Units successfully.';
+            }else{
+                $this->message = 'Updated Units successfully.';
             }
             $this->status = true;
             $this->redirect = true;
