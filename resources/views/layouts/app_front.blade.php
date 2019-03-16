@@ -47,8 +47,6 @@
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
 
-    
-<!-- ====================================[ DEFAULT STYLESHEET ]==================================== -->
 </head>
     <body class="page-md login loadingInProgress">
         <div id="cover"></div>
