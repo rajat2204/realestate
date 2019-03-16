@@ -871,20 +871,25 @@ class Validate
 		public function addDeal($action='add'){
 	      $validations = [
 	      	'client_id' 				=> $this->validation('name'),
-	      	'property_type' 		=> $this->validation('name'),
+	      	'property_type' 		    => $this->validation('name'),
 	      	'project_id' 				=> $this->validation('name'),
-	      	'property_id' 			=> $this->validation('name'),
-	      	'date' 							=> $this->validation('name'),
+            'property_id'               => $this->validation('name'),
+	      	'invoice_no' 			    => $this->validation('name'),
+            'date'                      => $this->validation('name'),
+	      	'balance' 					=> $this->validation('price'),
 	      	'plan_id' 					=> $this->validation('name'),
-	      	'payment_method' 		=> $this->validation('name'),
+	      	'payment_method' 		    => $this->validation('name'),
 	  		];
 	  	
 	      $validator = \Validator::make($this->data->all(), $validations,[
 	  		'client_id.required' 			=>  'Client Name is required.',
 	  		'property_type.required' 	=>  'Property Type is required.',
 	  		'project_id.required' 		=>  'Project Name is required.',
-	  		'property_id.required' 		=>  'Property Name is required.',
-	  		'date.required' 					=>  'Invoice Date is required.',
+            'property_id.required'      =>  'Property Name is required.',
+	  		'invoice_no.required' 		=>  'Invoice Number is required.',
+            'date.required'                     =>  'Invoice Date is required.',
+            'balance.required'                     =>  'Balance is required.',
+	  		'balance.numeric' 					=>  'Balance Amount should be numeric.',
 	  		'plan_id.required' 				=>  'Plan is required.',
 	  		'payment_method.required' =>  'Please Select the Payment Method.',
 	  	]);

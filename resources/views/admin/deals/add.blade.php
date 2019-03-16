@@ -74,19 +74,38 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Area:</label>
-              <input type="text" name="area" class="form-control" placeholder="Enter Area..." readonly id="area">
+          <div class="col-md-3">
+            <div class="flex-c">
+              <div class="form-group m-r-10">
+                <label>Area:</label>
+                <input type="text" name="area" class="form-control" placeholder="Enter Area..." readonly id="area">
+              </div>
+              <div class="form-group">
+                <label>Units:</label>
+                <select class="form-control">Units
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                </select>
+              </div>
             </div>
+              <!-- <input type="text" name="area" class="form-control" placeholder="Enter units..." readonly id="area"> -->
+            
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Amount:</label>
               <input type="text" name="amount" class="form-control" readonly placeholder="Enter Amount..." id="amount">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Balance:</label>
+              <input type="text" name="balance" class="form-control" placeholder="Enter Balance...">
+            </div>
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
               <label>Discount:</label>
               <input type="text" name="discount" class="form-control" placeholder="Enter Discount...">
@@ -170,8 +189,9 @@
                 url:"{{url('admin/area/ajaxarea?id=')}}"+value,
                 type:'POST',
                 success:function(data){
-                    $('#area').html(data);
-                    $('#amount').html(data);
+                  console.log(data);
+                    $('#area').val(data.area);
+                    $('#amount').val(data.price);
                 }
             });
         });

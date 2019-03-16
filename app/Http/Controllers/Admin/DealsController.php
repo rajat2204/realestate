@@ -34,14 +34,18 @@ class DealsController extends Controller
 
         $where = 'status != "trashed"';
         $deals  = _arefy(Deals::list('array',$where));
-       
+
         if ($request->ajax()) {
             return DataTables::of($deals)
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
 
+                $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/deals/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment"><i class="fa fa-eye"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/deals/print/%s',___encrypt($item['id']))).'"  title="Print Invoice"><i class="fa fa-print"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/deals/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"
@@ -54,21 +58,41 @@ class DealsController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
-            ->editColumn('name',function($item){
-                return ucfirst($item['name']);
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
             })
-            ->editColumn('balance',function($item){
-                if($item['balance'] != NULL){
-                  return 'Rs.'. ' ' .($item['balance']);
+            ->editColumn('project_id',function($item){
+                return ucfirst($item['project']['name']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('status',function($item){
+                if ($item['balance'] != 0) {
+                    return 'Partial';
+                }
+                else {
+                    return 'Paid';
+                }
+            })
+            ->editColumn('amount',function($item){
+                if($item['amount'] != NULL){
+                  return 'Rs.'. ' ' .number_format($item['amount']);
                 }else{
                   return 'Rs.'. ' ' .'0';
                 }
             })
-            ->editColumn('image',function($item){
-                $imageurl = asset("assets/img/agent/".$item['image']);
-                return '<img src="'.$imageurl.'" height="100px" width="120px">';
+            ->editColumn('area',function($item){
+                  return $item['area'].' '.'sq.ft.';
             })
-            ->rawColumns(['image','action'])
+            ->editColumn('balance',function($item){
+                if($item['balance'] != NULL){
+                  return 'Rs.'. ' ' .number_format($item['balance']);
+                }else{
+                  return 'Rs.'. ' ' .'0';
+                }
+            })
+            ->rawColumns(['action'])
             ->make(true);
         }
 
@@ -76,12 +100,13 @@ class DealsController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Agent Image','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Agent E-mail','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'designation', 'name' => 'designation','title' => 'Agent Designation','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_id', 'name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'project_id', 'name' => 'project_id','title' => 'Project Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no', 'name' => 'invoice_no','title' => 'Invoice Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'date', 'name' => 'date','title' => 'Invoice Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'area', 'name' => 'area','title' => 'Area','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount', 'name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
              ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
@@ -118,8 +143,8 @@ class DealsController extends Controller
     {
       $id = $request->id;
       $area = Property::where('id',$id)->first();
-      $areaview = view('admin.template.ajaxarea',compact('area'));
-
+      $areaview['area']=$area['area'];
+      $areaview['price']=$area['price'];
       return Response($areaview);
     }
 
@@ -193,5 +218,22 @@ class DealsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function changeStatus(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Deals::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Deals successfully.';
+            }else{
+                $this->message = 'Updated Deals successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
     }
 }
