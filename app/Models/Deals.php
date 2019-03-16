@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Deals extends Model
 {
 	protected $table = 'deal';
-	protected $fillable = ['client_id','project_id','property_id','plan_id','agent_id','invoice_no','date','area','amount','balance','discount','payment_method','remarks','status','created_at','updated_at'];
+	protected $fillable = ['client_id','project_id','property_id','plan_id','agent_id','invoice_no','unit_id','date','area','amount','balance','discount','payment_method','remarks','status','created_at','updated_at'];
 
 
     public static function change($userID,$data){
@@ -39,6 +39,9 @@ class Deals extends Model
     public function plan(){
         return $this->hasOne('App\Models\Plans','id','plan_id');
     }
+    public function units(){
+        return $this->hasOne('App\Models\Units','id','unit_id');
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
         $table_deal = self::select($keys)
@@ -56,6 +59,9 @@ class Deals extends Model
                 $q->select('id','name','property_construct');
             },
             'plan' => function($q){
+                $q->select('id','name','installment');
+            },
+            'units' => function($q){
                 $q->select('id','name');
             },
         ]);

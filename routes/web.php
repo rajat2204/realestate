@@ -202,6 +202,8 @@ Route::resource('deals', 'DealsController');
 	});
 	Route::group(['prefix' => 'deals'],function(){
 		Route::post('/status', 'DealsController@changeStatus');
+			Route::get('makeplan/{id}','DealsController@makePaymentPlan');
+			Route::post('makeplan/{id}','DealsController@makePaymentPlanForm');
 	});
 
 /***********************Services-Section****************************/

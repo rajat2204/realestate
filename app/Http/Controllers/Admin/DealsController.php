@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Deals;
+use App\Models\Units;
 use App\Models\Agents;
 use App\Models\Clients;
 use App\Models\Property;
 use App\Models\Plans;
 use App\Models\Project;
+use App\Models\Deals_Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -41,6 +43,8 @@ class DealsController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
 
+                $html   .= '<a href="'.url(sprintf('admin/deals/makeplan/%s',___encrypt($item['id']))).'"  title="Make Payment Plan"><i class="fa fa-credit-card"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/deals/showpaymentplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-cc-diners-club"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
@@ -83,7 +87,7 @@ class DealsController extends Controller
                 }
             })
             ->editColumn('area',function($item){
-                  return $item['area'].' '.'sq.ft.';
+                  return $item['area'].' '.$item['units']['name'];
             })
             ->editColumn('balance',function($item){
                 if($item['balance'] != NULL){
@@ -126,14 +130,15 @@ class DealsController extends Controller
         $data['property'] = _arefy(Property::where('status','!=','trashed')->get());
         $data['plan'] = _arefy(Plans::where('status','!=','trashed')->get());
         $data['project'] = _arefy(Project::where('status','!=','trashed')->get());
-        // dd($data['project']);
+        $data['units'] = _arefy(Units::where('status','!=','trashed')->get());
+        // dd($data['property']);
         return view('admin.home',$data);
     }
 
     public function ajaxProperty(Request $request)
     {
       $id = $request->id;
-      $property = Property::where('project_id',$id)->get();
+      $property = Property::where('project_id',$id)->where('deals','=','no')->get();
       $propertyview = view('admin.template.ajaxproperty',compact('property'));
 
       return Response($propertyview);
@@ -143,9 +148,45 @@ class DealsController extends Controller
     {
       $id = $request->id;
       $area = Property::where('id',$id)->first();
+      $units = Units::where('id',$area['unit_id'] )->first();
+      $areaview['unit_id']=$units['id'];
+      $areaview['unit_name']=$units['name'];
       $areaview['area']=$area['area'];
       $areaview['price']=$area['price'];
       return Response($areaview);
+    }
+
+    public function makePaymentPlan(Request $request,$id)
+    {
+      $data['view'] = 'admin.deals.makepaymentplan';
+      $id = ___decrypt($id);
+      $where = 'id = '.$id;
+      $data['deal'] = _arefy(Deals::list('single',$where));
+      // dd($data['deal']);
+      $data['installment'] = $data['deal']['plan']['installment'];
+      return view('admin.home',$data);
+    }
+
+    public function makePaymentPlanForm(Request $request,$id)
+    {
+      $id = ___decrypt($id);
+      $validation = new Validations($request);
+      $validator  = $validation->addDealPlan();
+      if ($validator->fails()){
+          $this->message = $validator->errors();
+      }else{
+          $data = new Deals_Payment();
+          $data->fill($request->all());
+
+          $data->save();
+
+          $this->status   = true;
+          $this->modal    = true;
+          $this->alert    = true;
+          $this->message  = "Payment Plan has been Added successfully.";
+          $this->redirect = url('admin/deals');  
+      }
+      return $this->populateresponse();
     }
 
     /**
@@ -162,10 +203,15 @@ class DealsController extends Controller
             $this->message = $validator->errors();
         }else{
             $data = new Deals();
-            $data->fill($request->all());
 
+            $data->fill($request->all());
             $data->save();
 
+            $lastid = $data->property_id;
+            $input = Property::findOrFail($lastid);
+            $property['deals'] = 'yes';
+
+            $input->update($property);
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
@@ -194,7 +240,11 @@ class DealsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['view'] = 'admin.deals.edit';
+        $id = ___decrypt($id);
+        $where = 'id = '.$id;
+        $data['deal'] = _arefy(Deals::list('single',$where));
+        return view('admin.home',$data);
     }
 
     /**
@@ -206,7 +256,24 @@ class DealsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addDeal('edit');
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+            $deal = Deals::findOrFail($id);
+            $input = $request->all();
+
+            $deal->update($input);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Deal has been Updated successfully.";
+            $this->redirect = url('admin/deals');
+        }
+            return $this->populateresponse();
     }
 
     /**

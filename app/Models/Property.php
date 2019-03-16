@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $table = 'property';
-    protected $fillable = ['project_id','category_id','company_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_construct','property_purpose','bedrooms','bathroom','garage','area','possession','description','key_points','status','featured','created_at','updated_at'];
+    protected $fillable = ['project_id','category_id','company_id','unit_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_construct','property_purpose','bedrooms','bathroom','garage','area','possession','description','key_points','status','deals','featured','created_at','updated_at'];
 
     public static function change($userID,$data){
         $isUpdated = false;

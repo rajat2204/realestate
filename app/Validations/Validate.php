@@ -266,7 +266,8 @@ class Validate
 			'featured_image'  		=> $this->validation('photo'),
 			'gallery'				=> $this->validation('id'),
 			'gallery.*'				=> $this->validation('gallery'),
-			'area'					=> $this->validation('area'),
+            'area'                  => $this->validation('area'),
+			'unit_id'				=> $this->validation('name'),
 			// 'agent_id'				=> $this->validation('name'),
 			'location'				=> $this->validation('name'),
 			'pincode'				=> $this->validation('pincode'),
@@ -296,7 +297,8 @@ class Validate
         	'gallery.*.required' 			=> 'Gallery Images are required.',
 			'gallery.*.mimes' 				=> 'Gallery Images should be in jpg,jpeg,png format.',
             'area.required'                 => 'Area of a Property is required.',
-			'area.numeric'					=> 'Area of a Property must be numeric.',
+            'area.numeric'                  => 'Area of a Property must be numeric.',
+			'unit_id.required'				=> 'Unit is required.',
 			// 'agent_id.required'				=> 'Property Agent is required.',
 			'location.required'				=> 'Location of a Property is required.',
 			
@@ -877,22 +879,42 @@ class Validate
 	      	'invoice_no' 			    => $this->validation('name'),
             'date'                      => $this->validation('name'),
 	      	'balance' 					=> $this->validation('price'),
+            'discount'                  => $this->validation('commission'),
 	      	'plan_id' 					=> $this->validation('name'),
 	      	'payment_method' 		    => $this->validation('name'),
 	  		];
+
+            if($action == 'edit'){
+                $validations['client_id']           = $this->validation('password_null');
+                $validations['property_type']       = $this->validation('password_null');
+                $validations['project_id']          = $this->validation('password_null');
+                $validations['property_id']         = $this->validation('password_null');
+                $validations['invoice_no']          = $this->validation('name');
+                $validations['date']                = $this->validation('name');
+                $validations['balance']             = $this->validation('password_null');
+                $validations['discount']            = $this->validation('password_null');
+                $validations['plan_id']             = $this->validation('password_null');
+                $validations['payment_method']      = $this->validation('password_null');
+            }
 	  	
 	      $validator = \Validator::make($this->data->all(), $validations,[
-	  		'client_id.required' 			=>  'Client Name is required.',
-	  		'property_type.required' 	=>  'Property Type is required.',
-	  		'project_id.required' 		=>  'Project Name is required.',
-            'property_id.required'      =>  'Property Name is required.',
-	  		'invoice_no.required' 		=>  'Invoice Number is required.',
-            'date.required'                     =>  'Invoice Date is required.',
-            'balance.required'                     =>  'Balance is required.',
-	  		'balance.numeric' 					=>  'Balance Amount should be numeric.',
-	  		'plan_id.required' 				=>  'Plan is required.',
-	  		'payment_method.required' =>  'Please Select the Payment Method.',
+	  		'client_id.required' 			 =>  'Client Name is required.',
+	  		'property_type.required' 	     =>  'Property Type is required.',
+	  		'project_id.required' 		     =>  'Project Name is required.',
+            'property_id.required'           =>  'Property Name is required.',
+	  		'invoice_no.required' 		     =>  'Invoice Number is required.',
+            'date.required'                  =>  'Invoice Date is required.',
+            'balance.required'               =>  'Balance is required.',
+            'balance.numeric'                =>  'Balance Amount should be numeric.',
+            'discount.numeric'               =>  'Discount should be numeric.',
+	  		'plan_id.required' 				 =>  'Plan is required.',
+	  		'payment_method.required'        =>  'Please Select the Payment Method.',
 	  	]);
+        if(($this->data->balance)>($this->data->amount)){
+          $validator->after(function ($validator){
+          $validator->errors()->add('balance', 'Balance Amount should not be greater than Total Amount.');
+     });
+    }
 	      return $validator;		
 		}
 		
@@ -931,7 +953,6 @@ class Validate
 	    $validator = \Validator::make($this->data->all(), $validations,[
 	    	'name.required'				=> 'Unit Name should not be blank',
 	  	]);
-	      return $validator;		
+	      return $validator;
 		}
-
 }
