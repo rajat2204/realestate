@@ -172,11 +172,6 @@
             <i class="fa fa-question-circle"></i><span>Help</span>
           </a>
         </li>
-        <li>
-          <a href="{{url('admin/logout')}}">
-            <i class="fa fa-fw fa-sign-out"></i> <span>Logout</span>
-          </a>
-        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

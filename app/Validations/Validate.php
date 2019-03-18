@@ -955,4 +955,9 @@ class Validate
 	  	]);
 	      return $validator;
 		}
+
+        public function addDealPlan($action = 'add')
+        {
+            
+        }
 }

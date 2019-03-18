@@ -24,6 +24,14 @@
 .m-r-10{
     margin-right: 10px;
 }
+a.logout-menu {
+    padding: 14px;
+}
+.logout-menu span {
+    color: #fff;
+    font-size: 17px;
+    /* padding: 20px; */
+}
 form.pisi{
     padding: 22px 5px;
     color:grey;
