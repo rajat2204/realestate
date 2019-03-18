@@ -56,7 +56,7 @@ class Validate
 			'amount'			=> ['required','numeric'],
             'action'            => ['required'],
 			'percentage'		=> ['required','numeric','between:0,99.99'],
-			'password_null' 	=> ['nullable']
+			'password_null' 	=> ['nullable'],
 		];
 		return $validation[$key];
 	}
@@ -955,9 +955,4 @@ class Validate
 	  	]);
 	      return $validator;
 		}
-
-        public function addDealPlan($action = 'add')
-        {
-            
-        }
 }

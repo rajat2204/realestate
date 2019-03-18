@@ -56,7 +56,7 @@
         <input type="hidden" name="validate" value="">
         <div class="box-footer">
           <a href="{{url('admin/deals')}}" class="btn btn-default">Cancel</a>
-          <button type="submit" id="valid-submit" data-target='[role="make-payment-plan"]' class="btn btn-info pull-right">Submit</button>
+          <button type="button" id="valid-submit" data-request="ajax-submit" data-target='[role="make-payment-plan"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
