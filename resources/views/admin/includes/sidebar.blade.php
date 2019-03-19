@@ -27,13 +27,13 @@
           </a>
         </li>
         <li>
-          <a href="{{url('admin/purchase')}}">
-            <i class="fa fa-shopping-cart"></i> <span>Purchase</span>
+          <a href="{{url('admin/property')}}">
+            <i class="fa fa-fw fa-file-image-o"></i> <span>Properties</span>
           </a>
         </li>
         <li>
-          <a href="{{url('admin/property')}}">
-            <i class="fa fa-fw fa-file-image-o"></i> <span>Properties</span>
+          <a href="{{url('admin/purchase')}}">
+            <i class="fa fa-shopping-cart"></i> <span>Purchase</span>
           </a>
         </li>
         <li>
@@ -71,8 +71,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:void(0);">Balance Invoices</a></li>
-            <li><a href="javascript:void(0);">Paid Invoices</a></li>
+            <li><a href="{{url('admin/balanceinvoices')}}">Balance Invoices</a></li>
+            <li><a href="{{url('admin/paidinvoices')}}">Paid Invoices</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -97,10 +97,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="javascript:void(0);">Purchase Report</a></li>
-            <li><a href="javascript:void(0);">Sales Report</a></li>
-            <li><a href="javascript:void(0);">Expense Report</a></li>
-            <li><a href="javascript:void(0);">Profit Report</a></li>
+            <li><a href="{{url('admin/purchasereport')}}">Purchase Report</a></li>
+            <li><a href="{{url('admin/salesreport')}}">Sales Report</a></li>
+            <li><a href="{{url('admin/expensereport')}}">Expense Report</a></li>
+            <li><a href="{{url('admin/profitreport')}}">Profit Report</a></li>
           </ul>
         </li>
         <li>

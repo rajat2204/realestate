@@ -224,6 +224,18 @@ Route::resource('social', 'SocialMediaController');
 
 Route::resource('contact', 'ContactController');
 
+/***********************Reports-Section****************************/
+
+Route::get('purchasereport', 'ReportController@purchaseReport');
+Route::get('salesreport', 'ReportController@salesReport');
+Route::get('expensereport', 'ReportController@expenseReport');
+Route::get('profitreport', 'ReportController@profitReport');
+
+/***********************Invoices-Section****************************/
+
+Route::get('balanceinvoices', 'ReportController@balanceInvoice');
+Route::get('paidinvoices', 'ReportController@paidInvoice');
+
 /***********************Notice-Section****************************/
 
 Route::resource('notice', 'NoticeController');

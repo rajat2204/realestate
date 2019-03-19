@@ -44,7 +44,6 @@ class DealsController extends Controller
                 $html    = '<div class="edit_details_box">';
 
                 $html   .= '<a href="'.url(sprintf('admin/deals/makeplan/%s',___encrypt($item['id']))).'"  title="Make Payment Plan"><i class="fa fa-credit-card"></i></a> | ';
-                $html   .= '<a href="'.url(sprintf('admin/deals/showpaymentplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-cc-diners-club"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';

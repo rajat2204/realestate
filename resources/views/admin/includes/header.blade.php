@@ -13,7 +13,7 @@
       <span class="sr-only">Toggle navigation</span>
     </a>
     <a href="{{url('admin/logout')}}" style="float:right" class="logout-menu">
-      <span>Logout</span>
+      <span>Sign Out</span>
     </a>
   </nav>
 </header>
