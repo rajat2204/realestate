@@ -93,6 +93,12 @@
     border-left: 10px solid transparent;
     content: '';
 }
+.dropdown-menu>li>a:hover {
+    background-color: #f8f9fe;
+    }
+.dropdown-menu.userinfo li.username a:hover{
+    background-color: transparent;
+}
 ul.dropdown-menu {
     left: auto;
     right: 0;
