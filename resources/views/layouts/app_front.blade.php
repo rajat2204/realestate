@@ -10,7 +10,9 @@
         
         <meta name="_token" content="{{ csrf_token() }}">
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/smartphoto@1.1.0/css/smartphoto.min.css">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
        
 
       
@@ -78,6 +80,7 @@
 
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+    <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
 
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
