@@ -25,9 +25,10 @@ class CategoryController extends Controller
 
     public function index(Request $request, Builder $builder){
         $data['view'] = 'admin.category.list';
-        
-        $propertycategory  = _arefy(PropertyCategories::where('status','!=','trashed')->get());
-       
+        \DB::statement(\DB::raw('set @rownum=0'));
+        $propertycategory  = PropertyCategories::where('status','!=','trashed')->get(['property_categories.*', 
+                    \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+       $propertycategory = _arefy($propertycategory);
         if ($request->ajax()) {
             return DataTables::of($propertycategory)
             ->editColumn('action',function($item){
@@ -70,6 +71,7 @@ class CategoryController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
+            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Category Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug','name' => 'slug','title' => 'Slug','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
