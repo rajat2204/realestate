@@ -20,7 +20,7 @@
         <title>Devdrishti Infrahomes Pvt. Ltd.</title>
         
     <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
-        
+    <link rel="stylesheet" href="{{asset('assets/css/smartphoto.min.css')}}">  
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}" >
     <!-- Fonts -->
@@ -60,7 +60,7 @@
         
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('assets/js/jquery-min.js')}}"></script>
-
+    <script src="{{asset('assets/js/smartphoto.min.js')}}"></script>
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>

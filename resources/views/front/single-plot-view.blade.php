@@ -565,46 +565,46 @@
            		<ul class="owl-carousel owl-gallery" id="gallery">
 	            	<li class="item">
 		             	<span class="thumb1"> 
-		             		<a href="..assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             			<img src="..assets/img/gallery/slider7.jpg" alt="gallery">
+		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             		</a> 
 		             	</span>
 		             	<span class="thumb2"> 
-		             		<a href="..assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             			<img src="..assets/img/gallery/slider7.jpg" alt="Windchants">
+		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             			<img src="../assets/img/gallery/slider7.jpg" alt="Windchants">
 		             		</a> 
 		             	</span> 
 		             </li>
 		             <li class="item">
 		             	<span class="thumb3">
-		             	 <a href="assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             	 	<img src="assets/img/gallery/slider7.jpg" alt="gallery">
+		             	 <a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             	 	<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             	 </a> 
 		             	</span>
 		             </li>
 		             <li class="item">
 		             	<span class="thumb4"> 
-		             		<a href="assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             			<img src="assets/img/gallery/slider7.jpg" alt="gallery">
+		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             		</a> 
 		             	</span>
 		             	 <span class="thumb5"> 
-		             	 	<a href="..assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             	 		<img src="assets/img/gallery/slider7.jpg" alt="gallery">
+		             	 	<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             	 		<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             	 	</a>
 		             	 </span>
 		             </li>
 		             <li class="item">
 		             	<span class="thumb1"> 
-		             		<a href="assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		             			<img src="assets/img/gallery/slider7.jpg" alt="gallery">
+		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             		</a>
 		             	</span>
 		            </li>
 		            <li class="item">
 		            	<span class="thumb3">
-		            		<a href="assets/img/gallery/slider7.jpg" class="js-smartPhoto">
-		            			<img src="assets/img/gallery/slider7.jpg" alt="gallery">
+		            		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		            			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		            		</a>
 		            	</span>
 		            </li>
