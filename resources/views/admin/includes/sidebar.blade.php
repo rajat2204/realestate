@@ -65,16 +65,42 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-thumb-tack fa-fw"></i> <span>Invoices</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="javascript:void(0);">Balance Invoices</a></li>
+            <li><a href="javascript:void(0);">Paid Invoices</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-shopping-cart"></i> <span>Expense/Inventory</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/expensecategories')}}"><i class="fa fa-tasks"></i>Expense Categories</a></li>
-            <li><a href="{{url('admin/vendors')}}"><i class="fa fa-industry"></i>Vendor/Staff</a></li>
-            <li><a href="{{url('admin/expenses')}}"><i class="fa fa-money"></i>Expenses</a></li>
-            <li><a href="{{url('admin/inventory')}}"><i class="fa fa-shopping-cart"></i>Inventory</a></li>
+            <li><a href="{{url('admin/expensecategories')}}">Expense Categories</a></li>
+            <li><a href="{{url('admin/vendors')}}">Vendor/Staff</a></li>
+            <li><a href="{{url('admin/expenses')}}">Expenses</a></li>
+            <li><a href="{{url('admin/inventory')}}">Inventory</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-table fa-fw"></i> <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="javascript:void(0);">Purchase Report</a></li>
+            <li><a href="javascript:void(0);">Sales Report</a></li>
+            <li><a href="javascript:void(0);">Expense Report</a></li>
+            <li><a href="javascript:void(0);">Profit Report</a></li>
           </ul>
         </li>
         <li>
