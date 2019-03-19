@@ -272,44 +272,72 @@ $(document).ready(function(){
 
         });
 
-        // $(document).ready(function() {
-
-        //     var agentSlider = $('#our-agent');
-        //     var agentSlider_settings = {
-        //         loop: true,
-        //         item:
-        //         mouseDrag: true ,
-        //         autoplaySpeed: 1000,
-        //         autoplayTimeout:2000,
-        //         navSpeed: 1000,
-        //         dotsSpeed: 1000,
-        //         dragEndSpeed: 1000,
-        //         autoplay: true,
-        //         center: true,
-        //         nav:true,
-        //         dots:true,
-        //         autoplayHoverPause:true,
-        //         responsive: {
-        //             0: {
-        //                 items: 1
-        //             },
-        //             360: {
-        //                 items: 1
-        //             },
-        //             500: {
-        //                 items: 2
-        //             },
-        //             991: {
-        //                 items: 3
-        //             }
-        //         }
-        //     };
-        //     agentSlider.owlCarousel(agentSlider_settings);
-
-        // });
+        $(document).ready(function() {
+            var homebannerDesc = $('#gallery');
+            var homebannerDesc_settings = {
+                loop: true,
+                items:3,
+                mouseDrag: true ,
+                autoplaySpeed: 1000,
+                autoplayTimeout:2000,
+                navSpeed: 1000,
+                dotsSpeed: 1000,
+                dragEndSpeed: 1000,
+                autoplay: true,
+                center: true,
+                nav:true,
+                dots:true,
+                autoplayHoverPause:true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    360: {
+                        items: 1
+                    },
+                    500: {
+                        items: 2
+                    },
+                    991: {
+                        items: 3
+                    }
+                }
+            };
+            homebannerDesc.owlCarousel(homebannerDesc_settings);
+        });
 // share icon
 
 $('.share_with a').on('click',function(){
   $('.social-icon').toggleClass('open');
   $('.share_with').toggleClass('open');
 })
+
+
+  document.addEventListener('DOMContentLoaded',function(){
+    var photo = new SmartPhoto(".js-img-viwer");
+        photo.on('change',function(){
+            console.log('change');
+        });
+        photo.on('close',function(){
+            console.log('close');
+        });
+        photo.on('swipestart',function(){
+            console.log('swipestart');
+        });
+        photo.on('swipeend',function(){
+            console.log('swipeend');
+        });
+        photo.on('loadall',function(){
+            console.log('loadall');
+        });
+        photo.on('zoomin',function(){
+            console.log('zoomin');
+        });
+        photo.on('zoomout',function(){
+            console.log('zoomout');
+        });
+        photo.on('open',function(){
+            console.log('open');
+        });
+  });
+ 
