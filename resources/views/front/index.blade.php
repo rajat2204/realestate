@@ -269,7 +269,7 @@
       <div class="col-12 col-md-6 col-xl-4">
           <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
             <div class="property-thumb">
-              <a href="{{url('properties')}}/{{($properties['slug'])}}"><img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature"></a>
+              <a href="{{url('properties')}}/{{($properties['slug'])}}" target="_blank"><img src="{{url('assets/img/properties')}}/{{$properties['featured_image']}}" alt="feature"></a>
               <div class="tag">
                   <span>For {{$properties['property_purpose']}}</span>
               </div>
