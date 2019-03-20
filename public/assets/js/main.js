@@ -272,39 +272,12 @@ $(document).ready(function(){
 
         });
 
-        $(document).ready(function() {
-            var homebannerDesc = $('#gallery');
-            var homebannerDesc_settings = {
-                loop: true,
-                items:3,
-                mouseDrag: true ,
-                autoplaySpeed: 1000,
-                autoplayTimeout:2000,
-                navSpeed: 1000,
-                dotsSpeed: 1000,
-                dragEndSpeed: 1000,
-                autoplay: true,
-                center: true,
-                nav:true,
-                dots:true,
-                autoplayHoverPause:true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    360: {
-                        items: 1
-                    },
-                    500: {
-                        items: 2
-                    },
-                    991: {
-                        items: 3
-                    }
-                }
-            };
-            homebannerDesc.owlCarousel(homebannerDesc_settings);
-        });
+        // $(document).ready(function() {
+        //   $('#gallery'),owlCarousel(function(){
+            
+        //   });
+            
+        // });
 // share icon
 
 $('.share_with a').on('click',function(){

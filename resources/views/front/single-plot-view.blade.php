@@ -90,29 +90,19 @@
     <section class="content-section-header hero-background d-flex d-column fcw top">
         <div class="z1 blurbox" style="visibility: visible;">
 		 <!--Project Snapshot Start-->
-			<span class="rera">RERA Regd. No.: <span>PH 2 - 64 of 2017, PH 3 - 73 of 2017 and PH 4 - 112 of 2017</span></span>
+			
 			<div class="snapshot"><div>
 			<h1 class="mb-0">Windchants</h1>
 			<div class="subheading">
 			<span>By <span class="fbold mr-0"> Experion Developers</span></span>
 			<span>Sector 112, Gurugram</span>               
-			<br><span class="br"> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="6.804px" height="10.02px" viewBox="0 0 6.804 10.02" enable-background="new 0 0 6.804 10.02" xml:space="preserve">
-			<path fill="#ffffff" d="M4.53,0.946h1.644l0.63-0.947H0.63l-0.63,0.947h1.07c1.087,0,2.088,0.084,2.489,0.992H0.629l-0.63,0.945
-			h3.678c0,0.003,0,0.006,0,0.008c0,0.68-0.565,1.724-2.431,1.724H0.342l0.001,0.883l3.617,4.522H5.57L1.826,5.342
-			c1.542-0.083,2.987-0.945,3.194-2.458h1.151l0.631-0.946H5.006C4.934,1.572,4.777,1.22,4.53,0.946z"></path>
-			</svg>
+			<br><span class="br"> 
 			<span class="fbold">2.06 Cr</span> onwards</span>
 
-			<span> • <span class="fbold">2, 3 &amp; 4 </span> BHK Flats</span>
-			<span>• Area:  <span class="fbold">2441 - 4857 sqft</span></span><br>
-			<span>• Status:  <span class="fbold">Ready to Move</span></span>
-			<!--in Plot case-->
-			<!--<span>&bull; Status:  <span class="fbold">Ready to occupy</span></span>-->
-			<!--<span>&bull; Possession:  <span class="fbold">Jun. 2023</span></span>-->
+			<span><span class="fbold">2, 3 &amp; 4 </span> BHK Flats</span>
+			<span>Area:  <span class="fbold">2441 - 4857 sqft</span></span><br>
+			<span>Status:  <span class="fbold">Ready to Move</span></span>
 			</div>
-
-
-<!--Project Highlights Start-->
 			<div class="highlights">
 				<span class="project-highlights">Highlights</span>
 				<ul>
@@ -125,19 +115,9 @@
 					<li style="width:100%;">Near IGI Airport.</li>
 				</ul>
 			</div>
-<!--Project Highlight end-->
 
-		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" onclick="fireGaForMicrosite('CTA1')" class="btn1">I'm Interested <svg class="arrow" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="21px" height="9.685px" viewBox="0 0 21 9.685" enable-background="new 0 0 21 9.685" xml:space="preserve">
-		<polygon id="Shape1" fill="#0f9747" stroke="#0f9747" stroke-width="0.5" points="20.469,4.846 15.797,0.349 15.596,0.543 
-		19.912,4.711 0.469,4.711 0.469,4.986 19.912,4.986 15.596,9.154 15.797,9.349 "></polygon>
-		</svg>
-		</a></div></div>
-		<div id="scroll">
-			<a class="js-scroll-trigger" href="#properties">
-				<svg width="14px" height="45px" viewBox="0 0 17 40" version="1.1">
-					<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.701200181"><g id="6" transform="translate(-631.000000, -739.000000)" fill-rule="nonzero" fill="#FFFFFF"><g id="Group" transform="translate(631.000000, 739.000000)">
-						<path d="M1.41666667,8.5767155 L1.41666667,8.5767155 L1.41666667,21.4232845 C1.41666667,25.3727396 4.58733213,28.5714286 8.5,28.5714286 C12.4124705,28.5714286 15.5833333,25.3716791 15.5833333,21.4232845 L15.5833333,8.5767155 C15.5833333,4.62726036 12.4126679,1.42857143 8.5,1.42857143 C4.58752955,1.42857143 1.41666667,4.62832086 1.41666667,8.5767155 L1.41666667,8.5767155 Z M0,8.5767155 C0,3.83992636 3.80454744,0 8.5,0 C13.1944204,0 17,3.83762536 17,8.5767155 L17,21.4232845 C17,26.1600736 13.1954526,30 8.5,30 C3.80557963,30 0,26.1623746 0,21.4232845 L0,8.5767155 L0,8.5767155 Z" id="Shape2"></path><path d="M7.79166667,5 L7.79166667,7.85714286 C7.79166667,8.25163193 8.10879834,8.57142857 8.5,8.57142857 C8.89120166,8.57142857 9.20833333,8.25163193 9.20833333,7.85714286 L9.20833333,5 C9.20833333,4.60551093 8.89120166,4.28571429 8.5,4.28571429 C8.10879834,4.28571429 7.79166667,4.60551093 7.79166667,5 L7.79166667,5 Z" id="Shape2"></path><path id="arrow-path" d="M8.5,37.8521385 L12.395718,33.9236834 C12.6723394,33.6447374 13.1208313,33.6447374 13.3974527,33.9236834 C13.674074,34.2026293 13.674074,34.65489 13.3974527,34.9338359 L9.00086732,39.3673674 C8.86255659,39.5068403 8.6812783,39.5765768 8.5,39.5765768 C8.3187217,39.5765768 8.13744341,39.5068403 7.99913268,39.3673674 L3.56885179,34.8998573 C3.29223041,34.6209114 3.29223041,34.1686506 3.56885179,33.8897047 C3.84547317,33.6107588 4.29396505,33.6107588 4.57058643,33.8897047 L8.5,37.8521385 Z"></path></g></g></g></svg></a>
-					</div>
+		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="btn1">I'm Interested</a></div></div>
+	
     			</div>
 				<div class="hero-img blurbox" style="visibility: visible;">
 				<!--Image Slider Max 4 Image Start-->
@@ -562,47 +542,40 @@
       <div class="card-section">
         <div class="gallery-box  padding30 nopadding-mobile">
           	<div id="galley">
-           		<ul class="owl-carousel owl-gallery" id="gallery">
-	            	<li class="item">
+           		<ul class="smartphotoWrapper" id="gallery">
+	            	<li class="brick">
 		             	<span class="thumb1"> 
 		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
 		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             		</a> 
 		             	</span>
-		             	<span class="thumb2"> 
-		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             			<img src="../assets/img/gallery/slider7.jpg" alt="Windchants">
-		             		</a> 
-		             	</span> 
+		             	
 		             </li>
-		             <li class="item">
-		             	<span class="thumb3">
+		             <li class="brick">
+		             	<span class="thumb1">
 		             	 <a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
 		             	 	<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             	 </a> 
 		             	</span>
 		             </li>
-		             <li class="item">
+		             <li class="brick">
 		             	<span class="thumb4"> 
 		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
 		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		             		</a> 
 		             	</span>
-		             	 <span class="thumb5"> 
-		             	 	<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             	 		<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		             	 	</a>
-		             	 </span>
+		             	
 		             </li>
-		             <li class="item">
-		             	<span class="thumb1"> 
-		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		             		</a>
-		             	</span>
+		             
+		            <li class="brick">
+		            	<span class="thumb1">
+		            		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
+		            			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
+		            		</a>
+		            	</span>
 		            </li>
-		            <li class="item">
-		            	<span class="thumb3">
+		            <li class="brick">
+		            	<span class="thumb1">
 		            		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
 		            			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
 		            		</a>
@@ -612,8 +585,8 @@
     		</div>
 		</div>
 		<div class="row view-all-photo-box">               
-		    <div class="col nopadding">
-		        <a href="img/gallery/img4.jpg" class="js-img-viwer cta-btn-gallery border-color text-color" data-id="raion" data-group="nogroup" data-index="8"><img src="img/gallery/img5.jpg" alt="Project Name"> View All Photos  </a>
+		    <div class="col-md-12 text-center m-b-20">
+		        <a href="javascript:void(0);" class="js-img-viwer cta-btn-gallery border-color text-color" data-id="raion" data-group="nogroup" data-index="8">View All Photos</a>
 		    </div>
 		    
 		</div>
@@ -692,39 +665,8 @@
 	
 </section>
 
-<footer class="padding30">
-<div class="footer-content">
-<div class="row footer-dash">
-<div class="col-12 col-lg-9 col-md-9 col-sm-12 nopadding">
-<div class="footer-nav my-auto">
-<a class="js-scroll-trigger" href="#aboutus">About</a>
-<a class="js-scroll-trigger" href="#properties">Properties Available</a>
-<a class="js-scroll-trigger" href="#overview">Overview</a>
-<a class="js-scroll-trigger" href="#amenities">Amenities</a>
-<!--<a class="js-scroll-trigger" href="#specifications">Specifications</a>-->
-<a class="js-scroll-trigger" href="#gallery">Gallery</a>
-<a class="js-scroll-trigger" href="#mapview">Map View</a>
-</div>
-</div>
-<!-- <div class="col-12 col-lg-3 col-md-9 col-sm-12 nopadding social-box text-right">
-<a href="#" class="facebook">Facebook</a>
-<a href="#" class="twitter">twitter</a>
-<a href="#" class="instagram">instagram</a>
-<a href="#" class="linkedin">linkedin</a>
-</div>-->
-</div>
-<div class="row developer-footer">
-<div class="col-8 nopadding">
-<img src="img/logo-footer.jpg" alt="Experion Developers">
-</div>
-<div class="col-4 nopadding"></div>
-</div>
 
-</div>
-<div class="footer-bg"><img src="img/project-bg.jpg" alt="Experion Developers"></div>
-</footer>
-
-<div class="mobile-contact">
+<!-- <div class="mobile-contact">
 <div class="row">
 <div class="col-6 nopadding">
 <span class="builder-name">Contact Builder</span>
@@ -732,8 +674,6 @@
 <div class="col-6 nopadding"><a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="mobile-fix-cta" onclick="fireGaForMicrosite('CTA4')">Get Phone Number</a></div>
 </div>
 </div>
-
-    <!-- Modal -->
 <div class="modal fade" id="mobileModal" tabindex="-1" role="dialog" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
@@ -746,4 +686,4 @@
 </div>
 </div>
 </div>
-    </div>
+    </div> -->
