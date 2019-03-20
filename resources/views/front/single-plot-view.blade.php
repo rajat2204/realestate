@@ -92,27 +92,21 @@
 		 <!--Project Snapshot Start-->
 			
 			<div class="snapshot"><div>
-			<h1 class="mb-0">Windchants</h1>
+			<h1 class="mb-0">{{$property['name']}}</h1>
 			<div class="subheading">
-			<span>By <span class="fbold mr-0"> Experion Developers</span></span>
-			<span>Sector 112, Gurugram</span>               
+			<span>By <span class="fbold mr-0"> {{$property['company']['name']}}</span></span>
+			<span title="{{$property['location']}}">{{$property['location']}}</span>               
 			<br><span class="br"> 
-			<span class="fbold">2.06 Cr</span> onwards</span>
+			<span class="fbold"><i class="fa fa-rupee"></i>{{number_format($property['price'])}}</span> onwards</span>
 
-			<span><span class="fbold">2, 3 &amp; 4 </span> BHK Flats</span>
-			<span>Area:  <span class="fbold">2441 - 4857 sqft</span></span><br>
-			<span>Status:  <span class="fbold">Ready to Move</span></span>
+			<span><span class="fbold">{{$property['bedrooms']}}</span> BHK {{$property['category']['name']}}</span>
+			<span>Area:  <span class="fbold">{{number_format($property['area'])}} {{$property['units']['name']}}</span></span><br>
+			<span>Possession:  <span class="fbold">{{$property['possession']}}</span></span>
 			</div>
 			<div class="highlights">
-				<span class="project-highlights">Highlights</span>
+				<span class="project-highlights">Highlights:</span>
 				<ul>
-					<li style="width:100%;">One of Asia's Largest Residential Skywalk.</li>
-					<li style="width:100%;">Over 2,50,000 sq. ft. of Activity Spaces.</li>
-					<li style="width:100%;">Low Population Density Project.</li>
-					<li style="width:100%;">Club Windchimes with facilities like Mini Theatre, Bio Diversity Pons, Full Lap Swimming Pool, Gym, Library, Squash Court and Much More
-					.</li>
-					<li style="width:100%;">Adjacent to Delhi Green zone.</li>
-					<li style="width:100%;">Near IGI Airport.</li>
+					<li style="width:100%;">{!!($property['key_points'])!!}</li>
 				</ul>
 			</div>
 
@@ -345,12 +339,12 @@
 		<div class="container nopadding">
 			<div class="row">
 				<div class="col-md-5 img-overview">
-				<img class="img-fluid img-round" src="../assets/img/properties/1552452492155245179315524514481550308490feature1.jpg" alt="img">
+				<img class="img-fluid img-round" src="{{url('assets/img/properties')}}/{{$property['featured_image']}}" alt="img">
 				</div>
 				<div class="col-lg-7 col-md-7 col-12 nopadding nopadding-mobile mml-10">
 				<!-- <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 160px;"><div class="overview overview-text" style="overflow: hidden; width: 100%; height: 160px;"> -->
 					<p>
-					Come home every day to more than 23 acres of luxury living at Windchants. A globally awarded premium condominium development by Experion. Choose from an exquisite selection of Villas, Penthouses, Duplexes and Apartments and be one of the select groups of 600 plus families. Nurture your hobbies across more than 2,50,000 sq. ft. of activity spaces or simply treat your eyes to an endless view of the artistically laid out landscape. 
+					{!!($property['description'])!!}
 					</p>
 
 				</div>

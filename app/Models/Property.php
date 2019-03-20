@@ -35,6 +35,10 @@ class Property extends Model
         return $this->hasOne('App\Models\Project','id','project_id');
     }
 
+    public function units(){
+        return $this->hasOne('App\Models\Units','id','unit_id');
+    }
+
     public function propertyGallery(){
         return $this->hasMany('App\Models\Property_Gallery','plot_id','id');
     }
@@ -52,6 +56,9 @@ class Property extends Model
                 $q->select('id','name');
             },
             'project' => function($q){
+                $q->select('id','name');
+            },
+            'units' => function($q){
                 $q->select('id','name');
             },
             'propertyGallery' => function($q){

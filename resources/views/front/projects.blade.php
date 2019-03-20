@@ -31,7 +31,7 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="{{url('projectproperties')}}/{{($projects['id'])}}"><img src="{{url('assets/img/Projects')}}/{{$projects['image']}}" alt="project"></a>
+									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/Projects')}}/{{$projects['image']}}" alt="project"></a>
 									<a href="javascript:void(0);" data-toggle="modal">
 										<div class="property-caption">
 											@if(count($projects['property']) == 1)
