@@ -134,7 +134,7 @@ class DealsController extends Controller
         return view('admin.home',$data);
     }
 
-    public function ajaxProperty(Request $request)
+    public function ajaxProperties(Request $request)
     {
       $id = $request->id;
       $property = Property::where('project_id',$id)->where('deals','=','no')->get();

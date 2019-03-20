@@ -11,7 +11,7 @@
     </div>
 
     <div class="row">
-        @foreach($projectproperty as $projectproperties)
+      @foreach($projectproperty as $projectproperties)
         <div class="col-12 col-md-6 col-xl-4">
           <a href="{{url('properties')}}/{{($projectproperties['slug'])}}">
             <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">

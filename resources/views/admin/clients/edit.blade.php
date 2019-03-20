@@ -25,7 +25,7 @@
 
           <div class="col-md-4">
             <div class="form-group">
-              <label>Father/Husband/Wife Name:</label>
+              <label>Father/Mother/Husband/Wife Name:</label>
               <input type="text" class="form-control" placeholder="Enter Father/Husband/Wife Name..." name="father_name" value="{{!empty($clients['father_name'])?$clients['father_name']:''}}">
             </div>
           </div>

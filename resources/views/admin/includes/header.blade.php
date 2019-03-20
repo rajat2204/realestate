@@ -22,15 +22,15 @@
               <li class="username">
                   <a href="#" class="clearfix">
                     <div class="pull-left"><i class="fa fa-user"></i></div>
-                    <div class="pull-right"><h5>Administrator!</h5><small>Logged in as <span>admin</span></small></div>
+                    <div class="pull-right"><h5>Administrator!</h5><small>Logged in as <span class="admin-color">admin</span></small></div>
                   </a>
               </li>
               <li class="userlinks">
                 <ul class="dropdown-menu">
                   <!-- <li><a href="/soft/realestate/admin/Users/myProfile">My Profile&nbsp;<i class="pull-right fa fa-pencil"></i></a></li> -->
-            <li><a href="/soft/realestate/admin/Users/changePass">Change Password&nbsp;<i class="pull-right fa fa-cog"></i></a></li>
+            <li><a href="{{url('admin/changepassword')}}">Change Password&nbsp;<i class="pull-right fa fa-cog"></i></a></li>
             <li class="divider"></li>
-            <li><a href="/soft/realestate/admin/Users/logout">Sign Out&nbsp;<i class="pull-right fa fa-power-off"></i></a></li>           
+            <li><a href="{{url('admin/logout')}}">Sign Out&nbsp;<i class="pull-right fa fa-power-off"></i></a></li>
                 </ul>
               </li>
             </ul>
