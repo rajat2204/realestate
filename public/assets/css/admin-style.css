@@ -4,6 +4,9 @@
     height: 51px;
     /* height: auto; */
 }
+span.admin-color {
+    color: red;
+}
 .skin-blue .user-panel>.info, .skin-blue .user-panel>.info>a {
     color: #fff;
     line-height: 37px;

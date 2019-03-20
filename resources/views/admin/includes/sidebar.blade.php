@@ -174,12 +174,6 @@
           </a>
         </li>
         <li>
-          <a href="{{url('admin/changepassword')}}">
-            <i class="fa fa-key"></i> <span>Change Password</span>
-          </a>
-        </li>
-        <li>
-        <li>
           <a href="{{url('admin/help')}}">
             <i class="fa fa-question-circle"></i><span>Help</span>
           </a>

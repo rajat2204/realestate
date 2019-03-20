@@ -182,7 +182,6 @@ class PurchaseController extends Controller
         $data['view'] = 'admin.purchase.add';
         $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
         $data['property'] = _arefy(Property::where('status', '=', 'active')->get());
-        // dd($data['property']);
         return view('admin.home',$data);
     }
 
@@ -201,7 +200,6 @@ class PurchaseController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['purchase'] = _arefy(Purchase::list('single',$where));      
-      // dd($data['purchase']);
       return view('admin.home',$data);
     }
 

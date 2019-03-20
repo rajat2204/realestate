@@ -26,7 +26,7 @@ class CategoryController extends Controller
     public function index(Request $request, Builder $builder){
         $data['view'] = 'admin.category.list';
         \DB::statement(\DB::raw('set @rownum=0'));
-        $propertycategory  = PropertyCategories::where('status','!=','trashed')->get(['property_categories.*', 
+        $propertycategory  = PropertyCategories::where('status','!=','trashed')->orderBy('id',"DESC")->get(['property_categories.*', 
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
        $propertycategory = _arefy($propertycategory);
         if ($request->ajax()) {
