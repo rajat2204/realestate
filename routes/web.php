@@ -195,7 +195,7 @@ Route::resource('company', 'CompanyController');
 
 Route::resource('deals', 'DealsController');
 	Route::group(['prefix' => 'property'],function(){
-			Route::post('ajaxproperty', 'DealsController@ajaxProperty');
+			Route::post('ajaxproperties', 'DealsController@ajaxProperties');
 	});
 	Route::group(['prefix' => 'area'],function(){
 			Route::post('ajaxarea', 'DealsController@ajaxArea');

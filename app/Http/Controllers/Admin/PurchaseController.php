@@ -190,7 +190,6 @@ class PurchaseController extends Controller
       $id = $request->id;
       $property = Property::where('project_id',$id)->get();
       $propertyview = view('admin.template.ajaxproperty',compact('property'));
-
       return Response($propertyview);
     }
 

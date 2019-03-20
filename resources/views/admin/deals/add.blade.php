@@ -183,7 +183,7 @@
         $('#project_id').on('change',function(){
             var value = $(this).val();
             $.ajax({
-                url:"{{url('admin/property/ajaxproperty?id=')}}"+value,
+                url:"{{url('admin/property/ajaxproperties?id=')}}"+value,
                 type:'POST',
                 success:function(data){
                     $('#properties').html(data).prev().css("display","block");
