@@ -162,7 +162,7 @@
 				</div>
 				<div class="col-lg-8 col-md-8 col-12 nopadding">
 				<div class="unit-detail-container">
-				<div class="row">
+				<div class="">
 					<ul class="property-type-detaiil">
 						<li><i class="fa fa-rupee"></i>2.06 Cr <span>onwards</span></li>
 						<li> 2 BHK Flat<span>  2441 sqft</span></li>
