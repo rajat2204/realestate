@@ -392,36 +392,18 @@
 				    <div class="amenties-title">Sports</div>
 				</li>
 				<li>
-					<span class="icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<i class="fa fa-bell icon-meditation-area"></i>
+					<span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><i class="fa fa-bell icon-meditation-area"></i></span>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 				<li>
-					<span class="icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><span class="icon-jogging-strolling-track"></span>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-			</ul>
-		</div>
-	
-	
-		<div class="row">
-			<ul class="amenities-list">
-				<li>
-				    <div class="amenties-title">Sports</div>
+					<i class="fa fa-bell icon-meditation-area"></i>
+					<span class="am-txt">Game Area</span>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+					<i class="fa fa-bell icon-meditation-area"></i>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 			</ul>
@@ -434,15 +416,16 @@
 				    <div class="amenties-title">Sports</div>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<i class="fa fa-bell icon-meditation-area"></i>
+					<span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><i class="fa fa-bell icon-meditation-area"></i>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><i class="fa fa-bell icon-meditation-area"></i>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 			</ul>
@@ -455,15 +438,36 @@
 				    <div class="amenties-title">Sports</div>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Swimming Pool</span>
+					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><i class="fa fa-bell icon-meditation-area"></i>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><i class="fa fa-bell icon-meditation-area"></i>
+					<span class="am-txt">Jogging / Walking Track</span>
+				</li>
+			</ul>
+		</div>
+	
+	
+		<div class="row">
+			<ul class="amenities-list">
+				<li>
+				    <div class="amenties-title">Sports</div>
+				</li>
+				<li>
+					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Swimming Pool</span>
+				</li>
+				<li><i class="fa fa-bell icon-meditation-area"></i></span>
+					<span class="am-txt">Jogging / Walking Track</span>
+				</li>
+				<li>
+					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
+				</li>
+				<li><i class="fa fa-bell icon-meditation-area"></i>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 			</ul>

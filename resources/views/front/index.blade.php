@@ -201,27 +201,27 @@
                       <label for="input-filter_bed_rooms">Bedrooms:</label>
                       <select class="form-control" name="filter_bed_rooms" id="input-filter_bed_rooms">
                         <option value="">--Select Bedroom--</option>
-                                        <option value="1">1</option> 
-    
-                                        <option value="2">2</option> 
-    
-                                        <option value="3">3</option> 
-    
-                                        <option value="4">4</option> 
-    
-                                        <option value="5">5</option> 
-    
-                                        <option value="6">6</option> 
-    
-                                        <option value="7">7</option> 
-    
-                                        <option value="8">8</option> 
-    
-                                        <option value="9">9</option> 
-    
-                                        <option value="10">10</option> 
-                    
-                                      </select>
+                          <option value="1">1</option> 
+
+                          <option value="2">2</option> 
+
+                          <option value="3">3</option> 
+
+                          <option value="4">4</option> 
+
+                          <option value="5">5</option> 
+
+                          <option value="6">6</option> 
+
+                          <option value="7">7</option> 
+
+                          <option value="8">8</option> 
+
+                          <option value="9">9</option> 
+
+                          <option value="10">10</option> 
+      
+                        </select>
                     </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <label for="input-filter_bath_rooms">Bathrooms:</label>

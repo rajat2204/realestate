@@ -4267,11 +4267,7 @@ ul.amenities-list li {
     height: 40px;
     margin-bottom: 30px;
 }
-.icon-meditation-area:before {
-    content: "";
-    background-image: url(../img/swimming.png);
-    background-size: cover;
-}
+
 .amenities-list .icon-meditation-area{
   color: #9da6ae;
     font-size: 21px;
