@@ -80,8 +80,18 @@
 		</ul>
 	</div>
 	<div class="form-container-box hidden-xs-down">
-		<div class="form-container">
-			<!-- <iframe id="GB_frame" class="iframe5" src="contact.html"></iframe> -->
+		<div class="formcontainer">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="detai_l">
+						<h6> Want to know more? </h6>
+						<input type="text" name="name" placeholder="Enter name " >	
+						<input type="email" name="" placeholder = "Enter Email">	
+						<input type="text" name="" placeholder= "Mobile ">		
+						<button class="btn btn-success "> Connect with Builder</button>
+					</div>	
+				</div>
+			</div>
 		</div>
 	</div>
 </nav>
@@ -110,7 +120,7 @@
 				</ul>
 			</div>
 
-		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="btn1">I'm Interested</a></div></div>
+		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="btn1 btn btn-md">I'm Interested</a></div></div>
 	
     			</div>
 				<div class="hero-img blurbox" style="visibility: visible;">
@@ -382,15 +392,15 @@
 				    <div class="amenties-title">Sports</div>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<span class="icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
 				</li>
 				<li><span class="icon icon-jogging-strolling-track"></span>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 				<li>
-					<span class="icon icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
+					<span class="icon-meditation-area"></span><span class="am-txt">Meditation Centre</span>
 				</li>
-				<li><span class="icon icon-jogging-strolling-track"></span>
+				<li><span class="icon-jogging-strolling-track"></span>
 					<span class="am-txt">Jogging / Walking Track</span>
 				</li>
 			</ul>
