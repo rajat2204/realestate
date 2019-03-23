@@ -3827,7 +3827,13 @@ padding:30px 10px 10px 0px;
 }
 .projectContent{
   border-bottom:1px solid #d7d7d7;
+  min-width: 520px;
   background-color: #fff; 
+}
+.propertyScroll {
+    position: relative;
+    overflow-x: scroll;
+    /* max-width: 200px; */
 }
 .projectContent:hover{
   background-color: #fbfafa;
@@ -4457,6 +4463,11 @@ ul.owl-gallery li {
   .content-section-header .hero-img{
     width: 100%;
   }
+  .contactNow{
+    padding: 7px 10px;
+    font-size: 14px;
+  }
+
   .fixed-top {
     width: 100%;
     top: 0 !important;
@@ -4466,7 +4477,7 @@ ul.owl-gallery li {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, .09);
     background-color: #fff;
   } 
-  .navbar-toggler{
+  .right-space .navbar-toggler{
     display: block;
     color: black;
     position: absolute;
@@ -4511,6 +4522,12 @@ ul.owl-gallery li {
 @media screen and (max-width: 768px) {
   .navbar-header {
     width: 100%;
+  }
+  .pd-right-none{
+    padding-right:15px;
+  }
+  .project-description {
+    padding-top: 10px;
   }
   section.content-section-header {
       height: 100vh;

@@ -54,18 +54,20 @@
 								<div class="project-content">
 									<p title="{{strip_tags($projects['description'])}}">{{str_limit(strip_tags($projects['description']),280)}}</p>
 								</div>
-								<ul class="projectContent">
-									<li>1 BHK Flat</li>
-									<li>1200 - 13850 sqft</li>
-									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-								</ul>
-								<ul class="projectContent">
-									<li>2 BHK Flat</li>
-									<li>1350 - 1380 sqft</li>
-									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-								</ul>
+								<div class="propertyScroll">
+									<ul class="projectContent">
+										<li>1 BHK Flat</li>
+										<li>1200 - 13850 sqft</li>
+										<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+										<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+									</ul>
+									<ul class="projectContent">
+										<li>2 BHK Flat</li>
+										<li>1350 - 1380 sqft</li>
+										<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+										<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					{{-- view photo popup --}}
