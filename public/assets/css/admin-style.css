@@ -21,6 +21,12 @@ span.admin-color {
     background-size: 100px;
     color: #797979;
 }
+.classFloat{
+    float:right;
+}
+.m-t-20{
+    margin-top: 15px;
+}
 .dropdown-menu.userinfo:before, .dropdown-menu.userinfo:after {
     content: " ";
     display: table;
@@ -194,4 +200,13 @@ div.configs{
 div.configs 
 {
     padding:10px auto;
+}
+@media only screen and (max-width: 576px){
+    .classFloat{
+        float: none;
+        margin-bottom: 10px;
+    }
+    .centerContent{
+        text-align: center;
+    }
 }
