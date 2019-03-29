@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Purchase;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -19,6 +20,8 @@ class ReportController extends Controller
     public function purchaseReport(Request $request)
     {
     	$data['view'] = 'admin.reports.purchasereport';
+        $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
+        $data['purchase'] = _arefy(Purchase::where('status','!=','trashed')->get());
     	return view('admin.home',$data);
     }
 
