@@ -41,7 +41,7 @@ class PurchaseController extends Controller
                 $html    = '<div class="edit_details_box">';
                 $html   .= '<a href="'.url(sprintf('admin/purchase/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 if ($item['status'] != 'paid'){
-                  $html   .= '<a href="'.url(sprintf('admin/purchase/payment/%s',___encrypt($item['id']))).'"  title="Purchase Payment"><i class="fa fa-money"></i></a> | ';
+                  $html   .= '<a href="'.url(sprintf('admin/purchase/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
                 }
                 $html   .= '<a href="'.url(sprintf('admin/purchase/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment History"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
@@ -164,8 +164,8 @@ class PurchaseController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'payment_type','name' => 'payment_type','title' => 'Payment Type','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
