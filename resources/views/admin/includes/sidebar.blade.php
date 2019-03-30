@@ -63,7 +63,7 @@
             <i class="fa fa-thumbs-up fa-fw"></i><span>Deals</span>
           </a>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-thumb-tack fa-fw"></i> <span>Invoices</span>
             <span class="pull-right-container">
@@ -74,7 +74,7 @@
             <li><a href="{{url('admin/balanceinvoices')}}">Balance Invoices</a></li>
             <li><a href="{{url('admin/paidinvoices')}}">Paid Invoices</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="treeview">
           <a href="#">
             <i class="fa fa-shopping-cart"></i> <span>Expense/Inventory</span>
@@ -89,7 +89,7 @@
             <li><a href="{{url('admin/inventory')}}">Inventory</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-table fa-fw"></i> <span>Reports</span>
             <span class="pull-right-container">
@@ -102,7 +102,7 @@
             <li><a href="{{url('admin/expensereport')}}">Expense Report</a></li>
             <li><a href="{{url('admin/profitreport')}}">Profit Report</a></li>
           </ul>
-        </li>
+        </li> -->
         <li>
           <a href="{{url('admin/agent')}}">
             <i class="fa fa-user-secret"></i><span>Agents</span>
