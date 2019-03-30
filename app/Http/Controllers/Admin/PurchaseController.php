@@ -29,7 +29,6 @@ class PurchaseController extends Controller
 
     public function index(Request $request, Builder $builder){
         $data['view'] = 'admin.purchase.list';
-        
         $where = 'status != "trashed"';
         $purchase  = _arefy(Purchase::list('array',$where));
 
