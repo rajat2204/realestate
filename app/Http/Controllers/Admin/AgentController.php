@@ -288,6 +288,7 @@ class AgentController extends Controller
         $data['view'] = 'admin.agents.wallet';
         $id = ___decrypt($id);
         $data['agent'] = _arefy(Agents::where('id',$id)->first());
+       // dd($data['agent']);
         return view('admin.home',$data);
     }
 
@@ -306,8 +307,7 @@ class AgentController extends Controller
             $data['mobile']=$request->mobile;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
-         //to deduct on selecting action[deduct] and Add on selecting action[add] 
-
+             //to deduct on selecting action[deduct] and Add on selecting action[add] 
             if($data['action']=='deduct' )
             {
                 $balance = $request->balance-$request->amount;
@@ -315,6 +315,8 @@ class AgentController extends Controller
                 $balance = $request->balance+$request->amount;
 
             }
+                 
+
             $data['balance']=$balance;
             $data['remarks']=$request->remarks;
             $data['status']='active';

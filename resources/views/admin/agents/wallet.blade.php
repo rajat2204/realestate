@@ -51,6 +51,7 @@
             }
             $totalBalance= array_sum($addbal) - array_sum($deductbal);
             @endphp
+            {{-- {{dd(array_sum($addbal))}} --}}
             	
             <div class="form-group">
                 <label class= "text-dark">Balance :</label>
