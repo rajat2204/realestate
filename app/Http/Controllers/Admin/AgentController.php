@@ -311,8 +311,9 @@ class AgentController extends Controller
             if($data['action']=='deduct' )
             {
                 $balance = $request->balance-$request->amount;
-            }else{
+            }elseif($data['action']=='add'){
                 $balance = $request->balance+$request->amount;
+
             }
             $data['balance']=$balance;
             $data['remarks']=$request->remarks;

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+
 class ConfigurationController extends Controller
 {
 
@@ -191,7 +192,6 @@ public function currencyAdd(Request $request)
         } 
       return $this->populateresponse();
     }
-
     public function currencyAddForm(Request $request)
     {
         $data['view'] = 'admin.configuration.currencies.add';

@@ -211,7 +211,7 @@ class SliderController extends Controller
             $this->redirect = url('admin/sliders');
         }
         return $this->populateresponse();
-    }
+    }   
 
     /**
      * Remove the specified resource from storage.
@@ -225,8 +225,8 @@ class SliderController extends Controller
     }
 
     public function changeStatus(Request $request){
-        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
-        $isUpdated               = Sliders::change($request->id,$userData);
+        $userData             = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated            = Sliders::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
