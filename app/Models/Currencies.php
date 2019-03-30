@@ -17,4 +17,13 @@ class Currencies extends Model
         }   
     }
 
+    public static function change($userID,$data){
+        $isUpdated = false;
+        $table_currency = \DB::table('currency');
+        if(!empty($data)){
+            $table_currency->where('id','=',$userID);
+            $isUpdated = $table_currency->update($data); 
+        }
+        return (bool)$isUpdated;
+    }
 }

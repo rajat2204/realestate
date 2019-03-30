@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
-use App\Models\ProjectImages;
-use App\Models\ProjectLayout;
-use App\Models\ProjectLocationMap;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -78,6 +75,10 @@ class ProjectController extends Controller
             ->editColumn('company_id',function($item){
                 return ucfirst($item['company']['name']);
             })
+            ->editColumn('image',function($item){
+                $imageurl = asset("assets/img/Projects/".$item['image']);
+                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+            })
             ->rawColumns(['image','action'])
             ->make(true);
         }
@@ -86,6 +87,7 @@ class ProjectController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
+            ->addColumn(['data' => 'image', 'name' => 'image','title' => 'Project Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'company_id', 'name' => 'company_id','title' => 'Company Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Project Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Project Slug','orderable' => false, 'width' => 120])
@@ -123,35 +125,25 @@ class ProjectController extends Controller
             $project = new Project();
             $project->fill($request->all());
 
+            if ($file = $request->file('image')){
+                $photo_name = time().$request->file('image')->getClientOriginalName();
+                $file->move('assets/img/Projects',$photo_name);
+                $project['image'] = $photo_name;
+            }
+            if ($file = $request->file('layout')){
+                $layout = time().$request->file('layout')->getClientOriginalName();
+                $file->move('assets/img/Project Layout',$layout);
+                $project['layout'] = $layout;
+            }
+            if ($file = $request->file('locationmap')){
+                $locationmap = time().$request->file('locationmap')->getClientOriginalName();
+                $file->move('assets/img/Project Location Map',$locationmap);
+                $project['locationmap'] = $locationmap;
+            }
+
             $project->save();
-            $lastid = $project->id;
+            
 
-            if ($files = $request->file('images')){
-                $projectimages = new ProjectImages;
-                $image_name = str_random(2).time().$files->getClientOriginalName();
-                $files->move('assets/img/Project Images',$image_name);
-                $projectimages['images'] = $image_name;
-                $projectimages['project_id'] = $lastid;
-                $projectimages->save();
-            }
-
-            if ($layout = $request->file('layoutplan')){
-                $layoutplan = new ProjectLayout;
-                $image_layout = str_random(2).time().$layout->getClientOriginalName();
-                $layout->move('assets/img/Project Layouts',$image_layout);
-                $layoutplan['images'] = $image_layout;
-                $layoutplan['project_id'] = $lastid;
-                $layoutplan->save();
-            }
-
-            if ($location = $request->file('locationmap')){
-                $locationmap = new ProjectLocationMap;
-                $image_location = str_random(2).time().$location->getClientOriginalName();
-                $location->move('assets/img/Project Location Maps',$image_location);
-                $locationmap['images'] = $image_location;
-                $locationmap['project_id'] = $lastid;
-                $locationmap->save();
-            }
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
@@ -184,11 +176,6 @@ class ProjectController extends Controller
         $id = ___decrypt($id);
         $where = 'id = '.$id;
         $data['project'] = _arefy(Project::list('single',$where));
-        $data['images'] = _arefy(ProjectImages::where('project_id',$id)->get());
-        // dd($data['images']);
-        $data['layout'] = _arefy(ProjectLayout::where('project_id',$id)->get());
-        $data['location'] = _arefy(ProjectLocationMap::where('project_id',$id)->get());
-        // dd($data['project']);
         $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
@@ -210,42 +197,24 @@ class ProjectController extends Controller
       }else{
           $projects = Project::findOrFail($id);
           $data = $request->all();
+
+          if ($file = $request->file('image')){
+                $photo_name = time().$request->file('image')->getClientOriginalName();
+                $file->move('assets/img/Projects',$photo_name);
+                $data['image'] = $photo_name;
+            }
+            if ($file = $request->file('layout')){
+                $layout = time().$request->file('layout')->getClientOriginalName();
+                $file->move('assets/img/Project Layout',$layout);
+                $data['layout'] = $layout;
+            }
+            if ($file = $request->file('locationmap')){
+                $locationmap = time().$request->file('locationmap')->getClientOriginalName();
+                $file->move('assets/img/Project Location Map',$locationmap);
+                $data['locationmap'] = $locationmap;
+            }
           
           $projects->update($data);
-
-          if ($files = $request->file('images')){
-              foreach ($files as $file){
-                $projectimages = new ProjectImages;
-                $image_name = str_random(2).time().$file->getClientOriginalName();
-                $file->move('assets/img/Project Images',$image_name);
-                $projectimages['images'] = $image_name;
-                $projectimages['project_id'] = $id;
-                $projectimages->save();
-              }
-            }
-
-            if ($layout = $request->file('layoutplan')){
-              foreach ($layout as $layouts){
-                $layoutplan = new ProjectLayout;
-                $image_layout = str_random(2).time().$layouts->getClientOriginalName();
-                $layouts->move('assets/img/Project Layouts',$image_layout);
-                $layoutplan['images'] = $image_layout;
-                $layoutplan['project_id'] = $id;
-                $layoutplan->save();
-              }
-            }
-
-            if ($location = $request->file('locationmap')){
-              foreach ($location as $locations){
-                $locationmap = new ProjectLocationMap;
-                $image_location = str_random(2).time().$locations->getClientOriginalName();
-                $locations->move('assets/img/Project Location Maps',$image_location);
-                $locationmap['images'] = $image_location;
-                $locationmap['project_id'] = $id;
-                $locationmap->save();
-              }
-            }
-
           $this->status   = true;
           $this->modal    = true;
           $this->alert    = true;

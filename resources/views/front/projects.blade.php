@@ -32,7 +32,7 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="javascript:void(0);"><img src="{{url('assets/img/Project Images')}}/{{$projects['project_image'][0]['images']}}" alt="project"></a>
+									<a href="javascript:void(0);"><img src="{{url('assets/img/Projects')}}/{{$projects['image']}}" alt="project"></a>
 									<a href="javascript:void(0);" data-toggle="modal">
 										<div class="property-caption">
 											<span class="bulge">{{count($projects['property'])}} properties</span>

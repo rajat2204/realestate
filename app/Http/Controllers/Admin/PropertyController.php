@@ -92,6 +92,13 @@ class PropertyController extends Controller
                     return 'N/A';
                 }
             })
+            ->editColumn('property_type',function($item){
+                if(!empty($item['property_type'])){
+                    return ucfirst($item['property_type']);
+                }else{
+                    return 'N/A';
+                }
+            })
             ->editColumn('area',function($item){
                 if (!empty($item['area'])) {
                     return ($item['area']). ' ' . 'sq.ft.';                    

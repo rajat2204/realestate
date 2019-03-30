@@ -5,7 +5,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
-      <form role="edit-inventory" method="POST" action="{{url('admin/tax/'.___encrypt($tax['id']))}}">
+      <form role="edit-tax" method="POST" action="{{url('admin/tax/edit/'.___encrypt($tax['id']))}}">
         {{csrf_field()}}
 
         <input type="hidden" value="PUT" name="_method">
@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div class="row">
+          <div class="row">
           <div class="col-md-4">
             <div class="form-group">
               <label>Select Tax Name:</label>
@@ -40,27 +40,23 @@
               </select>
             </div>
           </div>
+{{-- =======
+        <div class="form-group">
+          <label>Tax Name:</label>
+          <input type="text" class="form-control" placeholder="Enter Tax Name..." name="name" value="{{!empty($tax['name'])?$tax['name']:''}}">
+>>>>>>> 46a04b79f9b6609ee1aff64eea16625325b849e4
+        </div> --}}
+
+        <div class="form-group">
+          <label>Tax Percentage:</label>
+          <input type="text" class="form-control" placeholder="Enter Tax Percentage..." name="percentage" value="{{!empty($tax['percentage'])?$tax['percentage']:''}}">
         </div>
 
-
         <div class="box-footer">
-          <a href="{{url('admin/inventory')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="edit-inventory"]' class="btn btn-info pull-right">Submit</button>
+          <a href="{{url('admin/tax')}}" class="btn btn-default">Cancel</a>
+          <button type="button" data-request="ajax-submit" data-target='[role="edit-tax"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-
-@section('requirejs')
-<script type="text/javascript">
-  CKEDITOR.replace("remarks")
-
-$(document).ready(function () {
-  $("#qty").keyup(function () {
-      var value = $(this).val();
-      $("#balance").val(value);
-  });
-});
-</script>
-@endsection

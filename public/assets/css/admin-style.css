@@ -18,6 +18,12 @@
     background-size: 100px;
     color: #797979;
 }
+.flex-c {
+    display: flex;
+}
+.m-r-10{
+    margin-right: 10px;
+}
 form.pisi{
     padding: 22px 5px;
     color:grey;

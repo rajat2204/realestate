@@ -28,6 +28,7 @@
                 <option value="">Select Property Type</option>
                 <option value="residential">Residential</option>
                 <option value="commercial">Commercial</option>
+                <option value="others">Others</option>
               </select>
             </div>
           </div>
@@ -49,11 +50,8 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Select Property Name:</label>
-              <select class="form-control" name="property_id" id="property_id">
+              <select class="form-control" name="property_id" id="properties">
                 <option value="">Select Property Name</option>
-                @foreach($property as $property_name)
-                  <option value="{{!empty($property_name['id'])?$property_name['id']:''}}">{{!empty($property_name['name'])?$property_name['name']:''}}</option>
-                @endforeach
               </select>
             </div>
           </div>
@@ -76,19 +74,38 @@
         </div>
 
         <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label>Area:</label>
-              <input type="text" name="area" class="form-control" placeholder="Enter Area...">
+          <div class="col-md-3">
+            <div class="flex-c">
+              <div class="form-group m-r-10">
+                <label>Area:</label>
+                <input type="text" name="area" class="form-control" placeholder="Enter Area..." readonly id="area">
+              </div>
+              <div class="form-group">
+                <label>Units:</label>
+                <select class="form-control">Units
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                  <option>3 Sqft</option>
+                </select>
+              </div>
             </div>
+              <!-- <input type="text" name="area" class="form-control" placeholder="Enter units..." readonly id="area"> -->
+            
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Amount:</label>
-              <input type="text" name="amount" class="form-control" placeholder="Enter Amount...">
+              <input type="text" name="amount" class="form-control" readonly placeholder="Enter Amount..." id="amount">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Balance:</label>
+              <input type="text" name="balance" class="form-control" placeholder="Enter Balance...">
+            </div>
+          </div>
+          <div class="col-md-3">
             <div class="form-group">
               <label>Discount:</label>
               <input type="text" name="discount" class="form-control" placeholder="Enter Discount...">
@@ -141,7 +158,7 @@
 
         <div class="box-footer">
           <a href="{{url('admin/property')}}" class="btn btn-default">Cancel</a>
-          <button type="button" data-request="ajax-submit" data-target='[role="add-property"]' class="btn btn-info pull-right">Submit</button>
+          <button type="button" data-request="ajax-submit" data-target='[role="add-deal"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
     </div>
@@ -151,5 +168,33 @@
 @section('requirejs')
 <script type="text/javascript">
   CKEDITOR.replace("remarks");
+
+  $(document).ready(function(){
+        $('#project_id').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/property/ajaxproperty?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                    $('#properties').html(data).prev().css("display","block");
+                }
+            });
+        });
+    });
+
+  $(document).ready(function(){
+        $('#properties').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/area/ajaxarea?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                  console.log(data);
+                    $('#area').val(data.area);
+                    $('#amount').val(data.price);
+                }
+            });
+        });
+    });
 </script>
 @endsection

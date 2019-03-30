@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Deals extends Model
 {
 	protected $table = 'deal';
-	protected $fillable = ['client_id','property_id','plan_id','agent_id','invoice_no','date','area','amount','discount','payment_method','remarks','status','created_at','updated_at'];
+	protected $fillable = ['client_id','project_id','property_id','plan_id','agent_id','invoice_no','date','area','amount','balance','discount','payment_method','remarks','status','created_at','updated_at'];
 
 
     public static function change($userID,$data){

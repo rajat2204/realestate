@@ -10,19 +10,17 @@
         <div class="form-row">
             <div class="form-group">
               <label>Tax Name:</label>
-              <input type="text" class="form-control" placeholder="Enter Currency Name..." 
-              name="tax_name">
+              <input type="text" class="form-control" placeholder="Enter Currency Name..." name="name">
             </div>
           </div>
          <div class="form-row">
             <div class="form-group">
               <label>Tax Percentage:</label>
-              <input type="text" class="form-control" placeholder="Enter Tax Percentage..." 
-              name="tax_percentage">
+              <input type="text" class="form-control" placeholder="Enter Tax Percentage..." name="percentage">
             </div>
           </div>
         <div class="box-footer">
-          <a href="{{url('admin/client')}}" class="btn btn-default">Cancel</a>
+          <a href="{{url('admin/tax')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-tax"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>

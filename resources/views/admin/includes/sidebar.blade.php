@@ -141,11 +141,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/general')}}">General</a></li>
             <li><a href="{{url('admin/currencies')}}">Currency</a></li>
             <li><a href="{{url('admin/tax')}}">Tax</a></li>
-            <li><a href="javascript:void(0);">Units</a></li>
-            <li><a href="javascript:void(0);">Organizational Logo</a></li>
+            <li><a href="{{url('admin/units')}}">Units</a></li>
           </ul>
         </li>
         <li>

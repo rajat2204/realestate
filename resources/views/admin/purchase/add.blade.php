@@ -64,20 +64,29 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Area(In Sq.ft.):</label>
               <input type="text" class="form-control" placeholder="Enter Property Area(In Sq.ft.)..." name="area">
             </div>
           </div>
 
-          <div class="col-md-6">
+
+          <div class="col-md-4">
             <div class="form-group">
               <label>Property Price:</label>
-              <input type="text" class="form-control" placeholder="Enter Property Price..." name="price">
+              <input type="text" class="form-control" placeholder="Enter Property Price..." name="price" id="price">
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Balance:</label>
+              <input type="text" class="form-control" placeholder="Enter Balance..." name="balance" id="balance">
             </div>
           </div>
         </div>
+
 
         <div class="form-group">
           <label>Project Description:</label>
@@ -95,16 +104,6 @@
 
 @section('requirejs')
 <script type="text/javascript">
-
-  function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#adminimg').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
 
     CKEDITOR.replace("description");
 
