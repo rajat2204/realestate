@@ -202,6 +202,32 @@
     font-size: 22px;
     margin-bottom: 30px;
   }
+  .unit-detail-container{
+    padding-top: 20px;
+  }
+  a.jfloorplan{
+    display: block;
+  }
+  .builder-logo {
+    max-width: 100%;
+    height: 162px;
+    margin-bottom: 10px;
+  }
+  #aboutus p{
+    line-height: 20px;
+    text-align: justify;
+  }
+  .pl-4{
+    padding-left: 0 !important;
+  }
+  #properties .nopadding{
+    padding:0 10px;
+  }
+  .tabpaneContainer .thumbnail img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
   .section-sub {
     font-size: 16px;
   }
@@ -321,7 +347,9 @@
   nav.navbar {
       top: 30px !important;
   }
-  
+  .right-space nav.navbar{
+    top:0 !important;
+  }
   .header_strip ul li {
       padding: 0 6px;
       padding-left: 0;

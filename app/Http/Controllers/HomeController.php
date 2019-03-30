@@ -83,7 +83,7 @@ class HomeController extends Controller{
         $where = 'slug = "'.$slug.'"';
         $data['property'] = _arefy(Property::list('single',$where));
         // dd($data['property']);
-        return view('front_home',$data);
+        return view('single_page',$data);
     }
 
     public function allProperties(Request $request){

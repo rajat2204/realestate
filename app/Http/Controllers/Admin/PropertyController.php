@@ -6,6 +6,7 @@ use App\Models\Property;
 use App\Models\Company;
 use App\Models\Project;
 use App\Models\Agents;
+use App\Models\Units;
 use Illuminate\Http\Request;
 use App\Models\Property_Gallery;
 use App\Models\PropertyCategories;
@@ -146,6 +147,7 @@ class PropertyController extends Controller
         $data['project'] = _arefy(Project::where('status', '=', 'active')->get());
         $data['category'] = _arefy(PropertyCategories::where('status', '=', 'active')->get());
         $data['company'] = _arefy(Company::where('status', '=', 'active')->get());
+        $data['units'] = _arefy(Units::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 
@@ -225,6 +227,7 @@ class PropertyController extends Controller
         $data['company'] = Company::where('status', '=', 'active')->get();
         $data['project'] = Project::where('status', '=', 'active')->get();
         $data['category'] = PropertyCategories::where('status', '=', 'active')->get();
+        $data['units'] = _arefy(Units::where('status', '=', 'active')->get());
         return view('admin.home',$data);
     }
 

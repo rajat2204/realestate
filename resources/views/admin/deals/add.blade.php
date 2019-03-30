@@ -82,17 +82,11 @@
               </div>
               <div class="form-group">
                 <label>Units:</label>
-                <select class="form-control">Units
-                  <option>3 Sqft</option>
-                  <option>3 Sqft</option>
-                  <option>3 Sqft</option>
-                  <option>3 Sqft</option>
-                </select>
+                <input type="text" name="unit_name" id="unit_name" placeholder="Enter Unit" readonly class="form-control">
               </div>
             </div>
-              <!-- <input type="text" name="area" class="form-control" placeholder="Enter units..." readonly id="area"> -->
-            
           </div>
+
           <div class="col-md-3">
             <div class="form-group">
               <label>Amount:</label>
@@ -101,14 +95,14 @@
           </div>
           <div class="col-md-3">
             <div class="form-group">
-              <label>Balance:</label>
-              <input type="text" name="balance" class="form-control" placeholder="Enter Balance...">
+              <label>Discount<small>(In %):</small></label>
+              <input type="text" name="discount" id="discount" class="form-control" placeholder="Enter Discount...">
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-group">
-              <label>Discount:</label>
-              <input type="text" name="discount" class="form-control" placeholder="Enter Discount...">
+              <label>Balance:</label>
+              <input type="text" name="balance" class="form-control payable_balance" placeholder="Enter Balance..." readonly id="payable_balance">
             </div>
           </div>
         </div>
@@ -151,13 +145,29 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label>Comments/Remarks:</label>
-          <textarea cols="80" rows="6" name="remarks" id="remarks"></textarea>
-        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Comments/Remarks:</label>
+              <textarea cols="80" rows="6" name="remarks" id="remarks"></textarea>
+            </div>
+          </div>
 
+          <div class="col-md-6">
+            <div class="form-group">
+              <label></label>
+                <p><strong>Area: <span id="area_id"></span></strong></p>
+                <p><strong>Amount : <span id="amount_id"></span></strong></p>
+                <p><strong>Discount : <span id="new_discount"></span></strong></p>
+                <p><strong>Payable Amount : <span id="payable_amount"></span></strong></p>
+            </div>
+          </div>
+        </div>
+        <input type="hidden" id="old_amount" name="old_amount">
+        <input type="hidden" class="payable_amount" name="payable_amount">
+        <input type="hidden" id="unit_id" name="unit_id">
         <div class="box-footer">
-          <a href="{{url('admin/property')}}" class="btn btn-default">Cancel</a>
+          <a href="{{url('admin/deals')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="add-deal"]' class="btn btn-info pull-right">Submit</button>
         </div>
       </form>
@@ -173,7 +183,7 @@
         $('#project_id').on('change',function(){
             var value = $(this).val();
             $.ajax({
-                url:"{{url('admin/property/ajaxproperty?id=')}}"+value,
+                url:"{{url('admin/property/ajaxproperties?id=')}}"+value,
                 type:'POST',
                 success:function(data){
                     $('#properties').html(data).prev().css("display","block");
@@ -192,9 +202,36 @@
                   console.log(data);
                     $('#area').val(data.area);
                     $('#amount').val(data.price);
+                    $('#unit_name').val(data.unit_name);
+                    $('#area_id').html(data.area);
+                    $('#amount_id').html(data.price);
+                    $('#old_amount').val(data.price);
+                    $('#unit_id').val(data.unit_id);
+                    discount_count();
                 }
             });
         });
+        function discount_count(){
+           var amount =  $('#old_amount').val();
+            $('#new_discount').html('0');
+           $('#payable_amount').html(amount);
+           $('.payable_amount').val(amount);
+           $('.payable_balance').val(amount);
+           $('#payable_balance').html(amount);
+        }
+
+         $('#discount').on('keyup',function(){
+           // discount_count
+            var discount = $('#discount').val();
+            var amount = $('#old_amount').val();
+            var  payable_amount = (amount-(amount*discount/100));
+            $('#new_discount').html(discount);
+            $('#payable_amount').html(payable_amount);
+            $('.payable_amount').val(payable_amount);
+            $('.payable_balance').val(payable_amount);
+           $('#payable_balance').html(payable_amount);
+
+         });
     });
 </script>
 @endsection

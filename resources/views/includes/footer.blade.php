@@ -27,6 +27,9 @@
             <li>
               <a class="google" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
             </li>
+            <li>
+              <a class="linkedin" href="" target="_blank"><i class="fa fa-whatsapp"></i></a>
+            </li>
           </ul>
           
         </div>
@@ -89,6 +92,9 @@
         </li>
         <li>
           <a class="instagram" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
+        </li>
+        <li>
+          <a class="linkedin" href="" target="_blank"><i class="fa fa-whatsapp"></i></a>
         </li>
     </ul>
 </div>

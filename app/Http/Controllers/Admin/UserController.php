@@ -110,7 +110,7 @@ class UserController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-                $html   .= '<a href="'.url(sprintf('admin/setpermission/%s',___encrypt($item['id']))).'"  title="Set Permissions"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/setpermission/%s',___encrypt($item['id']))).'"  title="Set Permissions"><i class="fa fa-lock"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/userlevel/status/?id=%s&status=trashed',$item['id'])).'" 
                         data-request="ajax-confirm"

@@ -53,6 +53,7 @@
 		<!-- AdminLTE App -->
 		<script src="{{asset('assets/dist/js/adminlte.min.js')}}"></script>
 		<script src="{{asset('assets/js/script.js')}}"></script>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 		<script type="text/javascript">
 		$(function () {
 		    $.ajaxSetup({

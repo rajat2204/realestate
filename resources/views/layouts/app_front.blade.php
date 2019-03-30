@@ -10,7 +10,9 @@
         
         <meta name="_token" content="{{ csrf_token() }}">
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/smartphoto@1.1.0/css/smartphoto.min.css">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> -->
        
 
       
@@ -18,7 +20,7 @@
         <title>Devdrishti Infrahomes Pvt. Ltd.</title>
         
     <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
-        
+    <link rel="stylesheet" href="{{asset('assets/css/smartphoto.min.css')}}">  
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}" >
     <!-- Fonts -->
@@ -56,7 +58,7 @@
         
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('assets/js/jquery-min.js')}}"></script>
-
+    <script src="{{asset('assets/js/smartphoto.min.js')}}"></script>
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
@@ -76,6 +78,7 @@
 
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
+    <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
 
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>

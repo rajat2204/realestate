@@ -195,13 +195,15 @@ Route::resource('company', 'CompanyController');
 
 Route::resource('deals', 'DealsController');
 	Route::group(['prefix' => 'property'],function(){
-			Route::post('ajaxproperty', 'DealsController@ajaxProperty');
+			Route::post('ajaxproperties', 'DealsController@ajaxProperties');
 	});
 	Route::group(['prefix' => 'area'],function(){
 			Route::post('ajaxarea', 'DealsController@ajaxArea');
 	});
 	Route::group(['prefix' => 'deals'],function(){
 		Route::post('/status', 'DealsController@changeStatus');
+			Route::get('makeplan/{id}','DealsController@makePaymentPlan');
+			Route::post('makeplan/{id}','DealsController@makePaymentPlanForm');
 	});
 
 /***********************Services-Section****************************/
@@ -221,6 +223,18 @@ Route::resource('social', 'SocialMediaController');
 /***********************Contact-Address-Section****************************/
 
 Route::resource('contact', 'ContactController');
+
+/***********************Reports-Section****************************/
+
+Route::get('purchasereport', 'ReportController@purchaseReport');
+Route::get('salesreport', 'ReportController@salesReport');
+Route::get('expensereport', 'ReportController@expenseReport');
+Route::get('profitreport', 'ReportController@profitReport');
+
+/***********************Invoices-Section****************************/
+
+Route::get('balanceinvoices', 'ReportController@balanceInvoice');
+Route::get('paidinvoices', 'ReportController@paidInvoice');
 
 /***********************Notice-Section****************************/
 

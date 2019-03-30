@@ -1,4 +1,3 @@
-
 <section class="bg project-section">
 	<div class="container">
 		<div class="peojectnameList">
@@ -32,10 +31,14 @@
 						<div class="row">
 							<div class="col-md-4 pd-right-none">
 								<div class="imgProject">
-									<a href="javascript:void(0);"><img src="{{url('assets/img/Projects')}}/{{$projects['image']}}" alt="project"></a>
+									<a href="{{url('projectproperties')}}/{{___encrypt($projects['id'])}}"><img src="{{url('assets/img/Projects')}}/{{$projects['image']}}" alt="project"></a>
 									<a href="javascript:void(0);" data-toggle="modal">
 										<div class="property-caption">
-											<span class="bulge">{{count($projects['property'])}} properties</span>
+											@if(count($projects['property']) == 1)
+												<span class="bulge">{{count($projects['property'])}} property</span>
+											@else
+												<span class="bulge">{{count($projects['property'])}} properties</span>
+											@endif
 										</div>
 									</a>
 								</div>
@@ -51,18 +54,20 @@
 								<div class="project-content">
 									<p title="{{strip_tags($projects['description'])}}">{{str_limit(strip_tags($projects['description']),280)}}</p>
 								</div>
-								<ul class="projectContent">
-									<li>1 BHK Flat</li>
-									<li>1200 - 13850 sqft</li>
-									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-								</ul>
-								<ul class="projectContent">
-									<li>2 BHK Flat</li>
-									<li>1350 - 1380 sqft</li>
-									<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
-									<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
-								</ul>
+								<div class="propertyScroll">
+									<ul class="projectContent">
+										<li>1 BHK Flat</li>
+										<li>1200 - 13850 sqft</li>
+										<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+										<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+									</ul>
+									<ul class="projectContent">
+										<li>2 BHK Flat</li>
+										<li>1350 - 1380 sqft</li>
+										<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
+										<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					{{-- view photo popup --}}

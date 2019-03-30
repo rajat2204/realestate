@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property extends Model
 {
     protected $table = 'property';
-    protected $fillable = ['project_id','category_id','company_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_construct','property_purpose','bedrooms','bathroom','garage','area','possession','description','key_points','status','featured','created_at','updated_at'];
+    protected $fillable = ['project_id','category_id','company_id','unit_id','name','agent_id','slug','featured_image','price','location','pincode','latitude','longitude','property_type','property_construct','property_purpose','bedrooms','bathroom','garage','area','possession','description','key_points','status','deals','featured','created_at','updated_at'];
 
     public static function change($userID,$data){
         $isUpdated = false;
@@ -35,6 +35,10 @@ class Property extends Model
         return $this->hasOne('App\Models\Project','id','project_id');
     }
 
+    public function units(){
+        return $this->hasOne('App\Models\Units','id','unit_id');
+    }
+
     public function propertyGallery(){
         return $this->hasMany('App\Models\Property_Gallery','plot_id','id');
     }
@@ -52,6 +56,9 @@ class Property extends Model
                 $q->select('id','name');
             },
             'project' => function($q){
+                $q->select('id','name');
+            },
+            'units' => function($q){
                 $q->select('id','name');
             },
             'propertyGallery' => function($q){

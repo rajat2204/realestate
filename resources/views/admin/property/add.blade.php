@@ -177,10 +177,22 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Property Area:</label>
               <input type="text" class="form-control" placeholder="Enter Property Area..." name="area">
+            </div>
+          </div>
+
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Unit:</label>
+              <select class="form-control" name="unit_id">
+                <option>Select Units</option>
+                @foreach($units as $unit)
+                  <option value="{{!empty($unit['id'])?$unit['id']:''}}">{{!empty($unit['name'])?$unit['name']:''}}</option>
+                @endforeach
+              </select>
             </div>
           </div>
 
