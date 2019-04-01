@@ -6,7 +6,7 @@
       <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
         <div class="footer-text">
           <div class="menus_footer">
-            <h3>About <span style="color: #00b4d9">R</span>eal <span style="color: #00b4d9">E</span>state</h3>
+            <h3>About <span style="color: #1281AF">R</span>eal <span style="color: #1281AF">E</span>state</h3>
           </div>
           <div class="footer-about">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -37,7 +37,7 @@
       <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
         <div class="footer-menu">
           <div class="menus_footer">
-            <h3><span style="color: #00b4d9">O</span>ther <span style="color: #00b4d9">M</span>enus</h3>
+            <h3><span style="color: #1281AF">O</span>ther <span style="color: #1281AF">M</span>enus</h3>
           </div>
           <ul class="menus_footer">
             <li><a href="{{url('aboutus')}}"><i class="fa fa-info-circle"></i>About Us</li>
@@ -48,7 +48,7 @@
       </div>
       <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
         <div class="menus_footer">
-            <h3><span style="color: #00b4d9">S</span>ubscribe <span style="color: #00b4d9">H</span>ere !!!</h3>
+            <h3><span style="color: #1281AF">S</span>ubscribe <span style="color: #1281AF">H</span>ere !!!</h3>
           </div>
           <form role="subscribe" action="{{url('subscribe')}}" method="POST" class="form-inline">
               {{csrf_field()}}
