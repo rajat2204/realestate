@@ -318,10 +318,12 @@ class InventoryController extends Controller
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = Inventory::change($request->id,$userData);
 
-        if($isUpdated){
+        if($isUpdated)
+        {
             if($request->status == 'trashed'){
                 $this->message = 'Deleted Inventory successfully.';
-            }else{
+            }
+            else{
                 $this->message = 'Updated Inventory successfully.';
             }
             $this->status = true;

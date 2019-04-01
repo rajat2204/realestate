@@ -113,8 +113,8 @@ class AgentController extends Controller
                 return $html;
             })
             ->editColumn('balance',function($item){
-                if($item['balance'] != NULL){
-                  return 'Rs.'. ' ' .($item['balance']);
+                if($item['amount'] != NULL){
+                  return 'Rs.'. ' ' .($item['amount']);
                 }else{
                   return 'Rs.'. ' ' .'0';
                 }
@@ -135,7 +135,7 @@ class AgentController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             // ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
-             ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Amount','orderable' => false, 'width' => 120])
+             ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
              ->addColumn(['data' => 'action','name' => 'action','title' => 'Action','orderable' => false, 'width' => 120]);
              // ->addColumn(['data' => 'created_at','name' => 'created_at','title' => 'Created AT','orderable' => false, 'width' => 120]);
             // ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
@@ -288,6 +288,7 @@ class AgentController extends Controller
         $data['view'] = 'admin.agents.wallet';
         $id = ___decrypt($id);
         $data['agent'] = _arefy(Agents::where('id',$id)->first());
+       // dd($data['agent']);
         return view('admin.home',$data);
     }
 
@@ -306,14 +307,16 @@ class AgentController extends Controller
             $data['mobile']=$request->mobile;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
-         //to deduct on selecting action[deduct] and Add on selecting action[add] 
-
+             //to deduct on selecting action[deduct] and Add on selecting action[add] 
             if($data['action']=='deduct' )
             {
                 $balance = $request->balance-$request->amount;
-            }else{
+            }elseif($data['action']=='add'){
                 $balance = $request->balance+$request->amount;
+
             }
+                 
+
             $data['balance']=$balance;
             $data['remarks']=$request->remarks;
             $data['status']='active';

@@ -32,7 +32,7 @@
             <div class="form-group">
               <label>Select Property Name:</label>
               <select class="form-control" name="property_id" id="properties">
-                <option value=" ">Select Property</option>
+                <option value=" ">Select Property Name</option>
                 <option value="{{!empty($purchase['property']['id'])?$purchase['property']['id']:''}}" @if($purchase['property']['id'] == $purchase['property_id']) selected @endif>{{!empty($purchase['property']['name'])?$purchase['property']['name']:''}}</option>
               </select>
             </div>

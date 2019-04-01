@@ -21,30 +21,33 @@
 
             <div class="row m-t-20">
               <div class="col-md-3 col-sm-offset-1">
-                <select name="" class="form-control" id="PurchasereportProjectId">
-                  <option value="">All</option>
-                  <option value="1">Project A</option>
-                  <option value="2">Project B</option>
-                  <option value="3">Project C</option>
-                  <option value="4">Rajat</option>
+                <select class="form-control" id="PurchasereportProjectId" name="project_id">
+                  <option value="">Select Project Name</option>
+                  <option value="all">All</option>
+                  @foreach($projects as $project)
+                    <option value="{{!empty($project['id'])?$project['id']:''}}">{{!empty($project['name'])?$project['name']:''}}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="col-md-4">
-                <select name="" class="form-control" id="PurchasereportProjectId">
-                  <option value="">All</option>
-                  <option value="1">Project A</option>
-                  <option value="2">Project B</option>
-                  <option value="3">Project C</option>
-                  <option value="4">Rajat</option>
-                </select>
+                <input type="text" name="seller_name" id="seller_name" placeholder="Seller Name" class="form-control">
               </div>
               <div class="col-md-3">
-                <select name="" class="form-control" id="PurchasereportProjectId">
+                <select name="year" class="form-control" id="year">
+                  <option value="">Select Year</option>
                   <option value="">All</option>
-                  <option value="1">Project A</option>
-                  <option value="2">Project B</option>
-                  <option value="3">Project C</option>
-                  <option value="4">Rajat</option>
+                  <option value="">2019</option>
+                  <option value="">2020</option>
+                  <option value="">2021</option>
+                  <option value="">2022</option>
+                  <option value="">2023</option>
+                  <option value="">2024</option>
+                  <option value="">2025</option>
+                  <option value="">2026</option>
+                  <option value="">2027</option>
+                  <option value="">2028</option>
+                  <option value="">2029</option>
+                  <option value="">2030</option>
                 </select>
               </div>
             </div>
@@ -67,15 +70,39 @@
                 <a href="" class="btn btn-warning btn-sm"><span class="fa fa-refresh"></span>&nbsp;Reset</a>        
               </div>
           </div>
+          <div id="chartContainer" style="height: 370px; width: 100%;">
+            <?php
+              $dataPoints = array(
+                array("y" => 25, "label" => "Sunday"),
+              );
+               
+              ?>
+        </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 @section('requirejs')
 <script type="text/javascript">
-
+  window.onload = function () {
+  var chart = new CanvasJS.Chart("chartContainer", {
+    title: {
+      text: "Purchases"
+    },
+    axisY: {
+      title: "Total Cost"
+    },
+    data: [{
+      type: "line",
+      dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+    }]
+  });
+  chart.render();
+   
+  }
   
 </script>
 @endsection

@@ -192,7 +192,7 @@
         });
     });
 
-  $(document).ready(function(){
+    $(document).ready(function(){
         $('#properties').on('change',function(){
             var value = $(this).val();
             $.ajax({

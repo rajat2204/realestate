@@ -38,10 +38,11 @@
             	$agent_balance = App\Models\Agents_Wallets::where('agents_id',$agent['id'])->get();
             	$addbal[]=0;
             	$deductbal[]=0;
-
+              $totalBalance[]=0;
             foreach($agent_balance as $balance){
             	if($balance['action']=='add'){
             		$addbal[] = $balance['amount'];	
+
             	}
             	else
             	{
@@ -50,6 +51,7 @@
             }
             $totalBalance= array_sum($addbal) - array_sum($deductbal);
             @endphp
+            {{-- {{dd(array_sum($addbal))}} --}}
             	
             <div class="form-group">
                 <label class= "text-dark">Balance :</label>
