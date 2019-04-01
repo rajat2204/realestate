@@ -70,6 +70,9 @@ Route::resource('purchase', 'PurchaseController');
 	Route::group(['prefix' => 'property'],function(){
 			Route::post('ajaxproperty', 'PurchaseController@ajaxProperty');
 	});
+	Route::group(['prefix' => 'price'],function(){
+			Route::post('ajaxprice', 'PurchaseController@ajaxPrice');
+	});
 	Route::group(['prefix' => 'purchase'],function(){
 		Route::post('/status', 'PurchaseController@changeStatus');
 		Route::get('/payment/{id}','PurchaseController@purchasePayment');

@@ -16,7 +16,7 @@
           <a href="{{url('properties')}}/{{($projectproperties['slug'])}}">
             <div class="single-featured-property wow fadeInUp" data-wow-delay="100ms">
                 <div class="property-thumb">
-                    <a href="{{url('properties')}}/{{($projectproperties['slug'])}}"><img src="{{url('assets/img/properties')}}/{{$projectproperties['featured_image']}}" alt="feature"></a>
+                    <a href="{{url('properties')}}/{{($projectproperties['slug'])}}" target="_blank"><img src="{{url('assets/img/properties')}}/{{$projectproperties['featured_image']}}" alt="feature"></a>
                     <div class="tag">
                         <span>For {{$projectproperties['property_purpose']}}</span>
                     </div>

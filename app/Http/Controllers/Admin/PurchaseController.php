@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Property;
 use App\Models\Project;
 use App\Models\Purchase;
+use App\Models\Units;
 use App\Models\Purchase_Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -190,6 +191,18 @@ class PurchaseController extends Controller
       $property = Property::where('project_id',$id)->get();
       $propertyview = view('admin.template.ajaxproperty',compact('property'));
       return Response($propertyview);
+    }
+
+    public function ajaxPrice(Request $request)
+    {
+      $id = $request->id;
+      $price = Property::where('id',$id)->first();
+      $units = Units::where('id',$price['unit_id'] )->first();
+      $priceview['unit_id']=$units['id'];
+      $priceview['unit_name']=$units['name'];
+      $priceview['area']=$price['area'];
+      $priceview['price']=$price['price'];
+      return Response($priceview);
     }
 
     public function purchasePayment(Request $request,$id)
