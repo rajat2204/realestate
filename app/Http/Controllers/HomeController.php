@@ -11,6 +11,7 @@ use App\Models\Notice;
 use App\Models\Contact;
 use App\Models\Sliders;
 use App\Models\Enquiry;
+use App\Models\AgentEnquiry;
 use App\Models\Services;
 use App\Models\Property;
 use App\Models\Property_Gallery;
@@ -34,6 +35,7 @@ class HomeController extends Controller{
         $where = 'status = "active"';
         $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc',9));
         $data['agent'] = _arefy(Agents::where('status','active')->get());
+        // dd($data['agent']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
@@ -126,6 +128,16 @@ class HomeController extends Controller{
         return view('front_home',$data);
     }
 
+    public function agentEnquiry(Request $request,$id){
+        $id = ___decrypt($id);
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['agent'] = _arefy(Agents::where('id',$id)->first());
+        // dd($data['agent']);
+        $data['view'] = 'front.enquiry-agent';
+        return view('front_home',$data);
+    }
+
     public function allProjects(Request $request){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
@@ -186,6 +198,47 @@ class HomeController extends Controller{
                 $this->modal    = true;
                 $this->alert    = true;
                 $this->message  = "Enquiry has been submitted successfully.";
+                $this->redirect = url('/');
+            }
+        return $this->populateresponse();
+    }
+
+    public function agentEnquirySubmission(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->agentenquiry();
+        if($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data['agent_name']         =!empty($request->agent_name)?$request->agent_name:'';
+            $data['agent_contact']      =!empty($request->agent_contact)?$request->agent_contact:'';
+            $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
+            $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
+            $data['email']              =!empty($request->email)?$request->email:'';
+            $data['message']            =!empty($request->message)?$request->message:'';
+            
+            $inserId = AgentEnquiry::add($data);
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['agent_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Agent Enquiry has been submitted successfully.";
                 $this->redirect = url('/');
             }
         return $this->populateresponse();

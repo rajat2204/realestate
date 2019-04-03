@@ -1,7 +1,7 @@
 <section id="contact" class="contact-section">
   <div class="contact-form">
     <div class="container">
-      <form id="enquiry" role="enquiry" action="{{url('enquirysubmission')}}" method="POST">
+      <form role="agentenquiry" action="{{url('agentenquirysubmission')}}" method="POST">
         <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">
           <div class="col-md-6 col-lg-6 col-sm-6">
             <div class="contact-block">
@@ -12,14 +12,14 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Shop Name:</label>
-                          <input type="text" class="form-control" id="slider_name" name="slider_name" value="{{$slider['title']}}" readonly="">
+                          <label>Agent Name:</label>
+                          <input type="text" class="form-control" id="agent_name" name="agent_name" readonly="" value="{{$agent['name']}}">
                         </div>                                 
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Shop Contact:</label>
-                          <input type="number" id="slider_contact" class="form-control" name="slider_contact" value="{{$slider['mobile']}}" readonly="">
+                          <label>Agent Contact:</label>
+                          <input type="number" id="agent_contact" class="form-control" value="{{$agent['mobile']}}" name="agent_contact"  readonly="">
                         </div> 
                       </div>
                     </div>
@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="col-md-12">
-                    <button class="btn btn-common" id="submit" type="button" data-request="ajax-submit" data-target='[role="enquiry"]'>Submit Enquiry</button>
+                    <button class="btn btn-common" id="submit" type="button" data-request="ajax-submit" data-target='[role="agentenquiry"]'>Submit Enquiry</button>
                     <div id="msgSubmit" class="h3 text-center hidden"></div> 
                     <div class="clearfix"></div>
                   </div>
@@ -64,15 +64,7 @@
           <div class="col-md-6 col-lg-6 col-sm-6">
             <div class ="datas_show">
               <div class="form-row">
-                <img class="form-control slide-image" src="{{url('assets/img/Sliders')}}/{{$slider['image']}}" />
-              </div>
-              <div class="form-row">
-                <label>Description:</label>
-                <textarea class="form-control" name="description" rows="3" readonly="">{{strip_tags($slider['description'])}}</textarea>
-              </div>
-              <div class="form-row">
-                <label>Shop Location:</label>
-                <input type="text" name="location" class="form-control" placeholder ="Shop Location..." value="{{$slider['location']}}" readonly="">
+                <img class="form-control slide-image" src="{{url('assets/img/agent')}}/{{$agent['image']}}" />
               </div>
             </div>
           </div> 

@@ -382,8 +382,7 @@
               @foreach($agent as $agents)
                 <div class="item agentSpace">
                   <div>
-                    <img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent">
-                    <div class="overlay"></div>
+                    <a href="{{url('agentenquiry')}}/{{___encrypt($agents['id'])}}"><img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent"></a>
                   </div>
                   <div class="agentContent">
                     <div class="agent_name">{{$agents['name']}}</div>

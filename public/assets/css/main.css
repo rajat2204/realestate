@@ -2165,7 +2165,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   border: 1px solid #e1e1e1;
 }
 img.form-control.slide-image {
-    height: 170px;
+    height: 400px;
 }
 .submit-button {
     margin-bottom: 20px;

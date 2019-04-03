@@ -34,6 +34,8 @@ Route::get('contact','HomeController@contact');
 Route::post('contactussubmission','HomeController@contactUs');
 Route::get('sliders/{slug}','HomeController@enquiry');
 Route::post('enquirysubmission','HomeController@enquirySubmission');
+Route::get('agentenquiry/{id}','HomeController@agentEnquiry');
+Route::post('agentenquirysubmission','HomeController@agentEnquirySubmission');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
 Route::post('login','HomeController@customerLogin');
@@ -179,12 +181,20 @@ Route::resource('plans', 'PlanController');
 /***********************Leads-Section****************************/
 
 Route::get('contactleads','LeadController@contactLead');
+Route::get('agentleads','LeadController@agentLead');
+Route::get('sliderleads','LeadController@sliderLead');
 Route::resource('leads', 'LeadController');
 	Route::group(['prefix' => 'leads'],function(){
 		Route::post('/status', 'LeadController@changeStatus');
 	});
 	Route::group(['prefix' => 'contactleads'],function(){
 		Route::post('/status', 'LeadController@changeStatusContacts');
+	});
+	Route::group(['prefix' => 'agentleads'],function(){
+		Route::post('/status', 'LeadController@changeStatusAgents');
+	});
+	Route::group(['prefix' => 'sliderleads'],function(){
+		Route::post('/status', 'LeadController@changeStatusSlider');
 	});
 
 /***********************Company-Section****************************/

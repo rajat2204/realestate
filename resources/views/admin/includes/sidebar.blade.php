@@ -51,6 +51,8 @@
           <ul class="treeview-menu">
             <li><a href="{{url('admin/leads')}}"><i class="fa fa-tasks"></i>Admin Lead</a></li>
             <li><a href="{{url('admin/contactleads')}}"><i class="fa fa-envelope"></i>Enquiry Leads</a></li>
+            <li><a href="{{url('admin/agentleads')}}"><i class="fa fa-envelope"></i>Agent Leads</a></li>
+            <li><a href="{{url('admin/sliderleads')}}"><i class="fa fa-envelope"></i>Slider Leads</a></li>
           </ul>
         </li>
         <li>

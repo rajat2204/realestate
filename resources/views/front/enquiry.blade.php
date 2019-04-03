@@ -12,13 +12,13 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Shop Name:</label>
+                          <label>Name:</label>
                           <input type="text" class="form-control" id="slider_name" name="slider_name" value="{{$slider['title']}}" readonly="">
                         </div>                                 
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Shop Contact:</label>
+                          <label>Contact:</label>
                           <input type="number" id="slider_contact" class="form-control" name="slider_contact" value="{{$slider['mobile']}}" readonly="">
                         </div> 
                       </div>

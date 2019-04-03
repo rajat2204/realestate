@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Leads;
 use App\Models\Property;
 use App\Models\ContactUs;
+use App\Models\AgentEnquiry;
+use App\Models\Enquiry;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -128,6 +130,125 @@ class LeadController extends Controller
             ->addColumn(['data' => 'subject', 'name' => 'subject','title' => 'Subject','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'message', 'name' => 'message','title' => 'Message','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'number', 'name' => 'number','title' => 'Phone Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function agentLead(Request $request, Builder $builder){
+        $data['view'] = 'admin.leads.agentlist';
+        
+        $agentlead  = _arefy(AgentEnquiry::where('status','!=','trashed')->get());
+        // dd($agentlead);
+       
+        if ($request->ajax()) {
+            return DataTables::of($agentlead)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/agentleads/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> ';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('agent_name',function($item){
+                return ucfirst($item['agent_name']);
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('agent_contact',function($item){
+                return '+91-'.''.($item['agent_contact']);
+            })
+            ->editColumn('customer_contact',function($item){
+                return '+91-'.''.($item['customer_contact']);
+            })
+            ->editColumn('message',function($item){
+                if (!empty($item['message'])) {
+                    return str_limit($item['message'],30);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'agent_name', 'name' => 'agent_name','title' => 'Agent Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'agent_contact', 'name' => 'agent_contact','title' => 'Agent Contact','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'customer_name', 'name' => 'customer_name','title' => 'Customer Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'customer_contact', 'name' => 'customer_contact','title' => 'Customer Contact','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'E-mail','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'message', 'name' => 'message','title' => 'Message','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function sliderLead(Request $request, Builder $builder){
+        $data['view'] = 'admin.leads.sliderlist';
+        
+        $sliderlead  = _arefy(Enquiry::where('status','!=','trashed')->get());
+        // dd($agentlead);
+       
+        if ($request->ajax()) {
+            return DataTables::of($sliderlead)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/sliderleads/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> ';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('slider_name',function($item){
+                return ucfirst($item['slider_name']);
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('slider_contact',function($item){
+                return '+91-'.''.($item['slider_contact']);
+            })
+            ->editColumn('customer_contact',function($item){
+                return '+91-'.''.($item['customer_contact']);
+            })
+            ->editColumn('message',function($item){
+                if (!empty($item['message'])) {
+                    return str_limit($item['message'],30);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'slider_name', 'name' => 'slider_name','title' => 'Slider Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'slider_contact', 'name' => 'slider_contact','title' => 'Slider Contact','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Location','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'customer_name', 'name' => 'customer_name','title' => 'Customer Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'customer_contact', 'name' => 'customer_contact','title' => 'Customer Contact','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'E-mail','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'message', 'name' => 'message','title' => 'Message','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -259,6 +380,40 @@ class LeadController extends Controller
     public function changeStatusContacts(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = ContactUs::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted lead successfully.';
+            }else{
+                $this->message = 'Updated lead successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusAgents(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = AgentEnquiry::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted lead successfully.';
+            }else{
+                $this->message = 'Updated lead successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusSlider(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Enquiry::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){
