@@ -128,7 +128,7 @@
 					<div data-ride="carousel" class="carousel carousel-fade" id="carousel-example-captions">
 						<div role="listbox" class="carousel-inner">
 							<div class="carousel-item active">
-								<div class="slide-1"></div>
+								<div class="slide-1" style="background: url(../assets/img/properties/f1.png) top left no-repeat;"></div>
 							</div>
 						</div>
 					</div>
