@@ -3,7 +3,7 @@
     <div class="container">
       <form role="agentenquiry" action="{{url('agentenquirysubmission')}}" method="POST">
         <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.4s">
-          <div class="col-md-6 col-lg-6 col-sm-6">
+          <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="contact-block">
               <h2>Enquiry Form</h2>
                 {{csrf_field()}}
@@ -60,15 +60,7 @@
                 </div>
             </div>
           </div> 
-          <!-- next division of page -->
-          <div class="col-md-6 col-lg-6 col-sm-6">
-            <div class ="datas_show">
-              <div class="form-row">
-                <img class="form-control slide-image" src="{{url('assets/img/agent')}}/{{$agent['image']}}" />
-              </div>
-            </div>
-          </div> 
-          <!-- second partition ends  -->
+         
         </div>
       </form>
     </div>
