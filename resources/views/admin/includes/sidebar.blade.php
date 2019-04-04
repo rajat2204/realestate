@@ -22,6 +22,11 @@
           </a>
         </li>
         <li>
+          <a href="{{url('admin/company')}}">
+            <i class="fa fa-building"></i><span>Company</span>
+          </a>
+        </li>
+        <li>
           <a href="{{url('admin/project')}}">
             <i class="fa fa-folder-open"></i> <span>Projects</span>
           </a>
@@ -49,11 +54,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/leads')}}"><i class="fa fa-tasks"></i>Admin Lead</a></li>
-            <li><a href="{{url('admin/contactleads')}}"><i class="fa fa-envelope"></i>Enquiry Leads</a></li>
-            <li><a href="{{url('admin/agentleads')}}"><i class="fa fa-envelope"></i>Agent Leads</a></li>
-            <li><a href="{{url('admin/sliderleads')}}"><i class="fa fa-envelope"></i>Slider Leads</a></li>
+            <li><a href="{{url('admin/leads')}}">Admin Lead</a></li>
+            <li><a href="{{url('admin/contactleads')}}">Enquiry Leads</a></li>
+            <li><a href="{{url('admin/agentleads')}}">Agent Leads</a></li>
+            <li><a href="{{url('admin/sliderleads')}}">Slider Leads</a></li>
           </ul>
+        </li>
+        <li>
+          <a href="{{url('admin/agent')}}">
+            <i class="fa fa-user-secret"></i><span>Agents</span>
+          </a>
         </li>
         <li>
           <a href="{{url('admin/client')}}">
@@ -105,11 +115,6 @@
             <li><a href="{{url('admin/profitreport')}}">Profit Report</a></li>
           </ul>
         </li> -->
-        <li>
-          <a href="{{url('admin/agent')}}">
-            <i class="fa fa-user-secret"></i><span>Agents</span>
-          </a>
-        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-user fa-fw"></i> <span>User</span>
@@ -121,11 +126,6 @@
             <li><a href="{{url('admin/userlevel')}}">User Level</a></li>
             <li><a href="{{url('admin/users')}}">Users</a></li>
           </ul>
-        </li>
-        <li>
-          <a href="{{url('admin/company')}}">
-            <i class="fa fa-building"></i><span>Company</span>
-          </a>
         </li>
         <li>
           <a href="{{url('admin/sliders')}}">
