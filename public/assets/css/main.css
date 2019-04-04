@@ -2493,6 +2493,10 @@ header#header {
   .about-text {
       margin-top: 30px;
   }
+  .boxd{
+    padding: 10px 10px 10px 10px;
+    width: 100%;
+  }
 }
 .vertical_slides {
     display: inline-block;
@@ -4019,7 +4023,7 @@ span.fbold i {
     min-height: 100%;
 }
 .slide-1 {
-    background: url(../img/properties/f1.png) top left no-repeat;
+    
 }
 .hero-img .carousel{
   height: 100%;
