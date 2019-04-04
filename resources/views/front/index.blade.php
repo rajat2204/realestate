@@ -386,7 +386,6 @@
                   </div>
                   <div class="agentContent">
                     <div class="agent_name">{{$agents['name']}}</div>
-                    <div class="agent_name">{{$agents['designation']}}</div>
                   </div>
                 </div>
               @endforeach

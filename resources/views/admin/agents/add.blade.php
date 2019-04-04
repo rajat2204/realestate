@@ -26,36 +26,167 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label>Agent email:</label>
-            <input type="email" class="form-control" placeholder="Enter Agents email..." name="email">
+            <label>Son/Daughter/Husband/Wife Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Agents Son/Daughter/Wife Name..." name="spouse_name">
           </div>
         </div> 
        </div>   
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label>Agent's address:</label>
-              <input type="text" class="form-control" placeholder="Enter Agents address" name="address">
+              <label>Agent's DOB:</label>
+              <input type="date" class="form-control" placeholder="Enter Agents Date of Birth" name="dob">
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <div class="form-group">
-                <label>Agent's mobile:</label>
-                <input type="text" class="form-control" placeholder="Enter Agents Mobile" name="mobile">
+                <label>Agent's Adhaar Number:</label>
+                <input type="text" class="form-control" placeholder="Enter Agents Adhaar Number" name="adhaar">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label>Agent's PAN Number:</label>
+                <input type="text" class="form-control" placeholder="Enter Agents PAN Number" name="pan">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Agent's Address:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents Address" name="address" id="autocomplete">
+              <input type="hidden" name="city" id="city">
+              <input type="hidden" name="latitude" id="cityLat">
+              <input type="hidden" name="longitude" id="cityLng">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Agent's Post Office:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents Post Office" name="post_office">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label>Tehsil:</label>
+                <input type="text" class="form-control" placeholder="Enter Tehsil" name="tehsil">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label>District:</label>
+                <input type="text" class="form-control" placeholder="Enter District" name="district">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Agent's PIN:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents PIN" name="pin">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Agent's Contact Number:</label>
+              <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="mobile">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <label>E-mail Id:</label>
+                <input type="text" class="form-control" placeholder="Enter Agent E-mail Id" name="email">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Nominee:</label>
+              <input type="text" class="form-control" placeholder="Enter Nominee" name="nominee">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label>Nominee Relation:</label>
+              <input type="text" class="form-control" placeholder="Enter Nominee Relation" name="relation">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+                <label>Nominee Date Of Birth:</label>
+                <input type="date" class="form-control" placeholder="Enter Nominee Date Of Birth" name="dob_nominee">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-            <label>Agent's Designation:</label>
-            <input type="text" class="form-control" placeholder="Enter Agents Designation" name="designation">
-         </div>
-        </div>
-         <div class="col-md-6">
+              <label>Introducer Name:</label>
+              <input type="text" class="form-control" placeholder="Enter Introducer Name" name="introducer_name">
+            </div>
+          </div>
+          <div class="col-md-6">
             <div class="form-group">
-                <label>Commission:</label>
-                <input type="text" class="form-control" placeholder="Enter Commission" name="commission">
+              <label>Code:</label>
+              <input type="text" class="form-control" placeholder="Enter Code" name="code">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Educational Qualification:</label>
+              <input type="text" class="form-control" placeholder="Enter Educational Qualification" name="qualification">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Previous Experience:</label>
+              <input type="text" class="form-control" placeholder="Enter Previous Experience" name="experience">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Banker's Name:</label>
+              <input type="text" class="form-control" placeholder="Enter Banker's Name" name="banker_name">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Branch:</label>
+              <input type="text" class="form-control" placeholder="Enter Branch" name="branch_name">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Account Number:</label>
+              <input type="text" class="form-control" placeholder="Enter Account Number" name="account_no">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>IFSC Code:</label>
+              <input type="text" class="form-control" placeholder="Enter IFSC Code" name="ifsc">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Executive ID:</label>
+              <input type="text" class="form-control" placeholder="Enter Executive ID" name="executive_id">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Rank:</label>
+              <input type="text" class="form-control" placeholder="Enter Rank" name="rank">
             </div>
           </div>
         </div>

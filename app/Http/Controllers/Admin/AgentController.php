@@ -66,6 +66,12 @@ class AgentController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('spouse_name',function($item){
+                return ucfirst($item['spouse_name']);
+            })
+            ->editColumn('nominee',function($item){
+                return ucfirst($item['nominee']);
+            })
             ->editColumn('balance',function($item){
                 if($item['balance'] != NULL){
                   return 'Rs.'. ' ' .($item['balance']);
@@ -87,10 +93,12 @@ class AgentController extends Controller
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Agent Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'spouse_name', 'name' => 'spouse_name','title' => 'Agents Spouse Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'nominee', 'name' => 'nominee','title' => 'Agents Nominee','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'adhaar', 'name' => 'adhaar','title' => 'Agents Adhaar Number','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Agent E-mail','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'designation', 'name' => 'designation','title' => 'Agent Designation','orderable' => false, 'width' => 120])
              ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);

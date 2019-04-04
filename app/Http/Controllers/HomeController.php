@@ -222,7 +222,7 @@ class HomeController extends Controller{
             $password="AMREESH@25";
             $sender="AMRESH";
 
-            $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+            $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". The contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
             $pingurl = "skycon.bulksms5.com/sendmessage.php";
 
