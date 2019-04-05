@@ -138,7 +138,7 @@
           <div>
             @if(!empty($gallery))
               @foreach($gallery as $images)
-                <img style="max-width: 250px;" src="{{url('assets/img/Property Gallery')}}/{{$images['images']}}" id="adminimg">
+                <img style="max-width: 250px;" src="{{url('assets/img/PropertyGallery')}}/{{$images['images']}}" id="adminimg">
               @endforeach
             @endif
               <input type="file" id="gallery" accept="image/*" name="gallery[]" multiple/>
