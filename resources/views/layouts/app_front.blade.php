@@ -41,7 +41,7 @@
     <!-- mcustomscroll css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" >
+    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" > -->
     <!-- Animate -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
     <!-- Main Style -->
