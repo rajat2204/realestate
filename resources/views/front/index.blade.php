@@ -242,7 +242,7 @@
                 </div>
               </div>
                 <div class="searchwrap">
-                  <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} class="btn button_search1 text-right" type="submit" ><i class="fa fa-search"></i> Search</button>
+                  <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} class="btn button_search1 text-right" type="submit" id="search"><i class="fa fa-search"></i> Search</button>
                 </div>
             </div>
           </form>

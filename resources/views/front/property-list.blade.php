@@ -28,9 +28,11 @@
     <div class ="row ">
     <div class="col-md-2 ">
   <div class="boxd">
-  <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
-  <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span>
-<p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
+    <a href="#viewphotos" data-toggle="modal">
+      <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
+      <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span>
+      <p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
+  </a>
   </div>
   </div>
 <div class="col-md-2 trims">  
@@ -222,6 +224,49 @@
   </div>
      </div> 
  </div>
+ <div class="modal modalphotos fade" id="viewphotos" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <div class="modal-body popupmodal-body">
+                  <div class="swiper-container gallery-top">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
+                  </div>
+                  <!-- Add Arrows -->
+                  <div class="swiper-button-next swiper-button-white"></div>
+                  <div class="swiper-button-prev swiper-button-white"></div>
+                </div>
+                <div class="swiper-container gallery-thumbs">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
 </div>
 </div>
 </section>

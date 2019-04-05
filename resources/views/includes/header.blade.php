@@ -71,7 +71,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="javascript:void(0);-search">
+                        <a class="nav-link" href="#search">
                           <i class="fa fa-search"></i>
                         </a>
                       </li>
@@ -118,7 +118,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0);-search">
+                <a class="nav-link" href="#search">
                   <i class="fa fa-search"></i>
                 </a>
               </li>

@@ -681,7 +681,11 @@ a.back-to-top:hover, a.back-to-top:focus {
   -o-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
 }
-
+.boxd {
+  padding: 10px 0px 10px 10px;
+  width: 170px;
+  position: relative;
+}
 .dropdown .dropdown-menu .dropdown-item:last-child {
   border-bottom: none;
   border-bottom-left-radius: 4px;
@@ -3696,11 +3700,7 @@ p.utopia{
     padding: 2px 33px;
     color: #fff;
 }
-.boxd {
-  padding: 10px 0px 10px 10px;
-  width: 170px;
-  position: relative;
-}
+
 .trims.col-md-2{
   max-width: 14.266667%;
 }  
