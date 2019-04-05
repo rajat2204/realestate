@@ -2400,9 +2400,15 @@ p {
   display: block;
 }
 a.navbar-brand img {
-    width: 100%;
+  max-width: 110px;
+    /*width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;*/
+}
+a.navbar-brand .singleLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .shot-item>img {
     /*width: 360px;*/
@@ -4441,7 +4447,7 @@ ul.owl-gallery li {
     align-items: flex-start;
     flex-grow: 0;
     width: 100%;
-    margin-bottom: auto;
+    margin: 20px 0;
     padding: 12px 5% 12px 0px;
   }
   #sideNav .navbar-collapse .navbar-nav {
