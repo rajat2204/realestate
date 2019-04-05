@@ -472,72 +472,7 @@
 			</ul>
 		</div>
 	
-<!-- </div> -->
 
-<!-- <div class="item">
-<div class="row">
-<ul class="amenities-list">
-<li><span class="icon icon-tennis"></span><span class="am-txt">Billards &amp; Table Tennis Room</span></li>
-<li><span class="icon icon-cards-room"></span><span class="am-txt">Cards Room</span></li>
-<li><span class="icon icon-kids-play-area"></span><span class="am-txt">Children’s Play Areas</span></li>
-
-</ul>
-</div>
-</div>
-<div class="item">
-<div class="row">
-<ul class="amenities-list">
-<li><span class="icon icon-badminton-court"></span><span class="am-txt">Badminton Court</span></li>
-
-<li>
-    <div class="amenties-title">Leisure</div>
-</li>
-<li><span class="icon icon-banquet-hall"></span><span class="am-txt">Banquet And Party Halls</span></li>
-
-
-</ul>
-</div>
-</div></div>
-<div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-
-<li><span class="icon icon-Barbeque-Pit"></span><span class="am-txt">Outdoor Barbecue Area</span></li>
-<li><span class="icon icon-event-space-amphitheatre"></span><span class="am-txt">Mini Theatre</span></li>
-<li><span class="icon icon-coffee-lounge-restaurant"></span><span class="am-txt">Restaurant </span></li>
-
-</ul>
-</div>
-</div></div><div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-<li><span class="icon icon-power-backup"></span><span class="am-txt">Central Power Back-up </span></li>
-
-<li>
-    <div class="amenties-title">Security</div>
-</li>
-<li><span class="icon icon-security"></span><span class="am-txt">Security </span></li>
-
-
-
-</ul>
-</div>
-</div></div><div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-
-<li><span class="icon icon-intercom-facility"></span><span class="am-txt">Intercom Facility </span></li>
-
-<li><div class="amenties-title">Environment</div>
-</li>
-<li><span class="icon icon-park"></span><span class="am-txt">Landscaped gardens</span></li>
-
-
-</ul> -->
-<!-- </div> -->
 
 </div>
 </div>
@@ -553,9 +488,9 @@
              	@foreach($property['property_gallery'] as $property['property_galleries'])
           	<li class="brick">
              	<span class="thumb1">
-	             		<a href="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer"">
-	             		<img src="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
-	             		</a>
+             		<a href="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer">			
+	             		<img src="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" alt="gallery"> 
+	             	</a>
              	</span>
             </li>
 	            @endforeach
