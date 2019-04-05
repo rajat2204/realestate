@@ -75,7 +75,6 @@
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#amenities">Amenities</a></li>
 			<!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#specifications">Specifications</a></li>-->
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#gallery">Gallery</a></li>
-			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#mapview">Map View</a></li>
 			<li class="nav-item"><a class="nav-link js-scroll-trigger pb-0" href="#aboutus">About the Builder</a></li>
 		</ul>
 	</div>
@@ -546,91 +545,27 @@
 
 
 <section class="content-section flex-column" id="gallery">
-    <div><a class="card-title"> <span>Take a </span> Closer Look</a>
-      <div class="card-section">
-        <div class="gallery-box  padding30 nopadding-mobile">
-          	<div id="galley">
-           		<ul class="smartphotoWrapper" id="gallery">
-	            	<li class="brick">
-		             	<span class="thumb1"> 
-		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		             		</a> 
-		             	</span>
-		             	
-		             </li>
-		             <li class="brick">
-		             	<span class="thumb1">
-		             	 <a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             	 	<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		             	 </a> 
-		             	</span>
-		             </li>
-		             <li class="brick">
-		             	<span class="thumb4"> 
-		             		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		             			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		             		</a> 
-		             	</span>
-		             	
-		             </li>
-		             
-		            <li class="brick">
-		            	<span class="thumb1">
-		            		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		            			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		            		</a>
-		            	</span>
-		            </li>
-		            <li class="brick">
-		            	<span class="thumb1">
-		            		<a href="../assets/img/gallery/slider7.jpg" class="js-img-viwer"">
-		            			<img src="../assets/img/gallery/slider7.jpg" alt="gallery">
-		            		</a>
-		            	</span>
-		            </li>
-        		</ul>
-    		</div>
-		</div>
-		<div class="row view-all-photo-box">               
-		    <div class="col-md-12 text-center m-b-20">
-		        <a href="javascript:void(0);" class="js-img-viwer cta-btn-gallery border-color text-color" data-id="raion" data-group="nogroup" data-index="8">View All Photos</a>
-		    </div>
-		    
-		</div>
-      </div>
-    </div>
-  </section>
-<section class="content-section  flex-column" id="mapview">
-	<div>
-	<a class="card-title">Map <span>View </span> </a>
-		<div class="card-section">
-			<div class="tab-value">
-				<ul class="nav nav-tabs unittab">
-					<li><a href="javascript:void(0);"> Location Map</a></li>
-				</ul>
-			</div>
-			<div class="tabContent">
-				<div id="locationadvantage" class="">
-					<div class="row padding30">
-						<div class="col-lg-4 nopadding hidden-xs">
-							<div class="roundborder location-ad-img">
-								
-							</div>
-						</div>
-						<div class="col-lg-8 col-12 no-mobile-padding">
-							<ul class="advantage">
-								<li>Close Proximity to Delhi.</li>
-								<li>Near IGI Airport.</li>
-								<li>Adjacent to Delhi Green zone.</li>
-							</ul>
-						</div>
-					</div>
+  <div><a class="card-title"> <span>Take a </span> Closer Look</a>
+    <div class="card-section">
+      <div class="gallery-box  padding30 nopadding-mobile">
+      	<div id="galley">
+       		<ul class="smartphotoWrapper" id="gallery">
+             	@foreach($property['property_gallery'] as $property['property_galleries'])
+          	<li class="brick">
+             	<span class="thumb1">
+	             		<a href="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer"">
+	             		<img src="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
+	             		</a>
+             	</span>
+            </li>
+	            @endforeach
+    			</ul>
 				</div>
 			</div>
-		</div>
-	</div>
+    </div>
+  </div>
 </section>
+
 
 <section class="content-section  flex-column" id="aboutus">
 	<div>
@@ -639,16 +574,10 @@
 			<div class="container nopadding">
 				<div class="row nopadding">
 					<div class="col nopadding roundborder builder-logo">
-						<img class="my-auto img-fluid" src="../assets/img/services/1550063716ab1549887525FsD6.png" alt="Developers">
+						<img class="my-auto img-fluid" src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="Developers">
 					</div>
 					<div class="col-lg-9 col-md-9 col-12 nopadding pl-4">
-						<p>
-						Experion is a 100% FDI funded real estate developer backed by Experion Holdings Pte. Ltd., Singapore, the real estate investing arm of the $2.5 billion AT Holdings group of companies. Other businesses of AT Holdings include Construction, Oil &amp; Gas, Renewable Energy and Asset Management.<br>
-
-						At Experion we believe that good experiences foster enduring relationships. We offer transparency in transaction, thought-leadership in action, customer insight in our developments and thus, transform every relationship into positive, engaging and memorable experiences that people would love to come back to.<br>
-
-						With substantial Development Rights across various locations in India, Experion is developing townships, group-housing projects, commercial landmarks, organized retail destinations, hotels and resorts across Andhra Pradesh, Delhi NCR, Goa, Haryana, Maharashtra, Punjab, Tamil Nadu and Uttar Pradesh.
-						</p>
+						<p>{!! $property['company']['description'] !!}</p>
 					</div>
 				</div>
 			</div>
@@ -656,17 +585,16 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-12 nopadding">
 				<span class="developer-title">Site Address</span>
 					<div class="address-box roundborder mr-4">
-					Sector 112, Gurugram.
+					{{$property['location']}}
 					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-12 nopadding">
+				<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-12 nopadding">
 					<span class="developer-title">Corporate Address</span>
 					<div class="address-box roundborder">
 						Plot No. 18, 2nd Floor, Institutional Area , Gurugram, Delhi NCR, <br>
 						122001, India.
 					</div>
-				</div>
-
+				</div> -->
 			</div>
 		</div>
 	</div>

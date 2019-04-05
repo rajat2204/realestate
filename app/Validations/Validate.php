@@ -27,7 +27,7 @@ class Validate
 			'req_mobile_number' => ['required','required_with:phone_code','numeric'],
 			'country' 			=> ['required','string'],
 			'address'           => ['nullable','string','max:1500'],
-			'description'       => ['required','string','max:1500'],
+			'description'       => ['required','string'],
 			'key_points'       	=> ['required','string','max:1500'],
 			'title'             => ['required','string'],
 			'profile_picture'   => ['required','mimes:doc,docx,pdf'],

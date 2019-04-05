@@ -53,7 +53,7 @@ class Property extends Model
                 $q->select('id','name');
             },
             'company' => function($q){
-                $q->select('id','name');
+                $q->select('id','name','image','description');
             },
             'project' => function($q){
                 $q->select('id','name');

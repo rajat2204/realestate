@@ -122,17 +122,12 @@
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
-                <input name="selectoption"  class="" type="radio">
-                <label for="usr">Individual:</label>
-              </div>
-              <div class="col-md-6">
-               <input name="selectoption" class="" type="radio">
-                <label for="usr">Agent:</label>
+                <input name="text" class="form-control">
+                <label for="usr">Builder Name:</label>
               </div>
             </div>
           </div>
           <div class="form-group m-contact__fieldset">
-           
             <input name="name" class="form-control m-contact__input" type="text">
             <label for="usr" class="contact_label m-contact__label">Name:</label>
           </div>
