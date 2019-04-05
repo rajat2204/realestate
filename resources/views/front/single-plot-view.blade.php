@@ -93,10 +93,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="roundborder overview-detail mt-30">
-			<ul class="over-detail">
+		<!-- <div class="roundborder overview-detail mt-30">
+			<ul class="over-detail"> -->
 				<!--<li>Total Units <span class="s-bold"> 5344 Units  </span></li>-->
-				<li> Available Units <span class="s-bold">  575 Units </span></li>
+				<!-- <li> Available Units <span class="s-bold">  575 Units </span></li>
 				<li> Total No. of Towers <span class="s-bold">  7 Towers</span></li>
 				<li> Total No. of Floors <span class="s-bold">  27 Floors</span></li>
 				<li> Furnishing <span class="s-bold">  Semifurnished</span></li>
@@ -107,7 +107,7 @@
 				<li> Approved by <span class="s-bold"> HSVP </span></li>
 				<li> OC/CC* <span class="s-bold"> Yes/Yes</span></li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </section>
 
