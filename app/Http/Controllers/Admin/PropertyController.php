@@ -183,7 +183,7 @@ class PropertyController extends Controller
                 foreach ($files as $file){
                     $gallery = new Property_Gallery;
                     $image_name = str_random(2).time().$file->getClientOriginalName();
-                    $file->move('assets/img/Property Gallery',$image_name);
+                    $file->move('assets/img/PropertyGallery',$image_name);
                     $gallery['images'] = $image_name;
                     $gallery['plot_id'] = $lastid;
                     $gallery->save();
@@ -272,7 +272,7 @@ class PropertyController extends Controller
                 foreach ($files as $file){
                     $gallery = new Property_Gallery;
                     $image_name = str_random(2).time().$file->getClientOriginalName();
-                    $file->move('assets/img/Property Gallery',$image_name);
+                    $file->move('assets/img/PropertyGallery',$image_name);
                     $gallery['images'] = $image_name;
                     $gallery['plot_id'] = $id;
                     $gallery->save();

@@ -4,7 +4,7 @@
 	<a class="navbar-brand js-scroll-trigger mx-auto img-left" href="#page-top">
 		
 		<span class="d-lg-block img-left">
-			<img src="{{url('assets/img/properties/project-logo.jpg')}}" class="sids" alt ="logo">
+			<img src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="gallery">
 		</span>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,10 +93,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="roundborder overview-detail mt-30">
-			<ul class="over-detail">
+		<!-- <div class="roundborder overview-detail mt-30">
+			<ul class="over-detail"> -->
 				<!--<li>Total Units <span class="s-bold"> 5344 Units  </span></li>-->
-				<li> Available Units <span class="s-bold">  575 Units </span></li>
+				<!-- <li> Available Units <span class="s-bold">  575 Units </span></li>
 				<li> Total No. of Towers <span class="s-bold">  7 Towers</span></li>
 				<li> Total No. of Floors <span class="s-bold">  27 Floors</span></li>
 				<li> Furnishing <span class="s-bold">  Semifurnished</span></li>
@@ -107,20 +107,20 @@
 				<li> Approved by <span class="s-bold"> HSVP </span></li>
 				<li> OC/CC* <span class="s-bold"> Yes/Yes</span></li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </section>
 
 
-<section class="content-section d-flex flex-column" id="amenities">
+<!-- <section class="content-section d-flex flex-column" id="amenities">
 <div>
 <a class="card-title"> <span>Exclusive </span> Amenities</a>
 <div class="card-section">
-<div class="amenities-box">
+<div class="amenities-box"> -->
 <!--<div class="white-gradient"></div>-->
 <!-- <div class="owl-carousel owl-amenities"> -->
 	
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<ul class="amenities-list">
 					<li>
@@ -212,7 +212,7 @@
 
 </div>
 </div>
-</section>
+</section> -->
 
 
 <section class="content-section flex-column" id="gallery">
