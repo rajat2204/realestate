@@ -183,16 +183,25 @@ class HomeController extends Controller{
 
             $message="You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
+            $message_admin="From your Portal, " .$data['slider_name']. " has got an enquiry from".ucfirst($data['customer_name']).". The Shopkeeper's contact number is ".$data['slider_contact'].". You can contact ".ucfirst($data['slider_name'])." regarding any query. You have also got the lead regarding enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
+
             $pingurl = "skycon.bulksms5.com/sendmessage.php";
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $pingurl);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['slider_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($ch);
            
             curl_close($ch);
+
+            $admin = curl_init();
+            curl_setopt($admin, CURLOPT_URL, $pingurl);
+            curl_setopt($admin, CURLOPT_POST, 1);
+            curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
+            $result_admin = curl_exec($admin);
+           
+            curl_close($admin);
 
                 $this->status   = true;
                 $this->modal    = true;
@@ -224,6 +233,8 @@ class HomeController extends Controller{
 
             $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". The contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
+            $message_agent="From your Portal, " .$data['agent_name']. " has got an enquiry from ".ucfirst($data['customer_name']).". The Agent's contact number is ".$data['agent_contact'].". You can contact ".ucfirst($data['agent_name'])." regarding any query. You have also got the lead regarding enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
+
             $pingurl = "skycon.bulksms5.com/sendmessage.php";
 
             $ch = curl_init();
@@ -234,6 +245,14 @@ class HomeController extends Controller{
             $result = curl_exec($ch);
            
             curl_close($ch);
+
+            $admin_agent = curl_init();
+            curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
+            curl_setopt($admin_agent, CURLOPT_POST, 1);
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            $result_agent = curl_exec($admin_agent);
+           
+            curl_close($admin_agent);
 
                 $this->status   = true;
                 $this->modal    = true;
@@ -265,6 +284,8 @@ class HomeController extends Controller{
 
             $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". The contact number of ".ucfirst($data['customer_name'])." is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
+            $message_agent="From your Portal, " .$data['agent_name']. " has got an enquiry from ".ucfirst($data['customer_name']).". The Agent's contact number is ".$data['agent_contact'].". You can contact ".ucfirst($data['agent_name'])." regarding any query. You have also got the lead regarding enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
+
             $pingurl = "skycon.bulksms5.com/sendmessage.php";
 
             $ch = curl_init();
@@ -275,6 +296,14 @@ class HomeController extends Controller{
             $result = curl_exec($ch);
            
             curl_close($ch);
+
+            $admin_agent = curl_init();
+            curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
+            curl_setopt($admin_agent, CURLOPT_POST, 1);
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            $result_agent = curl_exec($admin_agent);
+           
+            curl_close($admin_agent);
 
                 $this->status   = true;
                 $this->modal    = true;
