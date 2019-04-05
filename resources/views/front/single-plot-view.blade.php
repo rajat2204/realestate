@@ -12,9 +12,7 @@
 	</button>
 	<div class="collapse navbar-collapse my-auto" id="navbarSupportedContent">
 		<ul class="navbar-nav">
-			
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#overview">Overview</a></li>
-			
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#gallery">Gallery</a></li>
 			<li class="nav-item"><a class="nav-link js-scroll-trigger pb-0" href="#aboutus">About the Builder</a></li>
 		</ul>

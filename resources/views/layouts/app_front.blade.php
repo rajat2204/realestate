@@ -41,7 +41,7 @@
     <!-- mcustomscroll css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" > -->
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" >
     <!-- Animate -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
     <!-- Main Style -->
@@ -61,7 +61,7 @@
     <script src="{{asset('assets/js/smartphoto.min.js')}}"></script>
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
+    
     <script src="{{asset('assets/js/jquery.mixitup.js')}}"></script>
     <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
@@ -79,7 +79,7 @@
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
     <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
