@@ -927,7 +927,6 @@ class Validate
 		public function addDeal($action='add'){
 	      $validations = [
 	      	'client_id' 				=> $this->validation('name'),
-	      	'property_type' 		    => $this->validation('name'),
 	      	'project_id' 				=> $this->validation('name'),
             'property_id'               => $this->validation('name'),
 	      	'invoice_no' 			    => $this->validation('name'),
@@ -940,7 +939,6 @@ class Validate
 
             if($action == 'edit'){
                 $validations['client_id']           = $this->validation('password_null');
-                $validations['property_type']       = $this->validation('password_null');
                 $validations['project_id']          = $this->validation('password_null');
                 $validations['property_id']         = $this->validation('password_null');
                 $validations['invoice_no']          = $this->validation('name');
@@ -953,7 +951,6 @@ class Validate
 	  	
 	      $validator = \Validator::make($this->data->all(), $validations,[
 	  		'client_id.required' 			 =>  'Client Name is required.',
-	  		'property_type.required' 	     =>  'Property Type is required.',
 	  		'project_id.required' 		     =>  'Project Name is required.',
             'property_id.required'           =>  'Property Name is required.',
 	  		'invoice_no.required' 		     =>  'Invoice Number is required.',

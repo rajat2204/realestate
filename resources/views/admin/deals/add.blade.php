@@ -8,30 +8,14 @@
       <form role="add-deal" method="POST" action="{!! action('Admin\DealsController@store') !!}">
         {{csrf_field()}}
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Deal On:</label>
-              <select class="form-control" name="client_id" id="client_id">
-                <option value="">Select Client Name</option>
-                @foreach($client as $clients)
-                  <option value="{{!empty($clients['id'])?$clients['id']:''}}">{{!empty($clients['name'])?$clients['name']:''}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Select Property Type:</label>
-              <select class="form-control" name="property_type" id="property_type">
-                <option value="">Select Property Type</option>
-                <option value="residential">Residential</option>
-                <option value="commercial">Commercial</option>
-                <option value="others">Others</option>
-              </select>
-            </div>
-          </div>
+        <div class="form-group">
+          <label>Deal On:</label>
+          <select class="form-control" name="client_id" id="client_id">
+            <option value="">Select Client Name</option>
+            @foreach($client as $clients)
+              <option value="{{!empty($clients['id'])?$clients['id']:''}}">{{!empty($clients['name'])?$clients['name']:''}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class="row">
