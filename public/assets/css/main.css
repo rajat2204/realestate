@@ -4293,7 +4293,7 @@ ul.amenities-list li {
     line-height: 40px;
 }
 ul.amenities-list li {
-    max-width: 197px;
+    /*max-width: 200px;*/
     display: inline-block;
     list-style: none;
     height: 40px;
@@ -4449,6 +4449,9 @@ ul.owl-gallery li {
     padding: 0px 0px 9px 0px;
     margin: 0;
     line-height: 30px;
+  }
+  #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link:hover{
+    color:#007bff;
   }
   #sideNav .navbar-nav .nav-item .nav-link {
     font-weight: 400;

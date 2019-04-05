@@ -387,17 +387,35 @@ class Validate
 
     public function agentenquiry($action='add'){
         $validations = [
+            'customer_name'         => $this->validation('name'),
+            'customer_contact'      => $this->validation('phone'),
+            'email'                 => $this->validation('req_email'),
+        ];
+        
+        $validator = \Validator::make($this->data->all(), $validations,[
+            'customer_name.required'        =>  'Customer Name is required.',
+            'customer_contact.required'     =>  'Customer Contact is required.',
+            'customer_contact.numeric'      =>  'Contact Number should be numeric.',
+            'customer_contact.digits'       =>  'Contact Number should not be greater than 10 digits.',
+            'email.required'                =>  'Customer E-mail is required.',
+
+        ]);
+        return $validator;      
+    }
+
+    public function agentenquirymodal($action='add'){
+        $validations = [
         	'customer_name' 		=> $this->validation('name'),
+            'email'                 => $this->validation('req_email'),
 			'customer_contact'  	=> $this->validation('phone'),
-			'email'  				=> $this->validation('req_email'),
     	];
     	
         $validator = \Validator::make($this->data->all(), $validations,[
     		'customer_name.required' 		=>  'Customer Name is required.',
+            'email.required'                =>  'Customer E-mail is required.',
     		'customer_contact.required' 	=>  'Customer Contact is required.',
     		'customer_contact.numeric' 		=>  'Contact Number should be numeric.',
     		'customer_contact.digits' 		=>  'Contact Number should not be greater than 10 digits.',
-    		'email.required' 				=>  'Customer E-mail is required.',
 
     	]);
         return $validator;		

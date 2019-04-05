@@ -36,6 +36,7 @@ Route::get('sliders/{slug}','HomeController@enquiry');
 Route::post('enquirysubmission','HomeController@enquirySubmission');
 Route::get('agentenquiry/{id}','HomeController@agentEnquiry');
 Route::post('agentenquirysubmission','HomeController@agentEnquirySubmission');
+Route::post('agentcontact','HomeController@agentEnquiryModal');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
 Route::post('login','HomeController@customerLogin');

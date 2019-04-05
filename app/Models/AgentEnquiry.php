@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AgentEnquiry extends Model
 {
     protected $table = 'agent_enquiry';
-    protected $fillable = ['agent_name','agent_contact','customer_name','customer_contact','email','message','status','created_at','updated_at'];
+    protected $fillable = ['agent_name','agent_contact','customer_name','customer_contact','email','message','interested','status','created_at','updated_at'];
 
     public static function add($data){
         if(!empty($data)){
