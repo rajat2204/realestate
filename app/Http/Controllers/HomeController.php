@@ -244,6 +244,47 @@ class HomeController extends Controller{
         return $this->populateresponse();
     }
 
+    public function agentEnquiryModal(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->agentenquirymodal();
+        if($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data['agent_name']         =!empty($request->agent_name)?$request->agent_name:'';
+            $data['agent_contact']      =!empty($request->agent_contact)?$request->agent_contact:'';
+            $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
+            $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
+            $data['email']              =!empty($request->email)?$request->email:'';
+            $data['interested']         =!empty($request->interested)?$request->interested:'';
+            
+            $inserId = AgentEnquiry::add($data);
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". The contact number of ".ucfirst($data['customer_name'])." is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['agent_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Agent Enquiry has been submitted successfully.";
+                $this->redirect = url('/');
+            }
+        return $this->populateresponse();
+    }
+
     public function contactUs(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->createContactUs();
@@ -371,11 +412,6 @@ class HomeController extends Controller{
     }
 
     public function searchProperty(Request $request){
-        // $validation = new Validations($request);
-        // $validator  = $validation->search();
-        // if($validator->fails()){
-        //     $this->message = $validator->errors();
-        // }else{
             $where = 1;
             if(!empty($request->filter_propertystatus)){
                 $where .= ' AND property_purpose = "'.$request->filter_propertystatus.'"';
@@ -392,8 +428,8 @@ class HomeController extends Controller{
             $data['property_type'] = $request->filter_propertystatus;
             $data['social']   = _arefy(SocialMedia::where('status','active')->get());
             $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
-            $data['contact'] = _arefy(Contact::where('status','active')->get());
             // dd($data['property']);
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
             $data['count']    = count($data['property']);
             $data['city']     = $request->filter_city;
             $data['view']     = 'front.property-list';

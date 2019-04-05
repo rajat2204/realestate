@@ -70,9 +70,9 @@
 	</button>
 	<div class="collapse navbar-collapse my-auto" id="navbarSupportedContent">
 		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#properties">Properties Available</a></li>
+			<!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#properties">Properties Available</a></li> -->
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#overview">Overview</a></li>
-			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#amenities">Amenities</a></li>
+			<!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#amenities">Amenities</a></li> -->
 			<!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#specifications">Specifications</a></li>-->
 			<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#gallery">Gallery</a></li>
 			<li class="nav-item"><a class="nav-link js-scroll-trigger pb-0" href="#aboutus">About the Builder</a></li>
@@ -127,220 +127,15 @@
 					<div data-ride="carousel" class="carousel carousel-fade" id="carousel-example-captions">
 						<div role="listbox" class="carousel-inner">
 							<div class="carousel-item active">
-								<div class="slide-1" style="background: url(../assets/img/properties/f1.png) top left no-repeat;"></div>
+								<div class="slide-1" style="background: url(../assets/img/properties/{{$property['featured_image']}}) top left no-repeat;">
+									<!-- <img class="img-fluid img-round" src="{{url('assets/img/properties')}}/{{$property['featured_image']}}" alt="img"> -->
+								</div>
 							</div>
 						</div>
 					</div>
 				<!--Image Slider End-->
 				</div>
 		</section>
-
-<section class="content-section d-flex flex-column" id="properties">
-	<div>
-		<a class="card-title">Properties <span>You Can Buy</span></a></div>
-		<div class="card-section no-mobile-padding">
-			<div class="tab-value">
-				<ul class="nav nav-tabs unittab">
-				    <li class="item"><a data-toggle="tab" href="#1bhk" class="active">2 BHK FLATS</a></li>
-				    <li class="item"><a data-toggle="tab" href="#2bhk">3 BHK FLATS </a></li>
-				    <li class="item"><a data-toggle="tab" href="#3bhk">4 BHK </a></li>
-				</ul>
-			</div>
-			<div class="tab-content">
-			<div id="1bhk" class="tab-pane fade in active show">
-				<div class="tab-content">
-				<div id="1_bhk_1" class="tab-pane fade in active show">
-				<div class="container">
-				<div class="tabpaneContainer row ">
-				<div class="col-lg-4 col-md-4 col-12">
-					<div class="thumbnail">
-						<a href="javascript:void(0);" class="jfloorplan">
-							<img src="../assets/img/properties/house-map.jpg" alt="house">
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-8 col-md-8 col-12 nopadding">
-				<div class="unit-detail-container">
-				<div class="">
-					<ul class="property-type-detaiil">
-						<li><i class="fa fa-rupee"></i>2.06 Cr <span>onwards</span></li>
-						<li> 2 BHK Flat<span>  2441 sqft</span></li>
-					</ul>
-				</div>
-				<div class="FloorDetail">
-					<ul class="col-12 col-sm-12 nopadding nopadding-mobile">
-						<li><span>Bedrooms <b> 2</b></span></li>
-						<li><span>Bathrooms <b> 3</b></span></li>
-						<li><span>Balconies <b> 3</b></span></li>
-						<li><span>Servant&nbsp;Room <b> 1</b></span></li>
-					</ul>
-				</div>
-				<div class="uspDetails">
-				<ul class="nopadding">
-				<li>One of Asia's Largest Residential Skywalk.</li>
-				  <li>Over 2,50,000 sq. ft. of Activity Spaces.</li>
-				  <li>Low Population Density Project.</li>
-				  <li>Club Windchimes with facilities like Mini  Theatre, Bio Diversity Pons, Full Lap Swimming Pool, Gym, Library, Squash Court  and Much More.</li>
-				  <li>Adjacent to Delhi Green zone.</li>
-				  <li>Near IGI Airport.</li>
-
-				</ul>
-				</div>
-				<div>
-				<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="cta-btn border-color text-color">Contact Now</a>
-				</div>
-			</div>
-		</div>
-</div>
-</div>
-</div>
-
-		</div>
-		</div>
-
-
-		<!-- <div id="2bhk" class="tab-pane fade show">
-		    <div class="sub-tab-container">
-		        <ul class="nav nav-tabs owl-carousel owl-unitdetail owl-loaded">   
-		        <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s;"><div class="owl-item"><li class="item"><a data-toggle="tab" class="active" href="#2_bhk_1">2802 sqft</a></li></div><div class="owl-item"><li class="item"><a data-toggle="tab" href="#2_bhk_2">3763 sqft</a></li></div></div></div></div></ul>
-		    </div>
- -->
-		<!-- <div class="tab-content">
-		<div id="2_bhk_1" class="tab-pane fade in active show">
-		<div class="container">
-		<div class="tabpaneContainer row ">
-		<div class="col-lg-4 col-md-4 col-12 nopadding">
-		<div class="thumbnail imghvr-zoom-in">
-		<a href="assets/img/properties/house-map.jpg" class="js-img-viwer-floorplan">
-			<img src="assets/img/properties/house-img.jpg" alt="House" width="100%">
-		</a></div>
-		</div>
-		<div class="col-lg-8 col-md-8 col-12 nopadding">
-		<div class="unit-detail-container">
-		<div class="row"><ul class="property-type-detaiil">
-		<li><i class="fa fa-rupee"></i>2.32 Cr <span>onwards</span>
-		</li>
-		<li> 3 BHK Flat <span>  2802 sqft</span></li>
-		</ul>
-		</div>
-		<div class="FloorDetail">
-		<ul class="col-12 col-sm-12 nopadding nopadding-mobile">
-			<li><span>Bedrooms <b> 3</b></span></li>
-			<li><span>Bathrooms <b> 4</b></span></li>
-			<li><span>Balconies <b> 4</b></span></li>
-			<li><span>Servant&nbsp;Room <b> 1</b></span></li>
-		</ul>
-		</div>
-		<div class="uspDetails">
-		<ul class="nopadding">
-		<li>One of Asia's Largest Residential Skywalk.</li>
-		  <li>Over 2,50,000 sq. ft. of Activity Spaces.</li>
-		  <li>Low Population Density Project.</li>
-		  <li>Club Windchimes with facilities like Mini  Theatre, Bio Diversity Pons, Full Lap Swimming Pool, Gym, Library, Squash Court  and Much More.</li>
-		  <li>Adjacent to Delhi Green zone.</li>
-		  <li>Near IGI Airport.</li>
-		</ul>
-		</div>
-		<div>
-		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="cta-btn border-color text-color"">Contact Now</a>
-		</div></div></div></div></div></div>
-
-		<div id="2_bhk_2" class="tab-pane fade show">
-		<div class="container">
-		<div class="tabpaneContainer row ">
-		<div class="col-lg-4 col-md-4 col-12 nopadding">
-		<div class="thumbnail imghvr-zoom-in">
-		<a href="img/floor-plan/3763.jpg" class="js-img-viwer-floorplan" data-caption="3 BHK Flat, 3763 sqft" data-id="raion" data-group="nogroup" data-index="2"><img src="img/floor-plan/3763s.jpg" alt="Ashiana Anmol" width="100%"><i class="sp1 zoom"></i></a></div>
-		</div>
-		<div class="col-lg-8 col-md-8 col-12 nopadding">
-		<div class="unit-detail-container">
-			<div class="row">
-				<ul class="property-type-detaiil">
-					<li><i class="fa fa-rupee"></i> 3.08 Cr <span>onwards</span></li>
-					<li> 3 BHK Flat <span>  3763 sqft</span></li>
-				</ul>
-			</div>
-			<div class="FloorDetail">
-				<ul class="col-12 col-sm-12 nopadding nopadding-mobile">
-					<li><span>Bedrooms <b> 3</b></span></li>
-					<li><span>Bathrooms <b> 4</b></span></li>
-					<li><span>Balconies <b> 4</b></span></li>
-					<li><span>Servant Room <b> 1</b></span></li>
-				</ul>
-			</div>
-			<div class="uspDetails">
-				<ul class="nopadding">
-				<li>One of Asia's Largest Residential Skywalk.</li>
-				  <li>Over 2,50,000 sq. ft. of Activity Spaces.</li>
-				  <li>Low Population Density Project.</li>
-				  <li>Club Windchimes with facilities like Mini  Theatre, Bio Diversity Pons, Full Lap Swimming Pool, Gym, Library, Squash Court  and Much More.</li>
-				  <li>Adjacent to Delhi Green zone.</li>
-				  <li>Near IGI Airport.</li>
-				</ul>
-			</div>
-			<div>
-				<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="cta-btn border-color text-color" >Contact Now</a>
-			</div>
-		</div>
-
-		</div>
-		</div> -->
-
-
-		<div id="3bhk" class="tab-pane fade show">
-		    
-
-		<div class="tab-content">
-		<div id="3_bhk_1" class="tab-pane fade in active show">
-		<div class="container">
-		<div class="tabpaneContainer row ">
-		<div class="col-lg-4 col-md-4 col-12 nopadding">
-		<div class="thumbnail imghvr-zoom-in">
-			<a href="javascript:void(0);" class="js-img-viwer-floorplan">
-				<img src="../assets/img/properties/house-map.jpg" alt="house" width="100%">
-			</a>
-		</div>
-		</div>
-		<div class="col-lg-8 col-md-8 col-12 nopadding">
-		<div class="unit-detail-container">
-		<div class=""><ul class="property-type-detaiil">
-		<li>3.98 Cr <span>onwards</span></li>
-
-		<!--Price on request format-->
-		<li> 4 BHK Flat <span>  4857 sqft</span></li>
-		<!--<li style="font-weight: normal;">Price on Request<span>&nbsp; </span></li>-->
-
-		</ul>
-		</div>
-		<div class="FloorDetail">
-		<ul class="col-12 col-sm-12 nopadding nopadding-mobile">
-		<li><span>Bedrooms <b> 4</b></span></li>
-		<li><span>Bathrooms <b> 4</b></span></li>
-		<li><span>Balconies <b> 5</b></span></li>
-		<li><span>Servant&nbsp;Room <b> 1</b></span></li>
-
-		</ul>
-		</div>
-		<div class="uspDetails">
-		<ul class="nopadding">
-		<li>One of Asia's Largest Residential Skywalk.</li>
-		  <li>Over 2,50,000 sq. ft. of Activity Spaces.</li>
-		  <li>Low Population Density Project.</li>
-		  <li>Club Windchimes with facilities like Mini  Theatre, Bio Diversity Pons, Full Lap Swimming Pool, Gym, Library, Squash Court  and Much More.</li>
-		  <li>Adjacent to Delhi Green zone.</li>
-		  <li>Near IGI Airport.</li>
-		</ul>
-		</div>
-		<div>
-		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="cta-btn border-color text-color" >Contact Now</a>
-		</div></div></div></div></div></div>
-
-		</div>
-		</div>
-
-		</div>
-	</div>
-</section>
 
 <section class="content-section d-flex flex-column" id="overview">
 	<a class="card-title">Overview</a>
@@ -377,172 +172,6 @@
 	</div>
 </section>
 
-<section class="content-section d-flex flex-column" id="amenities">
-<div>
-<a class="card-title"> <span>Exclusive </span> Amenities</a>
-<div class="card-section">
-<div class="amenities-box">
-<!--<div class="white-gradient"></div>-->
-<!-- <div class="owl-carousel owl-amenities"> -->
-	
-		<div class="row">
-			<ul class="amenities-list">
-				<li>
-				    <div class="amenties-title">Sports</div>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i></span>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Game Area</span>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-			</ul>
-		</div>
-	
-	
-		<div class="row">
-			<ul class="amenities-list">
-				<li>
-				    <div class="amenties-title">Sports</div>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-			</ul>
-		</div>
-	
-	
-		<div class="row">
-			<ul class="amenities-list">
-				<li>
-				    <div class="amenties-title">Sports</div>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-			</ul>
-		</div>
-	
-	
-		<div class="row">
-			<ul class="amenities-list">
-				<li>
-				    <div class="amenties-title">Sports</div>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Swimming Pool</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i></span>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-				<li>
-					<i class="fa fa-bell icon-meditation-area"></i><span class="am-txt">Meditation Centre</span>
-				</li>
-				<li><i class="fa fa-bell icon-meditation-area"></i>
-					<span class="am-txt">Jogging / Walking Track</span>
-				</li>
-			</ul>
-		</div>
-	
-<!-- </div> -->
-
-<!-- <div class="item">
-<div class="row">
-<ul class="amenities-list">
-<li><span class="icon icon-tennis"></span><span class="am-txt">Billards &amp; Table Tennis Room</span></li>
-<li><span class="icon icon-cards-room"></span><span class="am-txt">Cards Room</span></li>
-<li><span class="icon icon-kids-play-area"></span><span class="am-txt">Children’s Play Areas</span></li>
-
-</ul>
-</div>
-</div>
-<div class="item">
-<div class="row">
-<ul class="amenities-list">
-<li><span class="icon icon-badminton-court"></span><span class="am-txt">Badminton Court</span></li>
-
-<li>
-    <div class="amenties-title">Leisure</div>
-</li>
-<li><span class="icon icon-banquet-hall"></span><span class="am-txt">Banquet And Party Halls</span></li>
-
-
-</ul>
-</div>
-</div></div>
-<div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-
-<li><span class="icon icon-Barbeque-Pit"></span><span class="am-txt">Outdoor Barbecue Area</span></li>
-<li><span class="icon icon-event-space-amphitheatre"></span><span class="am-txt">Mini Theatre</span></li>
-<li><span class="icon icon-coffee-lounge-restaurant"></span><span class="am-txt">Restaurant </span></li>
-
-</ul>
-</div>
-</div></div><div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-<li><span class="icon icon-power-backup"></span><span class="am-txt">Central Power Back-up </span></li>
-
-<li>
-    <div class="amenties-title">Security</div>
-</li>
-<li><span class="icon icon-security"></span><span class="am-txt">Security </span></li>
-
-
-
-</ul>
-</div>
-</div></div><div class="item">
-<div class="row">
-<ul class="amenities-list">
-
-
-<li><span class="icon icon-intercom-facility"></span><span class="am-txt">Intercom Facility </span></li>
-
-<li><div class="amenties-title">Environment</div>
-</li>
-<li><span class="icon icon-park"></span><span class="am-txt">Landscaped gardens</span></li>
-
-
-</ul> -->
-<!-- </div> -->
-
-</div>
-</div>
-</section>
-
 
 <section class="content-section flex-column" id="gallery">
   <div><a class="card-title"> <span>Take a </span> Closer Look</a>
@@ -550,15 +179,15 @@
       <div class="gallery-box  padding30 nopadding-mobile">
       	<div id="galley">
        		<ul class="smartphotoWrapper" id="gallery">
-             	@foreach($property['property_gallery'] as $property['property_galleries'])
-          	<li class="brick">
-             	<span class="thumb1">
-	             		<a href="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer"">
-	             		<img src="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
-	             		</a>
-             	</span>
-            </li>
-	            @endforeach
+           	@foreach($property['property_gallery'] as $property['property_galleries'])
+	          	<li class="brick">
+	             	<span class="thumb1">
+		             		<a href="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer"">
+		             		<img src="{{url('assets/img/Property Gallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
+		             		</a>
+	             	</span>
+	            </li>
+            @endforeach
     			</ul>
 				</div>
 			</div>

@@ -29,7 +29,7 @@
     <div class="col-md-2 ">
   <div class="boxd">
     <a href="#viewphotos" data-toggle="modal">
-      <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt=" ">
+      <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt="">
       <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span>
       <p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
   </a>
@@ -85,12 +85,12 @@
   <button class="btn btn-blue" data-toggle="modal" data-target="#contactModal">Contact Agent</button>
   </div>
 
-  <div class="col-md-3 sim ">
+  <!-- <div class="col-md-3 sim ">
   <button class="btn btn-outline-default red" data-toggle="modal" data-target="#vienumberModal">View Phone NO.</button>   
   </div>
   <div class="col-md-3 sim">
   <i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
-  </div>
+  </div> -->
   <div class="col-md-3 sim disabl">
   <small class=""> Company/Owner Name</small>
   <small >{{$value['company']['name']}}</small>
@@ -112,25 +112,26 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-header-btm">
-        <span class="modal-title property-name-modal">Aarohan Infra Developers Pvt. Ltd.</span>
+        <span class="modal-title property-name-modal">{{$value['company']['name']}}</span>
         <div>
-        <span>Builder +91-97XXXXXXX11</span>
+        <span>Agent: {{$value['agent']['mobile']}}</span>
         </div>
       </div>
 
       <div class="modal-body popupmodal-body">
-        <form role="signup" action="{{url('signup')}}" method="POST">
+        <form role="agent-contact" action="{{url('agentcontact')}}" method="POST">
           {{csrf_field()}}
           <div class="form-group">
+            <input type="hidden" id="agent_contact" name="agent_contact" class="form-control" value="{{!empty($value['agent']['mobile'])?$value['agent']['mobile']:''}}">
             <div class="row">
-              <div class="col-md-6">
-                <input name="text" class="form-control">
-                <label for="usr">Builder Name:</label>
+              <div class="col-md-12">
+                <label for="usr">Agent Name:</label>
+                <input name="agent_name" class="form-control m-contact__input" type="text" value="{{!empty($value['agent']['name'])?$value['agent']['name']:''}}" readonly>
               </div>
             </div>
           </div>
           <div class="form-group m-contact__fieldset">
-            <input name="name" class="form-control m-contact__input" type="text">
+            <input name="customer_name" class="form-control m-contact__input" type="text">
             <label for="usr" class="contact_label m-contact__label">Name:</label>
           </div>
           <div class="form-group m-contact__fieldset">
@@ -138,18 +139,19 @@
             <label for="usr" class="contact_label m-contact__label">Email:</label>
           </div>
           <div class="form-group m-contact__fieldset">
-            <input name="phone" class="form-control m-contact__input" type="text">
+            <input name="customer_contact" class="form-control m-contact__input" type="text">
             <label for="usr" class="contact_label m-contact__label">Mobile Number:</label>
           </div>
           <div class="form-group m-contact__fieldset">
-            <select for="usr" class="m-contact__select">Interest in(optional):
-            <option>Visit</option>
-            <option>Visit</option>
-            <option>Visit</option>
-            </select>
+            <select for="usr" class="m-contact__select" name="interested">
+              <option value="">Interest in(optional)</option>
+              <option value="sitevisit">Site Visit</option>
+              <option value="immediatepurchase">Immediate Purchase</option>
+              <option value="homeloan">Home Loan</option>
+            </select> 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="agent-contact"]'>Submit</button>
           </div>
         </form>
       </div>
@@ -224,49 +226,49 @@
   </div>
      </div> 
  </div>
- <div class="modal modalphotos fade" id="viewphotos" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                
-                <div class="modal-body popupmodal-body">
-                  <div class="swiper-container gallery-top">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
-                  </div>
-                  <!-- Add Arrows -->
-                  <div class="swiper-button-next swiper-button-white"></div>
-                  <div class="swiper-button-prev swiper-button-white"></div>
-                </div>
-                <div class="swiper-container gallery-thumbs">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
-                    <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
-                  </div>
-                </div>
-                </div>
-              </div>
-            </div>
+  <div class="modal modalphotos fade" id="viewphotos" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body popupmodal-body">
+          <div class="swiper-container gallery-top">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
           </div>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next swiper-button-white"></div>
+          <div class="swiper-button-prev swiper-button-white"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/2/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/3/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/4/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/5/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/6/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/7/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/8/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/9/)"></div>
+            <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/10/)"></div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </section>
