@@ -2394,8 +2394,15 @@ p {
 .gallery-wrap{
   padding: 60px 0 40px;
 }
+.img-left.singleLogo{
+  height: 110px;
+  width: 110px;
+  display: block;
+}
 a.navbar-brand img {
-    max-width: 110px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 .shot-item>img {
     /*width: 360px;*/
@@ -3963,6 +3970,7 @@ span.fbold i {
 .snapshot {
   border-left: 3px solid #fff;
   padding-left: 43px;
+  width: 80%;
   margin-top: 52px;
 }
 .subheading {
@@ -4401,7 +4409,7 @@ ul.owl-gallery li {
   }
   .formcontainer{
     width: 100%;
-    height: 272px;
+    /*height: 272px;*/
     border: 0px;
   }
   .form-container-box{
@@ -4439,7 +4447,7 @@ ul.owl-gallery li {
   #sideNav .navbar-collapse .navbar-nav {
     flex-direction: column;
     width: 100%;
-    padding-left: 56px;
+    padding-left: 36px;
   }
   #sideNav .navbar-collapse .navbar-nav .nav-item {
     display: block;
@@ -4448,6 +4456,7 @@ ul.owl-gallery li {
     display: block;
     padding: 0px 0px 9px 0px;
     margin: 0;
+    color: #000;
     line-height: 30px;
   }
   #sideNav .navbar-collapse .navbar-nav .nav-item .nav-link:hover{
@@ -4470,6 +4479,10 @@ ul.owl-gallery li {
 @media (max-width: 991px){
   .content-section-header .hero-img{
     width: 100%;
+  }
+  .img-left.singleLogo{
+    height: 55px;
+    width: 130px;
   }
   .contactNow{
     padding: 7px 10px;

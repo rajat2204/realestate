@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-down" id="sideNav">
 	<a class="navbar-brand js-scroll-trigger mx-auto img-left" href="#page-top">
 		
-		<span class="d-lg-block img-left">
+		<span class="d-lg-block img-left singleLogo">
 			<img src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="gallery">
 		</span>
 	</a>
@@ -58,7 +58,7 @@
 				</ul>
 			</div>
 
-		<a data-toggle="modal" data-target="#mobileModal" href="#myModal" class="btn1 btn btn-md">I'm Interested</a></div></div>
+		<a data-toggle="modal" href="#interestedModal" class="btn1 btn btn-md">I'm Interested</a></div></div>
 	
     			</div>
 				<div class="hero-img blurbox" style="visibility: visible;">
@@ -263,5 +263,35 @@
 	</div>
 	
 </section>
+<!-- interested in -->
+<div class="modal contact-modal fade" id="interestedModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+         
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+     
 
+      <div class="modal-body popupmodal-body">
+        <form role="agent-contact" method="POST">
+          <div class="formcontainer">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="detai_l">
+						<h6 style="text-align: center;margin-top: 20px;"> Want to know more? </h6>
+						<input type="text" name="name" placeholder="Enter name " >	
+						<input type="email" name="" placeholder = "Enter Email">	
+						<input type="text" name="" placeholder= "Mobile ">		
+						<button class="btn btn-success "> Connect with Builder</button>
+					</div>	
+				</div>
+			</div>
+		</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
