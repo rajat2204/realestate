@@ -4053,6 +4053,9 @@ section.content-section {
     z-index: 99;
     position: relative;
 }
+section.content-section .card-title:hover{
+  color:#007bff;
+}
 section.content-section .card-title {
     font-size: 14px;
     font-weight: 700;
@@ -4138,6 +4141,14 @@ ul.property-type-detaiil li span {
     font-weight: 400;
     width: 129px;
     vertical-align: top;
+}
+.swiperpopupBox{
+  height: 600px;
+}
+.propertyName {
+    color: #1ab8db;
+    font-size: 20px;
+    font-weight: 500;
 }
 .tabpaneContainer .FloorDetail ul li span b {
     display: block;

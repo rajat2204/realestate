@@ -40,7 +40,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.min.css')}}" >
     <!-- mcustomscroll css -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ion.rangeSlider.min.css')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mCustomScrollbar.css')}}" >
     <!-- Animate -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/animate.css')}}">
@@ -61,11 +61,9 @@
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script src="{{asset('assets/js/jquery-min.js')}}"></script>
-
     <script src="{{asset('assets/js/smartphoto.min.js')}}"></script>
     <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-    
     <script src="{{asset('assets/js/jquery.mixitup.js')}}"></script>
     <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
     <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
@@ -76,18 +74,17 @@
     <script src="{{asset('assets/js/nivo-lightbox.js')}}"></script>
     <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('assets/js/ion.rangeSlider.min.js')}}"></script>
-
-    
     <script type="text/javascript" src="{{asset('assets/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 
     <script src="{{asset('assets/js/owl.carousel.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
     <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.js"></script>
+    
   
     
     <!-- [ SLIDER SCRIPT ] -->
@@ -103,13 +100,13 @@
         });
       });
        $('.review-slider').owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        items: 1,
-        dots: true,
-        autoplay: true
-      });
+          loop: true,
+          margin: 0,
+          nav: false,
+          items: 1,
+          dots: true,
+          autoplay: true
+        });
 
        $(".price-filter").ionRangeSlider({
             type: "double",
@@ -156,27 +153,27 @@
     </script>
     <script>
     
-         var galleryThumbs = new Swiper('.gallery-thumbs', {
-          spaceBetween: 10,
-          slidesPerView: 4,
-          loop: true,
-          freeMode: true,
-          // loopedSlides: 5, //looped slides should be the same
-          // watchSlidesVisibility: true,
-          // watchSlidesProgress: true,
-        });
-          var galleryTop = new Swiper('.gallery-top', {
-            spaceBetween: 10,
-            loop:true,
-            // loopedSlides: 5, //looped slides should be the same
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
-            thumbs: {
-              swiper: galleryThumbs,
-            },
-          });
+      var galleryThumbs = new Swiper('.gallery-thumbs', {
+      spaceBetween: 10,
+      slidesPerView: 4,
+      loop: true,
+      freeMode: true,
+      // loopedSlides: 5, //looped slides should be the same
+      // watchSlidesVisibility: true,
+      // watchSlidesProgress: true,
+    });
+    var galleryTop = new Swiper('.gallery-top', {
+      spaceBetween: 10,
+      loop:true,
+      // loopedSlides: 5, //looped slides should be the same
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      thumbs: {
+        swiper: galleryThumbs,
+      },
+    });
    
     </script>
     @yield('requirejs')
