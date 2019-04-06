@@ -37,10 +37,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
+            <div class="propertyName">Dearmzz Property</div>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           
-          <div class="modal-body popupmodal-body">
+          <div class="modal-body popupmodal-body swiperpopupBox">
             <div class="swiper-container gallery-top">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" style="background-image:url(http://lorempixel.com/1200/1200/nature/1/)"></div>
