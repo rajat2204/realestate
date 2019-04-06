@@ -7,16 +7,10 @@
     <div class="box-body">
       <form role="add-tax" method="POST" action="{{url('admin/tax/add')}}">
       {{csrf_field()}}
-        <div class="form-row">
+          <div class="form-row">
             <div class="form-group">
               <label>Tax Name:</label>
-              <input type="text" class="form-control" placeholder="Enter Currency Name..." name="name">
-            </div>
-          </div>
-         <div class="form-row">
-            <div class="form-group">
-              <label>Tax Percentage:</label>
-              <input type="text" class="form-control" placeholder="Enter Tax Percentage..." name="percentage">
+              <input type="text" class="form-control" placeholder="Enter Tax Name..." name="name">
             </div>
           </div>
         <div class="box-footer">

@@ -985,13 +985,24 @@ class Validate
     public function addTax($action ='add'){
         $validations = [
           'name'                        => $this->validation('name'),
-          'percentage'                  => $this->validation('percentage'),
         ];
         
         $validator = \Validator::make($this->data->all(), $validations,[
             'name.required'             => 'Tax Name should not be blank',
+        ]);
+          return $validator;        
+        }
+
+        public function addTaxPercentage($action ='add'){
+        $validations = [
+          'tax_id'                            => $this->validation('name'),
+          'percentage'                        => $this->validation('percentage'),
+        ];
+        
+        $validator = \Validator::make($this->data->all(), $validations,[
+            'tax_id.required'           => 'Tax Name is required',
             'percentage.required'       => 'Tax Percentage is required' ,
-            'percentage.numeric'        => 'Tax should be numeric',
+            'percentage.numeric'        => 'Tax Percentage should be numeric',
         ]);
           return $validator;        
         }

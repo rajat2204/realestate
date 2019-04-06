@@ -97,9 +97,6 @@ public function __construct(Request $request)
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
-            ->editColumn('percentage',function($item){
-                return $item['percentage'].'%';
-            })
             ->editColumn('status',function($item){
               if ($item['status'] == 'active') {
                 return 'Active';
@@ -114,7 +111,6 @@ public function __construct(Request $request)
             ])
             ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Tax Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'percentage', 'name' => 'percentage','title' => 'Tax Percentage','orderable' => false, 'width' => 120])        
             ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])        
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -237,6 +233,55 @@ public function currencyAdd(Request $request)
     {
         $data['view'] = 'admin.configuration.tax.add';
         return view('admin.home',$data);  
+    }
+
+    public function addTaxPercent(Request $request)
+    {
+        $data['view'] = 'admin.configuration.tax.addtaxpercent';
+        $data['taxname'] = _arefy(Tax::where('status', '=', 'active')->get());
+        return view('admin.home',$data);  
+    }
+
+    public function taxPercentForm(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->addTaxPercentage();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data = new Property();
+            $data->fill($request->all());
+            
+            if ($file = $request->file('featured_image')){
+                $photo_name = time().$request->file('featured_image')->getClientOriginalName();
+                $file->move('assets/img/properties',$photo_name);
+                $data['featured_image'] = $photo_name;
+            }
+
+            if ($request->featured == 1){
+                $data->featured = 1;
+            }
+
+            $data->save();
+            $lastid = $data->id;
+
+            if ($files = $request->file('gallery')){
+                foreach ($files as $file){
+                    $gallery = new Property_Gallery;
+                    $image_name = str_random(2).time().$file->getClientOriginalName();
+                    $file->move('assets/img/PropertyGallery',$image_name);
+                    $gallery['images'] = $image_name;
+                    $gallery['plot_id'] = $lastid;
+                    $gallery->save();
+
+                    $this->status   = true;
+                    $this->modal    = true;
+                    $this->alert    = true;
+                    $this->message  = "Property has been Added successfully.";
+                    $this->redirect = url('admin/property');
+                }
+            }    
+        }
+        return $this->populateresponse();
     }
 
     public function taxAdd(Request $request)

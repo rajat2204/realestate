@@ -225,7 +225,7 @@
 		          	<li class="brick">
 		             	<span class="thumb1">
 		             		<a href="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer">			
-			             		<img src="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" alt="gallery"> 
+			             		<img src="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
 			             	</a>
 		             	</span>
 		            </li>

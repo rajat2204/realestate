@@ -22,9 +22,13 @@
 							<a href="{{url('admin/tax/add')}}" class="btn btn-default btn-circle">
 							<i class="fa fa-plus"></i>
 							<span class="hidden-480">
-							Add Tax</span>
+							Add Tax Name</span>
 							</a>
-							
+							<a href="{{url('admin/taxpercent/add')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-plus"></i>
+							<span class="hidden-480">
+							Add Tax Percentage</span>
+							</a>
 						</div>
 					</div>
 					
