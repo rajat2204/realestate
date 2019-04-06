@@ -218,6 +218,7 @@ Route::resource('deals', 'DealsController');
 		Route::post('/status', 'DealsController@changeStatus');
 			Route::get('makeplan/{id}','DealsController@makePaymentPlan');
 			Route::post('makeplan/{id}','DealsController@makePaymentPlanForm');
+			Route::get('showplan/{id}','DealsController@showPaymentPlan');
 	});
 
 /***********************Services-Section****************************/

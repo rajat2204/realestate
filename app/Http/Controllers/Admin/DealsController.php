@@ -116,6 +116,45 @@ class DealsController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function showPaymentPlan(Request $request, Builder $builder){
+        $data['view'] = 'admin.deals.showpaymentplan';
+
+        \DB::statement(\DB::raw('set @rownum=0'));
+        $dealspayment  = Deals_Payment::where('status','!=','trashed')->get(['deal_payment.*', 
+                    \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+       $dealspayment = _arefy($dealspayment);
+        if ($request->ajax()) {
+            return DataTables::of($dealspayment)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.' .number_format($item['amount']);
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])     
+            ->addColumn(['data' => 'name','name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'date','name' => 'date','title' => 'Due Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -168,23 +207,17 @@ class DealsController extends Controller
 
     public function makePaymentPlanForm(Request $request,$id)
     {
-      $id = ___decrypt($id);
-      $validation = new Validations($request);
-      $validator  = $validation->addDealPlan();
-      if ($validator->fails()){
-          $this->message = $validator->errors();
-      }else{
-          $data = new Deals_Payment();
-          $data->fill($request->all());
+        $id = ___decrypt($id);
+        $data = new Deals_Payment();
+        $data->fill($request->all());
 
-          $data->save();
+        $data->save();
 
-          $this->status   = true;
-          $this->modal    = true;
-          $this->alert    = true;
-          $this->message  = "Payment Plan has been Added successfully.";
-          $this->redirect = url('admin/deals');  
-      }
+        $this->status   = true;
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->message  = "Payment Plan has been Added successfully.";
+        $this->redirect = url('admin/deals');
       return $this->populateresponse();
     }
 
