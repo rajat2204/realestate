@@ -36,7 +36,7 @@ class DealsController extends Controller
 
         $where = 'status != "trashed"';
         $deals  = _arefy(Deals::list('array',$where));
-
+        
         if ($request->ajax()) {
             return DataTables::of($deals)
             ->editColumn('action',function($item){
@@ -116,11 +116,12 @@ class DealsController extends Controller
         return view('admin.home')->with($data);
     }
 
-    public function showPaymentPlan(Request $request, Builder $builder){
+    public function showPaymentPlan(Request $request, Builder $builder,$id){
         $data['view'] = 'admin.deals.showpaymentplan';
 
         \DB::statement(\DB::raw('set @rownum=0'));
-        $dealspayment  = Deals_Payment::where('status','!=','trashed')->get(['deal_payment.*', 
+        $id = ___decrypt($id);
+        $dealspayment  = Deals_Payment::where('deal_id',$id)->get(['deal_payment.*', 
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
        $dealspayment = _arefy($dealspayment);
         if ($request->ajax()) {
@@ -200,7 +201,6 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
-      // dd($data['deal']);
       $data['installment'] = $data['deal']['plan']['installment'];
       return view('admin.home',$data);
     }
@@ -208,10 +208,13 @@ class DealsController extends Controller
     public function makePaymentPlanForm(Request $request,$id)
     {
         $id = ___decrypt($id);
-        $data = new Deals_Payment();
-        $data->fill($request->all());
-
-        $data->save();
+        foreach ($request->deal as $deals) {
+          $data['name']=$deals['name'];
+          $data['amount']=$deals['amount'];
+          $data['date']=$deals['date'];
+          $data['deal_id']=$id;
+          $deal = Deals_Payment::insert($data);
+        }
 
         $this->status   = true;
         $this->modal    = true;
