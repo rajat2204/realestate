@@ -29,7 +29,7 @@
 <div class="container ml-0 mr-0 pr-0 pl-0">
  <div id="wraperr">
     <div class ="row ">
-    <div class="col-md-2 ">
+    <div class="col-lg-2 ">
   <div class="boxd">
     <a href="#viewphotos" data-toggle="modal">
       <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt="">
@@ -39,7 +39,7 @@
     
   </div>
   </div>
-<div class="col-md-2 trims">  
+<div class="col-lg-2 trims">  
   <div class = "tex_t text-light "> 
     <i class="fa fa-rupee text-blue"></i>
       @if(!empty($value['price']))
@@ -54,30 +54,30 @@
   </div>
 </div>
   
- <div class="col-md-8 ">  
-<div class="row ">
+ <div class="col-lg-8 ">  
+<div class="rowpadding">
 <h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> For <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
   <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
 </div>   
-  <div class="row ">  
-  <div class="col-md-3 sims">
+  <div class="row">  
+  <div class="col-lg-3 sims">
   <span class="text-secondary">Carpet area</span>
   <span class="text-dark">@if(!empty($value['area'])){{$value['area']. ' '}}sqft.@else N/A @endif</span>
   </div>
-  <div class="col-md-3 sims">
+  <div class="col-lg-3 sims">
   <span class="text-secondary">Status</span>
   <span class="text-dark">@if(!empty($value['possession']))Possession By {{' ' .$value['possession']}}@else N/A @endif</span>
   </div>  
-<div class="col-md-3 sims">
+<div class="col-lg-3 sims">
   <span class="text-secondary">Property Name</span>
   <span class="text-dark">{{$value['name']}}</span>
 </div>
-  <div class="col-md-3 sims">
+  <div class="col-lg-3 sims">
   <span class="text-secondary">Agent Name</span>
   <span class="text-dark">{{$value['agent']['name']}}</span>
   </div>      
   </div>
-<div class="row">
+<div class="rowpadding">
 
 <div class="property-desc">
   <p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),80)}} </p>
@@ -85,7 +85,7 @@
 
   </div>
   <div class="row">
-  <div class="col-md-3 sim">
+  <div class="col-lg-3 sim">
   <button class="btn btn-blue" data-toggle="modal" data-target="#contactModal">Contact Agent</button>
   </div>
 
@@ -95,7 +95,7 @@
   <div class="col-md-3 sim">
   <i class="fa fa-heart bd text-blue mr-1"></i><small class="sharefeedback">Share Feedback</small>
   </div> -->
-  <div class="col-md-3 sim disabl">
+  <div class="col-lg-3 sim disabl">
   <small class=""> Company/Owner Name</small>
   <small >{{$value['company']['name']}}</small>
   </div>    

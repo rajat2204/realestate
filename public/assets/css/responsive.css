@@ -75,6 +75,34 @@
     font-size: 30px;
     margin-bottom: 30px;
   }
+  .rowpadding {
+      margin-left: 0;
+  }
+  .trims.col-lg-2{
+    max-width: 100%;
+  }
+  #wraperr{
+    padding: 0 20px;
+  }
+  .tex_t{
+    padding: 0;
+  }
+  .swiperpopupBox .outer .owl-theme .item span{
+    height: 260px;
+  }
+  #thumbs .item span{
+    height: 70px;
+  }
+  .boxd{
+    padding: 20px 0 0;
+    width: 100%;
+  }
+  .sims.col-lg-3{
+    padding: 0 15px;
+  }
+  .sim.col-lg-3{
+    padding: 10px 15px;
+  }
   #hero-area{
     padding-top: 0;
   }
@@ -202,12 +230,7 @@
     font-size: 22px;
     margin-bottom: 30px;
   }
-  .swiperpopupBox .outer .owl-theme .item span{
-    height: 260px;
-  }
-  #thumbs .item span{
-    height: 70px;
-  }
+  
   .unit-detail-container{
     padding-top: 20px;
   }
@@ -305,6 +328,12 @@
   .our_services{
     margin-bottom: 15px;
   }
+  .padding30 {
+      padding: 20px 0px;
+  }
+  .gallery-box.padding30{
+    padding: 20px;
+  }
   .about_content{
     margin-bottom: 15px;
   }
@@ -386,10 +415,13 @@
   .timeline .timelin-title {
     font-size: 18px;
   }
-
+  .nopadding{
+    padding: 0 15px;
+  }
   p,
   .about_us_content p {
       font-size: 14px;
+      padding-top: 5px;
       line-height: 20px !important;
   }
   .section-padding h4 {
