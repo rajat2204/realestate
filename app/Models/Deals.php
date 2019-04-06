@@ -42,6 +42,9 @@ class Deals extends Model
     public function units(){
         return $this->hasOne('App\Models\Units','id','unit_id');
     }
+    public function payment_plan(){
+        return $this->hasMany('App\Models\Deals_Payment','deal_id','id');
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
         $table_deal = self::select($keys)
@@ -63,6 +66,9 @@ class Deals extends Model
             },
             'units' => function($q){
                 $q->select('id','name');
+            },
+            'payment_plan' => function($q){
+                $q->select('id','name','amount','date');
             },
         ]);
         if($where){

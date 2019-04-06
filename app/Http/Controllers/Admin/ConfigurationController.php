@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tax;
+use App\Models\Tax_Percent;
 use App\Models\Units;
 use App\Models\Currencies;
 use Illuminate\Http\Request;
@@ -71,7 +72,7 @@ public function __construct(Request $request)
             return view('admin.home')->with($data);
     }
 
- public function tax(Request $request, Builder $builder)
+public function tax(Request $request, Builder $builder)
    {
          $data['view'] = 'admin.configuration.tax.list';
         \DB::statement(\DB::raw('set @rownum=0'));
@@ -111,6 +112,54 @@ public function __construct(Request $request)
             ])
             ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Tax Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])        
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+   
+   }
+
+   public function taxpercent(Request $request, Builder $builder)
+   {
+        $data['view'] = 'admin.configuration.tax.taxpercentlist';
+        
+        $where = 'status != "trashed"';
+        $taxpercent = Tax_Percent::list('array',$where);
+        
+        if ($request->ajax()) {
+            return DataTables::of($taxpercent)
+            ->editColumn('action',function($item) {
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="'.url(sprintf('admin/taxpercent/edit/%s/',___encrypt($item['id']))).'"  title="Edit Tax Percent"><i class="fa fa-edit"></i></a> | ';
+                $html   .= '<a href="javascript:void(0);"
+                        data-url="'.url(sprintf('admin/taxpercent/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('tax_id',function($item){
+                return ucfirst($item['taxname']['name']);
+            })
+            ->editColumn('percentage',function($item){
+                return ucfirst($item['percentage']);
+            })
+            ->editColumn('status',function($item){
+              if ($item['status'] == 'active') {
+                return 'Active';
+              }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'tax_id','name' => 'tax_id','title' => 'Tax Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'percentage', 'name' => 'percentage','title' => 'Tax Percentage','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status', 'name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])        
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -242,44 +291,22 @@ public function currencyAdd(Request $request)
         return view('admin.home',$data);  
     }
 
-    public function taxPercentForm(Request $request){
+    public function taxPercentForm(Request $request)
+    {
         $validation = new Validations($request);
         $validator  = $validation->addTaxPercentage();
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $data = new Property();
+            $data = new Tax_Percent();
             $data->fill($request->all());
-            
-            if ($file = $request->file('featured_image')){
-                $photo_name = time().$request->file('featured_image')->getClientOriginalName();
-                $file->move('assets/img/properties',$photo_name);
-                $data['featured_image'] = $photo_name;
-            }
-
-            if ($request->featured == 1){
-                $data->featured = 1;
-            }
 
             $data->save();
-            $lastid = $data->id;
-
-            if ($files = $request->file('gallery')){
-                foreach ($files as $file){
-                    $gallery = new Property_Gallery;
-                    $image_name = str_random(2).time().$file->getClientOriginalName();
-                    $file->move('assets/img/PropertyGallery',$image_name);
-                    $gallery['images'] = $image_name;
-                    $gallery['plot_id'] = $lastid;
-                    $gallery->save();
-
-                    $this->status   = true;
-                    $this->modal    = true;
-                    $this->alert    = true;
-                    $this->message  = "Property has been Added successfully.";
-                    $this->redirect = url('admin/property');
-                }
-            }    
+              $this->status   = true;
+              $this->modal    = true;
+              $this->alert    = true;
+              $this->message  = "Tax Percentage has been Added successfully.";
+              $this->redirect = url('admin/taxpercent');
         }
         return $this->populateresponse();
     }
@@ -312,6 +339,37 @@ public function currencyAdd(Request $request)
         $data['tax'] = _arefy(Tax::where('id',$id)->first());
         // dd($data['tax']);
         return view('admin.home',$data);
+    }
+
+    public function taxPercentEditForm(Request $request,$id)
+    {
+        $data['view'] = 'admin.configuration.tax.taxpercentedit';
+        $id = ___decrypt($id);
+        $data['taxpercent'] = _arefy(Tax_Percent::where('id',$id)->first());
+        $data['taxname'] = _arefy(Tax::where('status', '=', 'active')->get());
+        // dd($data['taxname']);
+        return view('admin.home',$data);
+    }
+
+    public function taxPercentEdit(Request $request,$id)
+    {
+        $id = ___decrypt($id);
+        $validation = new Validations($request);
+        $validator  = $validation->addTaxPercentage();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $tax = Tax_Percent::findOrFail($id);
+            $input = $request->all();
+
+            $tax->update($input);
+              $this->status   = true;
+              $this->modal    = true;
+              $this->alert    = true;
+              $this->message  = "Tax Percentage has been Updated successfully.";
+              $this->redirect = url('admin/taxpercent');
+        }
+        return $this->populateresponse();
     }
 
     public function unitsEditForm(Request $request,$id)
@@ -410,6 +468,23 @@ public function currencyAdd(Request $request)
                 $this->message = 'Deleted Units successfully.';
             }else{
                 $this->message = 'Updated Units successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusTaxPercent(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Tax_Percent::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Tax Percentage successfully.';
+            }else{
+                $this->message = 'Updated Tax Percentage successfully.';
             }
             $this->status = true;
             $this->redirect = true;

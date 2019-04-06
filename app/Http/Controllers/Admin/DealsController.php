@@ -9,6 +9,7 @@ use App\Models\Clients;
 use App\Models\Property;
 use App\Models\Plans;
 use App\Models\Tax;
+use App\Models\Tax_Percent;
 use App\Models\Project;
 use App\Models\Deals_Payment;
 use Illuminate\Http\Request;
@@ -184,6 +185,15 @@ class DealsController extends Controller
       return Response($propertyview);
     }
 
+    public function ajaxTax(Request $request)
+    {
+      $id = $request->id;
+      $tax = Tax_Percent::where('tax_id',$id)->get();
+      $taxview = view('admin.template.ajaxtax',compact('tax'));
+
+      return Response($taxview);
+    }
+
     public function ajaxArea(Request $request)
     {
       $id = $request->id;
@@ -212,8 +222,8 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
+      dd($data['deal']);
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
-      // dd($data['tax']);
       $data['installment'] = $data['deal']['plan']['installment'];
       return view('admin.home',$data);
     }

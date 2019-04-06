@@ -29,15 +29,29 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-3">
             <div class="form-group">
-              <label>Tax:</label>
-              <select class="form-control" name="payment_type" id="payment_type">
+              <label>Tax Name:</label>
+              <select class="form-control" name="tax_id" id="tax_id">
                 <option value="">Select Tax if Applicable</option>
                 @foreach($tax as $taxes)
-                  <option value="{{!empty($taxes['id'])?$taxes['id']:''}}">{{!empty($taxes['percentage'])?$taxes['percentage']:''}}</option>
+                  <option value="{{!empty($taxes['id'])?$taxes['id']:''}}">{{!empty($taxes['name'])?$taxes['name']:''}}</option>
                 @endforeach
               </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Tax Percentage:</label>
+              <select class="form-control" name="tax_percent_id" id="tax_percent_id">
+                <option value="">Select Tax Percentage</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Taxable Amount:</label>
+              <input type="text" name="taxable_amount" class="form-control" readonly>
             </div>
           </div>
         </div>
@@ -52,7 +66,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Payment Type:</label>
-              <select class="form-control" name="payment_type" id="payment_type">
+              <select class="form-control" name="payment_type" id="payment_type" onchange="check_dd();">
                 <option value="">Select Payment Type</option>
                 <option value="bank_transfer">Bank Transfer</option>
                 <option value="cash">Cash</option>
@@ -62,6 +76,23 @@
               </select>
             </div>
           </div>
+        </div>
+
+        <div class="row" id="cheque_div" style="display: none;">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Cheque Number:</label>
+              <input type="text" name="cheque_no" placeholder="Please Enter Cheque Number" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Bank Name:</label>
+              <input type="text" name="bank_name" placeholder="Please Enter Bank Name" class="form-control">
+            </div>
+          </div>
+        </div>
+
         </div>
 
         <div class="form-group">
@@ -85,5 +116,26 @@
 @section('requirejs')
 <script type="text/javascript">
   CKEDITOR.replace("remarks");
+
+  $(document).ready(function(){
+        $('#tax_id').on('change',function(){
+            var value = $(this).val();
+            $.ajax({
+                url:"{{url('admin/tax/ajaxtax?id=')}}"+value,
+                type:'POST',
+                success:function(data){
+                    $('#tax_percent_id').html(data).prev().css("display","block");
+                }
+            });
+        });
+    });
+
+  function check_dd() {
+    if(document.getElementById('payment_type').value == "cheque") {
+        document.getElementById('cheque_div').style.display = 'block';
+    } else {
+        document.getElementById('cheque_div').style.display = 'none';
+    }
+}
 </script>
 @endsection

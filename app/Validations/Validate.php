@@ -995,8 +995,8 @@ class Validate
 
         public function addTaxPercentage($action ='add'){
         $validations = [
-          'tax_id'                            => $this->validation('name'),
-          'percentage'                        => $this->validation('percentage'),
+          'tax_id'                      => $this->validation('name'),
+          'percentage'                  => $this->validation('percentage'),
         ];
         
         $validator = \Validator::make($this->data->all(), $validations,[

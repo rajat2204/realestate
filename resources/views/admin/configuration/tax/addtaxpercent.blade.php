@@ -10,7 +10,7 @@
         <div class="form-group">
           <label>Tax Name:</label>
           <select class="form-control" name="tax_id" id="tax_id">
-            <option>Select Tax Name</option>
+            <option value="">Select Tax Name</option>
             @foreach($taxname as $taxnames)
               <option value="{{!empty($taxnames['id'])?$taxnames['id']:''}}">{{!empty($taxnames['name'])?$taxnames['name']:''}}</option>
             @endforeach

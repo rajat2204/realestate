@@ -214,6 +214,9 @@ Route::resource('deals', 'DealsController');
 	Route::group(['prefix' => 'area'],function(){
 			Route::post('ajaxarea', 'DealsController@ajaxArea');
 	});
+	Route::group(['prefix' => 'tax'],function(){
+			Route::post('ajaxtax', 'DealsController@ajaxTax');
+	});
 	Route::group(['prefix' => 'deals'],function(){
 		Route::post('/status', 'DealsController@changeStatus');
 			Route::get('makeplan/{id}','DealsController@makePaymentPlan');
@@ -267,12 +270,17 @@ Route::post('currencies/store','ConfigurationController@currencyAdd');
 Route::post('currencies/status','ConfigurationController@changeStatus');
 
 Route::get('tax','ConfigurationController@tax');
+Route::get('taxpercent','ConfigurationController@taxpercent');
 Route::get('tax/add','ConfigurationController@taxAddForm');
 Route::post('tax/add','ConfigurationController@taxAdd');
 Route::get('tax/edit/{id}','ConfigurationController@taxEditForm');
 Route::post('tax/edit/{id}','ConfigurationController@taxEdit');
 Route::get('taxpercent/add','ConfigurationController@addTaxPercent');
+Route::post('taxpercent/add','ConfigurationController@taxPercentForm');
+Route::get('taxpercent/edit/{id}','ConfigurationController@taxPercentEditForm');
+Route::post('taxpercent/edit/{id}','ConfigurationController@taxPercentEdit');
 Route::post('tax/status','ConfigurationController@changeStatusTax');
+Route::post('taxpercent/status','ConfigurationController@changeStatusTaxPercent');
 
 Route::get('units','ConfigurationController@units');
 Route::get('units/create','ConfigurationController@unitsAddForm');
