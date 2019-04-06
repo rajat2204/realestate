@@ -123,7 +123,7 @@ class DealsController extends Controller
 
         \DB::statement(\DB::raw('set @rownum=0'));
         $id = ___decrypt($id);
-        $dealspayment  = Deals_Payment::where('deal_id',$id)->get(['deal_payment.*', 
+        $dealspayment  = Deals_Payment::where('deal_id',$id)->get(['deal_payment_plan.*', 
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
        $dealspayment = _arefy($dealspayment);
         if ($request->ajax()) {
@@ -222,7 +222,6 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
-      dd($data['deal']);
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
       $data['installment'] = $data['deal']['plan']['installment'];
       return view('admin.home',$data);
