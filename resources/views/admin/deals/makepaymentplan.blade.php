@@ -11,20 +11,20 @@
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Name:</small></label>
           <div class="col-sm-6">
-             <input name="name[]" value="Booking Amount" class="form-control" type="text" readonly>           
+             <input name="deal[0][name]" value="Booking Amount" class="form-control" type="text" readonly>           
           </div>
         </div>
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Amount:</small></label>
           <div class="col-sm-6">
-             <input name="amount[]" class="form-control amount" placeholder="Enter Amount" required>            
+             <input name="deal[0][amount]" class="form-control amount" placeholder="Enter Amount" required>            
            </div>
         </div>
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Due Date:</small></label>
           <div class="col-sm-6">
             <div>                        
-              <input name="date[]" class="form-control date" type="date" required>
+              <input name="deal[0][date]" class="form-control date" type="date" required>
             </div>
           </div>
         </div>
@@ -34,26 +34,26 @@
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Name:</small></label>
           <div class="col-sm-6">
-             <input name="name[]" value="{{$i}} Installment" class="form-control" type="text" readonly>            
+             <input name="deal[{{$i}}][name]" value="{{$i}} Installment" class="form-control" type="text" readonly>            
            </div>
         </div>
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Amount:</small></label>
           <div class="col-sm-6">
-             <input name="amount[]" class="form-control amount" placeholder="Enter Amount" type="" required>            
+             <input name="deal[{{$i}}][amount]" class="form-control amount" placeholder="Enter Amount" type="" required>            
            </div>
         </div>
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Due Date:</small></label>
           <div class="col-sm-6">
             <div>                        
-              <input name="date[]" class="form-control date" type="date" required>
+              <input name="deal[{{$i}}][date]" class="form-control date" type="date" required>
             </div>
           </div>
         </div>
            <br><br><br>
         @endfor
-        <input type="hidden" name="validate" value="">
+        
         <div class="box-footer">
           <a href="{{url('admin/deals')}}" class="btn btn-default">Cancel</a>
           <button type="button" id="valid-submit" data-request="ajax-submit" data-target='[role="make-payment-plan"]' class="btn btn-info pull-right">Submit</button>

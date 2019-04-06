@@ -219,6 +219,7 @@ Route::resource('deals', 'DealsController');
 			Route::get('makeplan/{id}','DealsController@makePaymentPlan');
 			Route::post('makeplan/{id}','DealsController@makePaymentPlanForm');
 			Route::get('showplan/{id}','DealsController@showPaymentPlan');
+			Route::get('payment/{id}','DealsController@makePayment');
 	});
 
 /***********************Services-Section****************************/
@@ -270,6 +271,7 @@ Route::get('tax/add','ConfigurationController@taxAddForm');
 Route::post('tax/add','ConfigurationController@taxAdd');
 Route::get('tax/edit/{id}','ConfigurationController@taxEditForm');
 Route::post('tax/edit/{id}','ConfigurationController@taxEdit');
+Route::get('taxpercent/add','ConfigurationController@addTaxPercent');
 Route::post('tax/status','ConfigurationController@changeStatusTax');
 
 Route::get('units','ConfigurationController@units');

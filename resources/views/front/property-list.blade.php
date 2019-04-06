@@ -232,33 +232,25 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="propertyName">Dearmzz Property</div>
+            <div class="propertyName">{{$value['name']}}</div>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           
           <div class="modal-body popupmodal-body swiperpopupBox">
             <div class="outer">
               <div id="big" class="owl-carousel owl-theme">
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/TK155444866615538649301550311336slider7.jpg')}}"></span>
-                </div>
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/ls155444866615529042721551848170project-overview-img.jpg')}}"></span>
-                </div>
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/uW1554448666155386497215503087661.jpg')}}"></span>
-                </div>  
+                @foreach($value['property_gallery'] as $value['property_galleries'])
+                  <div class="item">
+                    <span><img src="{{url('assets/img/PropertyGallery')}}/{{$value['property_galleries']['images']}}" alt="gallery"></span>
+                  </div>
+                @endforeach
               </div>
               <div id="thumbs" class="owl-carousel owl-theme">
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/TK155444866615538649301550311336slider7.jpg')}}"></span>
-                </div>
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/ls155444866615529042721551848170project-overview-img.jpg')}}"></span>
-                </div>
-                <div class="item">
-                  <span><img src="{{asset('assets/img/PropertyGallery/uW1554448666155386497215503087661.jpg')}}"></span>
-                </div>
+                @foreach($value['property_gallery'] as $value['property_galleries'])
+                  <div class="item">
+                    <span><img src="{{url('assets/img/PropertyGallery')}}/{{$value['property_galleries']['images']}}" alt="gallery"></span>
+                  </div>
+                @endforeach
               </div>
             </div> 
           </div>
