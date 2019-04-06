@@ -9,9 +9,12 @@
 <div class="tab-content" id="nav-tabContent">
  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 <div class="head_g clearfix">
-<p >{{$count}} Properties
-</p>
-  <button class="btn btn-sm btn-default text-dark ">
+@if($count == 1)
+  <p>{{$count}} Property</p>
+@else
+  <p>{{$count}} Properties</p>
+@endif
+  <!-- <button class="btn btn-sm btn-default text-dark ">
   Sort By
   <select class = "hovs">
 <option> Relevence  </option>
@@ -19,7 +22,7 @@
 <option> Price -high to low  </option>
 <option> Price -high to low  </option>
 </select>
-</button>
+</button> -->
 </div>
 @if(!empty($property))
 @foreach($property as  $value) 
@@ -53,7 +56,7 @@
   
  <div class="col-md-8 ">  
 <div class="row ">
-<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> for <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
+<h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> For <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
   <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
 </div>   
   <div class="row ">  

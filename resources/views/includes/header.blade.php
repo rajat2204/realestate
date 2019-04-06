@@ -55,7 +55,7 @@
                           Services
                         </a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item @if(Request::segment(1)=='projects') active @endif">
                         <a class="nav-link" href="{{url('/projects')}}">
                           Projects
                         </a>
