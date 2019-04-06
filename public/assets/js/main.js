@@ -12,12 +12,13 @@
   /* 
    One Page Navigation & wow js
    ========================================================================== */
-    var OnePNav = $('.onepage-nev');
-    var top_offset = OnePNav.height() - -0;
-    OnePNav.onePageNav({
-      currentClass: 'active',
-      scrollOffset: top_offset,
-    });
+    // var OnePNav = $('.onepage-nev');
+    // var top_offset = OnePNav.height() - -0;
+    // OnePNav.onePageNav({
+    //   currentClass: 'active',
+    //   fadeOut:'300',
+    //   scrollOffset: top_offset,
+    // });
   
   /*Page Loader active
     ========================================================*/
