@@ -223,6 +223,8 @@ Route::resource('deals', 'DealsController');
 			Route::post('makeplan/{id}','DealsController@makePaymentPlanForm');
 			Route::get('showplan/{id}','DealsController@showPaymentPlan');
 			Route::get('payment/{id}','DealsController@makePayment');
+			Route::post('makepayment/{id}','DealsController@savePayment');
+			Route::get('showpayment/{id}','DealsController@showPaymentList');
 	});
 
 /***********************Services-Section****************************/
@@ -252,8 +254,11 @@ Route::get('profitreport', 'ReportController@profitReport');
 
 /***********************Invoices-Section****************************/
 
+// Route::get('allinvoices', 'ReportController@allInvoice');
 Route::get('balanceinvoices', 'ReportController@balanceInvoice');
+Route::get('balanceinvoices/{id}', 'ReportController@showBalanceInvoice');
 Route::get('paidinvoices', 'ReportController@paidInvoice');
+Route::get('paidinvoices/{id}', 'ReportController@showPaidInvoice');
 
 /***********************Notice-Section****************************/
 

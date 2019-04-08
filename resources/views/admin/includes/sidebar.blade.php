@@ -83,6 +83,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
+            <!-- <li><a href="{{url('admin/allinvoices')}}">All Invoices</a></li> -->
             <li><a href="{{url('admin/balanceinvoices')}}">Balance Invoices</a></li>
             <li><a href="{{url('admin/paidinvoices')}}">Paid Invoices</a></li>
           </ul>

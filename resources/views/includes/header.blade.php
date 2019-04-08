@@ -7,7 +7,7 @@
         <div class="header_strip">
           <div class="phone_header">
               <i class="fa fa-phone"></i>
-              <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
+              <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">+91-{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
           </div>
           <ul class="shubhX">
             @if(Auth::user())

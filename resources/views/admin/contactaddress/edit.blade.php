@@ -29,6 +29,11 @@
           <input type="text" class="form-control" placeholder="Enter Contact Number..." name="phone" value="{{!empty($contact['phone'])?$contact['phone']:''}}">
         </div>
 
+        <div class="form-group">
+          <label>Whatsapp Number:</label>
+          <input type="text" class="form-control" placeholder="Enter Whatsapp Number..." name="whatsapp" value="{{!empty($contact['whatsapp'])?$contact['whatsapp']:''}}">
+        </div>
+
         <div class="box-footer">
           <a href="{{url('admin/contact')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="edit-contact"]' class="btn btn-info pull-right">Submit</button>

@@ -54,7 +54,8 @@ class Validate
             'req_pincode'       => ['required','min:6','max:6'],
 			'req_adhaar' 		=> ['required','min:12','max:12'],
 			'commission' 		=> ['nullable','numeric','between:0,99.99'],
-			'amount'			=> ['required','numeric'],
+            'amount'            => ['required','numeric'],
+			'late_amount'		=> ['nullable','numeric'],
             'action'            => ['required'],
 			'percentage'		=> ['required','numeric','between:0,99.99'],
 			'password_null' 	=> ['nullable'],
@@ -536,16 +537,44 @@ class Validate
 	}
 
 	public function contactaddress($action='edit'){
+        $validations = [
+            'address'               => $this->validation('name'),
+            'email'                 => $this->validation('req_email'),
+            'phone'                 => $this->validation('name'),
+            'whatsapp'                 => $this->validation('name'),
+        ];
+        $validator = \Validator::make($this->data->all(), $validations,[
+            'address.required'              =>  'Please enter your address.',
+            'email.required'                =>  'Please enter your E-mail.',
+            'phone.required'                =>  'Please enter your Contact Number.',
+            'whatsapp.required'             =>  'Please enter your Whatsapp Number.',
+        ]);
+        return $validator;
+    }
+
+    public function savePayment(){
 		$validations = [
-        	'address' 				=> $this->validation('name'),
-        	'email'					=> $this->validation('req_email'),
-        	'phone'					=> $this->validation('name'),
+        	'late_amount' 			=> $this->validation('late_amount'),
+        	'payment_type'			=> $this->validation('name'),
+        	'date'					=> $this->validation('name'),
     	];
 		$validator = \Validator::make($this->data->all(), $validations,[
-			'address.required' 				=>  'Please enter your address.',
-			'email.required'				=> 	'Please enter your E-mail.',
-			'phone.required'				=> 	'Please enter your Contact Number.',
+			'late_amount.numeric' 		=>  'Late Amount should be numeric.',
+			'payment_type.required'		=> 	'Payment Type is Required.',
+			'date.required'				=> 	'Date is Required.',
 		]);
+        if($this->data->payment_type == 'cheque'){
+            if(empty($this->data->cheque_no)){
+                $validator->after(function ($validator){
+                   $validator->errors()->add('cheque_no', 'Cheque Number is required.');
+                });
+            }
+            if(empty($this->data->bank_name)){
+                $validator->after(function ($validator){
+                   $validator->errors()->add('bank_name', 'Bank Name is required.');
+                });
+            }        
+        }
 		return $validator;
 	}
 

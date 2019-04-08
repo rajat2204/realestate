@@ -28,7 +28,7 @@
               <a class="google" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
             </li>
             <li>
-              <a class="linkedin" href="" target="_blank"><i class="fa fa-whatsapp"></i></a>
+              <a class="whatsapp" href="https://api.whatsapp.com/send?phone=91{{$contact[0]['whatsapp']}}" target="_blank"><i class="fa fa-whatsapp"></i></a>
             </li>
           </ul>
           
@@ -94,7 +94,7 @@
           <a class="instagram" href="{{$social[4]['url']}}" target="_blank"><i class="icon-social-google"></i></a>
         </li>
         <li>
-          <a class="linkedin" href="" target="_blank"><i class="fa fa-whatsapp"></i></a>
+          <a class="whatsapp" href="https://api.whatsapp.com/send?phone=91{{$contact[0]['whatsapp']}}" target="_blank"><i class="fa fa-whatsapp"></i></a>
         </li>
     </ul>
 </div>

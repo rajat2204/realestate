@@ -72,10 +72,15 @@
           </div>
           <div id="chartContainer" style="height: 370px; width: 100%;">
             <?php
-              $dataPoints = array(
-                array("y" => 25, "label" => "Sunday"),
-              );
-               
+            for($i =0; $i<12; $i++)
+            {
+              $date = date("F Y");
+              
+                $effectiveDate = date("F Y", strtotime("+".$i." months", strtotime($date)));
+             
+                $dataPoints[] = array("y" => 25+$i, "label" => $effectiveDate);
+            }
+            
               ?>
         </div>
           </div>
@@ -103,6 +108,7 @@
   chart.render();
    
   }
+
   
 </script>
 @endsection

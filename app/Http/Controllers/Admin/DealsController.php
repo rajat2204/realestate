@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Models\Plans;
 use App\Models\Tax;
 use App\Models\Tax_Percent;
+use App\Models\Make_Payment;
 use App\Models\Project;
 use App\Models\Deals_Payment;
 use Illuminate\Http\Request;
@@ -38,8 +39,8 @@ class DealsController extends Controller
 
         $where = 'status != "trashed"';
         $deals  = _arefy(Deals::list('array',$where));
-        
         if ($request->ajax()) {
+
             return DataTables::of($deals)
             ->editColumn('action',function($item){
                 
@@ -125,7 +126,7 @@ class DealsController extends Controller
         $id = ___decrypt($id);
         $dealspayment  = Deals_Payment::where('deal_id',$id)->get(['deal_payment_plan.*', 
                     \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
-       $dealspayment = _arefy($dealspayment);
+        $dealspayment = _arefy($dealspayment);
         if ($request->ajax()) {
             return DataTables::of($dealspayment)
             ->editColumn('action',function($item){
@@ -150,11 +151,97 @@ class DealsController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])     
+            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])
             ->addColumn(['data' => 'name','name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Due Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function showPaymentList(Request $request, Builder $builder,$id){
+        $data['view'] = 'admin.deals.showpaymentlist';
+
+        \DB::statement(\DB::raw('set @rownum=0'));
+        $id = ___decrypt($id);
+        $showpayment  = Make_Payment::where('deal_id',$id)->get(['deal_payment.*', 
+                    \DB::raw('@rownum  := @rownum  + 1 AS rownum')]);
+        $showpayment = _arefy($showpayment);
+
+        if ($request->ajax()) {
+            return DataTables::of($showpayment)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('remarks',function($item){
+              if (!empty($item['remarks'])) {
+                return strip_tags(str_limit($item['remarks'],10));
+              }else{
+                return 'N/A';
+              }
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.' .number_format($item['amount']);
+            })
+            ->editColumn('payment_type',function($item){
+              if ($item['payment_type'] == 'bank_transfer') {
+                return 'Bank Transfer';
+              }
+              if ($item['payment_type'] == 'cash') {
+                return 'Cash';
+              }
+              if ($item['payment_type'] == 'cheque') {
+                return 'Cheque';
+              }
+              if ($item['payment_type'] == 'paypal') {
+                return 'Paypal';
+              }
+              if ($item['payment_type'] == 'debit_card') {
+                return 'Debit Card';
+              }
+            })
+            ->editColumn('payable_amount',function($item){
+                return 'Rs.' .number_format($item['payable_amount']);
+            })
+            ->editColumn('taxable_amount',function($item){
+              if(!empty($item['taxable_amount'])){
+                return 'Rs.' .number_format($item['taxable_amount']);
+              }else{
+                return 'N/A';
+              }
+            })
+            ->editColumn('late_amount',function($item){
+              if(!empty($item['late_amount'])){
+                return 'Rs.' .number_format($item['late_amount']);
+              }else{
+                return 'N/A';
+              }
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])     
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'taxable_amount','name' => 'taxable_amount','title' => 'Tax Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'late_amount','name' => 'late_amount','title' => 'Late Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'payable_amount','name' => 'payable_amount','title' => 'Total Amount','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name','name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'date','name' => 'date','title' => 'Payment Date','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'payment_type','name' => 'payment_type','title' => 'Payment Type','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Transaction Reference','orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
     }
 
@@ -222,9 +309,44 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
+      $data['deal_payment'] = _arefy(Deals_Payment::where('payment_status','=','no')->where('deal_id',$id)->first());
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
-      $data['installment'] = $data['deal']['plan']['installment'];
+     
       return view('admin.home',$data);
+    }
+
+    public function savePayment(Request $request)
+    {
+        $validation = new Validations($request);
+        $validator  = $validation->savePayment();
+        if ($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data = new Make_Payment();
+
+            $data->fill($request->all());
+            $data->save();
+            $payment_plan_id = $request->payment_plan_id;
+            $input = Deals_Payment::findOrFail($payment_plan_id);
+            $payment_status['payment_status'] = 'yes';
+
+            $input->update($payment_status);
+            $amount = $request->amount;
+            $deal_id = $request->deal_id;
+            
+            $output = Deals::findOrFail($deal_id);
+            $balance = $output['balance'] - $amount;
+            $deals['balance'] = $balance;
+            $output->update($deals);
+
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Payment has been Done successfully.";
+            $this->redirect = url('admin/deals');  
+        }
+        return $this->populateresponse();
     }
 
     public function makePaymentPlanForm(Request $request,$id)

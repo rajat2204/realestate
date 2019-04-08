@@ -37,6 +37,7 @@ class HomeController extends Controller{
         $data['agent'] = _arefy(Agents::where('status','active')->get());
         // dd($data['agent']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
+        // dd($data['contact']);
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
         $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',6));

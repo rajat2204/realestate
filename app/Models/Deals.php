@@ -39,9 +39,11 @@ class Deals extends Model
     public function plan(){
         return $this->hasOne('App\Models\Plans','id','plan_id');
     }
+
     public function units(){
         return $this->hasOne('App\Models\Units','id','unit_id');
     }
+
     public function payment_plan(){
         return $this->hasMany('App\Models\Deals_Payment','deal_id','id');
     }
@@ -56,7 +58,7 @@ class Deals extends Model
                 $q->select('id','name');
             },
             'client' => function($q){
-                $q->select('id','name');
+                $q->select('id','name','phone');
             },
             'property' => function($q){
                 $q->select('id','name','property_construct');
@@ -68,7 +70,7 @@ class Deals extends Model
                 $q->select('id','name');
             },
             'payment_plan' => function($q){
-                $q->select('id','name','amount','date');
+                 $q->select('id','deal_id','name','amount','date','payment_status');
             },
         ]);
         if($where){

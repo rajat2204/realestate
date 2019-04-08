@@ -26,6 +26,9 @@ class Purchase extends Model
     public function property(){
         return $this->hasOne('App\Models\Property','id','property_id');
     }
+    public function purchase_payment(){
+        return $this->hasOne('App\Models\Purchase_Payment','purchase_id','id');
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit=''){
         $table_purchase = self::select($keys)
@@ -35,6 +38,9 @@ class Purchase extends Model
             },
             'property' => function($q){
                 $q->select('id','name','featured_image');
+            },
+            'purchase_payment' => function($q){
+                $q->select('id','purchase_id','amount','date');
             },
         ]);
         if($where){
@@ -65,4 +71,5 @@ class Purchase extends Model
             return $table_purchase->limit($limit)->get();
         }
     }
+   
 }

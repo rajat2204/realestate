@@ -7,25 +7,32 @@
     <div class="box-body">
       <form role="add-payment" method="POST" action="{{url('admin/deals/makepayment/'.___encrypt($deal['id']))}}">
         {{csrf_field()}}
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="hidden" id="id" name="deal_id" class="form-control" value="{{!empty($deal['id'])?$deal['id']:''}}">
+            <input type="hidden" id="id" name="payment_plan_id" class="form-control" value="{{!empty($deal_payment['id'])?$deal_payment['id']:''}}">
+          </div>
+        </div>
 
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
               <label>Name:</label>
-              <input type="text" name="name" readonly class="form-control">
+              <input type="text" name="name" value="{{$deal_payment['name']}}" readonly class="form-control">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
               <label>Amount:</label>
-              <input type="text" name="amount" readonly class="form-control">
+              <input type="text" name="amount" value="{{$deal_payment['amount']}}" readonly class="form-control">
+              <input type="hidden" id="real_amount" value="{{$deal_payment['amount']}}">
             </div>
           </div>
         </div>
 
         <div class="form-group">
           <label>Extra/Late Amount:</label>
-          <input type="text" name="late_amount" placeholder="Enter Extra/Late Amount" class="form-control">
+          <input type="text" id="late_amount" name="late_amount" placeholder="Enter Extra/Late Amount" class="form-control">
         </div>
 
         <div class="row">
@@ -51,7 +58,8 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Taxable Amount:</label>
-              <input type="text" name="taxable_amount" class="form-control" readonly>
+              <input type="hidden" name="" value="">
+              <input type="text" name="taxable_amount" id="taxable_amount" class="form-control" readonly>
             </div>
           </div>
         </div>
@@ -60,7 +68,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Payable Amount:</label>
-              <input type="text" name="payable_amount" readonly class="form-control">
+              <input type="text" id="payable_amount" name="payable_amount" value="{{$deal_payment['amount']}}" readonly class="form-control">
             </div>
           </div>
           <div class="col-md-6">
@@ -91,8 +99,6 @@
               <input type="text" name="bank_name" placeholder="Please Enter Bank Name" class="form-control">
             </div>
           </div>
-        </div>
-
         </div>
 
         <div class="form-group">
@@ -137,5 +143,35 @@
         document.getElementById('cheque_div').style.display = 'none';
     }
 }
+
+  $(document).ready(function(){
+    $('#late_amount').keyup(function(){
+      var late_amount= $(this).val();
+      var real_amount= $('#real_amount').val();
+      // var payable_amount= $('#payable_amount').val();
+
+      if(late_amount.length > 0)
+      {
+        var total_amount = Number(real_amount) + Number(late_amount);
+        $('#payable_amount').val(total_amount);
+      }
+      else
+      {
+         $('#payable_amount').val(real_amount);
+      }
+    });
+
+    $('#tax_percent_id').change(function(){
+      var taxable = $('#tax_percent_id').find(":selected").text();
+      var real_amount= $('#real_amount').val();
+      var total_taxable_amount = ((parseFloat(real_amount)* parseFloat(taxable))/100);
+      $('#taxable_amount').val(parseInt(total_taxable_amount));
+      var amount =parseInt(total_taxable_amount);
+      var payable_amount = $('#payable_amount').val();
+      total_amount = parseInt(total_taxable_amount) + parseInt(payable_amount);
+      $('#payable_amount').val(parseInt(total_amount));
+      $('#real_amount').val(parseInt(total_amount));
+    });
+  });
 </script>
 @endsection
