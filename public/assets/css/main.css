@@ -2275,7 +2275,7 @@ img.form-control.slide-image {
 
 .footer-area .footer-text p {
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 0;
   color: #fff;
 }
 
@@ -3161,7 +3161,7 @@ a.room-price {
 }
 
 .section-padding {
-  padding: 30px 0 60px;
+  padding: 20px 0 0px;
 }
 
 #about .img-thumb img {
@@ -3209,7 +3209,7 @@ a.room-price {
   color: #1281AF;
 }
 .subscribe-news {
-    margin-top: 30px;
+    margin-top: 0px;
 }
 /*.footer-menu ul li:after {
     content: "\f0a4";
