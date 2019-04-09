@@ -56,6 +56,7 @@
           <ul class="treeview-menu">
             <li><a href="{{url('admin/leads')}}">Admin Lead</a></li>
             <li><a href="{{url('admin/contactleads')}}">Enquiry Leads</a></li>
+            <li><a href="{{url('admin/propertyenquiryleads')}}">Property Enquiry Leads</a></li>
             <li><a href="{{url('admin/agentleads')}}">Agent Leads</a></li>
             <li><a href="{{url('admin/sliderleads')}}">Slider Leads</a></li>
           </ul>

@@ -6,6 +6,7 @@ use App\Models\Leads;
 use App\Models\Property;
 use App\Models\ContactUs;
 use App\Models\AgentEnquiry;
+use App\Models\Property_Enquiry;
 use App\Models\Enquiry;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -135,6 +136,76 @@ class LeadController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function propertyEnquiryLead(Request $request, Builder $builder){
+        $data['view'] = 'admin.leads.propertyenquirylist';
+        
+        $where = 'status != "trashed"';
+        $propertyEnquiryLead  = _arefy(Property_Enquiry::list('array',$where));
+       
+        if ($request->ajax()) {
+            return DataTables::of($propertyEnquiryLead)
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/propertyenquiryleads/status/?id=%s&status=trashed',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/delete.png').'"
+                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> ';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('name',function($item){
+                return ucfirst($item['name']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('property_construct',function($item){
+                return ucfirst($item['property']['property_construct']);
+            })
+            ->editColumn('type',function($item){
+                return ucfirst($item['property']['property_purpose']);
+            })
+            ->editColumn('location',function($item){
+                return ucfirst($item['property']['location']);
+            })
+            ->editColumn('price',function($item){
+                if ($item['property']['property_purpose'] == 'sale') {
+                    return 'Rs.'.(number_format($item['property']['price']));
+                }else{
+                    return 'Rs.'.(number_format($item['property']['price'])).'/month';
+                }
+            })
+            ->editColumn('mobile',function($item){
+                return '+91-'.''.($item['mobile']);
+            })
+            ->editColumn('image',function($item){
+                $imageurl = asset("assets/img/properties/".$item['property']['featured_image']);
+                return '<img src="'.$imageurl.'" height="60px" width="100px">';
+            })
+            ->rawColumns(['action','image'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_construct', 'name' => 'property_construct','title' => 'Property Type','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'type', 'name' => 'type','title' => 'Availability','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Property Location','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'price', 'name' => 'price','title' => 'Property Price','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'E-mail','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Phone Number','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
     public function agentLead(Request $request, Builder $builder){
         $data['view'] = 'admin.leads.agentlist';
         
@@ -259,8 +330,7 @@ class LeadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
       $data['view'] = 'admin.leads.add';
       $data['property'] = _arefy(Property::where('status', '=', 'active')->get());
       // dd($data['property']);
@@ -273,8 +343,7 @@ class LeadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->addLead();
         if ($validator->fails()){
@@ -310,8 +379,7 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $data['view'] = 'admin.leads.edit';
         $id = ___decrypt($id);
         $where = 'id = '.$id;
@@ -328,8 +396,7 @@ class LeadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $id = ___decrypt($id);
         $validation = new Validations($request);
         $validator  = $validation->addLead('edit');
@@ -414,6 +481,23 @@ class LeadController extends Controller
     public function changeStatusSlider(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = Enquiry::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted lead successfully.';
+            }else{
+                $this->message = 'Updated lead successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+
+    public function changeStatusPropertyEnquiry(Request $request){
+        $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Property_Enquiry::change($request->id,$userData);
 
         if($isUpdated){
             if($request->status == 'trashed'){

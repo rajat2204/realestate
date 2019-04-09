@@ -15,6 +15,7 @@ use App\Models\AgentEnquiry;
 use App\Models\Services;
 use App\Models\Property;
 use App\Models\Property_Gallery;
+use App\Models\Property_Enquiry;
 use App\Models\ContactUs;
 use App\Models\Subscribers;
 use App\Models\SocialMedia;
@@ -192,6 +193,7 @@ class HomeController extends Controller{
             curl_setopt($ch, CURLOPT_URL, $pingurl);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['slider_contact'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($ch);
            
             curl_close($ch);
@@ -200,6 +202,7 @@ class HomeController extends Controller{
             curl_setopt($admin, CURLOPT_URL, $pingurl);
             curl_setopt($admin, CURLOPT_POST, 1);
             curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin, CURLOPT_RETURNTRANSFER, true);
             $result_admin = curl_exec($admin);
            
             curl_close($admin);
@@ -208,6 +211,45 @@ class HomeController extends Controller{
                 $this->modal    = true;
                 $this->alert    = true;
                 $this->message  = "Enquiry has been submitted successfully.";
+                $this->redirect = url('/');
+            }
+        return $this->populateresponse();
+    }
+
+    public function propertyEnquirySubmission(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->propertyenquiry();
+        if($validator->fails()){
+            $this->message = $validator->errors();
+        }else{
+            $data['property_id']        =!empty($request->id)?$request->id:'';
+            $data['name']               =!empty($request->name)?$request->name:'';
+            $data['email']              =!empty($request->email)?$request->email:'';
+            $data['mobile']             =!empty($request->mobile)?$request->mobile:'';
+            
+            $inserId = Property_Enquiry::add($data);
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $message="From your Portal, you have got an enquiry from ".ucfirst($data['name']).". The Customer's contact number is ".$data['mobile'].". You can contact ".ucfirst($data['name'])." regarding any query. You have also got the lead regarding Property Enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7651827761 . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Property Enquiry has been submitted successfully.";
                 $this->redirect = url('/');
             }
         return $this->populateresponse();
@@ -232,7 +274,7 @@ class HomeController extends Controller{
             $password="AMREESH@25";
             $sender="AMRESH";
 
-            $message="You have got an enquiry ".$data['agent_name']." from ".ucfirst($data['customer_name']).". The contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+            $message="You have got an enquiry from ".ucfirst($data['customer_name']).". The contact number of the Customer is ".$data['customer_contact']." and the respective E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
             $message_agent="From your Portal, " .$data['agent_name']. " has got an enquiry from ".ucfirst($data['customer_name']).". The Agent's contact number is ".$data['agent_contact'].". You can contact ".ucfirst($data['agent_name'])." regarding any query. You have also got the lead regarding enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
 
@@ -251,6 +293,7 @@ class HomeController extends Controller{
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
             curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_RETURNTRANSFER, true);
             $result_agent = curl_exec($admin_agent);
            
             curl_close($admin_agent);

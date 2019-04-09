@@ -386,6 +386,24 @@ class Validate
         return $validator;      
     }
 
+    public function propertyenquiry($action='add'){
+        $validations = [
+            'name'                  => $this->validation('name'),
+            'email'                 => $this->validation('req_email'),
+            'mobile'                => $this->validation('phone'),
+        ];
+        
+        $validator = \Validator::make($this->data->all(), $validations,[
+            'name.required'       =>  'Customer Name is required.',
+            'email.required'      =>  'Customer E-mail is required.',
+            'mobile.required'     =>  'Customer Contact is required.',
+            'mobile.numeric'      =>  'Contact Number should be numeric.',
+            'mobile.digits'       =>  'Contact Number should not be greater than 10 digits.',
+
+        ]);
+        return $validator;      
+    }
+
     public function agentenquiry($action='add'){
         $validations = [
             'customer_name'         => $this->validation('name'),

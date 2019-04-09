@@ -18,19 +18,23 @@
 		</ul>
 	</div>
 	<div class="form-container-box hidden-xs-down">
-		<div class="formcontainer">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="detai_l">
-						<h6> Want to know more? </h6>
-						<input type="text" name="name" placeholder="Enter name " >	
-						<input type="email" name="" placeholder = "Enter Email">	
-						<input type="text" name="" placeholder= "Mobile ">		
-						<button class="btn btn-success "> Connect with Builder</button>
-					</div>	
+		<form role="plotenquiryform" action="{{url('plotenquiryform')}}" method="POST">
+				{{csrf_field()}}
+			<div class="formcontainer">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="detai_l">
+							<h6> Want to know more? </h6>
+							<input type="hidden" id="id" name="id" value="{{!empty($property['id'])?$property['id']:''}}">
+							<input type="text" name="name" placeholder="Enter name">	
+							<input type="email" name="email" placeholder="Enter Email">	
+							<input type="text" name="mobile" placeholder="Mobile ">		
+							<button type="button" class="btn btn-success" data-request="ajax-submit" data-target='[role="plotenquiryform"]'> Connect with Builder</button>
+						</div>	
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </nav>
 
@@ -269,26 +273,27 @@
     <div class="modal-content">
       <div class="modal-header">
         <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
-         
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
      
 
       <div class="modal-body popupmodal-body">
-        <form role="agent-contact" method="POST">
+        <form role="plotenquiry" action="{{url('plotenquiry')}}" method="POST">
+					{{csrf_field()}}
           <div class="formcontainer">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="detai_l">
-						<h6 style="text-align: center;margin-top: 20px;"> Want to know more? </h6>
-						<input type="text" name="name" placeholder="Enter name " >	
-						<input type="email" name="" placeholder = "Enter Email">	
-						<input type="text" name="" placeholder= "Mobile ">		
-						<button class="btn btn-success "> Connect with Builder</button>
-					</div>	
-				</div>
-			</div>
-		</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="detai_l">
+									<h6 style="text-align: center;margin-top: 20px;"> Want to know more? </h6>
+									<input type="hidden" id="id" name="id" value="{{!empty($property['id'])?$property['id']:''}}">
+									<input type="text" name="name" placeholder="Enter name">	
+									<input type="email" name="email" placeholder = "Enter Email">	
+									<input type="text" name="mobile" placeholder= "Mobile ">		
+									<button type="button" class="btn btn-success" data-request="ajax-submit" data-target='[role="plotenquiry"]'> Connect with Builder</button>
+								</div>	
+							</div>
+						</div>
+					</div>
         </form>
       </div>
     </div>

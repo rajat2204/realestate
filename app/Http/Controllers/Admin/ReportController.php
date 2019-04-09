@@ -310,6 +310,7 @@ class ReportController extends Controller
             ';
         //}
         $output .= '</table>';
+        dd($output);
         return $output;
     }
 }
