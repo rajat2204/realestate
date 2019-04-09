@@ -373,6 +373,12 @@
   .header_strip {
       text-align: right;
   }
+  .menus_footer {
+      margin-top: 10px;
+  }
+  .footer-text{
+    margin-bottom: 0;
+  }
   .slides {
     height: 320px;
   }
