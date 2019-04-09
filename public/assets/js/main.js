@@ -248,7 +248,7 @@ $(document).ready(function(){
                 navSpeed: 1000,
                 dotsSpeed: 1000,
                 dragEndSpeed: 1000,
-                autoplay: true,
+                autoplay: false,
                 center: true,
                 autoplayHoverPause:true,
                 responsive: {

@@ -178,6 +178,7 @@
   }
   .horizontal_slider .item p {
       font-size: 13px;
+      line-height: 19px;
   }
   .header_wrapper_mobile {
       display: flex;
@@ -200,7 +201,7 @@
       margin: 0;
   }
   div#hero_slider {
-      padding-top: 10px;
+      padding-top: 45px;
       padding-right:0;
       padding-left: 0;
   }
@@ -223,14 +224,23 @@
     font-size: 14px;
   }
 }
-
+@media (min-width: 991px) and (max-width: 480px) {
+  #filter-search {
+      margin-bottom: 10px;
+  }
+}
 /* mobile or only mobile */
 @media (max-width: 767px) {
   .section-title {
     font-size: 22px;
     margin-bottom: 30px;
   }
-  
+  #gallery .nopadding, #overview .nopadding,#aboutus .nopadding{
+    padding: 0 15px;
+  }
+  .image-overview{
+    max-width: 100%;
+  }
   .unit-detail-container{
     padding-top: 20px;
   }
@@ -302,7 +312,9 @@
       max-width: 400px;
       margin: 0 auto;
   }
-
+  .horizontal_slider img {
+      height: 190px;
+  }
   .shot-item>img {
       max-width: none;
       width: 100%;
@@ -327,6 +339,18 @@
 @media (max-width: 576px){
   .our_services{
     margin-bottom: 15px;
+  }
+  footer#footer-section {
+    padding: 10px 0 10px;
+  }
+  .menus_footer {
+    margin-top: 10px;
+  }
+  .footer-text {
+    margin-bottom: 0;
+  }
+  .propertyDescription{
+    margin-top: 10px;
   }
   .padding30 {
       padding: 20px 0px;
@@ -375,6 +399,12 @@
   }
   .menus_footer {
       margin-top: 10px;
+  }
+  div#hero_slider{
+    padding-top: 35px;
+  }
+  #filter-search {
+      margin-bottom: 30px;
   }
   .footer-text{
     margin-bottom: 0;
