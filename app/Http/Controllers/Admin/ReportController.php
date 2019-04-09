@@ -25,16 +25,16 @@ class ReportController extends Controller
     }
 
     public function purchaseReport(Request $request){
-    	$data['view'] = 'admin.reports.purchasereport';
+    	 $data['view'] = 'admin.reports.purchasereport';
         $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
         $where = 'status != "trashed"';
         $data['purchase'] = _arefy(Purchase::list('array',$where));
         
 
         $data['purchase_payment'] = _arefy(Purchase_Payment::where('status','!=','trashed')->where('date','!=','trashed')->get());
-       $tt= Purchase_Payment::checkdate1();
-        dd($tt);
-    	return view('admin.home',$data);
+        $tt= Purchase_Payment::checkdate1();
+        // dd($tt);
+    	  return view('admin.home',$data);
     }
 
     public function salesReport(Request $request){
@@ -127,6 +127,8 @@ class ReportController extends Controller
                 
                 $html    = '<div class="edit_details_box">';
 
+                $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/printbalanceinvoice/%s',___encrypt($item['id']))).'"  title="Print Demand Letter"><i class="fa fa-print"></i></a> | ';
+                $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/smsbalanceinvoice/%s',___encrypt($item['id']))).'"  title="SMS Demand Letter"><i class="fa fa-mobile"></i></a> ';
                 $html   .= '</div>';
                                 
                 return $html;
@@ -145,7 +147,8 @@ class ReportController extends Controller
             ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])
             ->addColumn(['data' => 'name','name' => 'name','title' => 'Payment Due On','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Payment Due Date','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120]);
+            ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
+            ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);;
         return view('admin.home')->with($data);
     }
 
@@ -154,7 +157,7 @@ class ReportController extends Controller
 
         $where = 'status != "trashed"';
         $paidinvoice  = _arefy(Deals::list('array',$where));
-        // dd($balanceinvoice);
+        // dd($paidinvoice);
 
         if ($request->ajax()) {
             return DataTables::of($paidinvoice)
@@ -212,14 +215,12 @@ class ReportController extends Controller
 
         $where = 'deal_id = '.___decrypt($id);
         $paid = _arefy(Make_Payment::list('array',$where));
-        // dd($paid);
 
         if ($request->ajax()) {
             return DataTables::of($paid)
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-
                 $html   .= '</div>';
                                 
                 return $html;
@@ -250,9 +251,6 @@ class ReportController extends Controller
                     return 'N/A';
                 }
             })
-            // ->editColumn('taxable_amount',function($item){
-            //     return 'Rs.'.number_format($item['taxable_amount']);
-            // })
             ->rawColumns(['action'])
             ->make(true);
         }
@@ -279,29 +277,29 @@ class ReportController extends Controller
     }
 
     public function convert_paid_invoice_to_html(){
-        //$invoice_data = $this->showPaidInvoice();
-        //dd($invoice_data);
+        // $invoice_data = $this->showPaidInvoice();
+        // dd($invoice_data);
         $output = '
             <h3 align="center">Paid Invoice Data</h3>
             <table width="100%" style="border-collapse:collapse; border: 0px;">
                 <tr>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Payment Name</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Amount</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Tax Name</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Tax Percentage</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Taxable Amount</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Late Amount</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Payment Date</th>
-                    <th style= "border: 1px solid;padding:12px" width="20%">Total Payable Amount</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Payment Name</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Amount</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Tax Name</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Tax Percentage</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Taxable Amount</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Late Amount</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Payment Date</th>
+                  <th style= "border: 1px solid;padding:12px" width="20%">Total Payable Amount</th>
                 </tr>
         ';
-        //foreach ($invoice_data as $invoice) {
+        // foreach ($invoice_data as $invoice) {
             $output .= '
                 <tr>
                     <td style= "border: 1px solid;padding:12px" width="20%">asdaDA</td>
-                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
-                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
-                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
                     <td style= "border: 1px solid;padding:12px" width="20%"></td>
                     <td style= "border: 1px solid;padding:12px" width="20%"></td>
                     <td style= "border: 1px solid;padding:12px" width="20%"></td>
@@ -310,7 +308,6 @@ class ReportController extends Controller
             ';
         //}
         $output .= '</table>';
-        dd($output);
         return $output;
     }
 }

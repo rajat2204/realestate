@@ -39,14 +39,16 @@ class DealsController extends Controller
 
         $where = 'status != "trashed"';
         $deals  = _arefy(Deals::list('array',$where));
+        // dd($deals);
         if ($request->ajax()) {
 
             return DataTables::of($deals)
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-
-                $html   .= '<a href="'.url(sprintf('admin/deals/makeplan/%s',___encrypt($item['id']))).'"  title="Make Payment Plan"><i class="fa fa-credit-card"></i></a> | ';
+                if ($item['payment_plan'] == NULL) {
+                  $html   .= '<a href="'.url(sprintf('admin/deals/makeplan/%s',___encrypt($item['id']))).'"  title="Make Payment Plan"><i class="fa fa-credit-card"></i></a> | ';
+                }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
@@ -183,7 +185,7 @@ class DealsController extends Controller
             })
             ->editColumn('remarks',function($item){
               if (!empty($item['remarks'])) {
-                return strip_tags(str_limit($item['remarks'],10));
+                return strip_tags(str_limit($item['remarks'],20));
               }else{
                 return 'N/A';
               }
