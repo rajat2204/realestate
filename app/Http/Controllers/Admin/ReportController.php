@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Deals;
 use App\Models\Project;
 use App\Models\Purchase;
@@ -206,7 +207,7 @@ class ReportController extends Controller
         return view('admin.home')->with($data);
     }
 
-    public function showPaidInvoice(Request $request, Builder $builder,$id){
+    public function showPaidInvoice(Request $request, Builder $builder,$id=''){
         $data['view'] = 'admin.invoices.showpaidinvoice';
 
         $where = 'deal_id = '.___decrypt($id);
@@ -269,5 +270,46 @@ class ReportController extends Controller
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Payment Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'payable_amount','name' => 'payable_amount','title' => 'Total Payable Amount','orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function pdf(){
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->convert_paid_invoice_to_html());
+        $pdf->stream();
+    }
+
+    public function convert_paid_invoice_to_html(){
+        //$invoice_data = $this->showPaidInvoice();
+        //dd($invoice_data);
+        $output = '
+            <h3 align="center">Paid Invoice Data</h3>
+            <table width="100%" style="border-collapse:collapse; border: 0px;">
+                <tr>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Payment Name</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Amount</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Tax Name</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Tax Percentage</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Taxable Amount</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Late Amount</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Payment Date</th>
+                    <th style= "border: 1px solid;padding:12px" width="20%">Total Payable Amount</th>
+                </tr>
+        ';
+        //foreach ($invoice_data as $invoice) {
+            $output .= '
+                <tr>
+                    <td style= "border: 1px solid;padding:12px" width="20%">asdaDA</td>
+                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
+                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
+                    <td style= "border: 1px solid;padding:12px" width="20%">SFSDF</td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
+                </tr>
+            ';
+        //}
+        $output .= '</table>';
+        return $output;
     }
 }

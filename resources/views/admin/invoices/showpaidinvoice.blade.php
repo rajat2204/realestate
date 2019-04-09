@@ -19,7 +19,7 @@
 				<div class="portlet light">
 					<div class="portlet-title">
 						<div class="actions">
-							<a href="#" class="btn btn-default btn-circle print-window">
+							<a href="{{url('admin/paidinvoice/pdf')}}" class="btn btn-default btn-circle print-window">
 								<i class="fa fa-print"></i><span class="hidden-480">Print</span>
 							</a>
 						</div>
@@ -42,10 +42,4 @@
 
 @section('requirejs')
 {!! $html->scripts()!!}
-
-<script type="text/javascript">
-    $('.print-window').click(function() {
-    window.print();
-});
-</script>
 @endsection

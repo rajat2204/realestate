@@ -259,6 +259,7 @@ Route::get('balanceinvoices', 'ReportController@balanceInvoice');
 Route::get('balanceinvoices/{id}', 'ReportController@showBalanceInvoice');
 Route::get('paidinvoices', 'ReportController@paidInvoice');
 Route::get('paidinvoices/{id}', 'ReportController@showPaidInvoice');
+Route::get('paidinvoice/pdf', 'ReportController@pdf');
 
 /***********************Notice-Section****************************/
 
