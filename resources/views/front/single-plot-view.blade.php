@@ -4,7 +4,7 @@
 	<a class="navbar-brand js-scroll-trigger mx-auto img-left" href="#page-top">
 		
 		<span class="d-lg-block img-left singleLogo">
-			<img src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="gallery">
+			<a href="{{url('/')}}" class="navbar-brand"><img src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="gallery"></a>
 		</span>
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,9 +86,11 @@
 		<div class="container nopadding">
 			<div class="row">
 				<div class="col-md-5 img-overview">
-				<img class="img-fluid img-round" src="{{url('assets/img/properties')}}/{{$property['featured_image']}}" alt="img">
+					<span class="image-overview">
+						<img class="img-fluid img-round" src="{{url('assets/img/properties')}}/{{$property['featured_image']}}" alt="img">
+					</span>
 				</div>
-				<div class="col-lg-7 col-md-7 col-12 nopadding nopadding-mobile mml-10">
+				<div class="col-lg-7 col-md-7 col-12 nopadding nopadding-mobile mml-10 propertyDescription">
 				<!-- <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: 100%; height: 160px;"><div class="overview overview-text" style="overflow: hidden; width: 100%; height: 160px;"> -->
 					<p>
 					{!!($property['description'])!!}
@@ -247,7 +249,7 @@
 		<div class="card-section padding30">
 			<div class="container nopadding">
 				<div class="row nopadding">
-					<div class="col nopadding roundborder builder-logo">
+					<div class="col-md-3 nopadding roundborder builder-logo">
 						<img class="my-auto img-fluid" src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="Developers">
 					</div>
 					<div class="col-lg-9 col-md-9 col-12 nopadding pl-4">

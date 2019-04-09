@@ -109,9 +109,9 @@
         $serial_no = 1;
       @endphp
     @foreach($notice as $notices)
-      <div class="item clearfix">
+      <div class="item noticeBoxes">
         <span class="badge badge-light numbering">{{$serial_no++}}</span>
-        <p class="float-left">{{$notices['text']}}</p>
+        <p class="">{{$notices['text']}}</p>
       </div>
     @endforeach
     </div>

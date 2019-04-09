@@ -459,11 +459,11 @@ a.back-to-top:hover, a.back-to-top:focus {
   padding: 10px 91px 10px 10px;
 }
 .subscribe-btn{
-  position: relative;
+  position: absolute;
+  top: 1px;
+  right: 0;
 }
 .subscribe-btn button {
-    position: absolute;
-    right: 0;
     border: 1px solid #1281AF;
     border-radius: 1px 5px 5px 1px;
     background-color: #1281AF;
@@ -2005,7 +2005,9 @@ a.back-to-top:hover, a.back-to-top:focus {
   border-color: #1281AF;
   background: transparent;
 }
-
+#filter-search {
+    margin-bottom: 65px;
+}
 .controls .btn {
   text-transform: uppercase;
   margin: 2px;
@@ -2275,7 +2277,7 @@ img.form-control.slide-image {
 
 .footer-area .footer-text p {
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 0;
   color: #fff;
 }
 
@@ -2460,10 +2462,24 @@ a.navbar-brand .singleLogo img {
     content: "";
     top: 7px;
 }
-nav.navbar {
-    top: 30px;
-    border-color: rgba(231, 231, 231, 0);
-    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+.noticeboard_slider .noticeBoxes {
+    display: flex;
+    align-items: center;
+}
+#header-wrap nav.navbar {
+  top: 30px !important;
+  border-color: rgba(231, 231, 231, 0);
+  box-shadow: 0 0 30px rgba(0,0,0,0.2);
+}
+.image-overview{
+  max-width: 400px;
+  height: 240px;
+  display: block;
+}
+.image-overview img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .header_strip ul li a:hover {
     color: #000;
@@ -2476,8 +2492,8 @@ nav.navbar {
     padding-right: 7px;
     text-transform: uppercase;
 }
-nav.top-nav-collapse {
-    top: 30px !important;
+#header-wrap nav.top-nav-collapse {
+    top: 0px !important;
 }
 .project_desc .col-lg-12.col-md-12.col-sm-12 {
     max-width: 900px;
@@ -2529,11 +2545,11 @@ header#header {
     padding-top: 0;
 }
 .horizontal_slider{
-  width: calc(100% - 640px);
+  width: calc(100% - 645px);
   float: left;
 }
 .header_wrapper {
-    /* padding: 80px 0 20px; */
+    padding: 0px 0 10px;
 }
 .slides li img {
     max-width: 100%;
@@ -2551,7 +2567,7 @@ div#hero_slider {
     padding-right: 15px;
 }
 .horizontal_slider .item p {
-    background: #00b3d7;
+    background: #1281AF;
     padding: 6px 20px;
     min-height: 70px;
     font-size: 15px;
@@ -2748,7 +2764,7 @@ p.contact_number {
 .notice_title {
     display: inline-block;
     width: 200px;
-    background: #00b3d7;
+    background: #1281AF;
     float: left;
 }
 .numbering{
@@ -2803,7 +2819,7 @@ p.contact_number {
 }
 .noticeboard_sec {
     padding: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding-top: 0;
 }
 
@@ -3161,7 +3177,7 @@ a.room-price {
 }
 
 .section-padding {
-  padding: 30px 0 60px;
+  padding: 20px 0 0px;
 }
 
 #about .img-thumb img {
@@ -3209,15 +3225,10 @@ a.room-price {
   color: #1281AF;
 }
 .subscribe-news {
-    margin-top: 30px;
+    margin-top: 0px;
+    position: relative;
 }
-/*.footer-menu ul li:after {
-    content: "\f0a4";
-    position: absolute;
-    left: 0px;
-    color: #fff;
-    font-family: fontAwesome;
-}*/
+
 /*---our agents----*/
 .agentSpace{
   /*padding: 10px;*/
