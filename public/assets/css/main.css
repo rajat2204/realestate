@@ -1422,6 +1422,12 @@ button:focus {
 .social-icon li .google:hover {
   background: #CE332A;
 }
+.social-icon li .whatsapp:hover {
+  background: #00E676;
+}
+.whatsapp .fa{
+  font-size: 20px;
+}
 .section-heading img {
     height: 9px;
 }
