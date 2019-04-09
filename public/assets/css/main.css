@@ -459,11 +459,11 @@ a.back-to-top:hover, a.back-to-top:focus {
   padding: 10px 91px 10px 10px;
 }
 .subscribe-btn{
-  position: relative;
+  position: absolute;
+  top: 1px;
+  right: 0;
 }
 .subscribe-btn button {
-    position: absolute;
-    right: 0;
     border: 1px solid #1281AF;
     border-radius: 1px 5px 5px 1px;
     background-color: #1281AF;
@@ -3226,14 +3226,9 @@ a.room-price {
 }
 .subscribe-news {
     margin-top: 0px;
+    position: relative;
 }
-/*.footer-menu ul li:after {
-    content: "\f0a4";
-    position: absolute;
-    left: 0px;
-    color: #fff;
-    font-family: fontAwesome;
-}*/
+
 /*---our agents----*/
 .agentSpace{
   /*padding: 10px;*/
