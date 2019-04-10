@@ -215,6 +215,7 @@ class ReportController extends Controller
 
         $where = 'deal_id = '.___decrypt($id);
         $paid = _arefy(Make_Payment::list('array',$where));
+        // dd($paid);
 
         if ($request->ajax()) {
             return DataTables::of($paid)

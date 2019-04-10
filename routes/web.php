@@ -258,6 +258,13 @@ Route::get('salesreport', 'ReportController@salesReport');
 Route::get('expensereport', 'ReportController@expenseReport');
 Route::get('profitreport', 'ReportController@profitReport');
 
+/***********************Cheques-Section****************************/
+
+// Route::get('allcheques', 'ChequeController@allchequesList');
+// Route::get('salesreport', 'ReportController@salesReport');
+// Route::get('expensereport', 'ReportController@expenseReport');
+// Route::get('profitreport', 'ReportController@profitReport');
+
 /***********************Invoices-Section****************************/
 
 // Route::get('allinvoices', 'ReportController@allInvoice');
