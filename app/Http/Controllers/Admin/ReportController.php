@@ -113,6 +113,7 @@ class ReportController extends Controller
     }
 
     public function showBalanceInvoice(Request $request, Builder $builder,$id){
+
         $data['view'] = 'admin.invoices.showbalanceinvoice';
 
         \DB::statement(\DB::raw('set @rownum=0'));
@@ -152,6 +153,17 @@ class ReportController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function pdfInvoice(Request $request,$id){
+       \DB::statement(\DB::raw('set @rownum=0'));
+        $id = ___decrypt($id);
+        $balance = _arefy(Deals_Payment::where('deal_id',$id)->where('payment_status','=','no')->get(['deal_payment_plan.*', 
+            \DB::raw('@rownum  := @rownum  + 1 AS rownum')]));
+        $data['balanceinvoice'] = _arefy($balance);
+        $excel_name='invoice_data';
+        $pdf = PDF::loadView('admin.pdfview', $data);
+        return $pdf->download('balance_invoice.pdf');
+
+    }
     public function paidInvoice(Request $request, Builder $builder){
     	$data['view'] = 'admin.invoices.paidinvoices';
 

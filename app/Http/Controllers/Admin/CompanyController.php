@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
-
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 class CompanyController extends Controller
 {
     /**
@@ -26,7 +27,6 @@ class CompanyController extends Controller
 
     public function index(Request $request, Builder $builder){
         $data['view'] = 'admin.company.list';
-        
         $company  = _arefy(Company::where('status','!=','trashed')->get());
        
         if ($request->ajax()) {
@@ -85,6 +85,44 @@ class CompanyController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportCompany(Request $request, Builder $builder){
+        $company  = _arefy(Company::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='company_data';
+        Excel::create($excel_name, function($excel) use ($company) {
+                $excel->sheet('mySheet', function($sheet) use ($company){
+                    $headings = [
+                        'Company ID',
+                        'Company Name',
+                        'Company Description',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($company)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($company as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['id'],
+                                $value['name'],
+                                strip_tags($value['description']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

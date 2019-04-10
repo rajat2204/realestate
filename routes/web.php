@@ -206,6 +206,7 @@ Route::resource('leads', 'LeadController');
 
 /***********************Company-Section****************************/
 
+Route::get('company/export', 'CompanyController@exportCompany');
 Route::resource('company', 'CompanyController');
 	Route::group(['prefix' => 'company'],function(){
 		Route::post('/status', 'CompanyController@changeStatus');
@@ -270,6 +271,7 @@ Route::get('profitreport', 'ReportController@profitReport');
 // Route::get('allinvoices', 'ReportController@allInvoice');
 Route::get('balanceinvoices', 'ReportController@balanceInvoice');
 Route::get('balanceinvoices/{id}', 'ReportController@showBalanceInvoice');
+Route::get('balanceinvoices/invoicepdf/{id}', 'ReportController@pdfInvoice');
 Route::get('paidinvoices', 'ReportController@paidInvoice');
 Route::get('paidinvoices/{id}', 'ReportController@showPaidInvoice');
 Route::get('paidinvoice/pdf', 'ReportController@pdf');
