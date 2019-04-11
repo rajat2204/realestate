@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Balance Invoices</h1>
+			<h1 class="page-header">Balance Invoices of {{$balance[0]['client']['name']}} for Invoice No. {{$balance[0]['invoice_no']}}</h1>
 		</div>
 	</div><!--/.row-->
 	<div class="page-content">

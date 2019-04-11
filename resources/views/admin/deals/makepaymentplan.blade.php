@@ -7,11 +7,14 @@
       <form action="{{url('admin/deals/makeplan/'.___encrypt($deal['id']))}}" class="form-horizontal" method="POST" role="make-payment-plan">
         {{csrf_field()}}
         <input type="hidden" name="balance" value="{{!empty($deal['balance'])?$deal['balance']:''}}">
-
+        <input type="hidden" name="client_id" value="{{!empty($deal['client_id'])?$deal['client_id']:''}}">
+        <input type="hidden" name="property_id" value="{{!empty($deal['property_id'])?$deal['property_id']:''}}">
+        <input type="hidden" name="invoice_no" value="{{!empty($deal['invoice_no'])?$deal['invoice_no']:''}}">
+        
         <div class="form-group">
           <label for="group_name" class="col-sm-3 control-label"><small>Name:</small></label>
           <div class="col-sm-6">
-             <input name="deal[0][name]" value="Booking Amount" class="form-control" type="text" readonly>           
+             <input name="deal[0][name]" value="Booking Amount" class="form-control" type="text" readonly>      
           </div>
         </div>
         <div class="form-group">

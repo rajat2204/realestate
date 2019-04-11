@@ -261,7 +261,6 @@ class DealsController extends Controller
         $data['plan'] = _arefy(Plans::where('status','!=','trashed')->get());
         $data['project'] = _arefy(Project::where('status','!=','trashed')->get());
         $data['units'] = _arefy(Units::where('status','!=','trashed')->get());
-        // dd($data['property']);
         return view('admin.home',$data);
     }
 
@@ -301,6 +300,7 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
+      // dd($data['deal']);
       $data['installment'] = $data['deal']['plan']['installment'];
       return view('admin.home',$data);
     }
@@ -312,6 +312,7 @@ class DealsController extends Controller
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
       $data['deal_payment'] = _arefy(Deals_Payment::where('payment_status','=','no')->where('deal_id',$id)->first());
+      // dd($data['deal_payment']);
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
      
       return view('admin.home',$data);
@@ -330,6 +331,7 @@ class DealsController extends Controller
             $data->save();
             $payment_plan_id = $request->payment_plan_id;
             $input = Deals_Payment::findOrFail($payment_plan_id);
+            // dd($input);
             $payment_status['payment_status'] = 'yes';
 
             $input->update($payment_status);
@@ -355,6 +357,9 @@ class DealsController extends Controller
     {
         $id = ___decrypt($id);
         foreach ($request->deal as $deals) {
+          $data['client_id']=$request->client_id;
+          $data['property_id']=$request->property_id;
+          $data['invoice_no']=$request->invoice_no;
           $data['name']=$deals['name'];
           $data['amount']=$deals['amount'];
           $data['date']=$deals['date'];

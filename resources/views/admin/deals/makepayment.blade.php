@@ -11,6 +11,9 @@
           <div class="form-group">
             <input type="hidden" id="id" name="deal_id" class="form-control" value="{{!empty($deal['id'])?$deal['id']:''}}">
             <input type="hidden" id="id" name="payment_plan_id" class="form-control" value="{{!empty($deal_payment['id'])?$deal_payment['id']:''}}">
+            <input type="hidden" id="client_id" name="client_id" class="form-control" value="{{!empty($deal_payment['client_id'])?$deal_payment['client_id']:''}}">
+            <input type="hidden" id="property_id" name="property_id" class="form-control" value="{{!empty($deal_payment['property_id'])?$deal_payment['property_id']:''}}">
+            <input type="hidden" id="invoice_no" name="invoice_no" class="form-control" value="{{!empty($deal_payment['invoice_no'])?$deal_payment['invoice_no']:''}}">
           </div>
         </div>
 
