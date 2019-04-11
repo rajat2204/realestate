@@ -24,6 +24,16 @@
 							<span class="hidden-480">
 							Add Leads</span>
 							</a>
+							<a href="{{url('admin/leads/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
+							<span class="hidden-480">
+							Export Leads</span>
+							</a>
+							<a href="{{url('admin/leads/print')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-print"></i>
+							<span class="hidden-480">
+							Print</span>
+							</a>
 						</div>
 					</div>
 					<div class="portlet-body">

@@ -21,7 +21,7 @@
                         <td style= "border: 1px solid;padding:12px" width="20%">{{$chequeslist['name']}}</td>
                         <td style= "border: 1px solid;padding:12px" width="20%">{{$chequeslist['invoice_no']}}</td>
                         <td style= "border: 1px solid;padding:12px" width="20%">Rs.{{$chequeslist['amount']}}</td>
-                        <td style= "border: 1px solid;padding:12px" width="20%">Rs.{{$chequeslist['cheque_no']}}</td>
+                        <td style= "border: 1px solid;padding:12px" width="20%">{{$chequeslist['cheque_no']}}</td>
                         <td style= "border: 1px solid;padding:12px" width="20%">Rs.{{$chequeslist['bank_name']}}</td>
                         <td style= "border: 1px solid;padding:12px" width="20%">{{$chequeslist['status']}}</td>
                     </tr>

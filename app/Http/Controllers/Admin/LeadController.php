@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Leads;
 use App\Models\Property;
 use App\Models\ContactUs;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LeadController extends Controller
 {
@@ -33,7 +36,7 @@ class LeadController extends Controller
         
         $where = 'status != "trashed"';
         $lead  = _arefy(Leads::list('array',$where));
-       
+        // dd($lead);
         if ($request->ajax()) {
             return DataTables::of($lead)
             ->editColumn('action',function($item){
@@ -510,5 +513,247 @@ class LeadController extends Controller
             $this->jsondata = [];
         }
         return $this->populateresponse();
+    }
+
+    public function exportLeads(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $lead  = _arefy(Leads::list('array',$where));
+        $type='xlsx';
+        $excel_name='leads_data';
+        Excel::create($excel_name, function($excel) use ($lead) {
+                $excel->sheet('mySheet', function($sheet) use ($lead){
+                    $headings = [
+                        'Name',
+                        'E-mail',
+                        'Phone Number',
+                        'Property Name',
+                        'Available For',
+                        'Follow Up',
+                        'Status',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($lead)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($lead as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                                $value['email'],
+                                $value['phone'],
+                                $value['property']['name'],
+                                $value['available'],
+                                $value['followup'],
+                                $value['status'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
+    public function exportenquiryLeads(Request $request, Builder $builder){
+        $contactlead  = _arefy(ContactUs::where('status','!=','trashed')->get());
+        // dd($contactlead);
+        $type='xlsx';
+        $excel_name='enquiry_data';
+        Excel::create($excel_name, function($excel) use ($contactlead) {
+                $excel->sheet('mySheet', function($sheet) use ($contactlead){
+                    $headings = [
+                        'Name',
+                        'E-mail',
+                        'Subject',
+                        'Message',
+                        'Phone Number',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($contactlead)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($contactlead as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                                $value['email'],
+                                $value['subject'],
+                                $value['message'],
+                                $value['number'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
+    public function propertyenquiryLeads(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $propertyEnquiryLead  = _arefy(Property_Enquiry::list('array',$where));
+        // dd($propertyEnquiryLead);
+        $type='xlsx';
+        $excel_name='propertyenquiry_data';
+        Excel::create($excel_name, function($excel) use ($propertyEnquiryLead) {
+                $excel->sheet('mySheet', function($sheet) use ($propertyEnquiryLead){
+                    $headings = [
+                        'Name',
+                        'Property Name',
+                        'Property Type',
+                        'Availability',
+                        'Property Location',
+                        'Property Price',
+                        'E-mail',
+                        'Phone Number',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($propertyEnquiryLead)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($propertyEnquiryLead as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                                $value['property']['name'],
+                                ucfirst($value['property']['property_construct']),
+                                ucfirst($value['property']['property_purpose']),
+                                $value['property']['location'],
+                                'Rs.'.number_format($value['property']['price']),
+                                $value['email'],
+                                $value['mobile'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
+    public function agentLeads(Request $request, Builder $builder){
+        $agentlead  = _arefy(AgentEnquiry::where('status','!=','trashed')->get());
+        // dd($agentlead);
+        $type='xlsx';
+        $excel_name='agentleads_data';
+        Excel::create($excel_name, function($excel) use ($agentlead) {
+                $excel->sheet('mySheet', function($sheet) use ($agentlead){
+                    $headings = [
+                        'Agent Name',
+                        'Agent Contact',
+                        'Customer Name',
+                        'Customer Contact',
+                        'E-mail',
+                        'Message',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($agentlead)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($agentlead as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['agent_name'],
+                                $value['agent_contact'],
+                                $value['customer_name'],
+                                $value['customer_contact'],
+                                $value['email'],
+                                $value['message'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
+    public function sliderLeads(Request $request, Builder $builder){
+        $sliderlead  = _arefy(Enquiry::where('status','!=','trashed')->get());
+        // dd($sliderlead);
+        $type='xlsx';
+        $excel_name='agentleads_data';
+        Excel::create($excel_name, function($excel) use ($sliderlead) {
+                $excel->sheet('mySheet', function($sheet) use ($sliderlead){
+                    $headings = [
+                        'Slider Name',
+                        'Slider Contact',
+                        'Location',
+                        'Customer Name',
+                        'Customer Contact',
+                        'E-mail',
+                        'Message',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($sliderlead)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($sliderlead as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['slider_name'],
+                                $value['slider_contact'],
+                                $value['location'],
+                                $value['customer_name'],
+                                $value['customer_contact'],
+                                $value['email'],
+                                $value['message'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
+    public function printLeads(Request $request){
+        $where = 'status != "trashed"';
+        $data['lead']  = _arefy(Leads::list('array',$where));
+        // dd($data['lead']);
+        $data['leads'] = _arefy($data['lead']);
+        $excel_name='leads_data';
+        $pdf = PDF::loadView('admin.leadpdf', $data);
+        return $pdf->download('leads_data.pdf');
     }
 }

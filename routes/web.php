@@ -183,6 +183,12 @@ Route::resource('plans', 'PlanController');
 
 /***********************Leads-Section****************************/
 
+Route::get('leads/export','LeadController@exportLeads');
+Route::get('contactleads/export','LeadController@exportenquiryLeads');
+Route::get('propertyenquiryleads/export','LeadController@propertyenquiryLeads');
+Route::get('agentleads/export','LeadController@agentLeads');
+Route::get('sliderleads/export','LeadController@sliderLeads');
+Route::get('leads/print','LeadController@printLeads');
 Route::get('contactleads','LeadController@contactLead');
 Route::get('agentleads','LeadController@agentLead');
 Route::get('sliderleads','LeadController@sliderLead');
