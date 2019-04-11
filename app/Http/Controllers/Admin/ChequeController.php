@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Make_Payment;
+use App\Models\Cheques;
+use App\Models\Clients;
+use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
@@ -21,34 +23,16 @@ class ChequeController extends Controller
     public function allchequesList(Builder $builder,Request $request){
     	$data['view'] = 'admin.cheques.allcheques';
         
-        $cheques  = _arefy(Clients::where('status','!=','trashed')->get());
+        $where = 'status = "pending"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        // dd($data['cheques']);
        
         if ($request->ajax()) {
-            return DataTables::of($clients)
+            return DataTables::of($data['cheques'])
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-                $html   .= '<a href="'.url(sprintf('admin/client/%s/changepassword',___encrypt($item['id']))).'"  title="Change Password"><i class="fa fa-cog"></i></a> | ';
-                $html   .= '<a href="'.url(sprintf('admin/client/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-                $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/client/status/?id=%s&status=trashed',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/delete.png').'"
-                        data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a> | ';
-                if($item['status'] == 'active'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/client/status/?id=%s&status=inactive',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/inactive-user.png').'"
-                        data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
-                }
-                elseif($item['status'] == 'inactive'){
-                    $html   .= '<a href="javascript:void(0);" 
-                        data-url="'.url(sprintf('admin/client/status/?id=%s&status=active',$item['id'])).'" 
-                        data-request="ajax-confirm"
-                        data-ask_image="'.url('assets/img/active-user.png').'"
-                        data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a>';
-                }
+                $html   .= '<a href="'.url(sprintf('admin/allcheques/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a>';
                 $html   .= '</div>';
                                 
                 return $html;
@@ -56,17 +40,19 @@ class ChequeController extends Controller
             ->editColumn('status',function($item){
                 return ucfirst($item['status']);
             })
-            ->editColumn('name',function($item){
-                return ucfirst($item['name']);
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
             })
-            ->editColumn('phone',function($item){
-                return '+91-'.' ' .($item['phone']);
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
             })
-            ->editColumn('photo',function($item){
-                $imageurl = asset("assets/img/Clients/".$item['photo']);
-                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+            ->editColumn('client_phone',function($item){
+                return ucfirst($item['client']['phone']);
             })
-            ->rawColumns(['photo','action'])
+            ->editColumn('amount',function($item){
+                return 'Rs.'.(number_format($item['amount']));
+            })
+            ->rawColumns(['action'])
             ->make(true);
         }
 
@@ -74,14 +60,215 @@ class ChequeController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'photo', 'name' => 'photo',"render"=> 'data','title' => 'Client photo','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Client Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Client E-mail','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'phone', 'name' => 'phone','title' => 'Client Mobile','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'dob', 'name' => 'dob','title' => 'Client DOB','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Client Address','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_id', 'name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone', 'name' => 'client_phone','title' => 'Client Contact Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no', 'name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount', 'name' => 'amount','title' => 'Amount Paid','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'cheque_no', 'name' => 'cheque_no','title' => 'Cheque Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'bank_name', 'name' => 'bank_name','title' => 'Bank Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function clearchequesList(Builder $builder,Request $request){
+        $data['view'] = 'admin.cheques.clearchequeslist';
+        
+        $where = 'status = "clear"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        // dd($data['cheques']);
+       
+        if ($request->ajax()) {
+            return DataTables::of($data['cheques'])
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
+            })
+            ->editColumn('client_phone',function($item){
+                return ucfirst($item['client']['phone']);
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.'.(number_format($item['amount']));
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'client_id', 'name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone', 'name' => 'client_phone','title' => 'Client Contact Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no', 'name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount', 'name' => 'amount','title' => 'Amount Paid','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'cheque_no', 'name' => 'cheque_no','title' => 'Cheque Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'bank_name', 'name' => 'bank_name','title' => 'Bank Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function bouncedchequesList(Builder $builder,Request $request){
+        $data['view'] = 'admin.cheques.bouncedchequeslist';
+        
+        $where = 'status = "bounce"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        // dd($data['cheques']);
+       
+        if ($request->ajax()) {
+            return DataTables::of($data['cheques'])
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
+            })
+            ->editColumn('client_phone',function($item){
+                return ucfirst($item['client']['phone']);
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.'.(number_format($item['amount']));
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'client_id', 'name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone', 'name' => 'client_phone','title' => 'Client Contact Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no', 'name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount', 'name' => 'amount','title' => 'Amount Paid','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'cheque_no', 'name' => 'cheque_no','title' => 'Cheque Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'bank_name', 'name' => 'bank_name','title' => 'Bank Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function cancelledchequesList(Builder $builder,Request $request){
+        $data['view'] = 'admin.cheques.cancelchequelist';
+        
+        $where = 'status = "cancelled"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        // dd($data['cheques']);
+       
+        if ($request->ajax()) {
+            return DataTables::of($data['cheques'])
+            ->editColumn('action',function($item){
+                
+                $html    = '<div class="edit_details_box">';
+                $html   .= '</div>';
+                                
+                return $html;
+            })
+            ->editColumn('status',function($item){
+                return ucfirst($item['status']);
+            })
+            ->editColumn('property_id',function($item){
+                return ucfirst($item['property']['name']);
+            })
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
+            })
+            ->editColumn('client_phone',function($item){
+                return ucfirst($item['client']['phone']);
+            })
+            ->editColumn('amount',function($item){
+                return 'Rs.'.(number_format($item['amount']));
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        $data['html'] = $builder
+            ->parameters([
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+            ])
+            ->addColumn(['data' => 'client_id', 'name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone', 'name' => 'client_phone','title' => 'Client Contact Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id', 'name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no', 'name' => 'invoice_no','title' => 'Invoice No.','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'amount', 'name' => 'amount','title' => 'Amount Paid','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'cheque_no', 'name' => 'cheque_no','title' => 'Cheque Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'bank_name', 'name' => 'bank_name','title' => 'Bank Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
+        return view('admin.home')->with($data);
+    }
+
+    public function updateChequeStatus($id){
+        $data['view'] = 'admin.cheques.editcheque';
+        $id = ___decrypt($id);
+        $where = 'id = '.___decrypt($id);
+        $data['cheques'] = _arefy(Cheques::list('single',$where));
+        // dd($data['cheques']);
+        return view('admin.home',$data);
+    }
+
+    public function updateCheque(Request $request, $id)
+    {
+        $id = ___decrypt($id);
+        $cheque = Cheques::findOrFail($id);
+        $data = $request->all();
+
+        $cheque->update($data);
+        $propertyDetails = _arefy(Property::where('id',$cheque['property_id'])->first());
+        $clientDetails = _arefy(Clients::where('id',$cheque['client_id'])->first());
+        // dd($clientDetails);
+
+        $username="AMREESH@25"; 
+        $password="AMREESH@25";
+        $sender="AMRESH";
+
+        $message="Dear ".$clientDetails['name'].", it is to inform you that your Cheque Number ".$cheque['cheque_no']." of ".$cheque['bank_name']." whose amount is Rs. ".number_format($cheque['amount']). " is ".$cheque['status']. " which you have submitted as a ".$cheque['name']. " for ".$propertyDetails['name'].". -DevDrishti Infrahomes Pvt. Ltd.";
+
+        $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $pingurl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $clientDetails['phone'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($ch);
+       
+        curl_close($ch);
+
+        $this->status   = true;
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->message  = "Cheque Status has been Updated successfully.";
+        $this->redirect = url('admin/allcheques');
+
+        return $this->populateresponse();
     }
 }

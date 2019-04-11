@@ -12,6 +12,7 @@ use App\Models\Tax;
 use App\Models\Tax_Percent;
 use App\Models\Make_Payment;
 use App\Models\Project;
+use App\Models\Cheques;
 use App\Models\Deals_Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -331,8 +332,15 @@ class DealsController extends Controller
             $data->save();
             $payment_plan_id = $request->payment_plan_id;
             $input = Deals_Payment::findOrFail($payment_plan_id);
-            // dd($input);
             $payment_status['payment_status'] = 'yes';
+
+            if ($data['payment_type'] == 'cheque') {
+              $cheque = new Cheques();
+
+              $cheque->fill($request->all());
+              $cheque['amount']=$request->payable_amount;
+              $cheque->save();
+            }
 
             $input->update($payment_status);
             $amount = $request->amount;

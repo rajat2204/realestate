@@ -262,9 +262,11 @@ Route::get('profitreport', 'ReportController@profitReport');
 /***********************Cheques-Section****************************/
 
 Route::get('allcheques', 'ChequeController@allchequesList');
-// Route::get('salesreport', 'ReportController@salesReport');
-// Route::get('expensereport', 'ReportController@expenseReport');
-// Route::get('profitreport', 'ReportController@profitReport');
+Route::get('clearcheques', 'ChequeController@clearchequesList');
+Route::get('bouncedcheques', 'ChequeController@bouncedchequesList');
+Route::get('cancelledcheques', 'ChequeController@cancelledchequesList');
+Route::get('allcheques/{id}/edit', 'ChequeController@updateChequeStatus');
+Route::post('allcheques/{id}', 'ChequeController@updateCheque');
 
 /***********************Invoices-Section****************************/
 
