@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Cheques;
 use App\Models\Clients;
 use App\Models\Property;
@@ -270,5 +271,15 @@ class ChequeController extends Controller
         $this->redirect = url('admin/allcheques');
 
         return $this->populateresponse();
+    }
+
+    public function pdfCheques(Request $request){
+        $where = 'status = "pending"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        $data['cheque'] = _arefy($data['cheques']);
+        // dd($data['cheque']);
+        $excel_name='cheques_pending_data';
+        $pdf = PDF::loadView('admin.chequepdfview', $data);
+        return $pdf->download('cheques_pending_data.pdf');
     }
 }

@@ -47,7 +47,7 @@
 <div class="col-lg-8 ">  
 <div class="rowpadding">
 <h6 class="mt-2"><b>{{ucfirst($value['property_type'])}}</b> For <strong>{{ucfirst($value['property_purpose'])}}</strong> in {{$value['location']}}.
-  <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6>
+  <!-- <span><i class="fa fa-map-marker text "></i>What's near By:</span></h6> -->
 </div>   
   <div class="row">  
   <div class="col-lg-3 sims">
@@ -70,7 +70,7 @@
 <div class="rowpadding">
 
 <div class="property-desc">
-  <p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),80)}} </p>
+  <p title="{{strip_tags($value['description'])}}">{{str_limit(strip_tags($value['description']),120)}} </p>
   </div>
 
   </div>
@@ -87,15 +87,12 @@
   </div> -->
   <div class="col-lg-3 sim disabl">
   <small class=""> Company/Owner Name</small>
-  <small >{{$value['company']['name']}}</small>
+  <small>{{$value['company']['name']}}</small>
   </div>    
   </div>  
      </div>
    </div>      
     </div>
-</div>
-   @endforeach
-@endif
 </div>
 <div class="modal contact-modal fade" id="contactModal" role="dialog">
   <div class="modal-dialog">
@@ -151,11 +148,8 @@
       </div>
     </div>
   </div>
-</div> 
-  
 </div>
-</div>
-</section>
+
 <div class="modal modalphotos fade" id="viewphotos" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -185,3 +179,11 @@
     </div>
   </div>
 </div>
+   @endforeach
+@endif
+</div>
+ 
+  
+</div>
+</div>
+</section>

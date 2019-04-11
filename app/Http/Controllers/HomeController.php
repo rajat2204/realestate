@@ -19,6 +19,7 @@ use App\Models\Property_Enquiry;
 use App\Models\ContactUs;
 use App\Models\Subscribers;
 use App\Models\SocialMedia;
+use App\Models\Static_pages;
 use App\Models\Testimonials;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
@@ -119,6 +120,8 @@ class HomeController extends Controller{
         $data['view']='front.aboutus';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['static'] = _arefy(Static_pages::where('status','active')->get());
+        // dd($data['static']);
         return view('front_home',$data);
     }
 

@@ -267,6 +267,7 @@ Route::get('bouncedcheques', 'ChequeController@bouncedchequesList');
 Route::get('cancelledcheques', 'ChequeController@cancelledchequesList');
 Route::get('allcheques/{id}/edit', 'ChequeController@updateChequeStatus');
 Route::post('allcheques/{id}', 'ChequeController@updateCheque');
+Route::get('cheques/chequepdf', 'ChequeController@pdfCheques');
 
 /***********************Invoices-Section****************************/
 

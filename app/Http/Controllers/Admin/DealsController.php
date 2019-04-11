@@ -52,7 +52,9 @@ class DealsController extends Controller
                 }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                if ($item['status'] == 'partial') {
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
+                }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/print/%s',___encrypt($item['id']))).'"  title="Print Invoice"><i class="fa fa-print"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
@@ -349,6 +351,9 @@ class DealsController extends Controller
             $output = Deals::findOrFail($deal_id);
             $balance = $output['balance'] - $amount;
             $deals['balance'] = $balance;
+            if ($deals['balance'] == 0) {
+              $deals['status'] = 'paid';
+            }
             $output->update($deals);
 
 

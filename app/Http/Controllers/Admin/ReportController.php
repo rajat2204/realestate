@@ -56,6 +56,7 @@ class ReportController extends Controller
         $data['view'] = 'admin.invoices.balanceinvoice';
 
         $where = 'status != "trashed"';
+        $where .= ' AND balance != "0"';
         $balanceinvoice  = _arefy(Deals::list('array',$where));
         // dd($balanceinvoice);
 
@@ -64,9 +65,7 @@ class ReportController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-
                 $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/%s',___encrypt($item['id']))).'"  title="Show Balance Invoices"><i class="fa fa-eye"></i></a> ';
-
                 $html   .= '</div>';
                                 
                 return $html;
