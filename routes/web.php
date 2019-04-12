@@ -22,6 +22,7 @@ Route::get('/clear-cache', function() {
 
 Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
+Route::post('paytm','HomeController@paytm');
 Route::post('subscribe', 'HomeController@Subscribe');
 Route::get('featuredproperty', 'HomeController@featuredProperty');
 Route::get('services', 'HomeController@allServices');

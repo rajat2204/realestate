@@ -54,7 +54,12 @@ class ReportController extends Controller
 
             $data['purchase_month'] = _arefy(Purchase::whereRaw('MONTH(created_at) = ?',[$current_month])->whereRaw('YEAR(created_at) = ?',[$current_year])->where('status','!=','trashed')->get());
             $data['purchase_payment'] = _arefy(Purchase_Payment::where('status','!=','trashed')->get());
-            
+            $data['year']=$request->year;
+            $data['seller_name']=$request->seller_name;
+            $data['project_name']=$request->project_name;
+            $data['date_from']=$request->start_from;
+            $data['date_to']=$request->start_to;
+            $data['current_month']=$current_month;
     	  return view('admin.home',$data);
     }
 
