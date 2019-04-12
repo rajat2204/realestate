@@ -56,7 +56,7 @@
 		                  </div>	
 		                 <div class="form-row "> 
 		                  <div class="form-group col-md-12">
-		         			<small><a class="nav-link whites">Forget Password?</a></small>	
+		         			<!-- <small><a class="nav-link whites">Forget Password?</a></small>	 -->
 							<button type ="button" class="btn btn-sm login " data-request ="ajax-submit" data-target='[role="login"]' style="background-color: #fc5c65 ;color:whitesmoke;float: right;"> Sign In</button>	
 		                   </div>
 		                  </div> 
