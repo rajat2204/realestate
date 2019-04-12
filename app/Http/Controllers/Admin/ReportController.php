@@ -25,15 +25,36 @@ class ReportController extends Controller
     }
 
     public function purchaseReport(Request $request){
-    	 $data['view'] = 'admin.reports.purchasereport';
-        $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
-        $where = 'status != "trashed"';
-        $data['purchase'] = _arefy(Purchase::list('array',$where));
-        
+    	    $data['view'] = 'admin.reports.purchasereport';
+            $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
+            $current_month = date('m');
+            $current_year = date('Y');
+            $purchase_year = \DB::table('purchase');
+            if(!empty($request->year)){
+                $year = $request->year;
+                $purchase_year->whereRaw('YEAR(created_at) = ?',$year);
+            }
 
-        $data['purchase_payment'] = _arefy(Purchase_Payment::where('status','!=','trashed')->where('date','!=','trashed')->get());
-        $tt= Purchase_Payment::checkdate1();
-        // dd($tt);
+            if(!empty($request->project_name)){
+                $project_name = $request->project_name;
+                $purchase_year->where('project_id',$project_name);
+            }
+
+            if(!empty($request->seller_name)){
+                $seller_name = $request->seller_name;
+                $purchase_year->where('seller_name','like','%'.$seller_name.'%');
+            }
+            if(!empty($request->date_from) && !empty($request->date_to)){
+                $date_from = $request->date_from;
+                $purchase_year->whereBetween('created_at', array($date_from, $request->date_to));
+            }
+
+            $purchase_year =$purchase_year->get();
+            $data['purchase_year'] =_arefy($purchase_year);
+
+            $data['purchase_month'] = _arefy(Purchase::whereRaw('MONTH(created_at) = ?',[$current_month])->whereRaw('YEAR(created_at) = ?',[$current_year])->where('status','!=','trashed')->get());
+            $data['purchase_payment'] = _arefy(Purchase_Payment::where('status','!=','trashed')->get());
+            
     	  return view('admin.home',$data);
     }
 
