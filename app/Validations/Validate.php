@@ -108,14 +108,15 @@ class Validate
 	public function signup(){
         $validations = [
             'first_name' 		  => $this->validation('name'),
-						'last_name'       => $this->validation('name'),
-						'email'					 	=> array_merge($this->validation('email'),[Rule::unique('users_realestate')]),
+			      'last_name'       => $this->validation('name'),
+						'email'					 	=> array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
 						'phone'       	  => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
 						'password'       	=> $this->validation('password'),
 				];
         $validator = \Validator::make($this->data->all(), $validations,[
 						'first_name.required'			=> 'Please Enter your First Name',        	
-						'last_name.required'			=> 'Please Enter your Last Name',      	
+            'last_name.required'      => 'Please Enter your Last Name',       
+						'email.required'			    => 'Please Enter your E-mail',      	
 						'email.unique'						=> 'Email is already registered.',   	
 						'phone.required'					=> 'Phone Number is required.',   	
 						'phone.numeric'						=> 'Phone Number should be numeric.',	
@@ -349,9 +350,8 @@ class Validate
 	public function createContactUs($action='add'){
         $validations = [
         	'name' 				=> $this->validation('name'),
-			'email'  			=> $this->validation('req_email'),
+			   'email'  			=> $this->validation('req_email'),
             'subject' 		    => $this->validation('name'),
-            'number' 		    => $this->validation('phone'),
             'message' 		    => $this->validation('name'),
     	];
     	
@@ -359,9 +359,6 @@ class Validate
     		'name.required' 		=>  'Name is required.',
     		'email.required' 		=>  'E-mail is required.',
     		'subject.required' 		=>  'Subject is required.',
-    		'number.required' 		=>  'Mobile Number is required.',
-    		'number.numeric' 		=>  'Mobile Number should be numeric.',
-    		'number.digits' 		=>  'Mobile Number should not be greater than 10 digits.',
     		'message.required' 		=>  'Message is required.',
 
     	]);

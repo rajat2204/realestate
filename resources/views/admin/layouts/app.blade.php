@@ -13,7 +13,7 @@
 	    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 	  
 	    <meta charset="utf-8"/>
-	    <title>Devdrishti Infrahomes Pvt. Ltd.</title>
+	    <title>DevDrishti Infrahomes Pvt. Ltd.</title>
 
 	 	<link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
 	 	<!-- Bootstrap 3.3.7 -->

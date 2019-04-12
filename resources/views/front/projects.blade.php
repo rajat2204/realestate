@@ -15,7 +15,7 @@
 				<div class="project-heading float-left">
 					<h2>Projects</h2>
 				</div>
-				<div class="project-right float-right">
+				<!-- <div class="project-right float-right">
 					<button class="btn btn-sm btn-default text-dark">Sort By
 	  				<select class = "hovs">
 							<option>Relevence</option>
@@ -24,7 +24,7 @@
 							<option>Most Recent</option>
 						</select>
 					</button>
-				</div>
+				</div> -->
 			</div>
 			@foreach($project as $projects)
 			<div class="projectsWrapper">
@@ -52,9 +52,13 @@
 									</div>
 								</div>
 								<div class="project-content">
-									<p title="{{strip_tags($projects['description'])}}">{{str_limit(strip_tags($projects['description']),280)}}</p>
+									@if(!empty($projects['description']))
+										<p title="{{strip_tags($projects['description'])}}">{{strip_tags($projects['description'])}}</p>
+									@else
+										<p title="{{strip_tags($projects['description'])}}">N/A</p>
+									@endif
 								</div>
-								<div class="propertyScroll">
+								<!-- <div class="propertyScroll">
 									<ul class="projectContent">
 										<li>1 BHK Flat</li>
 										<li>1200 - 13850 sqft</li>
@@ -67,7 +71,7 @@
 										<li><i class="fa fa-rupee"></i>56Lac - 73Lac</li>
 										<li><a href="javascript:void(0);" class="btn-blue contactNow">Contact Now</a></li>
 									</ul>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					{{-- view photo popup --}}

@@ -407,21 +407,20 @@ class HomeController extends Controller{
             $data['updated_at']          = date('Y-m-d H:i:s');
 
             $subscribe = Subscribers::add($data);
-            if ($subscribe) {
-                $emailData               = ___email_settings();
-                $emailData['email']      = !empty($request->email)?$request->email:'';
-                $data['created_at']      = date('Y-m-d H:i:s');
-                $data['updated_at']      = date('Y-m-d H:i:s');
+            // if ($subscribe) {
+            //     $emailData               = ___email_settings();
+            //     $emailData['email']      = !empty($request->email)?$request->email:'';
+            //     $data['created_at']      = date('Y-m-d H:i:s');
+            //     $data['updated_at']      = date('Y-m-d H:i:s');
 
-            $emailData['custom_text'] = 'You are subscribed successfully';
-               ___mail_sender($emailData['email'],$request->date,"subscription",$emailData);
+            // $emailData['custom_text'] = 'You are subscribed successfully';
+            //    ___mail_sender($emailData['email'],$request->date,"subscription",$emailData);
 
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
             $this->message  = "You are subscribed successfully.";
             $this->redirect = url('/');
-            }
         }
         return $this->populateresponse();
     }
