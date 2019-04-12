@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PropertyController extends Controller
 {
@@ -133,6 +135,58 @@ class PropertyController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function propertyExport(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $property  = _arefy(Property::list('array',$where));
+        // dd($property);
+        $type='xlsx';
+        $excel_name='property_data';
+        Excel::create($excel_name, function($excel) use ($property) {
+                $excel->sheet('mySheet', function($sheet) use ($property){
+                    $headings = [
+                        'Category Name',
+                        'Company Name',
+                        'Property Name',
+                        'Property Area',
+                        'Property Location',
+                        'Property Purpose',
+                        'Property Type',
+                        'Property Price',
+                        'Agent Name',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($property)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($property as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['category']['name'],
+                                $value['company']['name'],
+                                $value['name'],
+                                number_format($value['area']),
+                                $value['location'],
+                                ucfirst($value['property_purpose']),
+                                ucfirst($value['property_construct']),
+                                'Rs.'.number_format($value['price']),
+                                strip_tags($value['agent']['name']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

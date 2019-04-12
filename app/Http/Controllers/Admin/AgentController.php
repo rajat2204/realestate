@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
-use Validations\Validate as Validations;
 use App\Models\Agents_Wallets;
+use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AgentController extends Controller
 {
@@ -103,6 +105,55 @@ class AgentController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportAgent(Request $request, Builder $builder){
+        $agent  = _arefy(Agents::where('status','!=','trashed')->get());
+        // dd($agent);
+        $type='xlsx';
+        $excel_name='agents_data';
+        Excel::create($excel_name, function($excel) use ($agent) {
+                $excel->sheet('mySheet', function($sheet) use ($agent){
+                    $headings = [
+                        'Agent Name',
+                        'Agents Spouse Name',
+                        'Agents Nominee',
+                        'Agents Adhaar Number',
+                        'Agents E-mail',
+                        'Agents Contact',
+                        'Agents Address',
+                        'Balance',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($agent)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($agent as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                ucfirst($value['name']),
+                                ucfirst($value['spouse_name']),
+                                ucfirst($value['nominee']),
+                                $value['adhaar'],
+                                $value['email'],
+                                $value['mobile'],
+                                $value['address'],
+                                'Rs.'.number_format($value['balance']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     public function walletHistory(Request $request, Builder $builder){

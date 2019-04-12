@@ -24,6 +24,12 @@
 							<span class="hidden-480">
 							Add Purchase</span>
 							</a>
+
+							<a href="{{url('admin/purchase/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
+							<span class="hidden-480">
+							Export Purchase</span>
+							</a>
 						</div>
 					</div>
 					<div class="portlet-body">

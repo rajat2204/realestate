@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlanController extends Controller
 {
@@ -77,6 +79,45 @@ class PlanController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportPlans(Request $request, Builder $builder){
+        $plan  = _arefy(Plans::where('status','!=','trashed')->get());
+        // dd($plan);
+        $type='xlsx';
+        $excel_name='plans_data';
+        Excel::create($excel_name, function($excel) use ($plan) {
+                $excel->sheet('mySheet', function($sheet) use ($plan){
+                    $headings = [
+                        'ID',
+                        'Name',
+                        'Installments',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($plan)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($plan as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['id'],
+                                ucfirst($value['name']),
+                                $value['installment'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

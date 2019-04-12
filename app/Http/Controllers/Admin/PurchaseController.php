@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PurchaseController extends Controller
 {
@@ -106,6 +108,58 @@ class PurchaseController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function purchaseExport(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $purchase  = _arefy(Purchase::list('array',$where));
+        // dd($purchase);
+        $type='xlsx';
+        $excel_name='purchase_data';
+        Excel::create($excel_name, function($excel) use ($purchase) {
+                $excel->sheet('mySheet', function($sheet) use ($purchase){
+                    $headings = [
+                        'Property Name',
+                        'Project Name',
+                        'Seller Name',
+                        'Seller Address',
+                        'Seller Mobile',
+                        'Property Area',
+                        'Property Price',
+                        'Balance',
+                        'Description',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($purchase)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($purchase as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['property']['name'],
+                                $value['project']['name'],
+                                ucfirst($value['seller_name']),
+                                $value['seller_address'],
+                                $value['seller_mobile'],
+                                $value['area'],
+                                'Rs.'.number_format($value['price']),
+                                'Rs.'.number_format($value['balance']),
+                                strip_tags($value['description']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     public function showPayment(Request $request, Builder $builder,$id){
