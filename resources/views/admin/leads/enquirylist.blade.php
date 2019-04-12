@@ -17,15 +17,20 @@
 			<div class="col-md-12">
 				
 				<div class="portlet light">
-					<!-- <div class="portlet-title">
+					<div class="portlet-title">
 						<div class="actions">
-							<a href="{{url('admin/leads/create')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-plus"></i>
+							<a href="{{url('admin/contactleads/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
 							<span class="hidden-480">
-							Add Leads</span>
+							Export Enquiry Leads</span>
+							</a>
+							<a href="{{url('admin/contactleads/print')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-print"></i>
+							<span class="hidden-480">
+							Print</span>
 							</a>
 						</div>
-					</div> -->
+					</div>
 					<div class="portlet-body">
 						<div class="table-container">
 							<table class="table table-striped table-bordered table-hover" id="datatable_ajax">

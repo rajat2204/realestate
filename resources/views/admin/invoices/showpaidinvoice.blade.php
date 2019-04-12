@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Paid Invoices</h1>
+			<h1 class="page-header">Paid Invoices of {{$paid[0]['client']['name']}} for Invoice Number {{$paid[0]['invoice_no']}}</h1>
 		</div>
 	</div><!--/.row-->
 	<div class="page-content">
@@ -19,7 +19,7 @@
 				<div class="portlet light">
 					<div class="portlet-title">
 						<div class="actions">
-							<a href="{{url('admin/paidinvoice/pdf')}}" class="btn btn-default btn-circle print-window">
+							<a href="{{url('admin/paidinvoice/invoicepdf/'.Request::segment(3))}}" class="btn btn-default btn-circle print-window">
 								<i class="fa fa-print"></i><span class="hidden-480">Print</span>
 							</a>
 						</div>

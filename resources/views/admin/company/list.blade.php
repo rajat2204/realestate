@@ -28,7 +28,6 @@
 							<i class="fa fa-file-image-o"></i>
 							<span class="hidden-480" id="btnopen" >
 							Export Company</span>
-
 							</a>
 
 						</div>

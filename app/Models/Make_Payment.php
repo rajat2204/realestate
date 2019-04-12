@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Make_Payment extends Model
 {
     protected $table = 'deal_payment';
-   	protected $fillable = ['deal_id','payment_plan_id','name','payment_type','amount','tax_id','tax_percent_id','taxable_amount','date','remarks','late_amount','cheque_no','bank_name','payable_amount','status','created_at','updated_at'];
+   	protected $fillable = ['deal_id','property_id','invoice_no','client_id','payment_plan_id','name','payment_type','amount','tax_id','tax_percent_id','taxable_amount','date','remarks','late_amount','cheque_no','bank_name','payable_amount','status','created_at','updated_at'];
 
    	public function invoice(){
         return $this->hasMany('App\Models\Deals_Payment','id','payment_plan_id');
@@ -17,6 +17,12 @@ class Make_Payment extends Model
     }
     public function tax_percent(){
         return $this->hasOne('App\Models\Tax_Percent','id','tax_percent_id');
+    }
+    public function client(){
+        return $this->hasOne('App\Models\Clients','id','client_id');
+    }
+    public function property(){
+        return $this->hasOne('App\Models\Property','id','property_id');
     }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-asc',$limit=''){
@@ -30,6 +36,12 @@ class Make_Payment extends Model
             },
             'tax_percent' => function($q){
                 $q->select('id','percentage');
+            },
+            'client' => function($q){
+                $q->select('id','name','phone');
+            },
+            'property' => function($q){
+                $q->select('id','name');
             },
         ]);
         if($where){

@@ -89,7 +89,7 @@
             <li><a href="{{url('admin/paidinvoices')}}">Paid Invoices</a></li>
           </ul>
         </li>
-        <!-- <li class="treeview">
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-money"></i> <span>Cheques</span>
             <span class="pull-right-container">
@@ -97,13 +97,12 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('admin/allinvoices')}}">All Invoices</a></li>
             <li><a href="{{url('admin/allcheques')}}">All Cheques</a></li>
             <li><a href="{{url('admin/clearcheques')}}">Clear Cheques</a></li>
             <li><a href="{{url('admin/bouncedcheques')}}">Bounced Cheques</a></li>
             <li><a href="{{url('admin/cancelledcheques')}}">Cancelled Cheques</a></li>
           </ul>
-        </li> -->
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-shopping-cart"></i> <span>Expense/Inventory</span>

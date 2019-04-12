@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">All Cheques</h1>
+			<h1 class="page-header">Cleared Cheques</h1>
 		</div>
 	</div><!--/.row-->
 	<div class="page-content">
@@ -18,13 +18,13 @@
 				
 				<div class="portlet light">
 					<div class="portlet-title">
-						<div class="actions">
-							<a href="{{url('admin/cheques/chequepdf')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-print"></i>
+						<!-- <div class="actions">
+							<a href="{{url('admin/categories/create')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-plus"></i>
 							<span class="hidden-480">
-							Print</span>
+							Add Property Categories</span>
 							</a>
-						</div>
+						</div> -->
 					</div>
 					<div class="portlet-body">
 						<div class="table-container">

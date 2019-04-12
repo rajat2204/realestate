@@ -77,6 +77,7 @@ class ReportController extends Controller
         $data['view'] = 'admin.invoices.balanceinvoice';
 
         $where = 'status != "trashed"';
+        $where .= ' AND balance != "0"';
         $balanceinvoice  = _arefy(Deals::list('array',$where));
         // dd($balanceinvoice);
 
@@ -85,9 +86,7 @@ class ReportController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-
                 $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/%s',___encrypt($item['id']))).'"  title="Show Balance Invoices"><i class="fa fa-eye"></i></a> ';
-
                 $html   .= '</div>';
                                 
                 return $html;
@@ -137,26 +136,34 @@ class ReportController extends Controller
 
         $data['view'] = 'admin.invoices.showbalanceinvoice';
 
-        \DB::statement(\DB::raw('set @rownum=0'));
         $id = ___decrypt($id);
-        $balance = _arefy(Deals_Payment::where('deal_id',$id)->where('payment_status','=','no')->get(['deal_payment_plan.*', 
-            \DB::raw('@rownum  := @rownum  + 1 AS rownum')]));
-        $balance = _arefy($balance);
+        $where = 'deal_id = '.___decrypt($id);
+        $where .= ' AND payment_status = "no"';
+        $data['balance'] = _arefy(Deals_Payment::list('array',$where,['*'],'id-asc'));
+        // dd($data['balance']);
 
         if ($request->ajax()) {
-            return DataTables::of($balance)
+            return DataTables::of($data['balance'])
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
 
-                $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/printbalanceinvoice/%s',___encrypt($item['id']))).'"  title="Print Demand Letter"><i class="fa fa-print"></i></a> | ';
-                $html   .= '<a href="'.url(sprintf('admin/balanceinvoices/smsbalanceinvoice/%s',___encrypt($item['id']))).'"  title="SMS Demand Letter"><i class="fa fa-mobile"></i></a> ';
+                $html   .= '<a href="'.url(sprintf('admin/balanceinvoice/invoicepdf/%s',___encrypt($item['id']))).'"  title="Print Demand Letter"><i class="fa fa-print"></i></a>';
                 $html   .= '</div>';
                                 
                 return $html;
             })
             ->editColumn('amount',function($item){
                 return 'Rs.'.number_format($item['amount']);
+            })
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
+            })
+            ->editColumn('client_phone',function($item){
+                return $item['client']['phone'];
+            })
+            ->editColumn('property_id',function($item){
+                return $item['property']['name'];
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -166,7 +173,10 @@ class ReportController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
-            ->addColumn(['data' => 'rownum', 'name' => 'rownum','title' => 'S No','orderable' => false, 'width' => 1])
+            ->addColumn(['data' => 'client_id','name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone','name' => 'client_phone','title' => 'Phone Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id','name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no','name' => 'invoice_no','title' => 'Invoice Number','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name','name' => 'name','title' => 'Payment Due On','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Payment Due Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
@@ -175,16 +185,28 @@ class ReportController extends Controller
     }
 
     public function pdfInvoice(Request $request,$id){
-       \DB::statement(\DB::raw('set @rownum=0'));
         $id = ___decrypt($id);
-        $balance = _arefy(Deals_Payment::where('deal_id',$id)->where('payment_status','=','no')->get(['deal_payment_plan.*', 
-            \DB::raw('@rownum  := @rownum  + 1 AS rownum')]));
-        $data['balanceinvoice'] = _arefy($balance);
+        $where = 'deal_id = '.___decrypt($id);
+        $where .= ' AND payment_status = "no"';
+        $data['balance'] = _arefy(Deals_Payment::list('array',$where));
+        $data['balanceinvoice'] = _arefy($data['balance']);
         $excel_name='invoice_data';
         $pdf = PDF::loadView('admin.pdfview', $data);
         return $pdf->download('balance_invoice.pdf');
-
     }
+
+    public function pdfbalanceInvoice(Request $request,$id){
+        $id = ___decrypt($id);
+        $where = 'id = '.___decrypt($id);
+        $where .= ' AND payment_status = "no"';
+        $data['singlebalance'] = _arefy(Deals_Payment::list('single',$where));
+        // dd($data['singlebalance']);
+        $data['balanceinvoice'] = _arefy($data['singlebalance']);
+        $excel_name='balance_invoice';
+        $pdf = PDF::loadView('admin.balancepdfview', $data);
+        return $pdf->download('balance_invoice.pdf');
+    }
+
     public function paidInvoice(Request $request, Builder $builder){
     	$data['view'] = 'admin.invoices.paidinvoices';
 
@@ -247,11 +269,10 @@ class ReportController extends Controller
         $data['view'] = 'admin.invoices.showpaidinvoice';
 
         $where = 'deal_id = '.___decrypt($id);
-        $paid = _arefy(Make_Payment::list('array',$where));
-        // dd($paid);
+        $data['paid'] = _arefy(Make_Payment::list('array',$where));
 
         if ($request->ajax()) {
-            return DataTables::of($paid)
+            return DataTables::of($data['paid'])
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
@@ -261,6 +282,15 @@ class ReportController extends Controller
             })
             ->editColumn('amount',function($item){
                 return 'Rs.'.number_format($item['amount']);
+            })
+            ->editColumn('client_id',function($item){
+                return ucfirst($item['client']['name']);
+            })
+            ->editColumn('client_phone',function($item){
+                return $item['client']['phone'];
+            })
+            ->editColumn('property_id',function($item){
+                return $item['property']['name'];
             })
             ->editColumn('payable_amount',function($item){
                 return 'Rs.'.number_format($item['payable_amount']);
@@ -293,6 +323,10 @@ class ReportController extends Controller
             ->parameters([
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
+            ->addColumn(['data' => 'client_id','name' => 'client_id','title' => 'Client Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'client_phone','name' => 'client_phone','title' => 'Phone Number','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'property_id','name' => 'property_id','title' => 'Property Name','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'invoice_no','name' => 'invoice_no','title' => 'Invoice Number','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name','name' => 'name','title' => 'Payment Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'amount','name' => 'amount','title' => 'Amount','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'tax_id','name' => 'tax_id','title' => 'Tax Name','orderable' => false, 'width' => 120])
@@ -304,44 +338,14 @@ class ReportController extends Controller
         return view('admin.home')->with($data);
     }
 
-    public function pdf(){
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->convert_paid_invoice_to_html());
-        $pdf->stream();
-    }
+    public function pdfpaidInvoice(Request $request,$id){
+        $id = ___decrypt($id);
+        $where = 'deal_id = '.___decrypt($id);
+        $data['paid'] = _arefy(Make_Payment::list('array',$where));
+        $data['paidinvoice'] = _arefy($data['paid']);
+        $excel_name='invoice_data';
+        $pdf = PDF::loadView('admin.pdfpaidview', $data);
+        return $pdf->download('paid_invoice.pdf');
 
-    public function convert_paid_invoice_to_html(){
-        // $invoice_data = $this->showPaidInvoice();
-        // dd($invoice_data);
-        $output = '
-            <h3 align="center">Paid Invoice Data</h3>
-            <table width="100%" style="border-collapse:collapse; border: 0px;">
-                <tr>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Payment Name</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Amount</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Tax Name</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Tax Percentage</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Taxable Amount</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Late Amount</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Payment Date</th>
-                  <th style= "border: 1px solid;padding:12px" width="20%">Total Payable Amount</th>
-                </tr>
-        ';
-        // foreach ($invoice_data as $invoice) {
-            $output .= '
-                <tr>
-                    <td style= "border: 1px solid;padding:12px" width="20%">asdaDA</td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                    <td style= "border: 1px solid;padding:12px" width="20%"></td>
-                </tr>
-            ';
-        //}
-        $output .= '</table>';
-        return $output;
     }
 }

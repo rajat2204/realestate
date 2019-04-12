@@ -183,6 +183,12 @@ Route::resource('plans', 'PlanController');
 
 /***********************Leads-Section****************************/
 
+Route::get('leads/export','LeadController@exportLeads');
+Route::get('contactleads/export','LeadController@exportenquiryLeads');
+Route::get('propertyenquiryleads/export','LeadController@propertyenquiryLeads');
+Route::get('agentleads/export','LeadController@agentLeads');
+Route::get('sliderleads/export','LeadController@sliderLeads');
+Route::get('leads/print','LeadController@printLeads');
 Route::get('contactleads','LeadController@contactLead');
 Route::get('agentleads','LeadController@agentLead');
 Route::get('sliderleads','LeadController@sliderLead');
@@ -261,10 +267,13 @@ Route::get('profitreport', 'ReportController@profitReport');
 
 /***********************Cheques-Section****************************/
 
-// Route::get('allcheques', 'ChequeController@allchequesList');
-// Route::get('salesreport', 'ReportController@salesReport');
-// Route::get('expensereport', 'ReportController@expenseReport');
-// Route::get('profitreport', 'ReportController@profitReport');
+Route::get('allcheques', 'ChequeController@allchequesList');
+Route::get('clearcheques', 'ChequeController@clearchequesList');
+Route::get('bouncedcheques', 'ChequeController@bouncedchequesList');
+Route::get('cancelledcheques', 'ChequeController@cancelledchequesList');
+Route::get('allcheques/{id}/edit', 'ChequeController@updateChequeStatus');
+Route::post('allcheques/{id}', 'ChequeController@updateCheque');
+Route::get('cheques/chequepdf', 'ChequeController@pdfCheques');
 
 /***********************Invoices-Section****************************/
 
@@ -274,7 +283,8 @@ Route::get('balanceinvoices/{id}', 'ReportController@showBalanceInvoice');
 Route::get('balanceinvoices/invoicepdf/{id}', 'ReportController@pdfInvoice');
 Route::get('paidinvoices', 'ReportController@paidInvoice');
 Route::get('paidinvoices/{id}', 'ReportController@showPaidInvoice');
-Route::get('paidinvoice/pdf', 'ReportController@pdf');
+Route::get('paidinvoice/invoicepdf/{id}', 'ReportController@pdfpaidInvoice');
+Route::get('balanceinvoice/invoicepdf/{id}', 'ReportController@pdfbalanceInvoice');
 
 /***********************Notice-Section****************************/
 

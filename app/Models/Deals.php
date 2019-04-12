@@ -70,7 +70,7 @@ class Deals extends Model
                 $q->select('id','name');
             },
             'payment_plan' => function($q){
-                 $q->select('id','deal_id','name','amount','date','payment_status');
+                 $q->select('id','client_id','deal_id','name','amount','date','payment_status');
             },
         ]);
         if($where){

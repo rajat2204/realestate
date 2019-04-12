@@ -12,6 +12,7 @@ use App\Models\Tax;
 use App\Models\Tax_Percent;
 use App\Models\Make_Payment;
 use App\Models\Project;
+use App\Models\Cheques;
 use App\Models\Deals_Payment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,7 +52,9 @@ class DealsController extends Controller
                 }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
+                if ($item['status'] == 'partial') {
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
+                }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment"><i class="fa fa-eye"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/print/%s',___encrypt($item['id']))).'"  title="Print Invoice"><i class="fa fa-print"></i></a> | ';
                 $html   .= '<a href="javascript:void(0);" 
@@ -261,7 +264,6 @@ class DealsController extends Controller
         $data['plan'] = _arefy(Plans::where('status','!=','trashed')->get());
         $data['project'] = _arefy(Project::where('status','!=','trashed')->get());
         $data['units'] = _arefy(Units::where('status','!=','trashed')->get());
-        // dd($data['property']);
         return view('admin.home',$data);
     }
 
@@ -301,6 +303,7 @@ class DealsController extends Controller
       $id = ___decrypt($id);
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
+      // dd($data['deal']);
       $data['installment'] = $data['deal']['plan']['installment'];
       return view('admin.home',$data);
     }
@@ -312,6 +315,7 @@ class DealsController extends Controller
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
       $data['deal_payment'] = _arefy(Deals_Payment::where('payment_status','=','no')->where('deal_id',$id)->first());
+      // dd($data['deal_payment']);
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
      
       return view('admin.home',$data);
@@ -332,6 +336,14 @@ class DealsController extends Controller
             $input = Deals_Payment::findOrFail($payment_plan_id);
             $payment_status['payment_status'] = 'yes';
 
+            if ($data['payment_type'] == 'cheque') {
+              $cheque = new Cheques();
+
+              $cheque->fill($request->all());
+              $cheque['amount']=$request->payable_amount;
+              $cheque->save();
+            }
+
             $input->update($payment_status);
             $amount = $request->amount;
             $deal_id = $request->deal_id;
@@ -339,6 +351,9 @@ class DealsController extends Controller
             $output = Deals::findOrFail($deal_id);
             $balance = $output['balance'] - $amount;
             $deals['balance'] = $balance;
+            if ($deals['balance'] == 0) {
+              $deals['status'] = 'paid';
+            }
             $output->update($deals);
 
 
@@ -355,6 +370,9 @@ class DealsController extends Controller
     {
         $id = ___decrypt($id);
         foreach ($request->deal as $deals) {
+          $data['client_id']=$request->client_id;
+          $data['property_id']=$request->property_id;
+          $data['invoice_no']=$request->invoice_no;
           $data['name']=$deals['name'];
           $data['amount']=$deals['amount'];
           $data['date']=$deals['date'];
