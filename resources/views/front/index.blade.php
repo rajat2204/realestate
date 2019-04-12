@@ -49,52 +49,6 @@
       </ul>
     </div>
   </div>
-  <!-- for mobile -->
-           <div class="header_wrapper_mobile clearfix">
-              <div class="vertical_slides_mobile">
-                  <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
-                      data-mcs-theme="dark">
-                      <li>
-                          <img src="assets/img/gallery/slide1.jpg" />
-                          <p>Asian Paints</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide2.jpg" />
-                          <p>RR Cables</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide3.jpg" />
-                          <p>CP Tiles</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide4.jpg" />
-                          <p>Water Purifier</p>
-                      </li>
-                  </ul>
-              </div>
-             
-              <div class="vertical_slides_mobile2">
-                  <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
-                      data-mcs-theme="dark">
-                      <li>
-                          <img src="assets/img/gallery/slide1.jpg" />
-                          <p>Asian Paints</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide2.jpg" />
-                          <p>RR Cables</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide3.jpg" />
-                          <p>CP Tiles</p>
-                      </li>
-                      <li>
-                          <img src="assets/img/gallery/slide4.jpg" />
-                          <p>Water Purifier</p>
-                      </li>
-                  </ul>
-              </div>
-          </div>
 </header>
 <!-- header section html ends-->
 
@@ -162,24 +116,24 @@
                       <input type="text" class="form-control" name="filter_zipcode" value="" placeholder="Zip code">
                     </div>
                     <!--static code end-->  
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                       <select name="filter_country_id" id="input-country" class="form-control">
                         <option value="*"> --- Please Select --- </option>
                         <option value="244">Aaland Islands</option>
                         <option value="1">Afghanistan</option>
                         <option value="2">Albania</option>
                       </select>
-                    </div>
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    </div> -->
+                  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <select name="filter_zone_id" value="" id="input-zone" class="form-control">
-                    <option value=""> --- Please Select --- </option>
-                    </select>
-                  </div>
+                    <opetion value=""> --- Please Select --- </option>
+                    </slect>
+                  </div> -->
                 </div>
               </div>
                 <div class="form-group">
                   <div class="row">
-                  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <label for="input-filter_range">Price:</label>
                     <div class="attribute price-filter">
                     
@@ -187,14 +141,14 @@
                       
                         
                       </div>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">  
+                    </div> -->
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">  
                       <label for="input-area"> Area:(<span class="sub">Sq Ft</span>)</label>
                       <div class="attribute price-filter">
                         <input type="hidden" name="route" value="property/category">
 
                       </div>
-                    </div>
+                    </div> -->
                     <!--static code end-->  
                   
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
