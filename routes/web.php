@@ -71,6 +71,7 @@ Route::resource('categories', 'CategoryController');
 
 /***********************Purchase-Section****************************/
 
+Route::get('purchase/export','PurchaseController@purchaseExport');
 Route::get('purchase/showpayment/{id}','PurchaseController@showPayment');
 Route::resource('purchase', 'PurchaseController');
 	Route::group(['prefix' => 'property'],function(){
@@ -86,7 +87,7 @@ Route::resource('purchase', 'PurchaseController');
 	});
 
 /***********************Project-Section****************************/
-
+Route::get('project/export', 'ProjectController@exportProject');
 Route::resource('project', 'ProjectController');
 	Route::group(['prefix' => 'project'],function(){
 		Route::post('/status', 'ProjectController@changeStatus');
@@ -137,7 +138,7 @@ Route::resource('vendors', 'VendorController');
 	});
 
 /***********************Property-Section****************************/
-
+Route::get('property/export','PropertyController@propertyExport');
 Route::resource('property', 'PropertyController');
 	Route::group(['prefix' => 'property'],function(){
 		Route::post('/status', 'PropertyController@changeStatus');
@@ -167,6 +168,7 @@ Route::resource('testimonial', 'TestimonialController');
 
 /***********************Agents-Section****************************/
 
+Route::get('agent/export', 'AgentController@exportAgent');
 Route::get('agent/wallet_history','AgentController@walletHistory');
 Route::resource('agent', 'AgentController');
 Route::group(['prefix' => 'agent'],function(){
@@ -177,6 +179,7 @@ Route::group(['prefix' => 'agent'],function(){
 
 /***********************Plans-Section****************************/
 
+Route::get('plans/export','PlanController@exportPlans');
 Route::resource('plans', 'PlanController');
 	Route::group(['prefix' => 'plans'],function(){
 		Route::post('/status', 'PlanController@changeStatus');
@@ -190,6 +193,10 @@ Route::get('propertyenquiryleads/export','LeadController@propertyenquiryLeads');
 Route::get('agentleads/export','LeadController@agentLeads');
 Route::get('sliderleads/export','LeadController@sliderLeads');
 Route::get('leads/print','LeadController@printLeads');
+Route::get('contactleads/print','LeadController@printcontactLeads');
+Route::get('propertyenquiryleads/print','LeadController@propertyLeads');
+Route::get('agentleads/print','LeadController@AgentLeadsList');
+Route::get('sliderleads/print','LeadController@SliderLeadsList');
 Route::get('contactleads','LeadController@contactLead');
 Route::get('agentleads','LeadController@agentLead');
 Route::get('sliderleads','LeadController@sliderLead');
@@ -239,6 +246,8 @@ Route::resource('deals', 'DealsController');
 			Route::get('payment/{id}','DealsController@makePayment');
 			Route::post('makepayment/{id}','DealsController@savePayment');
 			Route::get('showpayment/{id}','DealsController@showPaymentList');
+			Route::get('print/showpayment/{id}','DealsController@pdfpaymentList');
+			Route::get('/print/{id}', 'DealsController@pdfpaymentplan');
 	});
 
 /***********************Services-Section****************************/

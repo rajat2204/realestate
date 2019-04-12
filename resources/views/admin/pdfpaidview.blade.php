@@ -37,7 +37,7 @@
                           <td style= "border: 1px solid;padding:12px" width="20%">N/A</td>
                         @endif
                         @if(!empty($paid['tax_percent']['percentage']))
-                          <td style= "border: 1px solid;padding:12px" width="20%">{{$paid['tax_percent']['percentage']}}</td>
+                          <td style= "border: 1px solid;padding:12px" width="20%">{{$paid['tax_percent']['percentage']}}%</td>
                         @else
                           <td style= "border: 1px solid;padding:12px" width="20%">N/A</td>
                         @endif

@@ -1,12 +1,11 @@
 
 <div class="right-space">
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-down" id="sideNav">
-	<a class="navbar-brand js-scroll-trigger mx-auto img-left" href="#page-top">
-		
+	<div class="navbar-brand1 js-scroll-trigger mx-auto img-left" href="#page-top">
 		<span class="d-lg-block img-left singleLogo">
 			<a href="{{url('/')}}" class="navbar-brand"><img src="{{url('assets/img/company')}}/{{$property['company']['image']}}" alt="gallery"></a>
 		</span>
-	</a>
+	</div>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>

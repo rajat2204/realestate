@@ -6,6 +6,7 @@ use PDF;
 use App\Models\Deals;
 use App\Models\Project;
 use App\Models\Purchase;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\Make_Payment;
 use App\Models\Deals_Payment;
@@ -205,7 +206,8 @@ class ReportController extends Controller
         $where = 'id = '.___decrypt($id);
         $where .= ' AND payment_status = "no"';
         $data['singlebalance'] = _arefy(Deals_Payment::list('single',$where));
-        // dd($data['singlebalance']);
+        $data['contact'] = _arefy(Contact::where('status','!=','trashed')->get());
+        // dd($data['contact']);
         $data['balanceinvoice'] = _arefy($data['singlebalance']);
         $excel_name='balance_invoice';
         $pdf = PDF::loadView('admin.balancepdfview', $data);

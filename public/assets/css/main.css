@@ -100,7 +100,9 @@ ul li, ol li {
   width: 100%;
   text-align: center;
 }
-
+.swal2-modal .swal2-content{
+  text-align: center!important;
+}
 .section-title-header p {
   text: center;
   font-weight: 400;
@@ -1318,7 +1320,7 @@ ul li, ol li {
 
 .btn {
   font-size: 14px;
-  padding: 10px 30px;
+  padding: 11px 30px;
   border-radius: 0px;
   cursor: pointer;
   font-weight: 400;
@@ -1722,7 +1724,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  color: #333;
+  color:#3f353d;
   font-weight: 700;
   padding: 0 17px;
   margin-top: 15px;
@@ -2607,13 +2609,13 @@ header#header {
     padding: 4px 15px;
 }
 .slides li p {
-    background: #000;
+    background: #3F353D;
     padding: 2px 7px;
     font-size: 14px;
 }
 
 .sliderwrap.clearfix {
-    background: #000;
+    background: #3F353D;
 }
 p.slider_title {
     float: left;
@@ -2701,7 +2703,7 @@ p.contact_number {
   font-weight: 700;
   padding: 5px 0;
   font-size: 22px;
-  color: #000;
+  color: #3f353d;
 }
 #services .service-desc hr {
   margin-left: 0;
@@ -2872,7 +2874,7 @@ p.contact_number {
     font-size: 13px;
     margin-bottom: 12px;
     position: relative;
-    background: #1281AF;
+    background: #3f353d;
     display: inline-block;
     vertical-align: middle;
     position: absolute;
@@ -2918,8 +2920,9 @@ p.contact_number {
     margin-bottom: 5px;
 }
 .section-heading p {
-    color: #1281AF;
+    color: #3f353d;
     font-size: 14px;
+    font-weight: 700;
     margin-bottom: 0;
     font-style: italic;
 }
@@ -2970,9 +2973,9 @@ p.contact_number {
     top: 10px;
     right: 10px;
     border-left: 25px solid transparent;
-    border-top: 25px solid #1281AF;
-    border-right: 25px solid #1281AF;
-    border-bottom: 25px solid #1281AF;
+    border-top: 25px solid #3f353d;
+    border-right: 25px solid #3f353d;
+    border-bottom: 25px solid #3f353d;
     z-index: 10;
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
@@ -3310,7 +3313,7 @@ a.room-price {
     background: #f2f2f2;
 }
 .agentContent{
-  background-color: #000;
+  background-color: #3f353d;
   padding: 16px 10px;
 }
 .agentContent>div{
@@ -3365,7 +3368,7 @@ a.room-price {
   padding: 30px 10px;
 }
 .text-blue{
-  color: #1281AF;
+  color: #3f353d;
 }
 .btn-blue{
   background-color: #1281AF;
@@ -3709,7 +3712,7 @@ p.utopia{
   display: block;
 }
 .tex_t span ,span>i{
-  color: #1281AF;
+  color: #3f353d;
   text-shadow: 1px 1px black;
   word-spacing: 0.13em;
   font-size: 18px;
@@ -4473,7 +4476,7 @@ ul.owl-gallery li {
   .navbar {
     padding: 0rem;
   }
-  #sideNav .navbar-brand {
+  #sideNav .navbar-brand1 {
     display: block;
     border-bottom: 1px solid #e7eced;
     width: 100%;

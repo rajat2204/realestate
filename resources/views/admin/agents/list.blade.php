@@ -29,6 +29,11 @@
 							<span class="hidden-480">
 							Wallet History</span>
 							</a>
+							<a href="{{url('admin/agent/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
+							<span class="hidden-480">
+							Export Agent</span>
+							</a>
 						</div>
 					</div>
 					<div class="portlet-body">

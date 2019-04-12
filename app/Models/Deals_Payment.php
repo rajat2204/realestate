@@ -15,6 +15,9 @@ class Deals_Payment extends Model
     public function property(){
         return $this->hasOne('App\Models\Property','id','property_id');
     }
+    public function deal(){
+        return $this->hasOne('App\Models\Deals','id','deal_id');   
+    }
 
     public static function list($fetch='array',$where='',$keys=['*'],$order='id-desc',$limit='',$featured=''){
         $table_plots = self::select($keys)
@@ -23,8 +26,11 @@ class Deals_Payment extends Model
                 $q->select('id','name','phone');
             },
             'property' => function($q){
-                $q->select('id','name');
+                $q->select('id','name','location','property_type','property_construct','area','price','pincode','property_purpose');
             },
+            'deal' => function($q){
+                $q->select('id','amount','discount','balance');
+            }
         ]);
         if($where){
             $table_plots->whereRaw($where);
