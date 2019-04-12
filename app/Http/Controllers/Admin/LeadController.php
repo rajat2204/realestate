@@ -702,7 +702,7 @@ class LeadController extends Controller
 
     public function sliderLeads(Request $request, Builder $builder){
         $sliderlead  = _arefy(Enquiry::where('status','!=','trashed')->get());
-        // dd($sliderlead);
+        // dd($sliderlead); 
         $type='xlsx';
         $excel_name='agentleads_data';
         Excel::create($excel_name, function($excel) use ($sliderlead) {
@@ -755,5 +755,42 @@ class LeadController extends Controller
         $excel_name='leads_data';
         $pdf = PDF::loadView('admin.leadpdf', $data);
         return $pdf->download('leads_data.pdf');
+    }
+
+    public function printcontactLeads(Request $request){
+        $data['contactlead']  = _arefy(ContactUs::where('status','!=','trashed')->get());
+        // dd($data['lead']);
+        $data['contactleads'] = _arefy($data['contactlead']);
+        $excel_name='contact_leads_data';
+        $pdf = PDF::loadView('admin.contactleadpdf', $data);
+        return $pdf->download('contact_leads_data.pdf');
+    }
+
+    public function propertyLeads(Request $request){
+        $where = 'status != "trashed"';
+        $data['propertyEnquiryLead']  = _arefy(Property_Enquiry::list('array',$where));
+        // dd($data['lead']);
+        $data['propertyEnquiryLeads'] = _arefy($data['propertyEnquiryLead']);
+        $excel_name='property_leads_data';
+        $pdf = PDF::loadView('admin.propertyleadspdf', $data);
+        return $pdf->download('property_leads_data.pdf');
+    }
+
+    public function AgentLeadsList(Request $request){
+        $data['agentlead']  = _arefy(AgentEnquiry::where('status','!=','trashed')->get());
+        // dd($data['lead']);
+        $data['agentleads'] = _arefy($data['agentlead']);
+        $excel_name='agent_leads_data';
+        $pdf = PDF::loadView('admin.agentleadspdf', $data);
+        return $pdf->download('agent_leads_data.pdf');
+    }
+
+    public function SliderLeadsList(Request $request){
+        $data['sliderlead']  = _arefy(Enquiry::where('status','!=','trashed')->get());
+        // dd($data['lead']);
+        $data['sliderleads'] = _arefy($data['sliderlead']);
+        $excel_name='slider_leads_data';
+        $pdf = PDF::loadView('admin.sliderleadspdf', $data);
+        return $pdf->download('slider_leads_data.pdf');
     }
 }

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProjectController extends Controller
 {
@@ -96,6 +98,48 @@ class ProjectController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportProject(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $projects  = _arefy(Project::list('array',$where));
+        // dd($projects);
+        $type='xlsx';
+        $excel_name='project_data';
+        Excel::create($excel_name, function($excel) use ($projects) {
+                $excel->sheet('mySheet', function($sheet) use ($projects){
+                    $headings = [
+                        'Company Name',
+                        'Project Name',
+                        'Project Location',
+                        'Project Description',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($projects)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($projects as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['company']['name'],
+                                $value['name'],
+                                $value['location'],
+                                strip_tags($value['description']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**
