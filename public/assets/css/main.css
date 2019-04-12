@@ -100,7 +100,9 @@ ul li, ol li {
   width: 100%;
   text-align: center;
 }
-
+.swal2-modal .swal2-content{
+  text-align: center!important;
+}
 .section-title-header p {
   text: center;
   font-weight: 400;
@@ -1318,7 +1320,7 @@ ul li, ol li {
 
 .btn {
   font-size: 14px;
-  padding: 10px 30px;
+  padding: 11px 30px;
   border-radius: 0px;
   cursor: pointer;
   font-weight: 400;
@@ -4473,7 +4475,7 @@ ul.owl-gallery li {
   .navbar {
     padding: 0rem;
   }
-  #sideNav .navbar-brand {
+  #sideNav .navbar-brand1 {
     display: block;
     border-bottom: 1px solid #e7eced;
     width: 100%;
