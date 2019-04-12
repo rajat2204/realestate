@@ -24,10 +24,10 @@
                   foreach ($purchase_year as $value1) {
                     $time=strtotime($value1['created_at']);
                     $month=date("F",$time);
-                    $year=date("Y",$time);
+                    $years=date("Y",$time);
                     /*$dateObj   = DateTime::createFromFormat('!m', $month);
                     $monthName = $dateObj->format('F');*/
-                    $dataPoints[]=array("y" => $value['price'], "label" =>$month.' '.$year);
+                    $dataPoints[]=array("y" => $value1['price'], "label" =>$month.' '.$years);
                     $my1=0;
                     $total_sum[]=$my1+= $value1['price'];
                   }

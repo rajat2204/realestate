@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use PDF;
 use App\Models\Deals;
 use App\Models\Project;
+use App\Models\Clients;
 use App\Models\Purchase;
+use App\Models\Expense;
+use App\Models\ExpenseCategory;
+use App\Models\Vendor;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\Make_Payment;
@@ -45,12 +49,13 @@ class ReportController extends Controller
                 $seller_name = $request->seller_name;
                 $purchase_year->where('seller_name','like','%'.$seller_name.'%');
             }
-            if(!empty($request->date_from) && !empty($request->date_to)){
-                $date_from = $request->date_from;
-                $purchase_year->whereBetween('created_at', array($date_from, $request->date_to));
+            if(!empty($request->start_from) && !empty($request->start_to)){
+                $date_from = $request->start_from;
+                $date_to = $request->start_to;
+                //dd($date_from,$date_to);
+                $purchase_year->whereBetween('created_at', array($date_from, $date_to));
             }
-
-            $purchase_year =$purchase_year->get();
+            $purchase_year =$purchase_year->orderBy('created_at')->get();
             $data['purchase_year'] =_arefy($purchase_year);
 
             $data['purchase_month'] = _arefy(Purchase::whereRaw('MONTH(created_at) = ?',[$current_month])->whereRaw('YEAR(created_at) = ?',[$current_year])->where('status','!=','trashed')->get());
@@ -66,11 +71,89 @@ class ReportController extends Controller
 
     public function salesReport(Request $request){
     	$data['view'] = 'admin.reports.salesreport';
+
+            $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
+            $data['client'] = _arefy(Clients::where('status','!=','trashed')->get());
+            $current_month = date('m');
+            $current_year = date('Y');
+            $purchase_year = \DB::table('deal');
+            if(!empty($request->year)){
+                $year = $request->year;
+                $purchase_year->whereRaw('YEAR(created_at) = ?',$year);
+            }
+
+            if(!empty($request->project_name)){
+                $project_name = $request->project_name;
+                $purchase_year->where('project_id',$project_name);
+            }
+
+            if(!empty($request->client_id)){
+                $client_id = $request->client_id;
+                $purchase_year->where('client_id',$client_id);
+            }
+            if(!empty($request->start_from) && !empty($request->start_to)){
+                $date_from = $request->start_from;
+                $date_to = $request->start_to;
+                //dd($date_from,$date_to);
+                $purchase_year->whereBetween('created_at', array($date_from, $date_to));
+            }
+            $purchase_year =$purchase_year->orderBy('created_at')->get();
+            $data['purchase_year'] =_arefy($purchase_year);
+
+            $data['purchase_month'] = _arefy(Deals::whereRaw('MONTH(created_at) = ?',[$current_month])->whereRaw('YEAR(created_at) = ?',[$current_year])->where('status','!=','trashed')->get());
+            $data['purchase_payment'] = _arefy(Deals::where('status','!=','trashed')->get());
+            $data['year']=$request->year;
+            $data['client_id']=$request->client_id;
+            $data['project_name']=$request->project_name;
+            $data['date_from']=$request->start_from;
+            $data['date_to']=$request->start_to;
+            $data['current_month']=$current_month;
+
     	return view('admin.home',$data);
     }
 
     public function expenseReport(Request $request){
-    	$data['view'] = 'admin.reports.expensereport';
+    	    $data['view'] = 'admin.reports.expensereport';
+            $data['projects'] = _arefy(Project::where('status','!=','trashed')->get());
+            $data['vendor'] = _arefy(Vendor::where('status','!=','trashed')->get());
+            $data['expenseCat'] = _arefy(ExpenseCategory::where('status','!=','trashed')->get());
+            $current_month = date('m');
+            $current_year = date('Y');
+            $purchase_year = \DB::table('expense');
+            if(!empty($request->year)){
+                $year = $request->year;
+                $purchase_year->whereRaw('YEAR(created_at) = ?',$year);
+            }
+
+            if(!empty($request->project_name)){
+                $project_name = $request->project_name;
+                $purchase_year->where('project_id',$project_name);
+            }
+
+            if(!empty($request->client_id)){
+                $client_id = $request->client_id;
+                $purchase_year->where('client_id',$client_id);
+            }
+            if(!empty($request->start_from) && !empty($request->start_to)){
+                $date_from = $request->start_from;
+                $date_to = $request->start_to;
+                //dd($date_from,$date_to);
+                $purchase_year->whereBetween('created_at', array($date_from, $date_to));
+            }
+            $purchase_year =$purchase_year->orderBy('created_at')->get();
+            $data['purchase_year'] =_arefy($purchase_year);
+
+            $data['purchase_month'] = _arefy(Expense::whereRaw('MONTH(created_at) = ?',[$current_month])->whereRaw('YEAR(created_at) = ?',[$current_year])->where('status','!=','trashed')->get());
+            $data['purchase_payment'] = _arefy(Expense::where('status','!=','trashed')->get());
+            $data['year']=$request->year;
+            $data['client_id']=$request->client_id;
+            $data['project_name']=$request->project_name;
+            $data['date_from']=$request->start_from;
+            $data['date_to']=$request->start_to;
+            $data['expens_cat_id']=$request->expens_cat_id;
+            $data['vendor_id']=$request->vendor_id;
+            $data['current_month']=$current_month;
+
     	return view('admin.home',$data);
     }
 
