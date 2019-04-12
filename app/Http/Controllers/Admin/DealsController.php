@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use PDF;
 use App\Models\Deals;
 use App\Models\Units;
 use App\Models\Agents;
 use App\Models\Clients;
 use App\Models\Property;
 use App\Models\Plans;
+use App\Models\Contact;
 use App\Models\Tax;
 use App\Models\Tax_Percent;
 use App\Models\Make_Payment;
@@ -162,6 +164,18 @@ class DealsController extends Controller
             ->addColumn(['data' => 'date','name' => 'date','title' => 'Due Date','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function pdfpaymentplan(Request $request,$id){
+        $id = ___decrypt($id);
+        $data['contact'] = _arefy(Contact::where('status','!=','trashed')->get());
+        $where = 'deal_id = '.___decrypt($id);
+        $data['dealspayment']  = _arefy(Deals_Payment::list('array',$where,['*'],'id-asc'));
+        // dd($data['dealspayment']);
+        $data['dealplan'] = _arefy($data['dealspayment']);
+        $excel_name='payment_plan';
+        $pdf = PDF::loadView('admin.paymentplanpdfview', $data);
+        return $pdf->download('payment_plan.pdf');
     }
 
     public function showPaymentList(Request $request, Builder $builder,$id){

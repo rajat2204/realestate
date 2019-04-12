@@ -245,6 +245,7 @@ Route::resource('deals', 'DealsController');
 			Route::get('payment/{id}','DealsController@makePayment');
 			Route::post('makepayment/{id}','DealsController@savePayment');
 			Route::get('showpayment/{id}','DealsController@showPaymentList');
+			Route::get('/print/{id}', 'DealsController@pdfpaymentplan');
 	});
 
 /***********************Services-Section****************************/
