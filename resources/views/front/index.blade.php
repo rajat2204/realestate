@@ -115,44 +115,8 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
                       <input type="text" class="form-control" name="filter_zipcode" value="" placeholder="Zip code">
                     </div>
-                    <!--static code end-->  
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                      <select name="filter_country_id" id="input-country" class="form-control">
-                        <option value="*"> --- Please Select --- </option>
-                        <option value="244">Aaland Islands</option>
-                        <option value="1">Afghanistan</option>
-                        <option value="2">Albania</option>
-                      </select>
-                    </div> -->
-                  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <select name="filter_zone_id" value="" id="input-zone" class="form-control">
-                    <opetion value=""> --- Please Select --- </option>
-                    </slect>
-                  </div> -->
-                </div>
-              </div>
-                <div class="form-group">
-                  <div class="row">
-                  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <label for="input-filter_range">Price:</label>
-                    <div class="attribute price-filter">
-                    
-                      <input type="hidden" name="route" value="property/category">
-                      
-                        
-                      </div>
-                    </div> -->
-                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">  
-                      <label for="input-area"> Area:(<span class="sub">Sq Ft</span>)</label>
-                      <div class="attribute price-filter">
-                        <input type="hidden" name="route" value="property/category">
-
-                      </div>
-                    </div> -->
-                    <!--static code end-->  
-                  
-                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                      <label for="input-filter_bed_rooms">Bedrooms:</label>
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <!-- <label for="input-filter_bed_rooms">Bedrooms:</label> -->
                       <select class="form-control" name="filter_bed_rooms" id="input-filter_bed_rooms">
                         <option value="">--Select Bedroom--</option>
                           <option value="1">1</option> 
@@ -178,7 +142,7 @@
                         </select>
                     </div>
                   <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <label for="input-filter_bath_rooms">Bathrooms:</label>
+                    <!-- <label for="input-filter_bath_rooms">Bathrooms:</label> -->
                       <select class="form-control" name="filter_bath_rooms" id="input-filter_bath_rooms">
                         <option value="">--Select Bathroom--</option>
                         <option value="1">1</option>            
@@ -193,8 +157,23 @@
                         <option value="10">10</option>            
                       </select>
                   </div>
+                    <!--static code end-->  
+                    <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                      <select name="filter_country_id" id="input-country" class="form-control">
+                        <option value="*"> --- Please Select --- </option>
+                        <option value="244">Aaland Islands</option>
+                        <option value="1">Afghanistan</option>
+                        <option value="2">Albania</option>
+                      </select>
+                    </div> -->
+                  <!-- <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <select name="filter_zone_id" value="" id="input-zone" class="form-control">
+                    <opetion value=""> --- Please Select --- </option>
+                    </slect>
+                  </div> -->
                 </div>
               </div>
+                
                 <div class="searchwrap">
                   <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} class="btn button_search1 text-right" type="submit"><i class="fa fa-search"></i> Search</button>
                 </div>

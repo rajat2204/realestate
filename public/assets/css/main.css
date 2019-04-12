@@ -3109,7 +3109,7 @@ a.room-price {
     font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 #enquiry label{
   font-weight: 600;
