@@ -19,10 +19,10 @@
 				<div class="portlet light">
 					<div class="portlet-title">
 						<!-- <div class="actions">
-							<a href="{{url('admin/deals/create')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-plus"></i>
+							<a href="{{url('admin/print/showpayment')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
 							<span class="hidden-480">
-							Add Deals</span>
+							Print</span>
 							</a>
 						</div> -->
 					</div>
