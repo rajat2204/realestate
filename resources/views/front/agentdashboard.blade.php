@@ -18,9 +18,9 @@
                       <div class="profileHead profileAlignleft">
                         <h3>Profile Details</h3>
                       </div>
-                      <!-- <div class="profileHead profileAlignright">
-                        <h3><a href="javascript:void(0);">Edit Profile</a></h3>
-                      </div> -->
+                      <div class="profileUpload text-center">
+                        <img src="{{asset('assets/img/agent/15542886941553943584customer-support.png')}}" width="100" height="100" class="img-circle border-img">
+                      </div>
                       <table class="table">
                         <tbody>
                           <tr>
@@ -74,9 +74,15 @@
                     </div>
 
                     <div id="property" class="tab-pane fade">
-                      
+                      <div class="profileHead profileAlignleft">
+                        <h3>Edit Profile</h3>
+                      </div>
                       <table class="table">
                         <tbody>
+                          <tr>
+                            <td style="text-align:right;">Upload Profile:</td>
+                            <td style="text-align:left;"><input type="file" name="name" style="border:none;"></td>
+                          </tr>
                           <tr>
                             <td style="text-align:right;">Name:</td>
                             <td style="text-align:left;"><input type="text" name="name"></td>
