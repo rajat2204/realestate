@@ -284,7 +284,7 @@ class DealsController extends Controller
     public function ajaxProperties(Request $request)
     {
       $id = $request->id;
-      $property = Property::where('project_id',$id)->where('deals','=','no')->get();
+      $property = Property::where('project_id',$id)->where('deals','=','no')->where('property_purpose','!=','rent')->get();
       $propertyview = view('admin.template.ajaxproperty',compact('property'));
 
       return Response($propertyview);
