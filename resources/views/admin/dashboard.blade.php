@@ -19,7 +19,7 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3>{{ \App\Models\PropertyCategories::count() }}</h3>
+            <h3>{{\App\Models\PropertyCategories::count()}}</h3>
             <p>Categories</p>
           </div>
           <div class="icon">

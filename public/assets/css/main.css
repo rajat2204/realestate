@@ -312,6 +312,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 
+
 .profile-wrapper {
   padding: 45px 0;
 }
@@ -4668,4 +4669,77 @@ ul.owl-gallery li {
 }
 @media screen and (max-width: 480px){
   
+}
+
+/*---------------Agent Section--------------------*/
+.sectionAgent{
+  padding-top: 120px;
+}
+.bordered-box {
+    text-align: center;
+    border: 3px solid #00a9cc;
+    border-radius: 5px;
+}
+.bordered-box ul{
+  background-color: #00a9cc;
+  
+}
+.bordered-box ul li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 5px 30px;
+    border-left: 1px solid #0ac1e8;
+}
+.bordered-box ul li:last-child{
+  border-right: 1px solid #0ac1e8;
+}
+.bordered-box ul li a{
+  color:#fff;
+  font-size: 18px;
+}
+.bordered-box ul li a:hover{
+  color:#000;
+}
+.profileAlignleft{
+  float: left;
+}
+.profileAlignright{
+  float:right;
+}
+.profileAlignright a{
+  font-size: 14px;
+}
+.agentprofile{
+  border: 1px solid #d2d2d2;
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px;
+}
+.borderBoxinner ul{
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+}
+.borderBoxinner ul li{
+  display: block;
+  border:none;
+}
+.agentprofile .table td{
+  border:none;
+  padding: 8px;
+}
+.spaceboth{
+  margin: 30px 0;
+}
+.borderBoxinner ul li a{
+  color:#000;
+  font-size: 12px;
+}
+.profileHead h3{
+  font-size: 20px;
+  text-align: left;
+
+}
+.borderBoxinner ul li:last-child{
+  border-right: none;
 }
