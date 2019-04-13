@@ -2460,7 +2460,7 @@ a.navbar-brand .singleLogo img {
     color: #fff;
 }
 
-.header_strip ul li:first-child:after {
+.header_strip ul li:after {
     position: absolute;
     height: 15px;
     width: 1px;
@@ -2468,6 +2468,10 @@ a.navbar-brand .singleLogo img {
     right: 0;
     content: "";
     top: 7px;
+}
+.header_strip ul li:last-child:after {
+    background: transparent;
+    
 }
 .noticeboard_slider .noticeBoxes {
     display: flex;
@@ -4705,7 +4709,7 @@ ul.owl-gallery li {
   color:#000;
 }
 .profileAlignleft{
-  float: left;
+  /*float: left;*/
 }
 .profileAlignright{
   float:right;
@@ -4730,6 +4734,7 @@ ul.owl-gallery li {
 }
 .agentprofile .table td{
   border:none;
+  width: 50%;
   padding: 8px;
 }
 .agentprofile .table td input {
@@ -4737,7 +4742,14 @@ ul.owl-gallery li {
     padding: 2px 5px;
     border: 1px solid #bcb6b6;
 }
- .tab-content>.active {
+.img-circle{
+  border-radius: 50%;
+}
+.border-img{
+  border:1px solid #ddd;
+  padding: 6px;
+}
+.tab-content>.active {
     display: block;
     opacity: 1;
 
@@ -4751,7 +4763,8 @@ ul.owl-gallery li {
 }
 .profileHead h3{
   font-size: 20px;
-  text-align: left;
+  margin-bottom: 10px;
+  text-align: center;
 
 }
 .borderBoxinner ul li:last-child{
