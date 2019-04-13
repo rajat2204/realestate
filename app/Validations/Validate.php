@@ -350,8 +350,9 @@ class Validate
 	public function createContactUs($action='add'){
         $validations = [
         	'name' 				=> $this->validation('name'),
-			   'email'  			=> $this->validation('req_email'),
+			'email'  			=> $this->validation('req_email'),
             'subject' 		    => $this->validation('name'),
+            'number'            => $this->validation('phone'),
             'message' 		    => $this->validation('name'),
     	];
     	
@@ -359,6 +360,9 @@ class Validate
     		'name.required' 		=>  'Name is required.',
     		'email.required' 		=>  'E-mail is required.',
     		'subject.required' 		=>  'Subject is required.',
+            'number.required'       =>  'Contact is required.',
+            'number.numeric'        =>  'Contact should be numeric.',
+            'number.digits'         =>  'Contact should not be greater than 10 digits.',
     		'message.required' 		=>  'Message is required.',
 
     	]);

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Hash;
+use App\Models\Users;
 use App\Models\Agents;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -219,12 +221,29 @@ class AgentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        // dd($request->all());
         $validation = new Validations($request);
         $validator  = $validation->addAgent();
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
+            $agentsdata['first_name']           = !empty($request->name)?$request->name:'';
+            $agentsdata['username']             = !empty($request->email)?$request->email:'';
+            $agentsdata['email']                = !empty($request->email)?$request->email:'';
+            $agentsdata['phone']                = !empty($request->mobile)?$request->mobile:'';
+            $agentsdata['password']             = Hash::make(!empty($request->password)?$request->password:'');
+            $agentsdata['user_type']            = 'agent';
+            $agentsdata['remember_token']       = str_random(60).$request->remember_token;
+            $agentsdata['created_at']           = date('Y-m-d H:i:s');
+            $agentsdata['updated_at']           = date('Y-m-d H:i:s');
+
+            $agent_data = Users::add($agentsdata);
+
             $data = new Agents();
+
+            $request['user_id'] = $agent_data;
+            $request['password'] = Hash::make($request['password']);
+
             $data->fill($request->all());
 
             if ($file = $request->file('image')){
@@ -232,7 +251,6 @@ class AgentController extends Controller
                 $file->move('assets/img/agent',$photo_name);
                 $data['image'] = $photo_name;
             }
-
             $data->save();
 
             $this->status   = true;

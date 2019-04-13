@@ -81,22 +81,28 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Agent's PIN:</label>
               <input type="text" class="form-control" placeholder="Enter Agents PIN" name="pin">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
               <label>Agent's Contact Number:</label>
               <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="mobile">
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="form-group">
                 <label>E-mail Id:</label>
                 <input type="text" class="form-control" placeholder="Enter Agent E-mail Id" name="email">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="form-control" placeholder="Enter Agent Password" name="password">
             </div>
           </div>
         </div>
