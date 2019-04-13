@@ -71,10 +71,32 @@ class AgentController extends Controller
                 return ucfirst($item['name']);
             })
             ->editColumn('spouse_name',function($item){
-                return ucfirst($item['spouse_name']);
+                if(!empty($item['spouse_name'])){
+                    return ucfirst($item['spouse_name']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('nominee',function($item){
-                return ucfirst($item['nominee']);
+                if(!empty($item['nominee'])){
+                    return ucfirst($item['nominee']);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('adhaar',function($item){
+                if(!empty($item['adhaar'])){
+                    return ucfirst($item['adhaar']);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('address',function($item){
+                if(!empty($item['address'])){
+                    return ucfirst($item['address']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('balance',function($item){
                 if($item['balance'] != NULL){
@@ -84,8 +106,13 @@ class AgentController extends Controller
                 }
             })
             ->editColumn('image',function($item){
-                $imageurl = asset("assets/img/agent/".$item['image']);
-                return '<img src="'.$imageurl.'" height="100px" width="120px">';
+                if (!empty($item['image'])) {
+                    $imageurl = asset("assets/img/agent/".$item['image']);
+                    return '<img src="'.$imageurl.'" height="100px" width="120px">';
+                }else{
+                    $imageurl = asset("assets/img/avatar.png");
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }
             })
             ->rawColumns(['image','action'])
             ->make(true);
