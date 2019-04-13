@@ -4677,7 +4677,7 @@ ul.owl-gallery li {
 
 /*---------------Agent Section--------------------*/
 .sectionAgent{
-  padding-top: 120px;
+  /*padding-top: 120px;*/
 }
 .bordered-box {
     text-align: center;
@@ -4731,6 +4731,16 @@ ul.owl-gallery li {
 .agentprofile .table td{
   border:none;
   padding: 8px;
+}
+.agentprofile .table td input {
+    width: 60%;
+    padding: 2px 5px;
+    border: 1px solid #bcb6b6;
+}
+ .tab-content>.active {
+    display: block;
+    opacity: 1;
+
 }
 .spaceboth{
   margin: 30px 0;
