@@ -528,7 +528,7 @@ class HomeController extends Controller{
                         $this->modal    = true;
                         $this->alert    = true;
                         $this->message  = "Agent Logged In Successfully !!!";
-                        $this->redirect = url('/');
+                        $this->redirect = url('/agentdashboard');
                     }else{
                         \Session::flush();
                         $this->message  =  $validator->errors()->add('password', 'You are not authorised Agent.');
