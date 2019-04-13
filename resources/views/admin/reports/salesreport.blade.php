@@ -33,6 +33,7 @@
                   }
                 }else{
                   $total_sum[]=0;
+                  $dataPoints[]=array();
                 }
                 @endphp
                 <div class="classFloat centerContent"><button class="btn btn-primary" type="button">Total Sale Count this month <span class="badge">{{count($purchase_month)}}</span>
