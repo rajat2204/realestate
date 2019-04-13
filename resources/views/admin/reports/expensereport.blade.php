@@ -33,6 +33,7 @@
                   }
                 }else{
                   $total_sum[]=0;
+                  $dataPoints[]=array();
                 }
                 @endphp
                 <div class="classFloat centerContent"><button class="btn btn-primary" type="button">Total Expense Count this month <span class="badge">{{count($purchase_month)}}</span>
@@ -43,7 +44,7 @@
                 <br><br>Total Expense <span class="badge"><i class="fa fa-rupee"></i>{{array_sum($total_sum)}}</span></button></div>
               </div>
             </div>
-            <form method="get" action="{{url('admin/Expensereports')}}">
+            <form method="get" action="{{url('admin/expensereport')}}">
             <div class="row m-t-20">
               <div class="col-md-3">
                 <select class="form-control" id="PurchasereportProjectId" name="project_name">
@@ -107,7 +108,7 @@
               </div>
               <div class="col-md-2">
                 <button type="submit" class="btn btn-success btn-sm"><span class="fa fa-search"></span> Search</button>
-                <a href="{{url('admin/salesreportExpensereports')}}" class="btn btn-warning btn-sm"><span class="fa fa-refresh"></span>&nbsp;Reset</a>        
+                <a href="{{url('admin/expensereport')}}" class="btn btn-warning btn-sm"><span class="fa fa-refresh"></span>&nbsp;Reset</a>        
               </div>
           </div>
         </form>
