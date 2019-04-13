@@ -512,11 +512,4 @@ class HomeController extends Controller{
         // }
         //     return $this->populateresponse();
     }
-
-    public function agentDashboard(Request $request){
-        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
-        $data['contact'] = _arefy(Contact::where('status','active')->get());
-        $data['view'] = 'front.agentdashboard';
-        return view('front_home',$data);
-    }
 }
