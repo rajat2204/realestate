@@ -70,9 +70,28 @@ class ClientController extends Controller
             ->editColumn('phone',function($item){
                 return '+91-'.' ' .($item['phone']);
             })
+            ->editColumn('dob',function($item){
+                if (!empty($item['dob'])) {
+                    return $item['dob'];
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('address',function($item){
+                if (!empty($item['address'])) {
+                    return $item['address'];
+                }else{
+                    return 'N/A';
+                }
+            })
             ->editColumn('photo',function($item){
-                $imageurl = asset("assets/img/Clients/".$item['photo']);
-                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                if(!empty($item['photo'])){
+                    $imageurl = asset("assets/img/Clients/".$item['photo']);
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }else{
+                    $imageurl = asset("assets/img/avatar.png");
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }
             })
             ->rawColumns(['photo','action'])
             ->make(true);

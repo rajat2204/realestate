@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use App\Models\Users;
+use App\Models\Clients;
 use App\Models\Project;
 use App\Models\Agents;
 use App\Models\Notice;
@@ -431,18 +432,29 @@ class HomeController extends Controller{
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
-            $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
-            $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
-            $data['email']                     =!empty($request->email)?$request->email:'';
-            $data['phone']                     =!empty($request->phone)?$request->phone:'';
-            $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
-            $data['remember_token']            =str_random(60).$request->remember_token;
-            $data['user_type']                 ='user';
-            $data['phone_code']                 ='+91';
-            $data['created_at']                = date('Y-m-d H:i:s');
-            $data['updated_at']                = date('Y-m-d H:i:s');
+            if($request->signup == 'customer'){
+                $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
+                $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
+                $data['email']                     =!empty($request->email)?$request->email:'';
+                $data['phone']                     =!empty($request->phone)?$request->phone:'';
+                $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $data['remember_token']            =str_random(60).$request->remember_token;
+                $data['user_type']                 ='user';
+                $data['phone_code']                 ='+91';
+                $data['created_at']                = date('Y-m-d H:i:s');
+                $data['updated_at']                = date('Y-m-d H:i:s');
 
-            $enquiry = Users::add($data);
+                $enquiry = Users::add($data);
+
+                $userdata['user_id']                   =$enquiry;
+                $userdata['name']                      =!empty($request->first_name)?$request->first_name:'';
+                $userdata['email']                     =!empty($request->email)?$request->email:'';
+                $userdata['phone']                     =!empty($request->phone)?$request->phone:'';
+                $userdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $userdata['created_at']                = date('Y-m-d H:i:s');
+                $userdata['updated_at']                = date('Y-m-d H:i:s');
+
+                $clientdata = Clients::add($userdata);
 
                 $this->status   = true;
                 $this->modal    = true;
@@ -450,32 +462,83 @@ class HomeController extends Controller{
                 $this->message  = "User Registered successfully.";
                 $this->redirect = url('/');
         }
+        else{
+                $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
+                $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
+                $data['email']                     =!empty($request->email)?$request->email:'';
+                $data['phone']                     =!empty($request->phone)?$request->phone:'';
+                $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $data['remember_token']            =str_random(60).$request->remember_token;
+                $data['user_type']                 ='agent';
+                $data['phone_code']                 ='+91';
+                $data['created_at']                = date('Y-m-d H:i:s');
+                $data['updated_at']                = date('Y-m-d H:i:s');
+
+                $enquiry = Users::add($data);
+
+                $agentdata['user_id']                   =$enquiry;
+                $agentdata['name']                      =!empty($request->first_name)?$request->first_name:'';
+                $agentdata['email']                     =!empty($request->email)?$request->email:'';
+                $agentdata['mobile']                     =!empty($request->phone)?$request->phone:'';
+                $agentdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $agentdata['created_at']                = date('Y-m-d H:i:s');
+                $agentdata['updated_at']                = date('Y-m-d H:i:s');
+
+                $clientdata = Agents::add($agentdata);
+
+                $this->status   = true;
+                $this->modal    = true;
+                $this->alert    = true;
+                $this->message  = "Agent Registered successfully.";
+                $this->redirect = url('/');
+        }
+    }
+
         return $this->populateresponse();
     }
 
-   public function customerLogin(Request $request){
+    public function customerLogin(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->custLogin();
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
-             if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
-               if(\Auth::user()->user_type == 'user'){
+            if($request->login == 'customer'){
+                if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                    if(\Auth::user()->user_type == 'user'){
 
-                    $this->status   = true;
-                    $this->modal    = true;
-                    $this->alert    = true;
-                    $this->message  = "User Logged In Successfully !!!";
-                    $this->redirect = url('/');
-               }else{
-                    \Session::flush();
-                    $this->message  =  $validator->errors()->add('password', 'You are not authorised user.');
-                    return $this->populateresponse();
-               }
-            }
-            else{
-                    $this->message  =  $validator->errors()->add('password', 'User Email or Password is Incorrect.');
-                } 
+                        $this->status   = true;
+                        $this->modal    = true;
+                        $this->alert    = true;
+                        $this->message  = "User Logged In Successfully !!!";
+                        $this->redirect = url('/');
+                    }else{
+                        \Session::flush();
+                        $this->message  =  $validator->errors()->add('password', 'You are not authorised User.');
+                        return $this->populateresponse();
+                    }
+                }else{
+                        $this->message = $validator->errors()->add('password', 'User Email or Password is Incorrect.');
+                    }    
+                }else{
+                    if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                    if(\Auth::user()->user_type == 'agent'){
+
+                        $this->status   = true;
+                        $this->modal    = true;
+                        $this->alert    = true;
+                        $this->message  = "Agent Logged In Successfully !!!";
+                        $this->redirect = url('/');
+                    }else{
+                        \Session::flush();
+                        $this->message  =  $validator->errors()->add('password', 'You are not authorised Agent.');
+                        return $this->populateresponse();
+                    }
+                }else{
+                        $this->message  =  $validator->errors()->add('password', 'Agent Email or Password is Incorrect.');
+                    }   
+                }
+             
         }
         return $this->populateresponse();
     }

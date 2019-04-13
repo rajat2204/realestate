@@ -142,12 +142,10 @@
           {{csrf_field()}}
           <ul class="signlist">
             <li class="sign-list">
-                <input name="first_name"  class="" type="radio">
-                customer
+                <input name="signup"  class="" type="radio" value="customer">customer
             </li>
             <li class="sign-list">
-                <input name="first_name"  class="" type="radio">
-                Agent
+                <input name="signup"  class="" type="radio" value="agent">Agent
             </li>
           </ul>
           <div class="row">
@@ -201,11 +199,11 @@
         <div class="container far27" >
           <ul class="signlist">
             <li class="sign-list">
-                <input name="first_name"  class="" type="radio">
+                <input name="login"  class="" type="radio" value="customer">
                 customer
             </li>
             <li class="sign-list">
-                <input name="first_name"  class="" type="radio">
+                <input name="login"  class="" type="radio" value="agent">
                 Agent
             </li>
           </ul>
