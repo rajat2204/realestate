@@ -526,7 +526,7 @@ class HomeController extends Controller{
                         $this->modal    = true;
                         $this->alert    = true;
                         $this->message  = "Agent Logged In Successfully !!!";
-                        $this->redirect = url('/agentdashboard');
+                        $this->redirect = url('/dashboard');
                     }else{
                         \Session::flush();
                         $this->message = $validator->errors()->add('password', 'You are not authorised Agent.');
@@ -578,5 +578,36 @@ class HomeController extends Controller{
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
+    }
+
+    public function agentchangePass(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->changepassword();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $user = Users::findOrFail(Auth::user()->id);
+          if ($request->password){
+            if (Hash::check($request->password, $user->password)){
+                if ($request->new_password == $request->confirm_password){
+                    $input['password'] = Hash::make($request->new_password);
+                }else{
+                    $this->message  =  $validator->errors()->add('confirm_password', 'Confirm Password Does not match.');
+                    return $this->populateresponse();
+                }
+            }else{
+                $this->message  =  $validator->errors()->add('confirm_password', 'Current Password Does not match.');
+                    return $this->populateresponse();
+            }
+        }
+        $user->update($input);
+
+        $this->message = 'Agent Password has been Updated Successfully.';
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->status   = true;
+        $this->redirect = url('/dashboard');
+     }
+        return $this->populateresponse();
     }
 }

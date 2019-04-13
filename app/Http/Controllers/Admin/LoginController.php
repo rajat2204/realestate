@@ -54,15 +54,13 @@ class LoginController extends Controller
         return view('admin.home',$data);
     }
 
-    public function changePassword(Request $request)
-    {
+    public function changePassword(Request $request){
         $data['view'] = 'admin.changepassword';
         $data['admin'] = _arefy(Users::find(Auth::user()->id));
         return view('admin.home',$data);
     }
 
-    public function adminchangePass(Request $request)
-    {
+    public function adminchangePass(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->changepassword();
         if ($validator->fails()) {
@@ -89,7 +87,7 @@ class LoginController extends Controller
         $this->alert    = true;
         $this->status = true;
         $this->redirect = url('admin/changepassword');
+     }
+        return $this->populateresponse();
     }
-    return $this->populateresponse();
-  }
 }
