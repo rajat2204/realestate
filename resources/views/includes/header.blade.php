@@ -10,8 +10,8 @@
               <a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">+91-{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a>
           </div>
           <ul class="shubhX">
-            <li><a href="javascript:void(0);">Dashboard</a></li>
             @if(Auth::user())
+              <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
               <p>Hello,{{ Auth::user()->first_name}}&nbsp;&nbsp;</p>
               <span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span>
             @else
