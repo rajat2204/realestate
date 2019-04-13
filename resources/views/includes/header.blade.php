@@ -140,6 +140,16 @@
       <div class="modal-body popupmodal-body">
         <form role="signup" action="{{url('signup')}}" method="POST">
           {{csrf_field()}}
+          <ul class="signlist">
+            <li class="sign-list">
+                <input name="first_name"  class="" type="radio">
+                customer
+            </li>
+            <li class="sign-list">
+                <input name="first_name"  class="" type="radio">
+                Agent
+            </li>
+          </ul>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -189,6 +199,16 @@
       <form method="post" action="{{url('login')}}" role="login">
         {{csrf_field()}}
         <div class="container far27" >
+          <ul class="signlist">
+            <li class="sign-list">
+                <input name="first_name"  class="" type="radio">
+                customer
+            </li>
+            <li class="sign-list">
+                <input name="first_name"  class="" type="radio">
+                Agent
+            </li>
+          </ul>
           <div class="form-row ">
             <div class="form-group col-md-12">
               <label >Username:</label>
