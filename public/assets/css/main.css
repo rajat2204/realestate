@@ -2460,7 +2460,7 @@ a.navbar-brand .singleLogo img {
     color: #fff;
 }
 
-.header_strip ul li:first-child:after {
+.header_strip ul li:after {
     position: absolute;
     height: 15px;
     width: 1px;
@@ -2468,6 +2468,10 @@ a.navbar-brand .singleLogo img {
     right: 0;
     content: "";
     top: 7px;
+}
+.header_strip ul li:last-child:after {
+    background: transparent;
+    
 }
 .noticeboard_slider .noticeBoxes {
     display: flex;
