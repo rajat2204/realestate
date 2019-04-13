@@ -4690,7 +4690,10 @@ ul.owl-gallery li {
 }
 .bordered-box ul{
   background-color: #00a9cc;
-  
+}
+.tableLeft{
+  float:left;
+  width: 50%;
 }
 .bordered-box ul li {
     list-style-type: none;
@@ -4738,7 +4741,7 @@ ul.owl-gallery li {
   padding: 8px;
 }
 .agentprofile .table td input {
-    width: 60%;
+    width: 70%;
     padding: 2px 5px;
     border: 1px solid #bcb6b6;
 }

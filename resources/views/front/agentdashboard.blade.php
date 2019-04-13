@@ -73,11 +73,47 @@
                       </table>
                     </div>
 
-                    <div id="property" class="tab-pane fade">
+                    <div id="property" class="tab-pane fade clearfix">
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
                       </div>
-                      <table class="table">
+                      <table class="table tableLeft">
+                        <tbody>
+                          <tr>
+                            <td style="text-align:right;">Upload Profile:</td>
+                            <td style="text-align:left;"><input type="file" name="name" style="border:none;"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">Name:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">Registered As:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">City:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">Email:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">Mobile no.:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">Password:</td>
+                            <td style="text-align:left;"><input type="text" name="name"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;"><button class="btn-info">Edit Profile</button></td>
+                            <td style="text-align:left;"></td>
+                          </tr>
+                         </tbody>
+                      </table>
+                       <table class="table tableLeft">
                         <tbody>
                           <tr>
                             <td style="text-align:right;">Upload Profile:</td>
