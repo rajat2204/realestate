@@ -5,7 +5,6 @@
           <div class="bordered-box spaceboth">
             <ul class="nav nav-tabs">
               <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
               <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
               <li><a data-toggle="tab" href="#change">Change Password</a></li>
             </ul>
@@ -19,8 +18,8 @@
                         <h3>Profile Details</h3>
                       </div>
                       <div class="profileUpload text-center">
-                        @if(!empty($agent['image']))
-                          <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img">
+                        @if(!empty($client['photo']))
+                          <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" width="100" height="100" class="img-circle border-img">
                         @else
                           <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
                         @endif
@@ -34,14 +33,6 @@
                           <tr>
                             <td style="text-align:right;" class="inputBold">Registered As:</td>
                             <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">District:</td>
-                            @if(!empty($agent['district']))
-                              <td style="text-align:left;">{{$agent['district']}}</td>
-                            @else
-                              <td style="text-align:left;">----</td>
-                            @endif
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
@@ -58,7 +49,6 @@
                     <div id="change" class="tab-pane fade">
                       <form role="changepass" method="POST" action="{{url('changepassword')}}">
                         {{csrf_field()}}
-                        <input type="hidden" name="user_type" value="{{Auth::user()->user_type}}">
                           <div class="profileHead profileAlignleft">
                             <h3>Change Password</h3>
                           </div>
@@ -86,7 +76,7 @@
                     </div>
 
                     <div id="property" class="tab-pane fade clearfix">
-                      <form role="editprofile" method="POST" action="{{url('editprofile')}}">
+                      <form role="clienteditprofile" method="POST" action="{{url('clienteditprofile')}}">
                         {{csrf_field()}}
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
@@ -98,12 +88,12 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Upload Profile:</td>
-                            <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
+                            <td style="text-align:left;"><input type="file" name="photo" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
                             <div>
-                              @if(!empty($agent['image']))
-                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
+                              @if(!empty($client['photo']))
+                                <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
                               @else
-                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
+                                <img src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
                               @endif
                             </div>
                           </tr>
@@ -113,15 +103,15 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
+                            <td style="text-align:left;"><input type="text" name="father_name" value="{{$client['father_name']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Registered As:</td>
                             <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
+                            <td style="text-align:right;" class="inputBold">Occupation:</td>
+                            <td style="text-align:left;"><input type="text" name="occupation" value="{{$client['occupation']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
@@ -129,44 +119,39 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                            <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
+                            <td style="text-align:left;"><input type="text" name="phone" value="{{Auth::user()->phone}}"></td>
                           </tr>
                          </tbody>
                       </table>
                        <table class="table tableLeft">
                         <tbody>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
+                            <td style="text-align:right;" class="inputBold">Address</td>
+                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$client['address']}}"></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
-                            <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
+                            <td style="text-align:right;" class="inputBold">District:</td>
+                            <td style="text-align:left;"><input type="text" name="district" value="{{$client['district']}}"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">State:</td>
+                            <td style="text-align:left;"><input type="text" name="state" value="{{$client['state']}}"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">DOB:</td>
+                            <td style="text-align:left;"><input type="date" name="dob" value="{{$client['dob']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
+                            <td style="text-align:left;"><input type="text" name="pan" value="{{$client['pan']}}"> </td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
+                            <td style="text-align:right;" class="inputBold">Nationality:</td>
+                            <td style="text-align:left;"><input type="text" name="nationality" value="{{$client['nationality']}}"></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee:</td>
-                            <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Relation:</td>
-                            <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
-                          </tr>
-                          <tr>
-
+                            <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="clienteditprofile"]' class="btn-info">Edit Profile</button></td>
                             <td style="text-align:left;"></td>
-                            <td style="text-align:center;"><button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button></td>
                           </tr>
                         </tbody>
                       </table>

@@ -120,7 +120,11 @@ ul li, ol li {
   padding: 0 10px;
   position: relative;
 }
-
+.signlist li{
+  display: inline-block;
+  /*padding-right: 20px;*/
+  padding: 10px 20px 10px 0;
+}
 .btn {
   font-size: 14px;
   padding: 10px 30px;
@@ -2456,7 +2460,7 @@ a.navbar-brand .singleLogo img {
     color: #fff;
 }
 
-.header_strip ul li:first-child:after {
+.header_strip ul li:after {
     position: absolute;
     height: 15px;
     width: 1px;
@@ -2464,6 +2468,10 @@ a.navbar-brand .singleLogo img {
     right: 0;
     content: "";
     top: 7px;
+}
+.header_strip ul li:last-child:after {
+    background: transparent;
+    
 }
 .noticeboard_slider .noticeBoxes {
     display: flex;
@@ -4673,25 +4681,30 @@ ul.owl-gallery li {
 
 /*---------------Agent Section--------------------*/
 .sectionAgent{
-  padding-top: 120px;
+  /*padding-top: 120px;*/
 }
 .bordered-box {
     text-align: center;
-    border: 3px solid #00a9cc;
+    border: 3px solid #1281AF;
     border-radius: 5px;
 }
 .bordered-box ul{
-  background-color: #00a9cc;
-  
+  background-color: #1281AF;
+  align-items: center;
+  justify-content: center;
+}
+.tableLeft{
+  float:left;
+  width: 50%;
 }
 .bordered-box ul li {
     list-style-type: none;
-    display: inline-block;
+    /*display: inline-block;*/
     padding: 5px 30px;
-    border-left: 1px solid #0ac1e8;
+    border-left: 1px solid #1878a0;
 }
 .bordered-box ul li:last-child{
-  border-right: 1px solid #0ac1e8;
+  border-right: 1px solid #1878a0;
 }
 .bordered-box ul li a{
   color:#fff;
@@ -4701,7 +4714,7 @@ ul.owl-gallery li {
   color:#000;
 }
 .profileAlignleft{
-  float: left;
+  /*float: left;*/
 }
 .profileAlignright{
   float:right;
@@ -4726,7 +4739,35 @@ ul.owl-gallery li {
 }
 .agentprofile .table td{
   border:none;
+  width: 50%;
+  font-size: 13px;
+  font-family: sans-serif;
   padding: 8px;
+}
+.agentprofile .table td input {
+    width: 70%;
+    padding: 2px 5px;
+    border: 1px solid #bcb6b6;
+}
+.img-circle{
+  border-radius: 50%;
+}
+.border-img{
+  border:1px solid #ddd;
+  /*padding: 6px;*/
+}
+.inputBold{
+  font-size: 13px;
+  font-weight: bold;
+}
+.sectionAgent .btn-info{
+  width: 100px;
+  font-size: 14px;
+}
+.tab-content>.active {
+    display: block;
+    opacity: 1;
+
 }
 .spaceboth{
   margin: 30px 0;
@@ -4737,7 +4778,9 @@ ul.owl-gallery li {
 }
 .profileHead h3{
   font-size: 20px;
-  text-align: left;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+  text-align: center;
 
 }
 .borderBoxinner ul li:last-child{

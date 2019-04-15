@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Hash;
+use App\Models\Users;
 use App\Models\Agents;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,10 +71,32 @@ class AgentController extends Controller
                 return ucfirst($item['name']);
             })
             ->editColumn('spouse_name',function($item){
-                return ucfirst($item['spouse_name']);
+                if(!empty($item['spouse_name'])){
+                    return ucfirst($item['spouse_name']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('nominee',function($item){
-                return ucfirst($item['nominee']);
+                if(!empty($item['nominee'])){
+                    return ucfirst($item['nominee']);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('adhaar',function($item){
+                if(!empty($item['adhaar'])){
+                    return ucfirst($item['adhaar']);
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('address',function($item){
+                if(!empty($item['address'])){
+                    return ucfirst($item['address']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('balance',function($item){
                 if($item['balance'] != NULL){
@@ -82,8 +106,13 @@ class AgentController extends Controller
                 }
             })
             ->editColumn('image',function($item){
-                $imageurl = asset("assets/img/agent/".$item['image']);
-                return '<img src="'.$imageurl.'" height="100px" width="120px">';
+                if (!empty($item['image'])) {
+                    $imageurl = asset("assets/img/agent/".$item['image']);
+                    return '<img src="'.$imageurl.'" height="100px" width="120px">';
+                }else{
+                    $imageurl = asset("assets/img/avatar.png");
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }
             })
             ->rawColumns(['image','action'])
             ->make(true);
@@ -219,12 +248,29 @@ class AgentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+        // dd($request->all());
         $validation = new Validations($request);
         $validator  = $validation->addAgent();
         if ($validator->fails()){
             $this->message = $validator->errors();
         }else{
+            $agentsdata['first_name']           = !empty($request->name)?$request->name:'';
+            $agentsdata['username']             = !empty($request->email)?$request->email:'';
+            $agentsdata['email']                = !empty($request->email)?$request->email:'';
+            $agentsdata['phone']                = !empty($request->mobile)?$request->mobile:'';
+            $agentsdata['password']             = Hash::make(!empty($request->password)?$request->password:'');
+            $agentsdata['user_type']            = 'agent';
+            $agentsdata['remember_token']       = str_random(60).$request->remember_token;
+            $agentsdata['created_at']           = date('Y-m-d H:i:s');
+            $agentsdata['updated_at']           = date('Y-m-d H:i:s');
+
+            $agent_data = Users::add($agentsdata);
+            
             $data = new Agents();
+
+            $request['user_id'] = $agent_data;
+            $request['password'] = Hash::make($request['password']);
+
             $data->fill($request->all());
 
             if ($file = $request->file('image')){
@@ -232,8 +278,22 @@ class AgentController extends Controller
                 $file->move('assets/img/agent',$photo_name);
                 $data['image'] = $photo_name;
             }
-
             $data->save();
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7651827761 . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
 
             $this->status   = true;
             $this->modal    = true;

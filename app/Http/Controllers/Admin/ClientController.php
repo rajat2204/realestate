@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Hash;
+use App\Models\Users;
 use App\Models\Clients;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -69,9 +70,28 @@ class ClientController extends Controller
             ->editColumn('phone',function($item){
                 return '+91-'.' ' .($item['phone']);
             })
+            ->editColumn('dob',function($item){
+                if (!empty($item['dob'])) {
+                    return $item['dob'];
+                }else{
+                    return 'N/A';
+                }
+            })
+            ->editColumn('address',function($item){
+                if (!empty($item['address'])) {
+                    return $item['address'];
+                }else{
+                    return 'N/A';
+                }
+            })
             ->editColumn('photo',function($item){
-                $imageurl = asset("assets/img/Clients/".$item['photo']);
-                return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                if(!empty($item['photo'])){
+                    $imageurl = asset("assets/img/Clients/".$item['photo']);
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }else{
+                    $imageurl = asset("assets/img/avatar.png");
+                    return '<img src="'.$imageurl.'" height="70px" width="100px">';
+                }
             })
             ->rawColumns(['photo','action'])
             ->make(true);
@@ -115,7 +135,21 @@ class ClientController extends Controller
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
+            $clientdata['first_name']           = !empty($request->name)?$request->name:'';
+            $clientdata['username']             = !empty($request->email)?$request->email:'';
+            $clientdata['email']                = !empty($request->email)?$request->email:'';
+            $clientdata['phone']                = !empty($request->phone)?$request->phone:'';
+            $clientdata['password']             = Hash::make(!empty($request->password)?$request->password:'');
+            $clientdata['user_type']            = 'user';
+            $clientdata['remember_token']       = str_random(60).$request->remember_token;
+            $clientdata['created_at']           = date('Y-m-d H:i:s');
+            $clientdata['updated_at']           = date('Y-m-d H:i:s');
+
+            $client_data = Users::add($clientdata);
+
             $client = new Clients();
+
+            $request['user_id'] = $client_data;
             $request['password'] = Hash::make($request['password']);
 
             $client->fill($request->all());
@@ -136,6 +170,21 @@ class ClientController extends Controller
                 $client['address_proof'] = $address_proof;
             }
             $client->save();
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7651827761 . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
 
             $this->status   = true;
             $this->modal    = true;

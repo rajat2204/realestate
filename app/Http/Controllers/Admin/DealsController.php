@@ -54,7 +54,7 @@ class DealsController extends Controller
                 }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showplan/%s',___encrypt($item['id']))).'"  title="Show Payment Plan"><i class="fa fa-briefcase"></i></a> | ';
                 $html   .= '<a href="'.url(sprintf('admin/deals/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-                if ($item['status'] == 'partial') {
+                if ($item['status'] == 'partial' && $item['payment_plan'] != NULL) {
                 $html   .= '<a href="'.url(sprintf('admin/deals/payment/%s',___encrypt($item['id']))).'"  title="Make Payment"><i class="fa fa-money"></i></a> | ';
                 }
                 $html   .= '<a href="'.url(sprintf('admin/deals/showpayment/%s',___encrypt($item['id']))).'"  title="Show Payment"><i class="fa fa-eye"></i></a> | ';
@@ -175,7 +175,7 @@ class DealsController extends Controller
         $data['dealplan'] = _arefy($data['dealspayment']);
         $excel_name='payment_plan';
         $pdf = PDF::loadView('admin.paymentplanpdfview', $data);
-        return $pdf->download('payment_plan.pdf');
+        return $pdf->download('invoice_pdf.pdf');
     }
 
     public function showPaymentList(Request $request, Builder $builder,$id){
@@ -329,7 +329,7 @@ class DealsController extends Controller
       $where = 'id = '.$id;
       $data['deal'] = _arefy(Deals::list('single',$where));
       $data['deal_payment'] = _arefy(Deals_Payment::where('payment_status','=','no')->where('deal_id',$id)->first());
-      // dd($data['deal_payment']);
+      // dd($data['deal']);
       $data['tax'] = _arefy(Tax::where('status','!=','trashed')->get());
      
       return view('admin.home',$data);
@@ -369,7 +369,45 @@ class DealsController extends Controller
               $deals['status'] = 'paid';
             }
             $output->update($deals);
+            
+            $client_id = Clients::where('id',$request->client_id)->first();
+            $property_id = Property::where('id',$request->property_id)->first();
 
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $message="Dear " . $client_id->name . ", the payment of Rs." . number_format($request->amount) . " has been recieved on " . $request->date . " as the " . $request->name . " for your property named " . $property_id->name . " whose Invoice Number is " . $request->invoice_no . ". -DevDrishti Infrahomes Pvt.Ltd.";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $client_id->phone . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
+
+            // if ($output->balance <= $output->balance - ($output->balance * (25/100))) {
+            //     $username="AMREESH@25"; 
+            //     $password="AMREESH@25";
+            //     $sender="AMRESH";
+
+            //     $message_customer="Dear " . $client_id->name . ", 25% amount of your purchased property named " . $property_id->name . " has been recieved whose Invoice Number is " . $request->invoice_no . ". So,You are requested to please come and complete the Agreement Formalities. Your balance Amount is Rs." . number_format($output->balance) . " -DevDrishti Infrahomes Pvt.Ltd.";
+
+            //     $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            //     $customer = curl_init();
+            //     curl_setopt($customer, CURLOPT_URL, $pingurl);
+            //     curl_setopt($customer, CURLOPT_POST, 1);
+            //     curl_setopt($customer, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $client_id->phone . '&message=' . urlencode($message_customer) . '&sender=' . $sender . '&type=3');
+            //     curl_setopt($customer, CURLOPT_RETURNTRANSFER, true);
+            //     $result = curl_exec($customer);
+               
+            //     curl_close($customer);
+            // }
 
             $this->status   = true;
             $this->modal    = true;

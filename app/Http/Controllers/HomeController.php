@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use App\Models\Users;
+use App\Models\Clients;
 use App\Models\Project;
 use App\Models\Agents;
 use App\Models\Notice;
@@ -431,18 +432,29 @@ class HomeController extends Controller{
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
-            $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
-            $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
-            $data['email']                     =!empty($request->email)?$request->email:'';
-            $data['phone']                     =!empty($request->phone)?$request->phone:'';
-            $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
-            $data['remember_token']            =str_random(60).$request->remember_token;
-            $data['user_type']                 ='user';
-            $data['phone_code']                 ='+91';
-            $data['created_at']                = date('Y-m-d H:i:s');
-            $data['updated_at']                = date('Y-m-d H:i:s');
+            if($request->signup == 'customer'){
+                $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
+                $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
+                $data['email']                     =!empty($request->email)?$request->email:'';
+                $data['phone']                     =!empty($request->phone)?$request->phone:'';
+                $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $data['remember_token']            =str_random(60).$request->remember_token;
+                $data['user_type']                 ='user';
+                $data['phone_code']                 ='+91';
+                $data['created_at']                = date('Y-m-d H:i:s');
+                $data['updated_at']                = date('Y-m-d H:i:s');
 
-            $enquiry = Users::add($data);
+                $enquiry = Users::add($data);
+
+                $userdata['user_id']                   =$enquiry;
+                $userdata['name']                      =!empty($request->first_name)?$request->first_name:'';
+                $userdata['email']                     =!empty($request->email)?$request->email:'';
+                $userdata['phone']                     =!empty($request->phone)?$request->phone:'';
+                $userdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+                $userdata['created_at']                = date('Y-m-d H:i:s');
+                $userdata['updated_at']                = date('Y-m-d H:i:s');
+
+                $clientdata = Clients::add($userdata);
 
                 $this->status   = true;
                 $this->modal    = true;
@@ -450,32 +462,81 @@ class HomeController extends Controller{
                 $this->message  = "User Registered successfully.";
                 $this->redirect = url('/');
         }
+        else{
+            $data['first_name']                =!empty($request->first_name)?$request->first_name:'';
+            $data['last_name']                 =!empty($request->last_name)?$request->last_name:'';
+            $data['email']                     =!empty($request->email)?$request->email:'';
+            $data['phone']                     =!empty($request->phone)?$request->phone:'';
+            $data['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+            $data['remember_token']            =str_random(60).$request->remember_token;
+            $data['user_type']                 ='agent';
+            $data['phone_code']                 ='+91';
+            $data['created_at']                = date('Y-m-d H:i:s');
+            $data['updated_at']                = date('Y-m-d H:i:s');
+
+            $enquiry = Users::add($data);
+
+            $agentdata['user_id']                   =$enquiry;
+            $agentdata['name']                      =!empty($request->first_name)?$request->first_name:'';
+            $agentdata['email']                     =!empty($request->email)?$request->email:'';
+            $agentdata['mobile']                     =!empty($request->phone)?$request->phone:'';
+            $agentdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
+            $agentdata['created_at']                = date('Y-m-d H:i:s');
+            $agentdata['updated_at']                = date('Y-m-d H:i:s');
+
+            $clientdata = Agents::add($agentdata);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Agent Registered successfully.";
+            $this->redirect = url('/');
+        }
+    }
+
         return $this->populateresponse();
     }
 
-   public function customerLogin(Request $request){
+    public function customerLogin(Request $request){
         $validation = new Validations($request);
         $validator  = $validation->custLogin();
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
-             if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
-               if(\Auth::user()->user_type == 'user'){
-
-                    $this->status   = true;
-                    $this->modal    = true;
-                    $this->alert    = true;
-                    $this->message  = "User Logged In Successfully !!!";
-                    $this->redirect = url('/');
-               }else{
-                    \Session::flush();
-                    $this->message  =  $validator->errors()->add('password', 'You are not authorised user.');
-                    return $this->populateresponse();
-               }
-            }
-            else{
-                    $this->message  =  $validator->errors()->add('password', 'User Email or Password is Incorrect.');
-                } 
+            if($request->login == 'customer'){
+                if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                    if(\Auth::user()->user_type == 'user'){
+                      $this->status   = true;
+                      $this->modal    = true;
+                      $this->alert    = true;
+                      $this->message  = "User Logged In Successfully !!!";
+                      $this->redirect = url('/userdashboard');
+                    }else{
+                        \Session::flush();
+                        $this->message = $validator->errors()->add('password', 'You are not authorised User.');
+                        return $this->populateresponse();
+                    }
+                }else{
+                        $this->message = $validator->errors()->add('password', 'Username or Password is Incorrect.');
+                    }    
+                }else{
+                    if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
+                    if(\Auth::user()->user_type == 'agent'){
+                        $this->status   = true;
+                        $this->modal    = true;
+                        $this->alert    = true;
+                        $this->message  = "Agent Logged In Successfully !!!";
+                        $this->redirect = url('/dashboard');
+                    }else{
+                        \Session::flush();
+                        $this->message = $validator->errors()->add('password', 'You are not authorised Agent.');
+                        return $this->populateresponse();
+                    }
+                }else{
+                        $this->message = $validator->errors()->add('password', 'Username or Password is Incorrect.');
+                    }   
+                }
+             
         }
         return $this->populateresponse();
     }
@@ -503,7 +564,6 @@ class HomeController extends Controller{
             $data['property_type'] = $request->filter_propertystatus;
             $data['social']   = _arefy(SocialMedia::where('status','active')->get());
             $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
-            // dd($data['property']);
             $data['contact'] = _arefy(Contact::where('status','active')->get());
             $data['count']    = count($data['property']);
             $data['city']     = $request->filter_city;
@@ -511,5 +571,137 @@ class HomeController extends Controller{
             return view('front_home',$data);
         // }
         //     return $this->populateresponse();
+    }
+
+    public function agentDashboard(Request $request){
+        $data['view'] = 'front.agentdashboard';
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
+        // dd($data['agent']);
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        return view('front_home',$data);
+    }
+
+    public function clientDashboard(Request $request){
+        $data['view'] = 'front.clientDashboard';
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
+        // dd($data['client']);
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        return view('front_home',$data);
+    }
+
+    public function agentchangePass(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->changeAgentpassword();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $user = Users::findOrFail(Auth::user()->id);
+          if ($request->password){
+            if (Hash::check($request->password, $user->password)){
+                if ($request->new_password == $request->confirm_password){
+                    $input['password'] = Hash::make($request->new_password);
+                }else{
+                    $this->message  =  $validator->errors()->add('confirm_password', 'Confirm Password Does not match.');
+                    return $this->populateresponse();
+                }
+            }else{
+                $this->message  =  $validator->errors()->add('confirm_password', 'Current Password Does not match.');
+                    return $this->populateresponse();
+            }
+        }
+        $user->update($input);
+
+        if ($request->user_type != 'user') {
+          $this->message = 'Agent Password has been Updated Successfully.';
+        }else{
+          $this->message = 'User Password has been Updated Successfully.';
+        }
+        $this->modal    = true;
+        $this->alert    = true;
+        $this->status   = true;
+        $this->redirect = url('/dashboard');
+     }
+        return $this->populateresponse();
+    }
+
+    public function editAgentProfile(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->editProfile();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $agentUserData['user_id']           = !empty($request->id)?$request->id:'';
+          $agentUserData['name']              = !empty($request->name)?$request->name:'';
+          $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
+          $agentUserData['district']          = !empty($request->district)?$request->district:'';
+          $agentUserData['email']             = !empty($request->email)?$request->email:'';
+          $agentUserData['mobile']            = !empty($request->mobile)?$request->mobile:'';
+          $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
+          $agentUserData['adhaar']            = !empty($request->adhaar)?$request->adhaar:'';
+          $agentUserData['pan']               = !empty($request->pan)?$request->pan:'';
+          $agentUserData['address']           = !empty($request->address)?$request->address:'';
+          $agentUserData['nominee']           = !empty($request->nominee)?$request->nominee:'';
+          $agentUserData['dob_nominee']       = !empty($request->dob_nominee)?$request->dob_nominee:'';
+          $agentUserData['relation']          = !empty($request->relation)?$request->relation:'';
+          $agentUserData['created_at']        = date('Y-m-d H:i:s');
+          $agentUserData['updated_at']        = date('Y-m-d H:i:s');
+
+          if ($file = $request->file('image')){
+            $photo_name = time().$request->file('image')->getClientOriginalName();
+            $file->move('assets/img/agent',$photo_name);
+            $agentUserData['image'] = $photo_name;
+          }
+
+          $agentDetails = Agents::changeDetail($request->id,$agentUserData);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Agents Profile has been Updated successfully.";
+            $this->redirect = url('/dashboard');
+
+        }
+        return $this->populateresponse();
+    }
+
+    public function editClientProfile(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->editClientProfile();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $clientData['user_id']           = !empty($request->id)?$request->id:'';
+          $clientData['name']              = !empty($request->name)?$request->name:'';
+          $clientData['father_name']       = !empty($request->father_name)?$request->father_name:'';
+          $clientData['occupation']        = !empty($request->occupation)?$request->occupation:'';
+          $clientData['email']             = !empty($request->email)?$request->email:'';
+          $clientData['phone']             = !empty($request->phone)?$request->phone:'';
+          $clientData['dob']               = !empty($request->dob)?$request->dob:'';
+          $clientData['pan']               = !empty($request->pan)?$request->pan:'';
+          $clientData['state']             = !empty($request->state)?$request->state:'';
+          $clientData['district']          = !empty($request->district)?$request->district:'';
+          $clientData['address']           = !empty($request->address)?$request->address:'';
+          $clientData['nationality']       = !empty($request->nationality)?$request->nationality:'';
+          $clientData['created_at']        = date('Y-m-d H:i:s');
+          $clientData['updated_at']        = date('Y-m-d H:i:s');
+
+          if ($file = $request->file('photo')){
+            $photo_name = time().$request->file('photo')->getClientOriginalName();
+            $file->move('assets/img/Clients',$photo_name);
+            $clientData['photo'] = $photo_name;
+          }
+
+          $clientDetails = Clients::changeDetail($request->id,$clientData);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Clients Profile has been Updated successfully.";
+            $this->redirect = url('/userdashboard');
+
+        }
+        return $this->populateresponse();
     }
 }

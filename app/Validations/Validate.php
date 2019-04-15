@@ -66,7 +66,7 @@ class Validate
 	public function login(){
         $validations = [
             'email' 		       	 => $this->validation('req_email'),
-			'password'       	   => $this->validation('password'),
+						'password'       	   => $this->validation('password'),
 			    ];
         $validator = \Validator::make($this->data->all(), $validations,[
         		'email.required'     => 'E-mail is required.',
@@ -77,10 +77,12 @@ class Validate
 
 	public function custLogin(){
         $validations = [
+        		'login'							 => $this->validation('name'),
             'phone' 		       	 => $this->validation('phone'),
 						'password'       	   => $this->validation('password'),
 			    ];
         $validator = \Validator::make($this->data->all(), $validations,[
+        	'login.required'  		 =>	'Please Select Any of the one field.',
         	'phone.required'  		 =>	'Phone is required.',
         	'phone.numeric'  			 =>	'Phone should be in numeric format.',
 					'password.required'    => 'Password is required.',
@@ -107,6 +109,7 @@ class Validate
 
 	public function signup(){
         $validations = [
+        		'signup'					=> $this->validation('name'),
             'first_name' 		  => $this->validation('name'),
 			      'last_name'       => $this->validation('name'),
 						'email'					 	=> array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
@@ -114,6 +117,7 @@ class Validate
 						'password'       	=> $this->validation('password'),
 				];
         $validator = \Validator::make($this->data->all(), $validations,[
+        		'signup.required'					=> 'Please Select Any of the one field.',
 						'first_name.required'			=> 'Please Enter your First Name',        	
             'last_name.required'      => 'Please Enter your Last Name',       
 						'email.required'			    => 'Please Enter your E-mail',      	
@@ -350,8 +354,9 @@ class Validate
 	public function createContactUs($action='add'){
         $validations = [
         	'name' 				=> $this->validation('name'),
-			   'email'  			=> $this->validation('req_email'),
+			'email'  			=> $this->validation('req_email'),
             'subject' 		    => $this->validation('name'),
+            'number'            => $this->validation('phone'),
             'message' 		    => $this->validation('name'),
     	];
     	
@@ -359,6 +364,9 @@ class Validate
     		'name.required' 		=>  'Name is required.',
     		'email.required' 		=>  'E-mail is required.',
     		'subject.required' 		=>  'Subject is required.',
+            'number.required'       =>  'Contact is required.',
+            'number.numeric'        =>  'Contact should be numeric.',
+            'number.digits'         =>  'Contact should not be greater than 10 digits.',
     		'message.required' 		=>  'Message is required.',
 
     	]);
@@ -478,7 +486,7 @@ class Validate
 
 	public function addAgent($action='add'){
 		$validations = [
-        	'image' 			=> $this->validation('photo'),
+        		'image' 			=> $this->validation('photo'),
             'name'              => $this->validation('name'),
             'spouse_name'       => $this->validation('name'),
             'dob'               => $this->validation('name'),
@@ -487,8 +495,8 @@ class Validate
             'post_office'       => $this->validation('name'),
             'district'          => $this->validation('name'),
             'pin'               => $this->validation('req_pincode'),
-            'mobile'            => array_merge($this->validation('phone'),[Rule::unique('agent')]),
-            'email'             => array_merge($this->validation('req_email'),[Rule::unique('agent')]),
+            'mobile'            => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+            'email'             => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
             'nominee'           => $this->validation('name'),
             'relation'          => $this->validation('name'),
         	'dob_nominee' 		=> $this->validation('name'),
@@ -651,7 +659,75 @@ class Validate
         return $validator;		
 	}
 
+	public function editProfile($action='add'){
+        $validations = [
+        	'image'				=> $this->validation('photomimes'),
+        	'spouse_name'		=> $this->validation('name'),
+            'district' 		    => $this->validation('name'),
+			'dob'  				=> $this->validation('name'),
+			'adhaar'  			=> $this->validation('req_adhaar'),
+			'address'			=> $this->validation('name'),
+			'nominee' 	     	=> $this->validation('name'),
+			'dob_nominee' 	    => $this->validation('name'),
+			'relation' 	     	=> $this->validation('name'),
+    	];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'spouse_name.required'     		=> 'Spouse Name is Required.',
+        	'district.required'     		=> 'City is Required.',
+        	'dob.required'     		    	=> 'Agents DOB is Required.',
+        	'adhaar.required'     		    => 'Agents Adhaar Number is Required.',
+        	'address.required'     		    => 'Agents Address is Required.',
+        	'nominee.required'     		    => 'Nominee Name is Required.',
+        	'dob_nominee.required'     		=> 'Nominees DOB is Required.',
+        	'relation.required'     		=> 'Nominees Relation to Agent is Required.',
+        ]);
+        return $validator;		
+	}
+
+	public function editClientProfile($action='add'){
+        $validations = [
+        	'photo'					=> $this->validation('photomimes'),
+        	'father_name'			=> $this->validation('name'),
+            'occupation' 		    => $this->validation('name'),
+			'address'				=> $this->validation('name'),
+			'district'				=> $this->validation('name'),
+			'state'					=> $this->validation('name'),
+			'dob'  					=> $this->validation('name'),
+			'pan' 	     			=> $this->validation('name'),
+			'nationality' 	   		=> $this->validation('name'),
+    	];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'photo.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'father_name.required'     		=> 'Father/Mothers Name is Required.',
+        	'occupation.required'     		=> 'User occupation is Required.',
+        	'address.required'     		    => 'User Address is Required.',
+        	'district.required'     		=> 'District is Required.',
+        	'state.required'     		    => 'State of a Client is Required.',
+        	'dob.required'     		    	=> 'Clients DOB is Required.',
+        	'pan.required'     				=> 'PAN Number is Required.',
+        	'nationality.required'     		=> 'CLients Nationality is Required.',
+        ]);
+        return $validator;		
+	}
+
 	public function changepassword($action='add'){
+        $validations = [
+        	'password' 					=> $this->validation('password'),
+			'new_password'  			=> $this->validation('password'),
+            'confirm_password' 		    => $this->validation('password'),
+    	];
+    	
+        $validator = \Validator::make($this->data->all(), $validations,[
+    		'password.required' 	=>  'Current Password is required.',
+    		'new_password.required' 		=>  'New password is required.',
+    		'confirm_password.required' 	=>  'Confirm Password is required.',
+
+    	]);
+        return $validator;		
+	}
+
+	public function changeAgentpassword(){
         $validations = [
         	'password' 					=> $this->validation('password'),
 			'new_password'  			=> $this->validation('password'),
@@ -710,10 +786,8 @@ class Validate
       	'name' 				=> $this->validation('name'),
       	'father_name' 		=> $this->validation('name'),
       	'dob' 				=> $this->validation('name'),
-		'phone'  			=> array_merge($this->validation('phone'),
-								[Rule::unique('client')]),
-		'email'  			=> array_merge($this->validation('req_email'),
-								[Rule::unique('client')]),
+		'phone'  			=> array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+		'email'  			=> array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
 		'password'  		=> $this->validation('password'),
 		'address'  			=> $this->validation('name'),
 		'district'  		=> $this->validation('name'),
@@ -725,22 +799,22 @@ class Validate
 		'address_proof'  	=> $this->validation('photomimes'),
 		  ];
 
-		  	if($action =='edit'){
-						$validations['phone'] 	= array_merge($this->validation('phone'),[
-							Rule::unique('client')->where(function($query){
-								$query->where('id','!=',$this->data->id);
-							})
-						]);
-						$validations['email'] 	= array_merge($this->validation('req_email'),[
-							Rule::unique('client')->where(function($query){
-								$query->where('id','!=',$this->data->id);
-							})
-						]);
-						$validations['password'] 			= $this->validation('photo_null');
-						$validations['photo'] 				= $this->validation('photo_null');
-						$validations['id_proof'] 			= $this->validation('photo_null');
-						$validations['address_proof'] = $this->validation('photo_null');
-					}
+	  	if($action =='edit'){
+			$validations['phone'] 	= array_merge($this->validation('phone'),[
+				Rule::unique('client')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+			$validations['email'] 	= array_merge($this->validation('req_email'),[
+				Rule::unique('client')->where(function($query){
+					$query->where('id','!=',$this->data->id);
+				})
+			]);
+			$validations['password'] 			= $this->validation('photo_null');
+			$validations['photo'] 				= $this->validation('photo_null');
+			$validations['id_proof'] 			= $this->validation('photo_null');
+			$validations['address_proof'] = $this->validation('photo_null');
+		}
   	
       $validator = \Validator::make($this->data->all(), $validations,[
 	  		'name.required' 				=>  'Client Name is required.',
