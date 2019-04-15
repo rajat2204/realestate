@@ -18,7 +18,11 @@
                         <h3>Profile Details</h3>
                       </div>
                       <div class="profileUpload text-center">
-                        <img src="{{asset('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                        @if(!empty($client['photo']))
+                          <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" width="100" height="100" class="img-circle border-img">
+                        @else
+                          <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                        @endif
                       </div>
                       <table class="table">
                         <tbody>
@@ -86,7 +90,11 @@
                             <td style="text-align:right;" class="inputBold">Upload Profile:</td>
                             <td style="text-align:left;"><input type="file" name="photo" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
                             <div>
-                              <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
+                              @if(!empty($client['photo']))
+                                <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
+                              @else
+                                <img src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
+                              @endif
                             </div>
                           </tr>
                           <tr>
@@ -95,7 +103,7 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="father_name" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="father_name" value="{{$client['father_name']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Registered As:</td>
@@ -103,7 +111,7 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Occupation:</td>
-                            <td style="text-align:left;"><input type="text" name="occupation"></td>
+                            <td style="text-align:left;"><input type="text" name="occupation" value="{{$client['occupation']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
@@ -119,27 +127,27 @@
                         <tbody>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete"></td>
+                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$client['address']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district"></td>
+                            <td style="text-align:left;"><input type="text" name="district" value="{{$client['district']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">State:</td>
-                            <td style="text-align:left;"><input type="text" name="state" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="state" value="{{$client['state']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob"></td>
+                            <td style="text-align:left;"><input type="date" name="dob" value="{{$client['dob']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan"> </td>
+                            <td style="text-align:left;"><input type="text" name="pan" value="{{$client['pan']}}"> </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Nationality:</td>
-                            <td style="text-align:left;"><input type="text" name="nationality"></td>
+                            <td style="text-align:left;"><input type="text" name="nationality" value="{{$client['nationality']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="clienteditprofile"]' class="btn-info">Edit Profile</button></td>

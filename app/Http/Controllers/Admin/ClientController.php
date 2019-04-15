@@ -148,6 +148,7 @@ class ClientController extends Controller
             $client_data = Users::add($clientdata);
 
             $client = new Clients();
+
             $request['user_id'] = $client_data;
             $request['password'] = Hash::make($request['password']);
 
@@ -169,6 +170,21 @@ class ClientController extends Controller
                 $client['address_proof'] = $address_proof;
             }
             $client->save();
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7651827761 . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
 
             $this->status   = true;
             $this->modal    = true;

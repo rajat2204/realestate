@@ -58,7 +58,10 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Client's Address:</label>
-              <input type="text" class="form-control" placeholder="Enter Clients Address..." name="address" value="{{!empty($clients['address'])?$clients['address']:''}}">
+              <input type="text" class="form-control" placeholder="Enter Clients Address..." name="address" value="{{!empty($clients['address'])?$clients['address']:''}}" id="autocomplete">
+              <input type="hidden" name="city" id="city" value="{{!empty($clients['city'])?$clients['city']:''}}">
+              <input type="hidden" name="latitude" id="cityLat" value="{{!empty($clients['latitude'])?$clients['latitude']:''}}">
+              <input type="hidden" name="longitude" id="cityLng" value="{{!empty($clients['longitude'])?$clients['longitude']:''}}">
             </div>
           </div>
 

@@ -57,7 +57,10 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Client's Address:</label>
-              <input type="text" class="form-control" placeholder="Enter Clients Address..." name="address">
+              <input type="text" class="form-control" placeholder="Enter Clients Address..." name="address" id="autocomplete">
+              <input type="hidden" name="city" id="city">
+              <input type="hidden" name="latitude" id="cityLat">
+              <input type="hidden" name="longitude" id="cityLng">
             </div>
           </div>
 
