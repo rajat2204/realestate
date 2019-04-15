@@ -19,7 +19,11 @@
                         <h3>Profile Details</h3>
                       </div>
                       <div class="profileUpload text-center">
-                        <img src="{{asset('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                        @if(!empty($agent['image']))
+                          <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img">
+                        @else
+                          <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                        @endif
                       </div>
                       <table class="table">
                         <tbody>
@@ -33,7 +37,11 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;">---</td>
+                            @if(!empty($agent['district']))
+                              <td style="text-align:left;">{{$agent['district']}}</td>
+                            @else
+                              <td style="text-align:left;">----</td>
+                            @endif
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
@@ -92,7 +100,11 @@
                             <td style="text-align:right;" class="inputBold">Upload Profile:</td>
                             <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
                             <div>
-                              <img style="" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added" width="100" height="100" class="img-circle border-img">
+                              @if(!empty($agent['image']))
+                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img">
+                              @else
+                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                              @endif
                             </div>
                           </tr>
                           <tr>
@@ -101,7 +113,7 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="spouse_name" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Registered As:</td>
@@ -109,7 +121,7 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district"></td>
+                            <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
@@ -125,34 +137,31 @@
                         <tbody>
                           <tr>
                             <td style="text-align:right;" class="inputBold">DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob"></td>
+                            <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
-                            <td style="text-align:left;"><input type="text" name="adhaar" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete"></td>
-                            <input type="hidden" name="city" id="city">
-                            <input type="hidden" name="latitude" id="cityLat">
-                            <input type="hidden" name="longitude" id="cityLng">
+                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Nominee:</td>
-                            <td style="text-align:left;"><input type="text" name="nominee"></td>
+                            <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob_nominee"> </td>
+                            <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Relation:</td>
-                            <td style="text-align:left;"><input type="text" name="relation"></td>
+                            <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
                           </tr>
                           <tr>
 

@@ -657,7 +657,7 @@ class Validate
 
 	public function editProfile($action='add'){
         $validations = [
-        	'image'				=> $this->validation('photo'),
+        	'image'				=> $this->validation('photomimes'),
         	'spouse_name'		=> $this->validation('name'),
             'district' 		    => $this->validation('name'),
 			'dob'  				=> $this->validation('name'),
@@ -668,10 +668,9 @@ class Validate
 			'relation' 	     	=> $this->validation('name'),
     	];
         $validator = \Validator::make($this->data->all(), $validations,[
-        	'image.required'				=> 'Agent Image is Required.',
         	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
         	'spouse_name.required'     		=> 'Spouse Name is Required.',
-        	'district.required'     		    => 'City is Required.',
+        	'district.required'     		=> 'City is Required.',
         	'dob.required'     		    	=> 'Agents DOB is Required.',
         	'adhaar.required'     		    => 'Agents Adhaar Number is Required.',
         	'address.required'     		    => 'Agents Address is Required.',
@@ -684,7 +683,7 @@ class Validate
 
 	public function editClientProfile($action='add'){
         $validations = [
-        	'photo'					=> $this->validation('photo'),
+        	'photo'					=> $this->validation('photomimes'),
         	'father_name'			=> $this->validation('name'),
             'occupation' 		    => $this->validation('name'),
 			'address'				=> $this->validation('name'),
@@ -695,7 +694,6 @@ class Validate
 			'nationality' 	   		=> $this->validation('name'),
     	];
         $validator = \Validator::make($this->data->all(), $validations,[
-        	'photo.required'				=> 'User Image is Required.',
         	'photo.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
         	'father_name.required'     		=> 'Father/Mothers Name is Required.',
         	'occupation.required'     		=> 'User occupation is Required.',

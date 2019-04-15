@@ -12,11 +12,10 @@
           <ul class="shubhX">
             @if(Auth::user())
               @if(Auth::user()->user_type=='agent')
-                <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
+                <li><a href="{{url('/dashboard')}}"><i class="fa fa-home"></i></a></li>
               @else
-                <li><a href="{{url('/userdashboard')}}">Dashboard</a></li>
+                <li><a href="{{url('/userdashboard')}}"><i class="fa fa-home"></i></a></li>
               @endif
-              <li><a href="{{url('/dashboard')}}"><i class="fa fa-home"></i></a></li>
               <li><p>Hello,{{ Auth::user()->first_name}}</p></li>
               <li><span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span></li>
             @else
@@ -148,7 +147,7 @@
           {{csrf_field()}}
           <ul class="signlist">
             <li class="sign-list">
-                <input name="signup"  class="" type="radio" value="customer">customer
+                <input name="signup"  class="" type="radio" value="customer">Customer
             </li>
             <li class="sign-list">
                 <input name="signup"  class="" type="radio" value="agent">Agent
@@ -206,7 +205,7 @@
           <ul class="signlist">
             <li class="sign-list">
                 <input name="login"  class="" type="radio" value="customer">
-                customer
+                Customer
             </li>
             <li class="sign-list">
                 <input name="login"  class="" type="radio" value="agent">

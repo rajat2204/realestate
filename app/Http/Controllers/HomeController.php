@@ -576,6 +576,8 @@ class HomeController extends Controller{
     public function agentDashboard(Request $request){
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
+        // dd($data['agent']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -583,6 +585,8 @@ class HomeController extends Controller{
     public function clientDashboard(Request $request){
         $data['view'] = 'front.clientDashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
+        // dd($data['client']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -631,7 +635,7 @@ class HomeController extends Controller{
           $agentUserData['user_id']           = !empty($request->id)?$request->id:'';
           $agentUserData['name']              = !empty($request->name)?$request->name:'';
           $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
-          $agentUserData['district']          = !empty($request->city)?$request->city:'';
+          $agentUserData['district']          = !empty($request->district)?$request->district:'';
           $agentUserData['email']             = !empty($request->email)?$request->email:'';
           $agentUserData['mobile']            = !empty($request->phone)?$request->phone:'';
           $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
@@ -679,6 +683,7 @@ class HomeController extends Controller{
           $clientData['state']             = !empty($request->state)?$request->state:'';
           $clientData['district']          = !empty($request->district)?$request->district:'';
           $clientData['address']           = !empty($request->address)?$request->address:'';
+          $clientData['nationality']       = !empty($request->nationality)?$request->nationality:'';
           $clientData['created_at']        = date('Y-m-d H:i:s');
           $clientData['updated_at']        = date('Y-m-d H:i:s');
 
