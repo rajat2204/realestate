@@ -517,7 +517,7 @@ class HomeController extends Controller{
                         return $this->populateresponse();
                     }
                 }else{
-                        $this->message = $validator->errors()->add('password', 'User Email or Password is Incorrect.');
+                        $this->message = $validator->errors()->add('password', 'Username or Password is Incorrect.');
                     }    
                 }else{
                     if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
@@ -533,7 +533,7 @@ class HomeController extends Controller{
                         return $this->populateresponse();
                     }
                 }else{
-                        $this->message = $validator->errors()->add('password', 'Agent Email or Password is Incorrect.');
+                        $this->message = $validator->errors()->add('password', 'Username or Password is Incorrect.');
                     }   
                 }
              
