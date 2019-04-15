@@ -101,9 +101,9 @@
                             <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
                             <div>
                               @if(!empty($agent['image']))
-                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img">
+                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
                               @else
-                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
                               @endif
                             </div>
                           </tr>

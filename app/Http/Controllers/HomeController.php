@@ -637,7 +637,7 @@ class HomeController extends Controller{
           $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
           $agentUserData['district']          = !empty($request->district)?$request->district:'';
           $agentUserData['email']             = !empty($request->email)?$request->email:'';
-          $agentUserData['mobile']            = !empty($request->phone)?$request->phone:'';
+          $agentUserData['mobile']            = !empty($request->mobile)?$request->mobile:'';
           $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
           $agentUserData['adhaar']            = !empty($request->adhaar)?$request->adhaar:'';
           $agentUserData['pan']               = !empty($request->pan)?$request->pan:'';

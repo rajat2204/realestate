@@ -12,9 +12,9 @@
           <ul class="shubhX">
             @if(Auth::user())
               @if(Auth::user()->user_type=='agent')
-                <li><a href="{{url('/dashboard')}}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{{url('/dashboard')}}" title="Agent Dashboard"><i class="fa fa-home"></i></a></li>
               @else
-                <li><a href="{{url('/userdashboard')}}"><i class="fa fa-home"></i></a></li>
+                <li><a href="{{url('/userdashboard')}}" title="Client Dashboard"><i class="fa fa-home"></i></a></li>
               @endif
               <li><p>Hello,{{ Auth::user()->first_name}}</p></li>
               <li><span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span></li>
@@ -146,12 +146,8 @@
         <form role="signup" action="{{url('signup')}}" method="POST">
           {{csrf_field()}}
           <ul class="signlist">
-            <li class="sign-list">
-                <input name="signup"  class="" type="radio" value="customer">Customer
-            </li>
-            <li class="sign-list">
-                <input name="signup"  class="" type="radio" value="agent">Agent
-            </li>
+            <li class="sign-list"><input name="signup" type="radio" value="customer">Customer</li>
+            <li class="sign-list"><input name="signup" type="radio" value="agent">Agent</li>
           </ul>
           <div class="row">
             <div class="col-md-6">
@@ -203,14 +199,8 @@
         {{csrf_field()}}
         <div class="container far27" >
           <ul class="signlist">
-            <li class="sign-list">
-                <input name="login"  class="" type="radio" value="customer">
-                Customer
-            </li>
-            <li class="sign-list">
-                <input name="login"  class="" type="radio" value="agent">
-                Agent
-            </li>
+            <li class="sign-list"><input name="login"  class="" type="radio" value="customer">Customer</li>
+            <li class="sign-list"><input name="login"  class="" type="radio" value="agent">Agent</li>
           </ul>
           <div class="form-row ">
             <div class="form-group col-md-12">

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Clients extends Model
 {
     protected $table = 'client';
-   	protected $fillable = ['user_id','name','email','phone','password','father_name','address','district','state','pincode','nationality','pan','dob','occupation','photo','id_proof','address_proof','status','created_at','updated_at'];
+   	protected $fillable = ['user_id','name','email','phone','password','father_name','address','latitude','longitude','district','state','pincode','nationality','pan','dob','occupation','photo','id_proof','address_proof','status','created_at','updated_at'];
 
     public static function add($data){
         if(!empty($data)){
