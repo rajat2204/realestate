@@ -60,7 +60,7 @@
 									
 								</div>
 								<div class="nearestLocation">
-									<span>Nearest Location:</span> <span>qwerty</span>
+									<span style="font-weight:bold;">Nearest Location:</span> <span>qwerty</span>
 								</div>
 								<!-- <div class="propertyScroll">
 									<ul class="projectContent">
