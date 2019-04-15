@@ -57,6 +57,10 @@
 									@else
 										<p title="{{strip_tags($projects['description'])}}">N/A</p>
 									@endif
+									
+								</div>
+								<div class="nearestLocation">
+									<span>Nearest Location:</span> <span>qwerty</span>
 								</div>
 								<!-- <div class="propertyScroll">
 									<ul class="projectContent">
