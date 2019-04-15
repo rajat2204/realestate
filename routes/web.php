@@ -43,7 +43,7 @@ Route::post('agentcontact','HomeController@agentEnquiryModal');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
 Route::post('login','HomeController@customerLogin');
-Route::get('dashboard/{id}','HomeController@agentDashboard');
+Route::get('dashboard','HomeController@agentDashboard');
 Route::post('editprofile','HomeController@editAgentProfile');
 Route::post('changepassword','HomeController@agentchangePass');
 Route::post('search/property','HomeController@searchProperty');

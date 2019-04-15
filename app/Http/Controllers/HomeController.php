@@ -573,11 +573,10 @@ class HomeController extends Controller{
         //     return $this->populateresponse();
     }
 
-    public function agentDashboard(Request $request,$id){
-        $id = ___decrypt($id);
+    public function agentDashboard(Request $request){
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
-        $data['agentDetail'] = _arefy(Agents::where('user_id',$id)->get());
+        $data['agentDetail'] = _arefy(SocialMedia::where('status','active')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -642,7 +641,7 @@ class HomeController extends Controller{
             $agentUserData['image'] = $photo_name;
           }
 
-          $agentDetails = Agents::update($agentUserData);
+          $agentDetails = Agents::changeDetail($request->id,$agentUserData);
 
             $this->status   = true;
             $this->modal    = true;
