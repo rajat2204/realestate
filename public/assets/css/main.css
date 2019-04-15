@@ -3851,6 +3851,12 @@ padding:30px 10px 10px 0px;
   font-weight: 600;
   margin-bottom: 0;
 }
+.nearestLocation span{
+  padding-right: 10px;
+}
+.project-content{
+  min-height: 105px;
+}
 .project-content p {
     font-size: 12px;
     line-height: 18px;
