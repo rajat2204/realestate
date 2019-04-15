@@ -35,6 +35,8 @@
                   $total_sum[]=0;
                   $dataPoints[]=array();
                 }
+
+                
                 @endphp
                 <div class="classFloat centerContent"><button class="btn btn-primary" type="button">Total Expense Count this month <span class="badge">{{count($purchase_month)}}</span>
                 <br><br>Total Expense this month <span class="badge"><i class="fa fa-rupee"></i>{{array_sum($month_sum)}}</span></button></div>
