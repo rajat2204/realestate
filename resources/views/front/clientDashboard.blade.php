@@ -7,10 +7,10 @@
               <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
               <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
               <li><a data-toggle="tab" href="#change">Change Password</a></li>
+              <li><a data-toggle="tab" href="#enquiry">Properties Enquired</a></li>
             </ul>
             <div class="borderBoxinner">
               <div class="row">
-                
                 <div class="col-md-12">
                   <div class="agentprofile tab-content">
                     <div id="profile" class="tab-pane fade active">
@@ -157,6 +157,11 @@
                       </table>
                       </form>
                     </div>
+
+                    <div id="enquiry" class="tab-pane fade clearfix">
+                      <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -167,7 +172,7 @@
     </div>
   </section>
 
-  @section('requirejs')
+@section('requirejs')
 <script type="text/javascript">
 
   function readURL(input) {

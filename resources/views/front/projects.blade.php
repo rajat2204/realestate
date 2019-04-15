@@ -2,12 +2,7 @@
 	<div class="container">
 		<div class="peojectnameList">
 			<ul class="list-project">
-				<li>
-					<a href="javascript:void(0);">Home</a>
-				</li>
-				<li>
-					<a href="javascript:void(0);">New Projects in Lucknow</a>
-				</li>
+				<li><a href="javascript:void(0);">Home</a></li>
 			</ul>
 		</div>
 		<div class="projects_list">
