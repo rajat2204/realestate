@@ -17,6 +17,16 @@ class Clients extends Model
         }   
     }
 
+    public static function changeDetail($userID,$data){
+        $isUpdated = false;
+        $table_client = \DB::table('client');
+        if(!empty($data)){
+            $table_client->where('user_id','=',$userID);
+            $isUpdated = $table_client->update($data); 
+        }
+        return (bool)$isUpdated;
+    }
+
    	public static function change($userID,$data){
         $isUpdated = false;
         $table_client = \DB::table('client');

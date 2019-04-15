@@ -503,14 +503,14 @@ class HomeController extends Controller{
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            if($request->login ==' customer'){
+            if($request->login == 'customer'){
                 if (\Auth::attempt(['phone' => $request->phone, 'password' => $request->password])) {
                     if(\Auth::user()->user_type == 'user'){
                       $this->status   = true;
                       $this->modal    = true;
                       $this->alert    = true;
                       $this->message  = "User Logged In Successfully !!!";
-                      $this->redirect = url('/');
+                      $this->redirect = url('/userdashboard');
                     }else{
                         \Session::flush();
                         $this->message = $validator->errors()->add('password', 'You are not authorised User.');
@@ -576,7 +576,13 @@ class HomeController extends Controller{
     public function agentDashboard(Request $request){
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
-        $data['agentDetail'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        return view('front_home',$data);
+    }
+
+    public function clientDashboard(Request $request){
+        $data['view'] = 'front.clientDashboard';
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -603,7 +609,11 @@ class HomeController extends Controller{
         }
         $user->update($input);
 
-        $this->message = 'Agent Password has been Updated Successfully.';
+        if ($request->user_type != 'user') {
+          $this->message = 'Agent Password has been Updated Successfully.';
+        }else{
+          $this->message = 'User Password has been Updated Successfully.';
+        }
         $this->modal    = true;
         $this->alert    = true;
         $this->status   = true;
@@ -613,7 +623,6 @@ class HomeController extends Controller{
     }
 
     public function editAgentProfile(Request $request){
-      // dd($request->all());
         $validation = new Validations($request);
         $validator  = $validation->editProfile();
         if ($validator->fails()) {
@@ -646,8 +655,46 @@ class HomeController extends Controller{
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
-            $this->message  = "Agent Registered successfully.";
+            $this->message  = "Agents Profile has been Updated successfully.";
             $this->redirect = url('/dashboard');
+
+        }
+        return $this->populateresponse();
+    }
+
+    public function editClientProfile(Request $request){
+        $validation = new Validations($request);
+        $validator  = $validation->editClientProfile();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $clientData['user_id']           = !empty($request->id)?$request->id:'';
+          $clientData['name']              = !empty($request->name)?$request->name:'';
+          $clientData['father_name']       = !empty($request->father_name)?$request->father_name:'';
+          $clientData['occupation']        = !empty($request->occupation)?$request->occupation:'';
+          $clientData['email']             = !empty($request->email)?$request->email:'';
+          $clientData['phone']             = !empty($request->phone)?$request->phone:'';
+          $clientData['dob']               = !empty($request->dob)?$request->dob:'';
+          $clientData['pan']               = !empty($request->pan)?$request->pan:'';
+          $clientData['state']             = !empty($request->state)?$request->state:'';
+          $clientData['district']          = !empty($request->district)?$request->district:'';
+          $clientData['address']           = !empty($request->address)?$request->address:'';
+          $clientData['created_at']        = date('Y-m-d H:i:s');
+          $clientData['updated_at']        = date('Y-m-d H:i:s');
+
+          if ($file = $request->file('photo')){
+            $photo_name = time().$request->file('photo')->getClientOriginalName();
+            $file->move('assets/img/Clients',$photo_name);
+            $clientData['photo'] = $photo_name;
+          }
+
+          $clientDetails = Clients::changeDetail($request->id,$clientData);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Clients Profile has been Updated successfully.";
+            $this->redirect = url('/userdashboard');
 
         }
         return $this->populateresponse();
