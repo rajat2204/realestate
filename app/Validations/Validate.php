@@ -655,7 +655,50 @@ class Validate
         return $validator;		
 	}
 
+	public function editProfile($action='add'){
+        $validations = [
+        	'image'				=> $this->validation('photo'),
+        	'spouse_name'		=> $this->validation('name'),
+            'district' 		    => $this->validation('name'),
+			'dob'  				=> $this->validation('name'),
+			'adhaar'  			=> $this->validation('req_adhaar'),
+			'address'			=> $this->validation('name'),
+			'nominee' 	     	=> $this->validation('name'),
+			'dob_nominee' 	    => $this->validation('name'),
+			'relation' 	     	=> $this->validation('name'),
+    	];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'image.required'				=> 'Agent Image is Required.',
+        	'image.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'spouse_name.required'     		=> 'Spouse Name is Required.',
+        	'district.required'     		    => 'City is Required.',
+        	'dob.required'     		    	=> 'Agents DOB is Required.',
+        	'adhaar.required'     		    => 'Agents Adhaar Number is Required.',
+        	'address.required'     		    => 'Agents Address is Required.',
+        	'nominee.required'     		    => 'Nominee Name is Required.',
+        	'dob_nominee.required'     		=> 'Nominees DOB is Required.',
+        	'relation.required'     		=> 'Nominees Relation to Agent is Required.',
+        ]);
+        return $validator;		
+	}
+
 	public function changepassword($action='add'){
+        $validations = [
+        	'password' 					=> $this->validation('password'),
+			'new_password'  			=> $this->validation('password'),
+            'confirm_password' 		    => $this->validation('password'),
+    	];
+    	
+        $validator = \Validator::make($this->data->all(), $validations,[
+    		'password.required' 	=>  'Current Password is required.',
+    		'new_password.required' 		=>  'New password is required.',
+    		'confirm_password.required' 	=>  'Confirm Password is required.',
+
+    	]);
+        return $validator;		
+	}
+
+	public function changeAgentpassword(){
         $validations = [
         	'password' 					=> $this->validation('password'),
 			'new_password'  			=> $this->validation('password'),

@@ -573,16 +573,18 @@ class HomeController extends Controller{
         //     return $this->populateresponse();
     }
 
-    public function agentDashboard(Request $request){
+    public function agentDashboard(Request $request,$id){
+        $id = ___decrypt($id);
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        $data['agentDetail'] = _arefy(Agents::where('user_id',$id)->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
 
     public function agentchangePass(Request $request){
         $validation = new Validations($request);
-        $validator  = $validation->changepassword();
+        $validator  = $validation->changeAgentpassword();
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
@@ -608,6 +610,47 @@ class HomeController extends Controller{
         $this->status   = true;
         $this->redirect = url('/dashboard');
      }
+        return $this->populateresponse();
+    }
+
+    public function editAgentProfile(Request $request){
+      // dd($request->all());
+        $validation = new Validations($request);
+        $validator  = $validation->editProfile();
+        if ($validator->fails()) {
+            $this->message = $validator->errors();
+        }else{
+          $agentUserData['user_id']           = !empty($request->id)?$request->id:'';
+          $agentUserData['name']              = !empty($request->name)?$request->name:'';
+          $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
+          $agentUserData['district']          = !empty($request->city)?$request->city:'';
+          $agentUserData['email']             = !empty($request->email)?$request->email:'';
+          $agentUserData['mobile']            = !empty($request->phone)?$request->phone:'';
+          $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
+          $agentUserData['adhaar']            = !empty($request->adhaar)?$request->adhaar:'';
+          $agentUserData['pan']               = !empty($request->pan)?$request->pan:'';
+          $agentUserData['address']           = !empty($request->address)?$request->address:'';
+          $agentUserData['nominee']           = !empty($request->nominee)?$request->nominee:'';
+          $agentUserData['dob_nominee']       = !empty($request->dob_nominee)?$request->dob_nominee:'';
+          $agentUserData['relation']          = !empty($request->relation)?$request->relation:'';
+          $agentUserData['created_at']        = date('Y-m-d H:i:s');
+          $agentUserData['updated_at']        = date('Y-m-d H:i:s');
+
+          if ($file = $request->file('image')){
+            $photo_name = time().$request->file('image')->getClientOriginalName();
+            $file->move('assets/img/agent',$photo_name);
+            $agentUserData['image'] = $photo_name;
+          }
+
+          $agentDetails = Agents::update($agentUserData);
+
+            $this->status   = true;
+            $this->modal    = true;
+            $this->alert    = true;
+            $this->message  = "Agent Registered successfully.";
+            $this->redirect = url('/dashboard');
+
+        }
         return $this->populateresponse();
     }
 }
