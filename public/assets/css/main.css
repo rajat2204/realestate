@@ -4685,11 +4685,13 @@ ul.owl-gallery li {
 }
 .bordered-box {
     text-align: center;
-    border: 3px solid #00a9cc;
+    border: 3px solid #1281AF;
     border-radius: 5px;
 }
 .bordered-box ul{
-  background-color: #00a9cc;
+  background-color: #1281AF;
+  align-items: center;
+  justify-content: center;
 }
 .tableLeft{
   float:left;
@@ -4697,12 +4699,12 @@ ul.owl-gallery li {
 }
 .bordered-box ul li {
     list-style-type: none;
-    display: inline-block;
+    /*display: inline-block;*/
     padding: 5px 30px;
-    border-left: 1px solid #0ac1e8;
+    border-left: 1px solid #1878a0;
 }
 .bordered-box ul li:last-child{
-  border-right: 1px solid #0ac1e8;
+  border-right: 1px solid #1878a0;
 }
 .bordered-box ul li a{
   color:#fff;
@@ -4738,6 +4740,8 @@ ul.owl-gallery li {
 .agentprofile .table td{
   border:none;
   width: 50%;
+  font-size: 13px;
+  font-family: sans-serif;
   padding: 8px;
 }
 .agentprofile .table td input {
@@ -4750,7 +4754,15 @@ ul.owl-gallery li {
 }
 .border-img{
   border:1px solid #ddd;
-  padding: 6px;
+  /*padding: 6px;*/
+}
+.inputBold{
+  font-size: 13px;
+  font-weight: bold;
+}
+.sectionAgent .btn-info{
+  width: 100px;
+  font-size: 14px;
 }
 .tab-content>.active {
     display: block;

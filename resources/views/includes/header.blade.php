@@ -11,9 +11,9 @@
           </div>
           <ul class="shubhX">
             @if(Auth::user())
-              <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
-              <p>Hello,{{ Auth::user()->first_name}}&nbsp;&nbsp;</p>
-              <span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span>
+              <li><a href="{{url('/dashboard')}}"><i class="fa fa-home"></i></a></li>
+              <li><p>Hello,{{ Auth::user()->first_name}}</p></li>
+              <li><span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span></li>
             @else
               <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
               <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#exampleModalCenter">Log In</button></li>
