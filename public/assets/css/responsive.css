@@ -75,6 +75,10 @@
     font-size: 30px;
     margin-bottom: 30px;
   }
+  .tableLeft{
+    float: none;
+    width: 100%;
+  }
   .rowpadding {
       margin-left: 0;
   }
@@ -228,12 +232,31 @@
   #filter-search {
       margin-bottom: 10px;
   }
+
 }
 /* mobile or only mobile */
 @media (max-width: 767px) {
   .section-title {
     font-size: 22px;
     margin-bottom: 30px;
+  }
+  .bordered-box ul{
+    display: block;
+  }
+  ul.shubhX{
+    padding: 1px 0px;
+  }
+  .spaceboth{
+    margin: 50px 0;
+  }
+  .agentprofile .table td input{
+    width: 100%;
+  }
+  .bordered-box ul li{
+    border-left:none;
+  }
+  .bordered-box ul li:last-child{
+    border-right:none;
   }
   #gallery .nopadding, #overview .nopadding,#aboutus .nopadding{
     padding: 0 15px;
@@ -397,6 +420,9 @@
   .header_strip {
       text-align: right;
   }
+  .header_strip ul li a{
+
+  }
   .menus_footer {
       margin-top: 10px;
   }
@@ -426,7 +452,7 @@
   }
   .header_strip ul li {
       padding: 0 6px;
-      padding-left: 0;
+      /*padding-left: 0;*/
   }
   .shot-item{
     margin-bottom: 15px;
@@ -444,6 +470,10 @@
 
   .header_strip ul li a {
       font-size: 12px;
+  }
+  .header_strip ul li a i{
+    font-size: 14px;
+    padding-top: 7px;
   }
   .section-padding {
       padding: 20px 0;
