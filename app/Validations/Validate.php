@@ -682,6 +682,33 @@ class Validate
         return $validator;		
 	}
 
+	public function editClientProfile($action='add'){
+        $validations = [
+        	'photo'					=> $this->validation('photo'),
+        	'father_name'			=> $this->validation('name'),
+            'occupation' 		    => $this->validation('name'),
+			'address'				=> $this->validation('name'),
+			'district'				=> $this->validation('name'),
+			'state'					=> $this->validation('name'),
+			'dob'  					=> $this->validation('name'),
+			'pan' 	     			=> $this->validation('name'),
+			'nationality' 	   		=> $this->validation('name'),
+    	];
+        $validator = \Validator::make($this->data->all(), $validations,[
+        	'photo.required'				=> 'User Image is Required.',
+        	'photo.mimes'					=> 'Image Should be in .jpg,.jpeg,.png format.',
+        	'father_name.required'     		=> 'Father/Mothers Name is Required.',
+        	'occupation.required'     		=> 'User occupation is Required.',
+        	'address.required'     		    => 'User Address is Required.',
+        	'district.required'     		=> 'District is Required.',
+        	'state.required'     		    => 'State of a Client is Required.',
+        	'dob.required'     		    	=> 'Clients DOB is Required.',
+        	'pan.required'     				=> 'PAN Number is Required.',
+        	'nationality.required'     		=> 'CLients Nationality is Required.',
+        ]);
+        return $validator;		
+	}
+
 	public function changepassword($action='add'){
         $validations = [
         	'password' 					=> $this->validation('password'),

@@ -11,7 +11,11 @@
           </div>
           <ul class="shubhX">
             @if(Auth::user())
-              <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
+              @if(Auth::user()->user_type=='agent')
+                <li><a href="{{url('/dashboard')}}">Dashboard</a></li>
+              @else
+                <li><a href="{{url('/userdashboard')}}">Dashboard</a></li>
+              @endif
               <p>Hello,{{ Auth::user()->first_name}}&nbsp;&nbsp;</p>
               <span><a href="{{url('/logout')}}" class="text-warning"><i class="fa fa-sign-out"></i><span>Logout</span></a></span>
             @else

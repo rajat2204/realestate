@@ -5,7 +5,6 @@
           <div class="bordered-box spaceboth">
             <ul class="nav nav-tabs">
               <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
               <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
               <li><a data-toggle="tab" href="#change">Change Password</a></li>
             </ul>
@@ -32,10 +31,6 @@
                             <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;">District:</td>
-                            <td style="text-align:left;">---</td>
-                          </tr>
-                          <tr>
                             <td style="text-align:right;">Email:</td>
                             <td style="text-align:left;">{{Auth::user()->email}}</td>
                           </tr>
@@ -50,7 +45,6 @@
                     <div id="change" class="tab-pane fade">
                       <form role="changepass" method="POST" action="{{url('changepassword')}}">
                         {{csrf_field()}}
-                        <input type="hidden" name="user_type" value="{{Auth::user()->user_type}}">
                           <div class="profileHead profileAlignleft">
                             <h3>Change Password</h3>
                           </div>
@@ -78,7 +72,7 @@
                     </div>
 
                     <div id="property" class="tab-pane fade clearfix">
-                      <form role="editprofile" method="POST" action="{{url('editprofile')}}">
+                      <form role="clienteditprofile" method="POST" action="{{url('clienteditprofile')}}">
                         {{csrf_field()}}
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
@@ -90,7 +84,7 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;">Upload Profile:</td>
-                            <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
+                            <td style="text-align:left;"><input type="file" name="photo" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
                             <div>
                               <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added">
                             </div>
@@ -101,15 +95,15 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="spouse_name" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="father_name" value=""></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;">Registered As:</td>
                             <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district"></td>
+                            <td style="text-align:right;">Occupation:</td>
+                            <td style="text-align:left;"><input type="text" name="occupation"></td>
                           </tr>
                           <tr>
                             <td style="text-align:right;">Email:</td>
@@ -117,45 +111,38 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;">Mobile no.:</td>
-                            <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
+                            <td style="text-align:left;"><input type="text" name="phone" value="{{Auth::user()->phone}}"></td>
                           </tr>
                          </tbody>
                       </table>
                        <table class="table tableLeft">
                         <tbody>
                           <tr>
+                            <td style="text-align:right;">Address</td>
+                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">District:</td>
+                            <td style="text-align:left;"><input type="text" name="district"></td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;">State:</td>
+                            <td style="text-align:left;"><input type="text" name="state" value=""></td>
+                          </tr>
+                          <tr>
                             <td style="text-align:right;">DOB:</td>
                             <td style="text-align:left;"><input type="date" name="dob"></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;">Adhaar Number:</td>
-                            <td style="text-align:left;"><input type="text" name="adhaar" value=""></td>
-                          </tr>
-                          <tr>
                             <td style="text-align:right;">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan" value=""></td>
+                            <td style="text-align:left;"><input type="text" name="pan"> </td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete"></td>
-                            <input type="hidden" name="city" id="city">
-                            <input type="hidden" name="latitude" id="cityLat">
-                            <input type="hidden" name="longitude" id="cityLng">
+                            <td style="text-align:right;">Nationality:</td>
+                            <td style="text-align:left;"><input type="text" name="nationality"></td>
                           </tr>
                           <tr>
-                            <td style="text-align:right;">Nominee:</td>
-                            <td style="text-align:left;"><input type="text" name="nominee"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;">Nominee DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob_nominee"> </td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;">Relation:</td>
-                            <td style="text-align:left;"><input type="text" name="relation"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button></td>
+                            <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="clienteditprofile"]' class="btn-info">Edit Profile</button></td>
                             <td style="text-align:left;"></td>
                           </tr>
                         </tbody>
