@@ -254,6 +254,7 @@
   }
   .bordered-box ul li{
     border-left:none;
+    border-bottom: 1px solid #1878a0;
   }
   .bordered-box ul li:last-child{
     border-right:none;
