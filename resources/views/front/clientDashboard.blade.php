@@ -26,26 +26,28 @@
                         <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
                       @endif
                     </div>
-                    <table class="table">
-                      <tbody>
-                        <tr>
-                          <td style="text-align:right;" class="inputBold">Name:</td>
-                          <td style="text-align:left;">{{Auth::user()->first_name}}</td>
-                        </tr>
-                        <tr>
-                          <td style="text-align:right;" class="inputBold">Registered As:</td>
-                          <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
-                        </tr>
-                        <tr>
-                          <td style="text-align:right;" class="inputBold">Email:</td>
-                          <td style="text-align:left;">{{Auth::user()->email}}</td>
-                        </tr>
-                        <tr>
-                          <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                          <td style="text-align:left;">{{Auth::user()->phone}}</td>
-                        </tr>
-                       </tbody>
-                    </table>
+                    
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">Name:</td>
+                            <td style="text-align:left;">{{Auth::user()->first_name}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">Registered As:</td>
+                            <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">Email:</td>
+                            <td style="text-align:left;">{{Auth::user()->email}}</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">Mobile no.:</td>
+                            <td style="text-align:left;">{{Auth::user()->phone}}</td>
+                          </tr>
+                         </tbody>
+                      </table>
+                    
                   </div>
 
                   <div id="change" class="tab-pane fade">
@@ -161,78 +163,84 @@
                   </div>
 
                   <div id="enquiry" class="tab-pane fade clearfix">
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>S.no</th>
-                          <th>Property Name</th>
-                          <th>Property Location</th>
-                          <th>Property Price</th>
-                          <th>Property Purpose</th>
-                          <th>Property Type</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @php  
-                          $i=0;
-                        @endphp
-                          @foreach($propertyenquiry as $propertyenquiries)
-                        @php
-                          $i++;
-                        @endphp
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
                           <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$propertyenquiries['property']['name']}}</td>
-                            <td>{{$propertyenquiries['property']['location']}}</td>
-                            <td>Rs.{{number_format($propertyenquiries['property']['price'])}}</td>
-                            <td>{{ucfirst($propertyenquiries['property']['property_purpose'])}}</td>
-                            <td>{{ucfirst($propertyenquiries['property']['property_construct'])}}</td>
-                            @if($propertyenquiries['property']['deals'] == 'no')
-                              <td>Not Sold</td>
-                            @else
-                              <td>Sold</td>
-                            @endif
+                            <th>S.no</th>
+                            <th>Property Name</th>
+                            <th>Property Location</th>
+                            <th>Property Price</th>
+                            <th>Property Purpose</th>
+                            <th>Property Type</th>
+                            <th>Status</th>
                           </tr>
-                          @endforeach
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody>
+                          @php  
+                            $i=0;
+                          @endphp
+                            @foreach($propertyenquiry as $propertyenquiries)
+                          @php
+                            $i++;
+                          @endphp
+                            <tr>
+                              <td>{{$i}}</td>
+                              <td>{{$propertyenquiries['property']['name']}}</td>
+                              <td>{{$propertyenquiries['property']['location']}}</td>
+                              <td>Rs.{{number_format($propertyenquiries['property']['price'])}}</td>
+                              <td>{{ucfirst($propertyenquiries['property']['property_purpose'])}}</td>
+                              <td>{{ucfirst($propertyenquiries['property']['property_construct'])}}</td>
+                              @if($propertyenquiries['property']['deals'] == 'no')
+                                <td>Not Sold</td>
+                              @else
+                                <td>Sold</td>
+                              @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
 
                   <div id="purchased" class="tab-pane fade clearfix">
-                    <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
-                    </table>
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+                      </table>
+                    </div>
                   </div>
 
                   <div id="partners" class="tab-pane fade clearfix">
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>S.no</th>
-                          <th>Partner Name</th>
-                          <th>Partner Contact Number</th>
-                          <th>Location</th>
-                          <th>Description</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @php  
-                          $i=0;
-                        @endphp
-                        @foreach($enquiry as $enquiries)
-                        @php
-                          $i++;
-                        @endphp
-                        <tr>
-                          <td>{{$i}}</td>
-                          <td>{{$enquiries['slider_name']}}</td>
-                          <td>{{$enquiries['slider_contact']}}</td>
-                          <td>{{$enquiries['location']}}</td>
-                          <td>{{$enquiries['description']}}</td>
-                        </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-hover">
+                        <thead>
+                          <tr>
+                            <th>S.no</th>
+                            <th>Partner Name</th>
+                            <th>Partner Contact Number</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php  
+                            $i=0;
+                          @endphp
+                          @foreach($enquiry as $enquiries)
+                          @php
+                            $i++;
+                          @endphp
+                          <tr>
+                            <td>{{$i}}</td>
+                            <td>{{$enquiries['slider_name']}}</td>
+                            <td>{{$enquiries['slider_contact']}}</td>
+                            <td>{{$enquiries['location']}}</td>
+                            <td>{{$enquiries['description']}}</td>
+                          </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
