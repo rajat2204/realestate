@@ -60,15 +60,15 @@
                           <tbody>
                              <tr>
                               <td style="text-align:right;" class="inputBold">Old Password:</td>
-                              <td style="text-align:left;"><input type="password" name="password"></td>
+                              <td style="text-align:left;"><input type="password" name="password" placeholder="Old password"></td>
                             </tr>
                             <tr>
                               <td style="text-align:right;" class="inputBold">New Password:</td>
-                              <td style="text-align:left;"><input type="password" name="new_password"></td>
+                              <td style="text-align:left;"><input type="password" name="new_password" placeholder="New password"></td>
                             </tr>
                             <tr>
                               <td style="text-align:right;" class="inputBold">Confirm New Password:</td>
-                              <td style="text-align:left;"><input type="password" name="confirm_password"></td>
+                              <td style="text-align:left;"><input type="password" name="confirm_password" placeholder="Confirm New password"></td>
                             </tr>
                             <tr>
                               <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="changepass"]' class="btn-info">Update</button></td>
