@@ -90,7 +90,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label>Agent's Contact Number:</label>
-              <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="mobile">
+              <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="phone">
             </div>
           </div>
           <div class="col-md-3">

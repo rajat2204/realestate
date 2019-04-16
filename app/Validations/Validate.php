@@ -495,8 +495,9 @@ class Validate
             'post_office'       => $this->validation('name'),
             'district'          => $this->validation('name'),
             'pin'               => $this->validation('req_pincode'),
-            'mobile'            => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
+            'phone'             => array_merge($this->validation('phone'),[Rule::unique('users_realestate')]),
             'email'             => array_merge($this->validation('req_email'),[Rule::unique('users_realestate')]),
+            'password'          => $this->validation('password'),
             'nominee'           => $this->validation('name'),
             'relation'          => $this->validation('name'),
         	'dob_nominee' 		=> $this->validation('name'),
@@ -509,7 +510,7 @@ class Validate
 					$query->where('id','!=',$this->data->id);
 				})
 			]);
-			$validations['mobile'] = array_merge($this->validation('phone'),[
+			$validations['phone'] = array_merge($this->validation('phone'),[
 				Rule::unique('agent')->where(function($query){
 					$query->where('id','!=',$this->data->id);
 				})
@@ -528,11 +529,12 @@ class Validate
             'district.required'     => 'Please enter your District.',
             'pin.required'          => 'Please enter your Pin Code.',
 			'pin.numeric'           => 'Pin Code should be Numeric.',
-			'mobile.required'		=> 'Please enter your Contact Number.',
-			'mobile.numeric'		=> 'Phone Number should be numeric.',
-			'mobile.unique'			=> 'Phone Number is already registered.',
+			'phone.required'		=> 'Please enter your Contact Number.',
+			'phone.numeric'		    => 'Phone Number should be numeric.',
+			'phone.unique'			=> 'Phone Number is already registered.',
             'email.required'        => 'Agent E-mail is required.',
             'email.unique'          => 'E-mail is already registered.',
+            'password.required'     => 'Password is required.',
             'nominee.required'      => 'Nominee is required.',
             'relation.required'     => 'Relation of a Nominee to an Agent is required.',
             'dob_nominee.required'  => 'DOB of a Nominee is required.',

@@ -70,6 +70,9 @@ class AgentController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('phone',function($item){
+                return '+91-' .$item['phone'];
+            })
             ->editColumn('spouse_name',function($item){
                 if(!empty($item['spouse_name'])){
                     return ucfirst($item['spouse_name']);
@@ -128,7 +131,7 @@ class AgentController extends Controller
             ->addColumn(['data' => 'nominee', 'name' => 'nominee','title' => 'Agents Nominee','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'adhaar', 'name' => 'adhaar','title' => 'Agents Adhaar Number','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'email', 'name' => 'email','title' => 'Agent E-mail','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'mobile', 'name' => 'mobile','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'phone', 'name' => 'phone','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
              ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
@@ -173,7 +176,7 @@ class AgentController extends Controller
                                 ucfirst($value['nominee']),
                                 $value['adhaar'],
                                 $value['email'],
-                                $value['mobile'],
+                                $value['phone'],
                                 $value['address'],
                                 'Rs.'.number_format($value['balance']),
                             ]);
@@ -248,7 +251,6 @@ class AgentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-        // dd($request->all());
         $validation = new Validations($request);
         $validator  = $validation->addAgent();
         if ($validator->fails()){
@@ -257,7 +259,7 @@ class AgentController extends Controller
             $agentsdata['first_name']           = !empty($request->name)?$request->name:'';
             $agentsdata['username']             = !empty($request->email)?$request->email:'';
             $agentsdata['email']                = !empty($request->email)?$request->email:'';
-            $agentsdata['phone']                = !empty($request->mobile)?$request->mobile:'';
+            $agentsdata['phone']                = !empty($request->phone)?$request->phone:'';
             $agentsdata['password']             = Hash::make(!empty($request->password)?$request->password:'');
             $agentsdata['user_type']            = 'agent';
             $agentsdata['remember_token']       = str_random(60).$request->remember_token;
@@ -285,7 +287,6 @@ class AgentController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $request->phone . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($ch);
-           
             curl_close($ch);
 
             $request['user_id'] = $agent_data;

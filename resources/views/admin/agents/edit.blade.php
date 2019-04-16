@@ -97,7 +97,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label>Agent's Contact Number:</label>
-              <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="mobile" value="{{!empty($agent['mobile'])?$agent['mobile']:''}}">
+              <input type="text" class="form-control" placeholder="Enter Agents Contact Number" name="phone" value="{{!empty($agent['phone'])?$agent['phone']:''}}">
             </div>
           </div>
           <div class="col-md-4">
