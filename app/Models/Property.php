@@ -47,7 +47,7 @@ class Property extends Model
         $table_plots = self::select($keys)
         ->with([
             'agent' => function($q){
-                $q->select('id','name','image','mobile');
+                $q->select('id','name','image','phone');
             },
             'category' => function($q){
                 $q->select('id','name');

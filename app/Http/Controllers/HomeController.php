@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use App\Models\Users;
+use App\Models\Deals;
 use App\Models\Clients;
 use App\Models\Project;
 use App\Models\Agents;
@@ -40,9 +41,7 @@ class HomeController extends Controller{
         $where = 'status = "active"';
         $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc',9));
         $data['agent'] = _arefy(Agents::where('status','active')->get());
-        // dd($data['agent']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
-        // dd($data['contact']);
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
         $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',6));
@@ -581,7 +580,6 @@ class HomeController extends Controller{
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
-        // dd($data['agent']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -593,7 +591,6 @@ class HomeController extends Controller{
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));
-        // dd($data['propertyenquiry']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
