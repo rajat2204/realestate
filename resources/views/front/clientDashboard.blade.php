@@ -177,24 +177,24 @@
                         @php  
                           $i=0;
                         @endphp
-                        @foreach($propertyenquiry as $propertyenquiries)
+                          @foreach($propertyenquiry as $propertyenquiries)
                         @php
                           $i++;
                         @endphp
-                        <tr>
-                          <td>{{$i}}</td>
-                          <td>{{$propertyenquiries['property']['name']}}</td>
-                          <td>{{$propertyenquiries['property']['location']}}</td>
-                          <td>Rs.{{number_format($propertyenquiries['property']['price'])}}</td>
-                          <td>{{ucfirst($propertyenquiries['property']['property_purpose'])}}</td>
-                          <td>{{ucfirst($propertyenquiries['property']['property_construct'])}}</td>
-                          @if($propertyenquiries['property']['deals'] == 'no')
-                            <td>Not Sold</td>
-                          @else
-                            <td>Sold</td>
-                          @endif
-                        </tr>
-                        @endforeach
+                          <tr>
+                            <td>{{$i}}</td>
+                            <td>{{$propertyenquiries['property']['name']}}</td>
+                            <td>{{$propertyenquiries['property']['location']}}</td>
+                            <td>Rs.{{number_format($propertyenquiries['property']['price'])}}</td>
+                            <td>{{ucfirst($propertyenquiries['property']['property_purpose'])}}</td>
+                            <td>{{ucfirst($propertyenquiries['property']['property_construct'])}}</td>
+                            @if($propertyenquiries['property']['deals'] == 'no')
+                              <td>Not Sold</td>
+                            @else
+                              <td>Sold</td>
+                            @endif
+                          </tr>
+                          @endforeach
                       </tbody>
                     </table>
                   </div>
