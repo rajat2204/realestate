@@ -15,7 +15,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="agentprofile tab-content">
-                  <div id="profile" class="tab-pane fade active">
+                  <div id="profile" class="tab-pane fade active profile_details">
                     <div class="profileHead profileAlignleft">
                       <h3>Profile Details</h3>
                     </div>
