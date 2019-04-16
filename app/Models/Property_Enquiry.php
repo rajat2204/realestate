@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Property_Enquiry extends Model
 {
     protected $table = 'propertyenquiry';
-	protected $fillable = ['property_id','name','email','mobile','status','created_at','updated_at'];
+	protected $fillable = ['user_id','property_id','name','email','mobile','status','created_at','updated_at'];
 
 	public static function add($data){
         if(!empty($data)){
@@ -35,7 +35,7 @@ class Property_Enquiry extends Model
         $table_property = self::select($keys)
         ->with([
             'property' => function($q){
-                $q->select('id','name','featured_image','property_construct','location','price','property_purpose');
+                $q->select('id','name','featured_image','property_construct','location','price','property_purpose','deals');
             },
         ]);
         if($where){

@@ -48,14 +48,18 @@
 								</div>
 								<div class="project-content">
 									@if(!empty($projects['description']))
-										<p title="{{strip_tags($projects['description'])}}">{{strip_tags(str_limit($projects['description'],280))}}</p>
+										<p title="{{strip_tags($projects['description'])}}">{{strip_tags(str_limit($projects['description'],6500))}}</p>
 									@else
 										<p title="{{strip_tags($projects['description'])}}">N/A</p>
 									@endif
 									
 								</div>
 								<div class="nearestLocation">
-									<span style="font-weight:bold;">Nearest Location:</span> <span>qwerty</span>
+									@if(!empty($projects['nearest_location']))
+										<span style="font-weight:bold;">Nearest Location:</span> <span>{{$projects['nearest_location']}}</span>
+									@else
+										<span style="font-weight:bold;">Nearest Location:</span> <span>N/A</span>
+									@endif
 								</div>
 								<!-- <div class="propertyScroll">
 									<ul class="projectContent">

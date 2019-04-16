@@ -486,7 +486,7 @@ class Validate
 
 	public function addAgent($action='add'){
 		$validations = [
-        		'image' 			=> $this->validation('photo'),
+        	'image' 			=> $this->validation('photo'),
             'name'              => $this->validation('name'),
             'spouse_name'       => $this->validation('name'),
             'dob'               => $this->validation('name'),

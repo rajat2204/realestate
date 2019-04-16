@@ -1,83 +1,85 @@
 <section class="sectionAgent">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="bordered-box spaceboth">
-            <ul class="nav nav-tabs">
-              <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-              <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
-              <li><a data-toggle="tab" href="#change">Change Password</a></li>
-              <li><a data-toggle="tab" href="#enquiry">Properties Enquired</a></li>
-            </ul>
-            <div class="borderBoxinner">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="agentprofile tab-content">
-                    <div id="profile" class="tab-pane fade active">
-                      <div class="profileHead profileAlignleft">
-                        <h3>Profile Details</h3>
-                      </div>
-                      <div class="profileUpload text-center">
-                        @if(!empty($client['photo']))
-                          <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" width="100" height="100" class="img-circle border-img">
-                        @else
-                          <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
-                        @endif
-                      </div>
-                      <table class="table">
-                        <tbody>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Name:</td>
-                            <td style="text-align:left;">{{Auth::user()->first_name}}</td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Registered As:</td>
-                            <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Email:</td>
-                            <td style="text-align:left;">{{Auth::user()->email}}</td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                            <td style="text-align:left;">{{Auth::user()->phone}}</td>
-                          </tr>
-                         </tbody>
-                      </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="bordered-box spaceboth">
+          <ul class="nav nav-tabs">
+            <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
+            <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
+            <li><a data-toggle="tab" href="#change">Change Password</a></li>
+            <li><a data-toggle="tab" href="#enquiry">Wish List</a></li>
+            <li><a data-toggle="tab" href="#purchased">Properties Purchased</a></li>
+            <li><a data-toggle="tab" href="#partners">Partners Enquiry</a></li>
+          </ul>
+          <div class="borderBoxinner">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="agentprofile tab-content">
+                  <div id="profile" class="tab-pane fade active">
+                    <div class="profileHead profileAlignleft">
+                      <h3>Profile Details</h3>
                     </div>
-
-                    <div id="change" class="tab-pane fade">
-                      <form role="changepass" method="POST" action="{{url('changepassword')}}">
-                        {{csrf_field()}}
-                          <div class="profileHead profileAlignleft">
-                            <h3>Change Password</h3>
-                          </div>
-                          <table class="table">
-                            <tbody>
-                               <tr>
-                                <td style="text-align:right;" class="inputBold">Old Password:</td>
-                                <td style="text-align:left;"><input type="password" name="password"></td>
-                              </tr>
-                              <tr>
-                                <td style="text-align:right;" class="inputBold">New Password:</td>
-                                <td style="text-align:left;"><input type="password" name="new_password"></td>
-                              </tr>
-                              <tr>
-                                <td style="text-align:right;" class="inputBold">Confirm New Password:</td>
-                                <td style="text-align:left;"><input type="password" name="confirm_password"></td>
-                              </tr>
-                              <tr>
-                                <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="changepass"]' class="btn-info">Update</button></td>
-                                <td style="text-align:left;"></td>
-                              </tr>
-                             </tbody>
-                          </table>
-                      </form>
+                    <div class="profileUpload text-center">
+                      @if(!empty($client['photo']))
+                        <img src="{{url('assets/img/Clients')}}/{{$client['photo']}}" width="100" height="100" class="img-circle border-img">
+                      @else
+                        <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img">
+                      @endif
                     </div>
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td style="text-align:right;" class="inputBold">Name:</td>
+                          <td style="text-align:left;">{{Auth::user()->first_name}}</td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:right;" class="inputBold">Registered As:</td>
+                          <td style="text-align:left;">{{ucfirst(Auth::user()->user_type)}}</td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:right;" class="inputBold">Email:</td>
+                          <td style="text-align:left;">{{Auth::user()->email}}</td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:right;" class="inputBold">Mobile no.:</td>
+                          <td style="text-align:left;">{{Auth::user()->phone}}</td>
+                        </tr>
+                       </tbody>
+                    </table>
+                  </div>
 
-                    <div id="property" class="tab-pane fade clearfix">
-                      <form role="clienteditprofile" method="POST" action="{{url('clienteditprofile')}}">
-                        {{csrf_field()}}
+                  <div id="change" class="tab-pane fade">
+                    <form role="changepass" method="POST" action="{{url('changepassword')}}">
+                      {{csrf_field()}}
+                        <div class="profileHead profileAlignleft">
+                          <h3>Change Password</h3>
+                        </div>
+                        <table class="table">
+                          <tbody>
+                             <tr>
+                              <td style="text-align:right;" class="inputBold">Old Password:</td>
+                              <td style="text-align:left;"><input type="password" name="password"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">New Password:</td>
+                              <td style="text-align:left;"><input type="password" name="new_password"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Confirm New Password:</td>
+                              <td style="text-align:left;"><input type="password" name="confirm_password"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;"><button type="button" data-request="ajax-submit" data-target='[role="changepass"]' class="btn-info">Update</button></td>
+                              <td style="text-align:left;"></td>
+                            </tr>
+                           </tbody>
+                        </table>
+                    </form>
+                  </div>
+
+                  <div id="property" class="tab-pane fade clearfix">
+                    <form role="clienteditprofile" method="POST" action="{{url('clienteditprofile')}}">
+                      {{csrf_field()}}
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
                       </div>
@@ -123,7 +125,7 @@
                           </tr>
                          </tbody>
                       </table>
-                       <table class="table tableLeft">
+                      <table class="table tableLeft">
                         <tbody>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Address</td>
@@ -155,13 +157,82 @@
                           </tr>
                         </tbody>
                       </table>
-                      </form>
-                    </div>
+                    </form>
+                  </div>
 
-                    <div id="enquiry" class="tab-pane fade clearfix">
-                      <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
-                      </table>
-                    </div>
+                  <div id="enquiry" class="tab-pane fade clearfix">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>S.no</th>
+                          <th>Property Name</th>
+                          <th>Property Location</th>
+                          <th>Property Price</th>
+                          <th>Property Purpose</th>
+                          <th>Property Type</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php  
+                          $i=0;
+                        @endphp
+                        @foreach($propertyenquiry as $propertyenquiries)
+                        @php
+                          $i++;
+                        @endphp
+                        <tr>
+                          <td>{{$i}}</td>
+                          <td>{{$propertyenquiries['property']['name']}}</td>
+                          <td>{{$propertyenquiries['property']['location']}}</td>
+                          <td>Rs.{{number_format($propertyenquiries['property']['price'])}}</td>
+                          <td>{{ucfirst($propertyenquiries['property']['property_purpose'])}}</td>
+                          <td>{{ucfirst($propertyenquiries['property']['property_construct'])}}</td>
+                          @if($propertyenquiries['property']['deals'] == 'no')
+                            <td>Not Sold</td>
+                          @else
+                            <td>Sold</td>
+                          @endif
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div id="purchased" class="tab-pane fade clearfix">
+                    <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
+                    </table>
+                  </div>
+
+                  <div id="partners" class="tab-pane fade clearfix">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>S.no</th>
+                          <th>Partner Name</th>
+                          <th>Partner Contact Number</th>
+                          <th>Location</th>
+                          <th>Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php  
+                          $i=0;
+                        @endphp
+                        @foreach($enquiry as $enquiries)
+                        @php
+                          $i++;
+                        @endphp
+                        <tr>
+                          <td>{{$i}}</td>
+                          <td>{{$enquiries['slider_name']}}</td>
+                          <td>{{$enquiries['slider_contact']}}</td>
+                          <td>{{$enquiries['location']}}</td>
+                          <td>{{$enquiries['description']}}</td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -170,7 +241,8 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 @section('requirejs')
 <script type="text/javascript">

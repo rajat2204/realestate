@@ -25,6 +25,8 @@ use App\Models\Testimonials;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
+use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
 
 class HomeController extends Controller{
@@ -172,14 +174,15 @@ class HomeController extends Controller{
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $data['slider_name']        =!empty($request->slider_name)?$request->slider_name:'';
-            $data['slider_contact']     =!empty($request->slider_contact)?$request->slider_contact:'';
-            $data['description']        =!empty($request->description)?$request->description:'';
-            $data['location']           =!empty($request->location)?$request->location:'';
-            $data['customer_name']      =!empty($request->customer_name)?$request->customer_name:'';
-            $data['customer_contact']   =!empty($request->customer_contact)?$request->customer_contact:'';
-            $data['email']              =!empty($request->email)?$request->email:'';
-            $data['message']            =!empty($request->message)?$request->message:'';
+            $data['slider_name']        = !empty($request->slider_name)?$request->slider_name:'';
+            $data['slider_contact']     = !empty($request->slider_contact)?$request->slider_contact:'';
+            $data['description']        = !empty($request->description)?$request->description:'';
+            $data['location']           = !empty($request->location)?$request->location:'';
+            $data['customer_name']      = !empty($request->customer_name)?$request->customer_name:'';
+            $data['customer_contact']   = !empty($request->customer_contact)?$request->customer_contact:'';
+            $data['email']              = !empty($request->email)?$request->email:'';
+            $data['message']            = !empty($request->message)?$request->message:'';
+            $data['user_id']            = !empty(Auth::user()->id)?Auth::user()->id:NULL;
             
             $inserId = Enquiry::add($data);
 
@@ -187,7 +190,7 @@ class HomeController extends Controller{
             $password="AMREESH@25";
             $sender="AMRESH";
 
-            $message="You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
+            $message = "You have got an enquiry for your shop ".$data['slider_name']." from ".ucfirst($data['customer_name']).". Their contact number is ".$data['customer_contact']." and E-mail Id is ".$data['email'].". You can contact ".ucfirst($data['customer_name'])." regarding any query. -Devdrishti Infrahomes Pvt.Ltd.";
 
             $message_admin="From your Portal, " .$data['slider_name']. " has got an enquiry from".ucfirst($data['customer_name']).". The Shopkeeper's contact number is ".$data['slider_contact'].". You can contact ".ucfirst($data['slider_name'])." regarding any query. You have also got the lead regarding enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
 
@@ -226,10 +229,11 @@ class HomeController extends Controller{
         if($validator->fails()){
             $this->message = $validator->errors();
         }else{
-            $data['property_id']        =!empty($request->id)?$request->id:'';
-            $data['name']               =!empty($request->name)?$request->name:'';
-            $data['email']              =!empty($request->email)?$request->email:'';
-            $data['mobile']             =!empty($request->mobile)?$request->mobile:'';
+            $data['property_id']        = !empty($request->id)?$request->id:'';
+            $data['name']               = !empty($request->name)?$request->name:'';
+            $data['email']              = !empty($request->email)?$request->email:'';
+            $data['mobile']             = !empty($request->mobile)?$request->mobile:'';
+            $data['user_id']            = !empty(Auth::user()->id)?Auth::user()->id:NULL;
             
             $inserId = Property_Enquiry::add($data);
 
@@ -586,7 +590,10 @@ class HomeController extends Controller{
         $data['view'] = 'front.clientDashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
-        // dd($data['client']);
+        $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
+        $where = 'user_id = '.Auth::user()->id;
+        $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));
+        // dd($data['propertyenquiry']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -613,16 +620,17 @@ class HomeController extends Controller{
         }
         $user->update($input);
 
-        if ($request->user_type != 'user') {
-          $this->message = 'Agent Password has been Updated Successfully.';
-        }else{
-          $this->message = 'User Password has been Updated Successfully.';
-        }
+        $this->status   = true;
         $this->modal    = true;
         $this->alert    = true;
-        $this->status   = true;
-        $this->redirect = url('/dashboard');
-     }
+        if (\Auth::user()->user_type != 'user') {
+          $this->message = 'Agent Password has been Updated Successfully.';
+           $this->redirect = url('/dashboard');
+        }else{
+          $this->message = 'User Password has been Updated Successfully.';
+           $this->redirect = url('/userdashboard');
+        }
+    }
         return $this->populateresponse();
     }
 
