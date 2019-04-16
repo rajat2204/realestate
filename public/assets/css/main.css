@@ -4744,6 +4744,10 @@ ul.owl-gallery li {
 }
 .agentprofile .table th{
   font-family: sans-serif;
+  padding: 7px;
+}
+.bordertable td{
+  border:1px solid #ddd!important;
 }
 .profile_details .table td{
   width: 50%;

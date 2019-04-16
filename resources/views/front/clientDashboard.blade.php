@@ -162,7 +162,7 @@
                     </form>
                   </div>
 
-                  <div id="enquiry" class="tab-pane fade clearfix">
+                  <div id="enquiry" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
                       <table class="table table-bordered table-hover">
                         <thead>
@@ -203,14 +203,14 @@
                     </div>
                   </div>
 
-                  <div id="purchased" class="tab-pane fade clearfix">
+                  <div id="purchased" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
                       <table class="table table-striped table-bordered table-hover" id="datatable_ajax">
                       </table>
                     </div>
                   </div>
 
-                  <div id="partners" class="tab-pane fade clearfix">
+                  <div id="partners" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
                       <table class="table table-bordered table-hover">
                         <thead>
