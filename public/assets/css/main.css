@@ -4703,6 +4703,9 @@ ul.owl-gallery li {
   float:left;
   width: 50%;
 }
+table.table.tableLeft.tableEdit {
+    margin-top: 15px;
+}
 .bordered-box ul li {
     list-style-type: none;
     /*display: inline-block;*/
