@@ -123,13 +123,14 @@ class HomeController extends Controller{
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['static'] = _arefy(Static_pages::where('status','active')->get());
-        // dd($data['static']);
         return view('front_home',$data);
     }
     /*---------------------start terms and conditions----------------------------------*/
     public function termsandconditions(Request $request){
         $data['view'] = 'front.termsandconditions';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['static'] = _arefy(Static_pages::where('status','active')->get());
+        // dd($data['static']);
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -139,6 +140,7 @@ class HomeController extends Controller{
     public function privacypolicy(Request $request){
         $data['view'] = 'front.privacy-policy';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['static'] = _arefy(Static_pages::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -608,6 +610,7 @@ class HomeController extends Controller{
         $data['view'] = 'front.clientDashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
+        // dd($data['client']);
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));

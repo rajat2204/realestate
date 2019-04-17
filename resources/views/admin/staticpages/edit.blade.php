@@ -18,7 +18,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label>Title :</label>
-              <input type="text" class="form-control" placeholder="Enter Title Name..." name="title" value="{{!empty($staticpage['title'])?$staticpage['title']:''}}">
+              <input type="text" class="form-control" placeholder="Enter Title Name..." name="title" value="{{!empty($staticpage['title'])?$staticpage['title']:''}}" readonly>
             </div>
           </div>
 
