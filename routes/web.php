@@ -51,6 +51,7 @@ Route::post('changepassword','HomeController@agentchangePass');
 Route::post('search/property','HomeController@searchProperty');
 Route::get('projectproperties/{id}','HomeController@projectProperties');
 Route::get('termsandconditions','HomeController@termsandconditions');
+Route::get('privacypolicy','HomeController@privacypolicy');
 Route::get('logout',function(){
 		\Auth::logout();
           return redirect('/');
