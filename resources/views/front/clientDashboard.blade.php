@@ -45,6 +45,30 @@
                             <td style="text-align:right;" class="inputBold">Mobile no.:</td>
                             <td style="text-align:left;">{{Auth::user()->phone}}</td>
                           </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">Address:</td>
+                            @if(!empty($client['address']))
+                              <td style="text-align:left;">{{$client['address']}}</td>
+                            @else
+                              <td style="text-align:left;">----</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">District:</td>
+                            @if(!empty($client['district']))
+                              <td style="text-align:left;">{{$client['district']}}</td>
+                            @else
+                              <td style="text-align:left;">----</td>
+                            @endif
+                          </tr>
+                          <tr>
+                            <td style="text-align:right;" class="inputBold">State:</td>
+                            @if(!empty($client['state']))
+                              <td style="text-align:left;">{{$client['state']}}</td>
+                            @else
+                              <td style="text-align:left;">----</td>
+                            @endif
+                          </tr>
                          </tbody>
                       </table>
                     
@@ -276,7 +300,7 @@
                           <tr>
                             <td>{{$i}}</td>
                             <td>{{$enquiries['slider_name']}}</td>
-                            <td>{{$enquiries['slider_contact']}}</td>
+                            <td>+91-{{$enquiries['slider_contact']}}</td>
                             <td>{{$enquiries['location']}}</td>
                             <td>{!! $enquiries['description'] !!}</td>
                           </tr>

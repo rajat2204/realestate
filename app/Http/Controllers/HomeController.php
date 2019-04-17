@@ -599,6 +599,7 @@ class HomeController extends Controller{
         $data['view'] = 'front.clientDashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
+        // dd($data['client']);
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));
