@@ -386,8 +386,8 @@
           </div>
       </div>
     </div>
+    </div>
   </div>
-</div>
   <!-----------------------------End show balance payments modal ----------------------->
 </section>
 
@@ -425,6 +425,19 @@ $(document).ready(function(){
               type:'POST',
               success:function(data){
                   $('#paidpayment').html(data).prev().css("display","block");
+              }
+          });
+        });
+    });
+
+$(document).ready(function(){
+    $('#balancePopup').on('click', function () {
+        var value = $(this).val();
+          $.ajax({
+              url:"{{url('balancepayment/?id=')}}"+value,
+              type:'POST',
+              success:function(data){
+                  $('#balancepayment').html(data).prev().css("display","block");
               }
           });
         });

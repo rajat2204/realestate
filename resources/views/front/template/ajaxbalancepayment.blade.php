@@ -3,15 +3,17 @@
     <tr>
       <th>Payment Name</th>
       <th>Payment Amount</th>
-      <th>Payment Due Date</th>
+      <th>Invoice Number</th>
+      <th>Payment Date</th>
     </tr>
   </thead>
   <tbody>
-   @foreach($purchased['payment_plan'] as $plan)
+   @foreach($balancepayment as $balance)
     <tr>
-      <td>{{$plan['name']}}</td>
-      <td>Rs.{{number_format($plan['amount'])}}</td>
-      <td>{{$plan['date']}}</td>
+      <td>{{$balance['name']}}</td>
+      <td>Rs.{{number_format($balance['amount'])}}</td>
+      <td>{{$balance['invoice_no']}}</td>
+      <td>{{$balance['date']}}</td>
     </tr>
    @endforeach
   </tbody>

@@ -638,11 +638,20 @@ class HomeController extends Controller{
     {
         $where = 'user_id = '.Auth::user()->id;
         $client = _arefy(Clients::list('single',$where));
-        $whereProperty = 'client_id = '.$client['id'];
         $paidpayment = _arefy(Make_Payment::where('client_id',$client['id'])->get());
         // dd($paidpayment);
         $paidview = view('front.template.ajaxpaidpayment',compact('paidpayment'));
         return Response($paidview);
+    }
+
+    public function ajaxBalancePayment(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $balancepayment = _arefy(Deals_Payment::where('client_id',$client['id'])->where('payment_status','=','no')->get());
+        // dd($balancepayment);
+        $balanceview = view('front.template.ajaxbalancepayment',compact('balancepayment'));
+        return Response($balanceview);
     }
 
     public function agentchangePass(Request $request){

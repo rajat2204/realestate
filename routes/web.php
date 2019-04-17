@@ -47,6 +47,7 @@ Route::get('dashboard','HomeController@agentDashboard');
 Route::get('userdashboard','HomeController@clientDashboard');
 Route::post('paymentplan','HomeController@ajaxPaymentPlan');
 Route::post('paidpayment','HomeController@ajaxPaidPayment');
+Route::post('balancepayment','HomeController@ajaxBalancePayment');
 Route::post('editprofile','HomeController@editAgentProfile');
 Route::post('clienteditprofile','HomeController@editClientProfile');
 Route::post('changepassword','HomeController@agentchangePass');

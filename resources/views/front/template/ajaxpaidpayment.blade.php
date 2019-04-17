@@ -18,9 +18,21 @@
       <td>Rs.{{number_format($paid['amount'])}}</td>
       <td>{{$paid['invoice_no']}}</td>
       <td>{{$paid['payment_type']}}</td>
-      <td>Rs.{{number_format($paid['late_amount'])}}</td>
-      <td>Rs.{{number_format($paid['taxable_amount'])}}</td>
-      <td>Rs.{{number_format($paid['payable_amount'])}}</td>
+      @if(!empty($paid['late_amount']))
+        <td>Rs.{{number_format($paid['late_amount'])}}</td>
+      @else
+        <td>N/A</td>
+      @endif
+      @if(!empty($paid['taxable_amount']))
+        <td>Rs.{{number_format($paid['taxable_amount'])}}</td>
+      @else
+        <td>N/A</td>
+      @endif
+      @if(!empty($paid['taxable_amount']))
+        <td>Rs.{{number_format($paid['payable_amount'])}}</td>
+      @else
+        <td>N/A</td>
+      @endif
       <td>{{$paid['date']}}</td>
     </tr>
    @endforeach
