@@ -135,6 +135,15 @@ class HomeController extends Controller{
     }
     /*---------------------end terms and conditions----------------------------------*/
 
+    /*---------------------start Privacy and policy----------------------------------*/
+    public function privacypolicy(Request $request){
+        $data['view'] = 'front.privacy-policy';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        return view('front_home',$data);
+    }
+    /*---------------------end Privacy and policy----------------------------------*/
+
     public function enquiry(Request $request,$slug){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
