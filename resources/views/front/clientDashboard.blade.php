@@ -271,9 +271,9 @@
                             <td>
                               <a href="{{url('properties')}}/{{($purchases['property']['slug'])}}" target="_blank" title="View Property Details"><i class="fa fa-fw fa-file-image-o"></i></a>|
                             @if(!empty($purchases['payment_plan']))
-                              <a href="#showpaymentpopup" data-toggle="modal" title="Show Payment Plan"><i class="fa fa-eye"></i></a>|
-                              <a href="#showpaidpayments" data-toggle="modal" title="Show Paid Payments"><i class="fa fa-money"></i></a> |
-                              <a href="#showbalancepayments" data-toggle="modal" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a>
+                              <a href="#showpaymentpopup" id="paymentPopup" data-toggle="modal" title="Show Payment Plan"><i class="fa fa-eye"></i></a>|
+                              <a href="#showpaidpayments" id="paidPopup" data-toggle="modal" title="Show Paid Payments"><i class="fa fa-money"></i></a> |
+                              <a href="#showbalancepayments" id="balancePopup" data-toggle="modal" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a>
                             @endif
                             </td>
                           </tr>
@@ -339,33 +339,13 @@
         </div>
         <div class="modal-body">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                  <th>Properties</th>
-                  <th>Plan</th>
-                  <th>Phone no</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>095676767788</td>
-                </tr>
-              </tbody>
+            <table class="table table-striped table-bordered" id="paymentplan">
             </table>
           </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
   <!-----------------------------End show payment modal ----------------------->
 
   <!----------------------------- show paid payments modal ----------------------->
@@ -373,40 +353,20 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle" style="text-align: center;color:#1878a0;font-weight:600;font-family:sans-serif;">Payment Plan</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle" style="text-align: center;color:#1878a0;font-weight:600;font-family:sans-serif;">Paid Payments</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                  <th>Properties</th>
-                  <th>Plan</th>
-                  <th>Phone no</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>095676767788</td>
-                </tr>
-              </tbody>
+            <table class="table table-striped table-bordered" id="paidpayment">
             </table>
           </div>
       </div>
     </div>
+    </div>
   </div>
-</div>
   <!-----------------------------End show paid payments modal ----------------------->
 
   <!----------------------------- show balance payments modal ----------------------->
@@ -421,47 +381,66 @@
         </div>
         <div class="modal-body">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-              <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                  <th>Properties</th>
-                  <th>Plan</th>
-                  <th>Phone no</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>095676767788</td>
-                </tr>
-              </tbody>
+            <table class="table table-striped table-bordered" id="balancepayment">
             </table>
           </div>
       </div>
     </div>
+    </div>
   </div>
-</div>
   <!-----------------------------End show balance payments modal ----------------------->
 </section>
 
 @section('requirejs')
 <script type="text/javascript">
 
-  function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#adminimg').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#adminimg').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+
+$(document).ready(function(){
+    $('#paymentPopup').on('click', function () {
+        var value = $(this).val();
+          $.ajax({
+              url:"{{url('paymentplan/?id=')}}"+value,
+              type:'POST',
+              success:function(data){
+                  $('#paymentplan').html(data).prev().css("display","block");
+              }
+          });
+        });
+    });
+
+$(document).ready(function(){
+    $('#paidPopup').on('click', function () {
+        var value = $(this).val();
+          $.ajax({
+              url:"{{url('paidpayment/?id=')}}"+value,
+              type:'POST',
+              success:function(data){
+                  $('#paidpayment').html(data).prev().css("display","block");
+              }
+          });
+        });
+    });
+
+$(document).ready(function(){
+    $('#balancePopup').on('click', function () {
+        var value = $(this).val();
+          $.ajax({
+              url:"{{url('balancepayment/?id=')}}"+value,
+              type:'POST',
+              success:function(data){
+                  $('#balancepayment').html(data).prev().css("display","block");
+              }
+          });
+        });
+    });
 </script>
 @endsection
