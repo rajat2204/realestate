@@ -48,7 +48,7 @@
 								</div>
 								<div class="project-content">
 									@if(!empty($projects['description']))
-										<p title="{{strip_tags($projects['description'])}}">{{strip_tags(str_limit($projects['description'],6500))}}</p>
+										<p title="{{strip_tags($projects['description'])}}">{!! str_limit($projects['description'],6500) !!}</p>
 									@else
 										<p title="{{strip_tags($projects['description'])}}">N/A</p>
 									@endif

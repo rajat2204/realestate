@@ -35,7 +35,7 @@ class Property_Enquiry extends Model
         $table_property = self::select($keys)
         ->with([
             'property' => function($q){
-                $q->select('id','name','featured_image','property_construct','location','price','property_purpose','deals');
+                $q->select('id','name','featured_image','property_construct','location','price','property_purpose','deals','area');
             },
         ]);
         if($where){

@@ -5,9 +5,10 @@
           <div class="bordered-box spaceboth">
             <ul class="nav nav-tabs">
               <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
               <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
               <li><a data-toggle="tab" href="#change">Change Password</a></li>
+              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
+              <li><a  data-toggle="tab" href="#propertysold">Properties Involved</a></li>
             </ul>
             <div class="borderBoxinner">
               <div class="row">
@@ -171,6 +172,56 @@
                         </tbody>
                       </table>
                       </form>
+                    </div>
+
+                    <div id="propertysold" class="tab-pane fade clearfix bordertable">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                          <tr>
+                            <th>S.no</th>
+                            <th>Property Image</th>
+                            <th>Client Name</th>
+                            <th>Property Name</th>
+                            <th>Property Location</th>
+                            <th>Property Price</th>
+                            <th>Property Area</th>
+                            <th>Property Purpose</th>
+                            <th>Property Type</th>
+                            <!-- <th>Actions</th> -->
+                          </tr>
+                        </thead>
+                          <tbody>
+                            @php  
+                              $i=0;
+                            @endphp
+                              @foreach($soldProperty as $soldProperties)
+                            @php
+                              $i++;
+                            @endphp
+                            <tr>
+                              <td>{{$i}}</td>
+                              <td><img src="{{asset('assets/img/properties/'.$soldProperties['property']['featured_image'])}}" class="list_img" style="width: 120px; height: 80px;"></td>
+                              <td>{{$soldProperties['client']['name']}}</td>
+                              <td>{{$soldProperties['property']['name']}}</td>
+                              <td>{{$soldProperties['property']['location']}}</td>
+                              <td>Rs.{{number_format($soldProperties['property']['price'])}}</td>
+                              <td>{{number_format($soldProperties['property']['area'])}} {{$soldProperties['units']['name']}}</td>
+                              <td>{{ucfirst($soldProperties['property']['property_purpose'])}}</td>
+                              <td>{{ucfirst($soldProperties['property']['property_construct'])}}</td>
+                              
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div id="account" class="tab-pane fade clearfix bordertable">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>

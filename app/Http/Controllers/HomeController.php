@@ -581,6 +581,9 @@ class HomeController extends Controller{
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
+        $whereProperty = 'agent_id = '.$data['agent']['id'];
+        $data['soldProperty'] = _arefy(Deals::list('array',$whereProperty));
         return view('front_home',$data);
     }
 
@@ -591,6 +594,11 @@ class HomeController extends Controller{
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));
+        $where = 'user_id = '.Auth::user()->id;
+        $data['client'] = _arefy(Clients::list('single',$where));
+        $whereProperty = 'client_id = '.$data['client']['id'];
+        $data['purchased'] = _arefy(Deals::list('array',$whereProperty));
+        // dd($data['purchased']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -642,7 +650,7 @@ class HomeController extends Controller{
           $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
           $agentUserData['district']          = !empty($request->district)?$request->district:'';
           $agentUserData['email']             = !empty($request->email)?$request->email:'';
-          $agentUserData['mobile']            = !empty($request->mobile)?$request->mobile:'';
+          $agentUserData['phone']            = !empty($request->mobile)?$request->mobile:'';
           $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
           $agentUserData['adhaar']            = !empty($request->adhaar)?$request->adhaar:'';
           $agentUserData['pan']               = !empty($request->pan)?$request->pan:'';

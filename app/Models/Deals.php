@@ -61,7 +61,7 @@ class Deals extends Model
                 $q->select('id','name','phone');
             },
             'property' => function($q){
-                $q->select('id','name','property_construct');
+                $q->select('id','name','featured_image','property_construct','location','price','property_purpose','deals','area','slug');
             },
             'plan' => function($q){
                 $q->select('id','name','installment');
