@@ -262,8 +262,8 @@
                           <tr>
                             <td>{{$i}}</td>
                             <td><img src="{{asset('assets/img/properties/'.$purchases['property']['featured_image'])}}" class="list_img" style="width: 120px; height: 80px;"></td>
-                            <td>{{$purchases['property']['name']}}</td>
-                            <td>{{$purchases['property']['location']}}</td>
+                            <td style="width:12%;">{{$purchases['property']['name']}}</td>
+                            <td style="width:16%;">{{$purchases['property']['location']}}</td>
                             <td>Rs.{{number_format($purchases['property']['price'])}}</td>
                             <td>{{number_format($purchases['property']['area'])}} {{$purchases['units']['name']}}</td>
                             <td>{{ucfirst($purchases['property']['property_purpose'])}}</td>
@@ -271,7 +271,7 @@
                             <td>
                               <a href="{{url('properties')}}/{{($purchases['property']['slug'])}}" target="_blank" title="View Property Details"><i class="fa fa-fw fa-file-image-o"></i></a>|
                             @if(!empty($purchases['payment_plan']))
-                              <a href="#" title="Show Payment Plan"><i class="fa fa-eye"></i></a>|
+                              <a href="#showpaymentpopup" data-toggle="modal" title="Show Payment Plan"><i class="fa fa-eye"></i></a>|
                               <a href="#" title="Show Paid Payments"><i class="fa fa-money"></i></a> |
                               <a href="#" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a>
                             @endif
@@ -311,7 +311,7 @@
                             <td>{{$enquiries['slider_name']}}</td>
                             <td>+91-{{$enquiries['slider_contact']}}</td>
                             <td>{{$enquiries['location']}}</td>
-                            <td>{!! $enquiries['description'] !!}</td>
+                            <td style="width: 50%;">{!! $enquiries['description'] !!}</td>
                           </tr>
                           @endforeach
                         </tbody>
@@ -327,7 +327,61 @@
     </div>
   </div>
 </section>
-
+<!----------------------------- show payment modal ----------------------->
+<div class="modal fade" id="showpaymentpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle" style="text-align: center;">Payment Plan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Email</th>
+                <th>Properties</th>
+                <th>Plan</th>
+                <th>Phone no</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>John</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>095676767788</td>
+              </tr>
+              <tr>
+                <td>Mary</td>
+                <td>Moe</td>
+                <td>mary@example.com</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>095676767788</td>
+              </tr>
+              <tr>
+                <td>July</td>
+                <td>Dooley</td>
+                <td>july@example.com</td>
+                <td>Doe</td>
+                <td>john@example.com</td>
+                <td>095676767788</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
+<!-----------------------------End show payment modal ----------------------->
 @section('requirejs')
 <script type="text/javascript">
 

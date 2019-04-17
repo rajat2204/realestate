@@ -874,7 +874,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   position: relative;
 }
 #interestedModal {
-  margin: 138px auto;
+  margin: 108px auto;
 }
 .portfolio-img img {
   width: 100%;
@@ -4759,9 +4759,11 @@ table.table.tableLeft.tableEdit {
 .agentprofile .table td{
   border:none;
   font-size: 13px;
+  vertical-align: middle;
   font-family: sans-serif;
   padding: 8px;
 }
+
 .agentprofile .table td input {
     width: 70%;
     padding: 2px 5px;
