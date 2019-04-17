@@ -188,6 +188,9 @@
 
                   <div id="enquiry" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
+                      <div class="profileHead profileAlignleft">
+                        <h3>Wish List</h3>
+                      </div>
                       <table class="table table-bordered table-hover">
                         <thead>
                           <tr>
@@ -231,6 +234,9 @@
 
                   <div id="purchased" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
+                      <div class="profileHead profileAlignleft">
+                        <h3>Properties Purchased</h3>
+                      </div>
                       <table class="table table-bordered table-hover">
                         <thead>
                           <tr>
@@ -279,6 +285,9 @@
                   
                   <div id="partners" class="tab-pane fade clearfix bordertable">
                     <div class="table-responsive">
+                      <div class="profileHead profileAlignleft">
+                        <h3>Partners Enquiry</h3>
+                      </div>
                       <table class="table table-bordered table-hover">
                         <thead>
                           <tr>

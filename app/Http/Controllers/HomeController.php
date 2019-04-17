@@ -599,10 +599,9 @@ class HomeController extends Controller{
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
-        $data['contact'] = _arefy(Contact::where('status','active')->get());
-        $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
         $whereProperty = 'agent_id = '.$data['agent']['id'];
         $data['soldProperty'] = _arefy(Deals::list('array',$whereProperty));
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
 
