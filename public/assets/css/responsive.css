@@ -73,6 +73,12 @@
   #showpaymentpopup .modal-dialog{
     max-width: 800px;
   } 
+  #showpaidpayments .modal-dialog{
+    max-width: 800px;
+  } 
+  #showbalancepayments .modal-dialog{
+    max-width: 800px;
+  } 
 }
 /* tablets */
 @media (max-width: 991px) {
