@@ -501,7 +501,7 @@ class HomeController extends Controller{
             $agentdata['user_id']                   =$enquiry;
             $agentdata['name']                      =!empty($request->first_name)?$request->first_name:'';
             $agentdata['email']                     =!empty($request->email)?$request->email:'';
-            $agentdata['mobile']                     =!empty($request->phone)?$request->phone:'';
+            $agentdata['phone']                     =!empty($request->phone)?$request->phone:'';
             $agentdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
             $agentdata['created_at']                = date('Y-m-d H:i:s');
             $agentdata['updated_at']                = date('Y-m-d H:i:s');
