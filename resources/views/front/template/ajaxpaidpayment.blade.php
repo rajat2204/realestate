@@ -17,7 +17,7 @@
       <td>{{$paid['name']}}</td>
       <td>Rs.{{number_format($paid['amount'])}}</td>
       <td>{{$paid['invoice_no']}}</td>
-      <td>{{$paid['payment_type']}}</td>
+      <td>{{ucfirst($paid['payment_type'])}}</td>
       @if(!empty($paid['late_amount']))
         <td>Rs.{{number_format($paid['late_amount'])}}</td>
       @else

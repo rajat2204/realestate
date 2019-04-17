@@ -619,6 +619,8 @@ class HomeController extends Controller{
         $data['client'] = _arefy(Clients::list('single',$where));
         $whereProperty = 'client_id = '.$data['client']['id'];
         $data['purchased'] = _arefy(Deals::list('array',$whereProperty));
+        $data['paidpayment'] = _arefy(Make_Payment::where('client_id',$data['client']['id'])->get());
+        $data['balancepayment'] = _arefy(Deals_Payment::where('client_id',$data['client']['id'])->where('payment_status','=','no')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -639,7 +641,6 @@ class HomeController extends Controller{
         $where = 'user_id = '.Auth::user()->id;
         $client = _arefy(Clients::list('single',$where));
         $paidpayment = _arefy(Make_Payment::where('client_id',$client['id'])->get());
-        // dd($paidpayment);
         $paidview = view('front.template.ajaxpaidpayment',compact('paidpayment'));
         return Response($paidview);
     }
@@ -649,7 +650,6 @@ class HomeController extends Controller{
         $where = 'user_id = '.Auth::user()->id;
         $client = _arefy(Clients::list('single',$where));
         $balancepayment = _arefy(Deals_Payment::where('client_id',$client['id'])->where('payment_status','=','no')->get());
-        // dd($balancepayment);
         $balanceview = view('front.template.ajaxbalancepayment',compact('balancepayment'));
         return Response($balanceview);
     }

@@ -272,9 +272,14 @@
                               <a href="{{url('properties')}}/{{($purchases['property']['slug'])}}" target="_blank" title="View Property Details"><i class="fa fa-fw fa-file-image-o"></i></a>|
                             @if(!empty($purchases['payment_plan']))
                               <a href="#showpaymentpopup" id="paymentPopup" data-toggle="modal" title="Show Payment Plan"><i class="fa fa-eye"></i></a>|
-                              <a href="#showpaidpayments" id="paidPopup" data-toggle="modal" title="Show Paid Payments"><i class="fa fa-money"></i></a> |
-                              <a href="#showbalancepayments" id="balancePopup" data-toggle="modal" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a>
                             @endif
+                            @if(!empty($paidpayment))
+                              <a href="#showpaidpayments" id="paidPopup" data-toggle="modal" title="Show Paid Payments"><i class="fa fa-money"></i></a> |
+                            @endif
+                            @if(!empty($balancepayment))
+                              <a href="#showbalancepayments" id="balancePopup" data-toggle="modal" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a> |
+                            @endif
+                              <a href="#" title="Print Invoices"><i class="fa fa-print"></i></a>
                             </td>
                           </tr>
                           @endforeach
