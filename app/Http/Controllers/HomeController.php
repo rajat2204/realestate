@@ -126,6 +126,14 @@ class HomeController extends Controller{
         // dd($data['static']);
         return view('front_home',$data);
     }
+    /*---------------------start terms and conditions----------------------------------*/
+    public function termsandconditions(Request $request){
+        $data['view'] = 'front.termsandconditions';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        return view('front_home',$data);
+    }
+    /*---------------------end terms and conditions----------------------------------*/
 
     public function enquiry(Request $request,$slug){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
