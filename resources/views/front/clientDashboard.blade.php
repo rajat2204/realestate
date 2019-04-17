@@ -365,6 +365,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-----------------------------End show payment modal ----------------------->
 
   <!----------------------------- show paid payments modal ----------------------->
@@ -405,6 +406,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-----------------------------End show paid payments modal ----------------------->
 
   <!----------------------------- show balance payments modal ----------------------->
@@ -445,6 +447,7 @@
       </div>
     </div>
   </div>
+</div>
   <!-----------------------------End show balance payments modal ----------------------->
 </section>
 
