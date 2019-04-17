@@ -23,6 +23,8 @@ use App\Models\Subscribers;
 use App\Models\SocialMedia;
 use App\Models\Static_pages;
 use App\Models\Testimonials;
+use App\Models\Deals_Payment;
+use App\Models\Make_Payment;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
@@ -617,9 +619,30 @@ class HomeController extends Controller{
         $data['client'] = _arefy(Clients::list('single',$where));
         $whereProperty = 'client_id = '.$data['client']['id'];
         $data['purchased'] = _arefy(Deals::list('array',$whereProperty));
-        // dd($data['purchased']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
+    }
+
+    public function ajaxPaymentPlan(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $whereProperty = 'client_id = '.$client['id'];
+        $purchased = _arefy(Deals::list('single',$whereProperty));
+        // dd($purchased);
+        $planview = view('front.template.ajaxpaymentplan',compact('purchased'));
+        return Response($planview);
+    }
+
+    public function ajaxPaidPayment(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $whereProperty = 'client_id = '.$client['id'];
+        $paidpayment = _arefy(Make_Payment::where('client_id',$client['id'])->get());
+        // dd($paidpayment);
+        $paidview = view('front.template.ajaxpaidpayment',compact('paidpayment'));
+        return Response($paidview);
     }
 
     public function agentchangePass(Request $request){
