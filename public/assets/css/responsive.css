@@ -78,6 +78,10 @@
   .tableLeft{
     float: none;
     width: 100%;
+    margin-bottom:0;
+  }
+  table.table.tableLeft.tableEdit{
+    margin-top:0;
   }
   .rowpadding {
       margin-left: 0;
@@ -363,6 +367,10 @@
 @media (max-width: 576px){
   .our_services{
     margin-bottom: 15px;
+  }
+  .agentprofile {
+      padding: 5px;
+      margin: -1px;
   }
   footer#footer-section {
     padding: 10px 0 10px;

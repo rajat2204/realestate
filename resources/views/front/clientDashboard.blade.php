@@ -151,10 +151,10 @@
                           </tr>
                          </tbody>
                       </table>
-                      <table class="table tableLeft">
+                      <table class="table tableLeft tableEdit">
                         <tbody>
                           <tr>
-                            <td style="text-align:right;" class="inputBold">Address</td>
+                            <td style="text-align:right;" class="inputBold">Address:</td>
                             <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{!empty($client['address'])?$client['address']:''}}"></td>
                           </tr>
                           <tr>

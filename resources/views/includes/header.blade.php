@@ -146,8 +146,8 @@
         <form role="signup" action="{{url('signup')}}" method="POST">
           {{csrf_field()}}
           <ul class="signlist">
-            <li class="sign-list"><input name="signup" type="radio" value="customer">Customer</li>
-            <li class="sign-list"><input name="signup" type="radio" value="agent">Agent</li>
+            <li class="sign-list"><input name="signup" type="radio" value="customer"> Customer</li>
+            <li class="sign-list"><input name="signup" type="radio" value="agent"> Agent</li>
           </ul>
           <div class="row">
             <div class="col-md-6">
@@ -199,8 +199,8 @@
         {{csrf_field()}}
         <div class="container far27" >
           <ul class="signlist">
-            <li class="sign-list"><input name="login"  class="" type="radio" value="customer">Customer</li>
-            <li class="sign-list"><input name="login"  class="" type="radio" value="agent">Agent</li>
+            <li class="sign-list"><input name="login"  class="" type="radio" value="customer"> Customer</li>
+            <li class="sign-list"><input name="login"  class="" type="radio" value="agent"> Agent</li>
           </ul>
           <div class="form-row ">
             <div class="form-group col-md-12">
