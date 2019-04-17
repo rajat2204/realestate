@@ -2376,6 +2376,7 @@ img.form-control.slide-image {
 p {
     font-size: 16px;
     line-height: 28px;
+    font-family: sans-serif;
 }
 
 .projects_detail {
@@ -4799,4 +4800,16 @@ ul.owl-gallery li {
 }
 .borderBoxinner ul li:last-child{
   border-right: none;
+}
+/*-----------------------terms and condition---------------------------------------*/
+.category_container{
+  background: #fff;
+  padding: 40px 20px 40px 20px;
+  margin: 0 -15px;
+  position: relative;
+  border: 1px solid #bebaba;
+  box-shadow: 0px 0px 6px #beb7b7;
+}
+.termsconditionsection{
+  padding: 30px 0;
 }
