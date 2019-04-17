@@ -15,7 +15,7 @@
                 
                 <div class="col-md-12">
                   <div class="agentprofile tab-content">
-                    <div id="profile" class="tab-pane fade active">
+                    <div id="profile" class="tab-pane fade active profile_details">
                       <div class="profileHead profileAlignleft">
                         <h3>Profile Details</h3>
                       </div>
@@ -92,85 +92,90 @@
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
                       </div>
-                      <table class="table tableLeft">
-                        <tbody>
-                          <tr>
-                            <td style="text-align:right;"><input type="hidden" name="id" value="{{\Auth::user()->id}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Upload Profile:</td>
-                            <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
-                            <div>
-                              @if(!empty($agent['image']))
-                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
-                              @else
-                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
-                              @endif
-                            </div>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Name:</td>
-                            <td style="text-align:left;"><input type="text" name="name" value="{{Auth::user()->first_name}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Registered As:</td>
-                            <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Email:</td>
-                            <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                            <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
-                          </tr>
-                         </tbody>
-                      </table>
-                       <table class="table tableLeft">
-                        <tbody>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
-                            <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee:</td>
-                            <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Relation:</td>
-                            <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
-                          </tr>
-                          <tr>
+                      <div class="clearfix">
+                        <table class="table tableLeft">
+                          <tbody>
+                            <tr>
+                              <td style="text-align:right;"><input type="hidden" name="id" value="{{\Auth::user()->id}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Upload Profile:</td>
+                              <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
+                              <div>
+                                @if(!empty($agent['image']))
+                                  <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
+                                @else
+                                  <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
+                                @endif
+                              </div>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Name:</td>
+                              <td style="text-align:left;"><input type="text" name="name" value="{{Auth::user()->first_name}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
+                              <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Registered As:</td>
+                              <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">District:</td>
+                              <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Email:</td>
+                              <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Mobile no.:</td>
+                              <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
+                            </tr>
+                           </tbody>
+                        </table>
+                         <table class="table tableLeft tableEdit">
+                          <tbody>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">DOB:</td>
+                              <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
+                              <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">PAN Number:</td>
+                              <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Address</td>
+                              <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Nominee:</td>
+                              <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
+                              <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Relation:</td>
+                              <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
+                            </tr>
+                           <!--  <tr>
 
-                            <td style="text-align:left;"></td>
-                            <td style="text-align:center;"><button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                              <td style="text-align:left;"></td>
+                              <td style="text-align:center;"></td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                        </div>
+                      <div>
+                        <button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button>
+                      </div>
                       </form>
                     </div>
 
