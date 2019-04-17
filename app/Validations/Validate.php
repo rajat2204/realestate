@@ -969,7 +969,7 @@ class Validate
 	      $validations = [
       	'amount' 		=> $this->validation('amount'),      	
 				'action' 		=> $this->validation('action'),
-				'remark'   	=> $this->validation('name'),
+				'remarks'   	=> $this->validation('name'),
 			];
   	
       $validator = \Validator::make($this->data->all(), $validations,[

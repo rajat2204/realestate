@@ -30,9 +30,9 @@
           	</div> 
           	<div class="form-group">
                 <label class= "text-dark"> Mobile :</label>
-				<label name="mobile" class="ml-3"> {{!empty($agent['mobile'])?$agent['mobile']:''}}
+				<label name="phone" class="ml-3"> {{!empty($agent['phone'])?$agent['phone']:''}}
 				</label>
-			    <input type="hidden" name="mobile" value="{{!empty($agent['mobile'])?$agent['mobile']:''}}">
+			    <input type="hidden" name="phone" value="{{!empty($agent['phone'])?$agent['phone']:''}}">
             </div>
             @php
             	$agent_balance = App\Models\Agents_Wallets::where('agents_id',$agent['id'])->get();
@@ -73,7 +73,7 @@
 			</div>
 			<div class="form-group">
        	      <label class= "text-dark">Remarks :</label>
-	    	  <textarea value ="" placeholder="Write if any" class="form-control" name="remark"></textarea>
+	    	  <textarea value ="" placeholder="Write if any" class="form-control" name="remarks"></textarea>
             </div> 
             <div class="box-footer">
     	      	<a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>

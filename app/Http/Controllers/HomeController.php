@@ -14,6 +14,7 @@ use App\Models\Contact;
 use App\Models\Sliders;
 use App\Models\Enquiry;
 use App\Models\AgentEnquiry;
+use App\Models\Agents_Wallets;
 use App\Models\Services;
 use App\Models\Property;
 use App\Models\Property_Gallery;
@@ -603,6 +604,8 @@ class HomeController extends Controller{
         $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
         $whereProperty = 'agent_id = '.$data['agent']['id'];
         $data['soldProperty'] = _arefy(Deals::list('array',$whereProperty));
+        $data['agentwallet'] = _arefy(Agents_Wallets::where('agents_id',$data['agent']['id'])->get());
+        // dd($data['agentwallet']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -611,7 +614,6 @@ class HomeController extends Controller{
         $data['view'] = 'front.clientDashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['client'] = _arefy(Clients::where('user_id',Auth::user()->id)->first());
-        // dd($data['client']);
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));

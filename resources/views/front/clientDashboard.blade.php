@@ -279,7 +279,6 @@
                             @if(!empty($balancepayment))
                               <a href="#showbalancepayments" id="balancePopup" data-toggle="modal" title="Show Balance Payments"><i class="fa fa-briefcase"></i></a> |
                             @endif
-                              <a href="#" title="Print Invoices"><i class="fa fa-print"></i></a>
                             </td>
                           </tr>
                           @endforeach

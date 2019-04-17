@@ -430,7 +430,7 @@ class AgentController extends Controller
         else{
             $data['agents_id']=$request->agent_id;
             $data['email']=$request->email;
-            $data['mobile']=$request->mobile;
+            $data['phone']=$request->phone;
             $data['amount']=$request->amount;
             $data['action']=$request->action;
              //to deduct on selecting action[deduct] and Add on selecting action[add] 

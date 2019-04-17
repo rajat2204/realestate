@@ -183,19 +183,19 @@
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                           <thead>
-                          <tr>
-                            <th>S.no</th>
-                            <th>Property Image</th>
-                            <th>Client Name</th>
-                            <th>Property Name</th>
-                            <th>Property Location</th>
-                            <th>Property Price</th>
-                            <th>Property Area</th>
-                            <th>Property Purpose</th>
-                            <th>Property Type</th>
-                            <!-- <th>Actions</th> -->
-                          </tr>
-                        </thead>
+                            <tr>
+                              <th>S.no</th>
+                              <th>Property Image</th>
+                              <th>Client Name</th>
+                              <th>Property Name</th>
+                              <th>Property Location</th>
+                              <th>Property Price</th>
+                              <th>Property Area</th>
+                              <th>Property Purpose</th>
+                              <th>Property Type</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
                           <tbody>
                             @php  
                               $i=0;
@@ -214,7 +214,7 @@
                               <td>{{number_format($soldProperties['property']['area'])}} {{$soldProperties['units']['name']}}</td>
                               <td>{{ucfirst($soldProperties['property']['property_purpose'])}}</td>
                               <td>{{ucfirst($soldProperties['property']['property_construct'])}}</td>
-                              
+                              <td><a href="{{url('properties')}}/{{($soldProperties['property']['slug'])}}" target="_blank" title="View Property Details"><i class="fa fa-fw fa-file-image-o"></i></a></td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -225,6 +225,36 @@
                     <div id="account" class="tab-pane fade clearfix bordertable">
                       <div class="table-responsive">
                         <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>S.no</th>
+                              <th>Amount</th>
+                              <th>E-mail</th>
+                              <th>Phone Number</th>
+                              <th>Action</th>
+                              <th>Balance</th>
+                              <th>Remarks</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                            @php  
+                              $i=0;
+                            @endphp
+                            @foreach($agentwallet as $agentwallets)
+                            @php
+                              $i++;
+                            @endphp
+                            <tr>
+                              <td>{{$i}}</td>
+                              <td>Rs.{{number_format($agentwallets['amount'])}}</td>
+                              <td>{{$agentwallets['email']}}</td>
+                              <td>+91-{{$agentwallets['phone']}}</td>
+                              <td>{{ucfirst($agentwallets['action'])}}</td>
+                              <td>Rs.{{number_format($agentwallets['balance'])}}</td>
+                              <td>{!! $agentwallets['remarks'] !!}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
                         </table>
                       </div>
                     </div>
