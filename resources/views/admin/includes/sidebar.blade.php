@@ -1,7 +1,10 @@
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
-      <!-- Sidebar user panel -->
+      {!!___get_user_menu(['18','19'])!!}
+      
+    {{-- 
+      
       <div class="user-panel">
         <div class="pull-left image">
           <img src="{{asset('assets/img/logo.jpg')}}" class="img-circle" alt="User Image">
@@ -197,7 +200,7 @@
             <i class="fa fa-question-circle"></i><span>Help</span>
           </a>
         </li>
-      </ul>
+      </ul> --}}
     </section>
     <!-- /.sidebar -->
 </aside>

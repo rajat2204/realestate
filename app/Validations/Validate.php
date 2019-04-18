@@ -4,9 +4,7 @@ namespace Validations;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
-/**
-* 
-*/
+
 class Validate
 {
 	protected $data;
