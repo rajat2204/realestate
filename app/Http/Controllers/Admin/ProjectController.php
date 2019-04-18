@@ -66,6 +66,9 @@ class ProjectController extends Controller
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
             })
+            ->editColumn('nearest_location',function($item){
+                return ucfirst($item['nearest_location']);
+            })
             ->editColumn('description',function($item){
                 if (!empty($item['description'])) {
                   return str_limit(strip_tags($item['description']),50);
@@ -92,7 +95,7 @@ class ProjectController extends Controller
             ->addColumn(['data' => 'image', 'name' => 'image','title' => 'Project Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'company_id', 'name' => 'company_id','title' => 'Company Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Project Name','orderable' => false, 'width' => 120])
-            ->addColumn(['data' => 'slug', 'name' => 'slug','title' => 'Project Slug','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'nearest_location', 'name' => 'nearest_location','title' => 'Projects Nearest Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'location', 'name' => 'location','title' => 'Project Location','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'description', 'name' => 'description','title' => 'Project Description','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])

@@ -36,6 +36,7 @@ class PropertyController extends Controller
 
         $where = 'status != "trashed"';
         $property  = _arefy(Property::list('array',$where));
+
         if ($request->ajax()) {
             return DataTables::of($property)
             ->editColumn('action',function($item){
@@ -71,7 +72,11 @@ class PropertyController extends Controller
                 return ucfirst($item['category']['name']);
             })
             ->editColumn('agent_id',function($item){
-                return ucfirst($item['agent']['name']);
+                if (!empty($item['agent']['name'])) {
+                    return ucfirst($item['agent']['name']);
+                }else{
+                    return 'N/A';
+                }
             })
             ->editColumn('company_id',function($item){
                 return ucfirst($item['company']['name']);
@@ -93,6 +98,13 @@ class PropertyController extends Controller
                     return 'Rs.'.' ' .number_format($item['price']);
                 }else{
                     return 'N/A';
+                }
+            })
+            ->editColumn('deals',function($item){
+                if($item['deals'] == 'yes'){
+                    return 'Sold';
+                }else{
+                    return 'Not Sold';
                 }
             })
             ->editColumn('property_type',function($item){
@@ -132,6 +144,7 @@ class PropertyController extends Controller
             ->addColumn(['data' => 'property_purpose','name' => 'property_purpose','title' => 'Property Purpose','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'price','name' => 'price','title' => 'Property Price','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'agent_id','name' => 'agent_id','title' => 'Agent','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'deals','name' => 'deals','title' => 'Property Status','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -155,6 +168,7 @@ class PropertyController extends Controller
                         'Property Type',
                         'Property Price',
                         'Agent Name',
+                        'Property Sold',
                     ];
 
                     $sheet->row(1, $headings);
@@ -174,12 +188,13 @@ class PropertyController extends Controller
                                 $value['category']['name'],
                                 $value['company']['name'],
                                 $value['name'],
-                                number_format($value['area']),
+                                number_format($value['area']) .' '. $value['units']['name'],
                                 $value['location'],
                                 ucfirst($value['property_purpose']),
                                 ucfirst($value['property_construct']),
                                 'Rs.'.number_format($value['price']),
                                 strip_tags($value['agent']['name']),
+                                ucfirst($value['deals']),
                             ]);
                         }
                         $i++;
