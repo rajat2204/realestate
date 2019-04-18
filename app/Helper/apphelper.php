@@ -614,7 +614,7 @@
         $result = DB::table('users_menu')->select(['name','action_url','menu_class','menu_icon'])->where(
             [
                 'status' => 'active',
-                'section' => $section,
+                'menu_section' => $section,
                 'parent' => 0
             ]
         )->orderBy('menu_order','ASC')->get()->toArray();
@@ -656,7 +656,7 @@
     }
 
     function add_menu_item($menu,$option,$depth,&$html){
-        $id_admin = Auth::User()->id_user;
+        $id_admin = Auth::User()->id;
 
         foreach ($menu as $item) {
             if(!empty($item['menu_id'])){
@@ -735,23 +735,28 @@
      /* MENU */
 
     function ___get_category_list(&$categoryList,$parent_category = 0){
-        $id_admin = Auth::User()->id_user;
-        $type = Auth::User()->type;
+        $id_admin = Auth::User()->id;
+        $type = Auth::User()->user_type;
         static $index = 0;$page = "";
 
-        //$admin_menus = Clients::get_menu_visibility($id_admin);
-
+        $admin_menus = DB::table('get_menu_visibility')->where(
+            [
+                
+                'user_id' => $id_admin
+            ]
+        )->first();
+//dd(json_decode($admin_menus->menu_visibility));
         $result = DB::table('users_menu')->where(
             [
                 'status' => 'active',
-                'section' => $type,
+                'menu_section' => 'sidebar',
                 'parent' => $parent_category
             ]
         )->orderBy('menu_order','ASC')->get()->toArray();
-
+        $arr = json_decode($admin_menus->menu_visibility);
         foreach($result as $row){
             
-            //if(in_array($row->id, $admin_menus)){
+            if(in_array($row->id, $arr)){
                 $callback = $row->callback;
                 $categoryList[$row->id] = array(
                     'menu_id' => $row->id,
@@ -762,7 +767,7 @@
                     'callback' => (!empty($row->callback) && function_exists($row->callback))?$callback():'',
                     'class' => ($page == $row->action_url)?sprintf('active %s',$row->menu_class):$row->menu_class
                 );
-            //}
+            }
             if(check_parent_category_by_id($row->id) > 0){
                 ___get_category_list($categoryList[$row->id]['child'],$row->id);
             }

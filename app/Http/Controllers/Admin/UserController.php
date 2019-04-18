@@ -157,7 +157,8 @@ class UserController extends Controller
     {
         $data['view'] = 'admin.user.add';
         $data['userlevel'] = _arefy(User_level::where('status','!=','trashed')->get());
-        // dd($data['userlevel']);
+        $data['get_user_menu']=_arefy(\DB::table('users_menu')->where(
+            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
         return view('admin.home',$data);
     }
 
@@ -180,7 +181,9 @@ class UserController extends Controller
             $user->fill($request->all());
 
             $user->save();
-           
+            $menu['menu_visibility'] = json_encode($request->menu);
+            $menu['user_id'] = $user->id;
+            \DB::table('get_menu_visibility')->insert($menu);
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
@@ -213,6 +216,12 @@ class UserController extends Controller
         $id = ___decrypt($id);
         $data['userlevel'] = _arefy(User_level::where('status','!=','trashed')->get());
         $data['user'] = _arefy(Users::where('id',$id)->first());
+        $data['get_user_menu']=_arefy(\DB::table('users_menu')->where(
+            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
+        $data['menu']=_arefy(\DB::table('users_menu')->where(
+            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
+        $data['visible_menu']=_arefy(\DB::table('get_menu_visibility')->where(
+            ['user_id' => $id])->first());
         return view('admin.home',$data);
     }
 
@@ -235,9 +244,10 @@ class UserController extends Controller
             $users = Users::findOrFail($id);
             $request['remember_token']      = str_random(60).$request['remember_token'];
             $data = $request->all();
-
             $users->update($data);
 
+            $menu['menu_visibility'] = json_encode($request->menu);
+            \DB::table('get_menu_visibility')->where('user_id',$id)->update($menu);
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;

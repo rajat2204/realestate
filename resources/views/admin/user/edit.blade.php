@@ -44,7 +44,18 @@
           <label>Mobile:</label>
           <input type="text" name="phone" class="form-control" placeholder="Enter Mobile Number..." value="{{!empty($user['phone'])?$user['phone']:''}}">
         </div>
-
+        <div class="form-group">
+          <label>Menu Permission:</label><br>
+          @if(!empty($get_user_menu))
+            @foreach($get_user_menu as $menu)
+              @if(in_array($menu['id'],json_decode($visible_menu['menu_visibility'])))
+                <input type="checkbox" name="menu[]"  value="{{$menu['id']}}" checked="">{{$menu['name']}}<br>
+              @else
+                <input type="checkbox" name="menu[]"  value="{{$menu['id']}}" >{{$menu['name']}}<br>
+              @endif
+            @endforeach
+          @endif
+        </div>
         <div class="box-footer">
           <a href="{{url('admin/users')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="edit-user"]' class="btn btn-info pull-right">Submit</button>
