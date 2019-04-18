@@ -5,16 +5,17 @@
           <div class="bordered-box spaceboth">
             <ul class="nav nav-tabs">
               <li  class="active"><a data-toggle="tab" href="#profile">Profile</a></li>
-              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
               <li><a data-toggle="tab" href="#property">Edit Profile</a></li>
               <li><a data-toggle="tab" href="#change">Change Password</a></li>
+              <li><a  data-toggle="tab" href="#account">Account Details</a></li>
+              <li><a  data-toggle="tab" href="#propertysold">Properties Involved</a></li>
             </ul>
             <div class="borderBoxinner">
               <div class="row">
                 
                 <div class="col-md-12">
                   <div class="agentprofile tab-content">
-                    <div id="profile" class="tab-pane fade active">
+                    <div id="profile" class="tab-pane fade active profile_details">
                       <div class="profileHead profileAlignleft">
                         <h3>Profile Details</h3>
                       </div>
@@ -91,86 +92,171 @@
                       <div class="profileHead profileAlignleft">
                         <h3>Edit Profile</h3>
                       </div>
-                      <table class="table tableLeft">
-                        <tbody>
-                          <tr>
-                            <td style="text-align:right;"><input type="hidden" name="id" value="{{\Auth::user()->id}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Upload Profile:</td>
-                            <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
-                            <div>
-                              @if(!empty($agent['image']))
-                                <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
-                              @else
-                                <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
-                              @endif
-                            </div>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Name:</td>
-                            <td style="text-align:left;"><input type="text" name="name" value="{{Auth::user()->first_name}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Registered As:</td>
-                            <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Email:</td>
-                            <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                            <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
-                          </tr>
-                         </tbody>
-                      </table>
-                       <table class="table tableLeft">
-                        <tbody>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
-                            <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">PAN Number:</td>
-                            <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Address</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee:</td>
-                            <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
-                            <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
-                          </tr>
-                          <tr>
-                            <td style="text-align:right;" class="inputBold">Relation:</td>
-                            <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
-                          </tr>
-                          <tr>
+                      <div class="clearfix">
+                        <table class="table tableLeft">
+                          <tbody>
+                            <tr>
+                              <td style="text-align:right;"><input type="hidden" name="id" value="{{\Auth::user()->id}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Upload Profile:</td>
+                              <td style="text-align:left;"><input type="file" name="image" onchange="readURL(this)" id="uploadFile" accept="image/*" style="border:none;"></td>
+                              <div>
+                                @if(!empty($agent['image']))
+                                  <img src="{{url('assets/img/agent')}}/{{$agent['image']}}" width="100" height="100" class="img-circle border-img" onchange="readURL(this)" id="uploadFile" accept="image/*">
+                                @else
+                                  <img src="{{url('assets/img/avatar.png')}}" width="100" height="100" class="img-circle border-img" id="adminimg">
+                                @endif
+                              </div>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Name:</td>
+                              <td style="text-align:left;"><input type="text" name="name" value="{{Auth::user()->first_name}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
+                              <td style="text-align:left;"><input type="text" name="spouse_name" value="{{$agent['spouse_name']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Registered As:</td>
+                              <td style="text-align:left;"><input type="text" name="user_type" value="{{ucfirst(Auth::user()->user_type)}}" readonly></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">District:</td>
+                              <td style="text-align:left;"><input type="text" name="district" value="{{$agent['district']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Email:</td>
+                              <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Mobile no.:</td>
+                              <td style="text-align:left;"><input type="text" name="mobile" value="{{Auth::user()->phone}}"></td>
+                            </tr>
+                           </tbody>
+                        </table>
+                         <table class="table tableLeft tableEdit">
+                          <tbody>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">DOB:</td>
+                              <td style="text-align:left;"><input type="date" name="dob" value="{{$agent['dob']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Adhaar Number:</td>
+                              <td style="text-align:left;"><input type="text" name="adhaar" value="{{$agent['adhaar']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">PAN Number:</td>
+                              <td style="text-align:left;"><input type="text" name="pan" value="{{$agent['pan']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Address</td>
+                              <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{$agent['address']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Nominee:</td>
+                              <td style="text-align:left;"><input type="text" name="nominee" value="{{$agent['nominee']}}"></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Nominee DOB:</td>
+                              <td style="text-align:left;"><input type="date" name="dob_nominee" value="{{$agent['dob_nominee']}}"> </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:right;" class="inputBold">Relation:</td>
+                              <td style="text-align:left;"><input type="text" name="relation" value="{{$agent['relation']}}"></td>
+                            </tr>
+                           <!--  <tr>
 
-                            <td style="text-align:left;"></td>
-                            <td style="text-align:center;"><button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button></td>
-                          </tr>
-                        </tbody>
-                      </table>
+                              <td style="text-align:left;"></td>
+                              <td style="text-align:center;"></td>
+                            </tr> -->
+                          </tbody>
+                        </table>
+                        </div>
+                      <div>
+                        <button type="button" data-request="ajax-submit" data-target='[role="editprofile"]' class="btn-info">Edit Profile</button>
+                      </div>
                       </form>
+                    </div>
+
+                    <div id="propertysold" class="tab-pane fade clearfix bordertable">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>S.no</th>
+                              <th>Property Image</th>
+                              <th>Client Name</th>
+                              <th>Property Name</th>
+                              <th>Property Location</th>
+                              <th>Property Price</th>
+                              <th>Property Area</th>
+                              <th>Property Purpose</th>
+                              <th>Property Type</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @php  
+                              $i=0;
+                            @endphp
+                              @foreach($soldProperty as $soldProperties)
+                            @php
+                              $i++;
+                            @endphp
+                            <tr>
+                              <td>{{$i}}</td>
+                              <td><img src="{{asset('assets/img/properties/'.$soldProperties['property']['featured_image'])}}" class="list_img" style="width: 120px; height: 80px;"></td>
+                              <td>{{$soldProperties['client']['name']}}</td>
+                              <td>{{$soldProperties['property']['name']}}</td>
+                              <td>{{$soldProperties['property']['location']}}</td>
+                              <td>Rs.{{number_format($soldProperties['property']['price'])}}</td>
+                              <td>{{number_format($soldProperties['property']['area'])}} {{$soldProperties['units']['name']}}</td>
+                              <td>{{ucfirst($soldProperties['property']['property_purpose'])}}</td>
+                              <td>{{ucfirst($soldProperties['property']['property_construct'])}}</td>
+                              <td><a href="{{url('properties')}}/{{($soldProperties['property']['slug'])}}" target="_blank" title="View Property Details"><i class="fa fa-fw fa-file-image-o"></i></a></td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div id="account" class="tab-pane fade clearfix bordertable">
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>S.no</th>
+                              <th>Amount</th>
+                              <th>E-mail</th>
+                              <th>Phone Number</th>
+                              <th>Action</th>
+                              <th>Balance</th>
+                              <th>Remarks</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+                            @php  
+                              $i=0;
+                            @endphp
+                            @foreach($agentwallet as $agentwallets)
+                            @php
+                              $i++;
+                            @endphp
+                            <tr>
+                              <td>{{$i}}</td>
+                              <td>Rs.{{number_format($agentwallets['amount'])}}</td>
+                              <td>{{$agentwallets['email']}}</td>
+                              <td>+91-{{$agentwallets['phone']}}</td>
+                              <td>{{ucfirst($agentwallets['action'])}}</td>
+                              <td>Rs.{{number_format($agentwallets['balance'])}}</td>
+                              <td>{!! $agentwallets['remarks'] !!}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>

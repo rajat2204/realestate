@@ -14,6 +14,7 @@ use App\Models\Contact;
 use App\Models\Sliders;
 use App\Models\Enquiry;
 use App\Models\AgentEnquiry;
+use App\Models\Agents_Wallets;
 use App\Models\Services;
 use App\Models\Property;
 use App\Models\Property_Gallery;
@@ -23,6 +24,8 @@ use App\Models\Subscribers;
 use App\Models\SocialMedia;
 use App\Models\Static_pages;
 use App\Models\Testimonials;
+use App\Models\Deals_Payment;
+use App\Models\Make_Payment;
 use Illuminate\Http\Request;
 use App\Models\PropertyCategories;
 use App\Http\Controllers\Controller;
@@ -123,9 +126,28 @@ class HomeController extends Controller{
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['static'] = _arefy(Static_pages::where('status','active')->get());
-        // dd($data['static']);
         return view('front_home',$data);
     }
+    /*---------------------start terms and conditions----------------------------------*/
+    public function termsandconditions(Request $request){
+        $data['view'] = 'front.termsandconditions';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['static'] = _arefy(Static_pages::where('status','active')->get());
+        // dd($data['static']);
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        return view('front_home',$data);
+    }
+    /*---------------------end terms and conditions----------------------------------*/
+
+    /*---------------------start Privacy and policy----------------------------------*/
+    public function privacypolicy(Request $request){
+        $data['view'] = 'front.privacy-policy';
+        $data['contact'] = _arefy(Contact::where('status','active')->get());
+        $data['static'] = _arefy(Static_pages::where('status','active')->get());
+        $data['social'] = _arefy(SocialMedia::where('status','active')->get());
+        return view('front_home',$data);
+    }
+    /*---------------------end Privacy and policy----------------------------------*/
 
     public function enquiry(Request $request,$slug){
         $data['contact'] = _arefy(Contact::where('status','active')->get());
@@ -482,7 +504,7 @@ class HomeController extends Controller{
             $agentdata['user_id']                   =$enquiry;
             $agentdata['name']                      =!empty($request->first_name)?$request->first_name:'';
             $agentdata['email']                     =!empty($request->email)?$request->email:'';
-            $agentdata['mobile']                     =!empty($request->phone)?$request->phone:'';
+            $agentdata['phone']                     =!empty($request->phone)?$request->phone:'';
             $agentdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
             $agentdata['created_at']                = date('Y-m-d H:i:s');
             $agentdata['updated_at']                = date('Y-m-d H:i:s');
@@ -580,6 +602,10 @@ class HomeController extends Controller{
         $data['view'] = 'front.agentdashboard';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('user_id',Auth::user()->id)->first());
+        $whereProperty = 'agent_id = '.$data['agent']['id'];
+        $data['soldProperty'] = _arefy(Deals::list('array',$whereProperty));
+        $data['agentwallet'] = _arefy(Agents_Wallets::where('agents_id',$data['agent']['id'])->get());
+        // dd($data['agentwallet']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -591,8 +617,43 @@ class HomeController extends Controller{
         $data['enquiry'] = _arefy(Enquiry::where('user_id',Auth::user()->id)->get());
         $where = 'user_id = '.Auth::user()->id;
         $data['propertyenquiry'] = _arefy(Property_Enquiry::list('array',$where));
+        $where = 'user_id = '.Auth::user()->id;
+        $data['client'] = _arefy(Clients::list('single',$where));
+        $whereProperty = 'client_id = '.$data['client']['id'];
+        $data['purchased'] = _arefy(Deals::list('array',$whereProperty));
+        $data['paidpayment'] = _arefy(Make_Payment::where('client_id',$data['client']['id'])->get());
+        $data['balancepayment'] = _arefy(Deals_Payment::where('client_id',$data['client']['id'])->where('payment_status','=','no')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
+    }
+
+    public function ajaxPaymentPlan(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $whereProperty = 'client_id = '.$client['id'];
+        $purchased = _arefy(Deals::list('single',$whereProperty));
+        // dd($purchased);
+        $planview = view('front.template.ajaxpaymentplan',compact('purchased'));
+        return Response($planview);
+    }
+
+    public function ajaxPaidPayment(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $paidpayment = _arefy(Make_Payment::where('client_id',$client['id'])->get());
+        $paidview = view('front.template.ajaxpaidpayment',compact('paidpayment'));
+        return Response($paidview);
+    }
+
+    public function ajaxBalancePayment(Request $request)
+    {
+        $where = 'user_id = '.Auth::user()->id;
+        $client = _arefy(Clients::list('single',$where));
+        $balancepayment = _arefy(Deals_Payment::where('client_id',$client['id'])->where('payment_status','=','no')->get());
+        $balanceview = view('front.template.ajaxbalancepayment',compact('balancepayment'));
+        return Response($balanceview);
     }
 
     public function agentchangePass(Request $request){
@@ -642,7 +703,7 @@ class HomeController extends Controller{
           $agentUserData['spouse_name']       = !empty($request->spouse_name)?$request->spouse_name:'';
           $agentUserData['district']          = !empty($request->district)?$request->district:'';
           $agentUserData['email']             = !empty($request->email)?$request->email:'';
-          $agentUserData['mobile']            = !empty($request->mobile)?$request->mobile:'';
+          $agentUserData['phone']            = !empty($request->mobile)?$request->mobile:'';
           $agentUserData['dob']               = !empty($request->dob)?$request->dob:'';
           $agentUserData['adhaar']            = !empty($request->adhaar)?$request->adhaar:'';
           $agentUserData['pan']               = !empty($request->pan)?$request->pan:'';
