@@ -229,7 +229,7 @@ class HomeController extends Controller{
             $admin = curl_init();
             curl_setopt($admin, CURLOPT_URL, $pingurl);
             curl_setopt($admin, CURLOPT_POST, 1);
-            curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
             curl_setopt($admin, CURLOPT_RETURNTRANSFER, true);
             $result_admin = curl_exec($admin);
            
@@ -321,7 +321,7 @@ class HomeController extends Controller{
             $admin_agent = curl_init();
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
-            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
             curl_setopt($admin_agent, CURLOPT_RETURNTRANSFER, true);
             $result_agent = curl_exec($admin_agent);
            
@@ -373,7 +373,7 @@ class HomeController extends Controller{
             $admin_agent = curl_init();
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
-            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 9792759420 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
             $result_agent = curl_exec($admin_agent);
            
             curl_close($admin_agent);

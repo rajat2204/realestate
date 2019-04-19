@@ -153,7 +153,6 @@ class PropertyController extends Controller
     public function propertyExport(Request $request, Builder $builder){
         $where = 'status != "trashed"';
         $property  = _arefy(Property::list('array',$where));
-        // dd($property);
         $type='xlsx';
         $excel_name='property_data';
         Excel::create($excel_name, function($excel) use ($property) {
