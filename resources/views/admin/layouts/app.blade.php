@@ -135,6 +135,14 @@
 	      });
 	}
 	 google.maps.event.addDomListener(window, 'load', initialize); 
+	 $(document).ready(function(){
+			$(".treeview").click(function(){
+				$(this).toggleClass("dropdownmenu")
+
+
+				
+			});
+		});
 </script>
 @yield('requirejs')
 
