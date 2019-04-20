@@ -23,6 +23,9 @@ span.admin-color {
 }
 .classFloat{
     float:right;
+} 
+.dropdownmenu .treeview-menu{
+    display: block;
 }
 .m-t-20{
     margin-top: 15px;

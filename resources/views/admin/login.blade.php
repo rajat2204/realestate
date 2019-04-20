@@ -97,6 +97,7 @@
 		        $('#cover').fadeOut(500);
 		    },1000)
 		});
+		
 		</script>
 	<script type="text/javascript">
 	    setTimeout(function(){
