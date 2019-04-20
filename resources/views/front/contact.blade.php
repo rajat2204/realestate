@@ -64,7 +64,13 @@
                 <div class="contact-icon">
                   <i class="fa fa-phone"></i>
                 </div>
-                <p><a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a></p>
+                <p><a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">+91-{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}</a></p>
+              </div>
+              <div class="single-contact">
+                <div class="contact-icon">
+                  <i class="fa fa-whatsapp"></i>
+                </div>
+                <p><a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">+91-{{!empty($contact[0]['whatsapp'])?$contact[0]['whatsapp']:''}}</a></p>
               </div>
             </div>
           </div>

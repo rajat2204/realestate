@@ -335,7 +335,7 @@ class Validate
         	'slug.unique'     				=> 'This Slider Slug has already been taken.',
         	'slug.alpha_dash'     			=> 'No spaces allowed in Slider slug.The Slug may only contain letters, numbers, dashes and underscores.',
         	'position.required'				=> 'Slider Position is required.',
-        	'location.required'				=> 'Location of a Slider is required.',
+        	'location.required'				=> 'Location is required.',
         	'description.required'			=> 'Slider Description is required.',
         ]);
        
@@ -344,7 +344,8 @@ class Validate
 		    	$validator->after(function ($validator){
 				   $validator->errors()->add('mobile', 'Contact Number is required.');
 				});
-			}        }
+			}        
+        }
 		return $validator;
 	}
 

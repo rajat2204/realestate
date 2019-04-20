@@ -375,27 +375,6 @@
   </div>
 </section>
 <!-- Portfolio Section Ends -->
-
-<!-- Background Section Starts -->
-<!-- <section class="review-section set-bg" style="background-image: url(assets/img/review-bg.jpg); background-size: cover;">
-  <div class="container">
-    <div class="review-slider owl-carousel owl-loaded owl-drag">
-      <div class="review-item text-white">
-        <p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
-        <h5>Stacy Mc Neeley</h5>
-        <span>CEP’s Director</span>
-        <div class="clint-pic set-bg" data-setbg="img/review/1.jpg" style="background-image: url(assets/img/testimonials/1.jpg);"></div>
-      </div>
-      <div class="review-item text-white">
-        <p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
-        <h5>Stacy Mc Neeley</h5>
-        <span>CEP’s Director</span>
-        <div class="clint-pic set-bg" data-setbg="img/review/1.jpg" style="background-image: url(assets/img/testimonials/1.jpg);"></div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!-- Background Section Ends -->
   
 <!-- testimonial section html -->
 <div id="testimonials">
@@ -421,6 +400,11 @@
       </div>
         @endforeach
     </div>
+    @if(count($testimonial_load)>9)
+      <div class="text-center">
+        <a class="btn btn-info" href="{{url('/testimonials')}}">Load More..</a>
+      </div>
+    @endif
   </div>
 </div>
 <!-- testimonial section end -->
