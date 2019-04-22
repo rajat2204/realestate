@@ -2416,6 +2416,7 @@ p {
 }
 a.navbar-brand img {
   max-width: 110px;
+  /*height: 110px;*/
     /*width: 100%;
     height: 100%;
     object-fit: cover;*/
@@ -2564,7 +2565,8 @@ header#header {
     padding: 0px 0 10px;
 }
 .slides li img {
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
 }
 .footer-about {
     padding-right: 60px;
