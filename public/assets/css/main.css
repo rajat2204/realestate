@@ -1886,6 +1886,7 @@ a.back-to-top:hover, a.back-to-top:focus {
     position: absolute;
     padding: 0px 15px;
     top: 0;
+    left: 0;
   }
   .navbar-brand img {
     width: 75%;
@@ -2492,7 +2493,7 @@ a.navbar-brand .singleLogo img {
 .image-overview img{
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .header_strip ul li a:hover {
     color: #000;
@@ -2564,6 +2565,10 @@ header#header {
 .header_wrapper {
     padding: 0px 0 10px;
 }
+.slides li a {
+    display: block;
+    height: 103px;
+}
 .slides li img {
     width: 100%;
     height: 100%;
@@ -2576,8 +2581,8 @@ header#header {
 }
 div#hero_slider {
     width: 100%;
-    padding-top: 10px;
-    padding-left: 20px;
+    padding-top: 6px;
+    padding-left: 15px;
     padding-right: 15px;
 }
 .horizontal_slider .item p {
@@ -4062,7 +4067,7 @@ span.fbold i {
   left: 0px;
   z-index: 0;
   position: fixed;
-  width: 85%;
+  width: 78%;
   height: 100%;
   height: 100vh;
 }
@@ -4239,12 +4244,15 @@ ul.smartphotoWrapper {
 }
 ul.smartphotoWrapper .brick {
     /*margin-bottom: 30px;*/
+    display: inline-block;
+    width: 32%;
     overflow: hidden;
 }
 ul.smartphotoWrapper {
-    column-count: 3;
+    /* column-count: 3; */
+    width: 100%;
     moz-column-count: 3;
-     -webkit-column-count: 3; 
+    /* -webkit-column-count: 3; */
 }
 .smartphoto{
   z-index: 9999;
@@ -4405,9 +4413,10 @@ ul.owl-gallery li {
     overflow: hidden;
 }
 .thumb1 {
-  width: 100%;
   height: 281px;
-  margin-bottom: 10px;
+  /* width: 301px; */
+  margin-right: 8px;
+  margin-bottom: 4px;
   overflow: hidden;
 }
 .smartphoto-arrow-left a{
@@ -4424,6 +4433,9 @@ ul.owl-gallery li {
 }
 .thumb1 img{
   height: 100%;
+  width: 100%;
+  object-fit: c;
+  /* max-width: 100%; */
 }
 .thumb4 img{
   height: 100%;
@@ -4626,6 +4638,8 @@ ul.owl-gallery li {
   }
   .slide-1, .slide-2, .slide-3, .slide-4{
     min-height: 548px;
+    margin-top: 54px;
+    background-size: contain!important;
   }
   .navbar-brand {
     position: absolute;

@@ -216,8 +216,9 @@
       order: 1;
   }
   a.navbar-brand img {
-      max-width: 100px;
-      margin: 0;
+    max-width: 60px;
+    margin: 0;
+    height: 52px!important;
   }
   div#hero_slider {
       padding-top: 45px;
@@ -254,6 +255,9 @@
   .section-title {
     font-size: 22px;
     margin-bottom: 30px;
+  }
+  ul.smartphotoWrapper .brick{
+        width: 49%;
   }
   .bordered-box ul{
     display: block;
@@ -439,6 +443,9 @@
 @media (max-width: 480px) {
   .header_strip {
       text-align: right;
+  }
+  ul.smartphotoWrapper .brick{
+        width: 100%;
   }
   .header_strip ul li a{
 
