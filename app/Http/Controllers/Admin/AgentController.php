@@ -126,6 +126,7 @@ class AgentController extends Controller
                 "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Agent Image','orderable' => false, 'width' => 120])
+            ->addColumn(['data' => 'agent_id', 'name' => 'agent_id','title' => 'Agent ID','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Agent Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'spouse_name', 'name' => 'spouse_name','title' => 'Agents Spouse Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'nominee', 'name' => 'nominee','title' => 'Agents Nominee','orderable' => false, 'width' => 120])
@@ -299,8 +300,14 @@ class AgentController extends Controller
                 $file->move('assets/img/agent',$photo_name);
                 $data['image'] = $photo_name;
             }
+
             $data->save();
 
+            $lastid = $data->id;
+
+            $agentId['agent_id'] = "DIH00" . $lastid;
+
+            $data = Agents::change($lastid,$agentId);
 
             $this->status   = true;
             $this->modal    = true;
