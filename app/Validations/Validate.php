@@ -513,6 +513,7 @@ class Validate
 					$query->where('id','!=',$this->data->id);
 				})
 			]);
+            $validations['password']   = $this->validation('password_null');
 		}
 		$validator = \Validator::make($this->data->all(), $validations,[
 			'image.required'		=> 'Agent Image is required.',

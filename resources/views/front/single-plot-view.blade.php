@@ -226,15 +226,15 @@
       	<div class="gallery-box  padding30 nopadding-mobile">
       		<div id="galley">
 	       		<ul class="smartphotoWrapper" id="gallery">
-	             	@foreach($property['property_gallery'] as $property['property_galleries'])
-		          	<li class="brick">
-		             	<span class="thumb1">
-		             		<a href="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer">			
-			             		<img src="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
-			             	</a>
-		             	</span>
-		            </li>
-		            @endforeach
+           	@foreach($property['property_gallery'] as $property['property_galleries'])
+          	<li class="brick">
+             	<span class="thumb1">
+             		<a href="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" class="js-img-viwer">			
+	             		<img src="{{url('assets/img/PropertyGallery')}}/{{$property['property_galleries']['images']}}" alt="gallery">
+	             	</a>
+             	</span>
+            </li>
+            @endforeach
 				</ul>
 			</div>
 		</div>

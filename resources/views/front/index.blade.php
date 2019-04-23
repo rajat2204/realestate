@@ -26,7 +26,7 @@
         @foreach($sliders as $sliderscenter)
           <div class="item">
             <img src="{{url('assets/img/Sliders')}}/{{$sliderscenter['image']}}" />
-            <p>{!! $sliderscenter['description'] !!}</p>
+            <p title="{{strip_tags(html_entity_decode($sliderscenter['description']))}}">{{strip_tags(html_entity_decode(str_limit($sliderscenter['description'],180)))}}</p>
           </div>
         @endforeach
       </div>
