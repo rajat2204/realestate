@@ -2784,7 +2784,7 @@ p.contact_number {
 .notice_title {
     display: inline-block;
     width: 200px;
-    background: #50beda;
+    background: #9c100a;
     float: left;
 }
 .numbering{
@@ -2801,11 +2801,11 @@ p.contact_number {
 }
 
 .noticeboard_slider .owl-item:nth-child(even) {
-    background:#d8232a;
+    background: #51beda;
 }
 
 .noticeboard_slider .owl-item:nth-child(odd) {
-    background: #9c100a;
+    background: #07af99;
 }
 
 .noticeboard_slider .owl-item:nth-child(odd), 
@@ -2818,9 +2818,9 @@ p.contact_number {
 .noticeboard_slider .owl-item:nth-child(even):after {
     content: "";
     position: absolute;
-    border-top: 30px solid #d8232a;
+    border-top: 30px solid #51beda;
     border-right: 28px solid #ffa30000;
-    border-bottom: 30px solid #d8232a;
+    border-bottom: 30px solid #51beda;
     top: 0;
     bottom: 0;
     left: -1px;
@@ -2833,9 +2833,9 @@ p.contact_number {
 }
 
 .noticeboard_slider .owl-item:nth-child(even):after {
-    border-top: 26px solid #9c100a;
+    border-top: 26px solid #02ad97;
     border-right: 34px solid #ffa30000;
-    border-bottom: 28px solid #9c100a;
+    border-bottom: 28px solid #02ad97;
 }
 .noticeboard_sec {
     padding: 15px;
@@ -2999,7 +2999,7 @@ p.contact_number {
     transition-duration: 500ms;
 }
 #header-wrap {
-    height: 107px;
+    height: 101px;
 }
 .feature-text {
     border-left: 1px solid #ebebeb;
@@ -3133,7 +3133,7 @@ a.room-price {
   font-weight: 600;
 }
 .button_search1 {
-  background-color: #50beda;
+  background-color: #9c100a;
 }
 .price-filter {
     position: relative;
@@ -3389,7 +3389,7 @@ a.room-price {
   color: #3f353d;
 }
 .btn-blue{
-  background-color: #960f0a;
+  background-color: #02ad97;
 }
 #content_s{
   /*  height:100%;*/
