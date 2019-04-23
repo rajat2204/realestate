@@ -243,8 +243,9 @@ $(document).ready(function(){
                   // items:4,
                   loop:true,
                   // margin:10,
+                  // autoplaySpeed: 1000,
                   autoplay:true,
-                  autoplayTimeout:1000,
+                  autoplayTimeout:1500,
                   autoplayHoverPause:true,
                   responsive: {
                     0: {
@@ -264,10 +265,10 @@ $(document).ready(function(){
                     }
                 }
               });
-              $('.play').on('click',function(){
-                  owl.trigger('play.owl.autoplay',[1000])
+              $('#notice_slider').on('mouseleave',function(){
+                  owl.trigger('play.owl.autoplay',[1500])
               })
-              $('.stop').on('click',function(){
+              $('#notice_slider').on('mouseover',function(){
                   owl.trigger('stop.owl.autoplay')
               })
             // var homebannerDesc = $('#notice_slider');

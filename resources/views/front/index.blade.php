@@ -104,8 +104,12 @@
         <span class="badge badge-light numbering">{{$serial_no++}}</span>
         <p class="">{{$notices['text']}}</p>
       </div>
+
     @endforeach
+
     </div>
+    <a class="play">p</a>
+      <a class="stop">s</a>
   </div>
 </section>
 <!-- Notice board sections ends-->
