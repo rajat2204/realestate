@@ -256,6 +256,9 @@
     font-size: 22px;
     margin-bottom: 30px;
   }
+  .top-nav-collapse .navbar-brand img{
+    width: 90%;
+  }
   ul.smartphotoWrapper .brick{
         width: 49%;
   }

@@ -250,7 +250,7 @@ $(document).ready(function(){
                 dragEndSpeed: 1000,
                 autoplay: true,
                 center: true,
-                autoplayHoverPause:true,
+                // autoplayHoverPause:true,
                 responsive: {
                     0: {
                         items: 1
