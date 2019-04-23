@@ -142,10 +142,10 @@
     padding: 10px 0 30px;
   }
   #agents {
-    padding: 35px 0 50px;
+    /*padding: 35px 0 50px;*/
   }
   #services {
-    padding: 15px 0;
+    padding: 23px 0 20px;
   }
   #header-wrap {
       height: 55px;
@@ -452,7 +452,7 @@
     padding: 40px 0 20px;
   }
   #agents {
-      padding: 50px 0;
+      /*padding: 50px 0;*/
   }
   .button_search1{
     min-height: 45px;
