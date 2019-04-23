@@ -294,7 +294,7 @@
       @endforeach
     </div>
     @if(count($property_featured)>6)
-    <div class="text-center">
+    <div class="text-center m-b-10">
       <a class="btn btn-info" href="{{url('/featuredproperty')}}">Load More..</a>
     </div>
     @endif
@@ -328,8 +328,8 @@
         @endforeach
       </div>
       @if(count($service_load)>6)
-      <div class="text-center">
-        <a class="btn btn-info" href="{{url('/services')}}">Load More..</a>
+      <div class="text-center m-b-10">
+        <a class="btn btn-red" href="{{url('/services')}}">Load More..</a>
       </div>
       @endif
     </div>
@@ -442,8 +442,8 @@
         @endforeach
     </div>
     @if(count($testimonial_load)>9)
-      <div class="text-center">
-        <a class="btn btn-info" href="{{url('/testimonials')}}">Load More..</a>
+      <div class="text-center m-b-10">
+        <a class="btn btn-red" href="{{url('/testimonials')}}">Load More..</a>
       </div>
     @endif
   </div>

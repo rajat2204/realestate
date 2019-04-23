@@ -2891,6 +2891,12 @@ p.contact_number {
 .fixed-social-icon .social-icon li {
     display: block;
 }
+.btn-red:hover {
+    color: #02ad97;
+}
+.m-b-10{
+  margin-bottom: 20px;
+}
 .share_with {
     /* border-radius: 50%; */
     text-align: center;

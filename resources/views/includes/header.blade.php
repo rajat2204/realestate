@@ -179,7 +179,7 @@
             <input name="password" placeholder="Enter your password" class="form-control" type="password">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-info" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
+            <button type="button" class="btn btn-red" data-request="ajax-submit" data-target='[role="signup"]'>Submit</button>
           </div>
         </form>
       </div>
@@ -220,7 +220,7 @@
          </div>
         </div>  
         <div class="modal-footer">
-          <button type="button" class="btn btn-success btn-sm " data-request="ajax-submit" data-target='[role="login"]'>Submit</button>
+          <button type="button" class="btn btn-red btn-sm " data-request="ajax-submit" data-target='[role="login"]'>Submit</button>
         </div>
       </form>
     </div>
