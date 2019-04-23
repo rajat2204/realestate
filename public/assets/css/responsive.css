@@ -90,6 +90,9 @@
     font-size: 30px;
     margin-bottom: 30px;
   }
+  #filter-search{
+    padding-top: 0;
+  }
   .tableLeft{
     float: none;
     width: 100%;
