@@ -559,7 +559,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 .top-nav-collapse .navbar-brand img {
-  width: 65%;
+  /*width: 65%;*/
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
@@ -1689,7 +1689,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 .top-nav-collapse .navbar-brand img {
-  width: 50%;
+  /*width: 50%;*/
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
@@ -2005,7 +2005,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   padding: 0px 0px 25px;
 }
 .featured-properties-area{
-  padding: 60px 0 40px;
+  padding: 30px 0 10px;
   background: #f2f2f2;
 }
 .controls .active {
@@ -2014,7 +2014,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   background: transparent;
 }
 #filter-search {
-    margin-bottom: 65px;
+    margin-bottom: 42px;
 }
 .controls .btn {
   text-transform: uppercase;
@@ -2249,7 +2249,7 @@ img.form-control.slide-image {
 #contact {
   position: relative;
   overflow: hidden;
-  padding: 30px 0;
+  padding: 0px 0 30px;
   background: #f2f2f2;
 }
 
@@ -2408,7 +2408,7 @@ p {
 
 
 .gallery-wrap{
-  padding: 60px 0 40px;
+  padding: 30px 0 10px;
 }
 .img-left.singleLogo{
   height: 110px;
@@ -2702,7 +2702,7 @@ p.contact_number {
 }
 /* Services Section */
 #services {
-  padding: 60px 0 40px;
+  padding: 30px 0 10px;
 }
 #services .service-media {
   margin: 10px;
@@ -2743,7 +2743,7 @@ p.contact_number {
 
 /* Testimonials Section */
 #testimonials {
-  padding: 60px 0;
+  padding: 30px 0 0;
   background: #f2f2f2;
 }
 #testimonials i {
@@ -3006,6 +3006,16 @@ p.contact_number {
     background-color: #fff;
     transition: .3s ease-in;
     border-right: 1px solid #ebebeb;
+}
+.navbar-start{
+  display: flex;
+  align-items: center;
+}
+.navbar-start p{
+  color:#950f0a;
+  font-weight: 700;
+  font-size: 20px;
+  padding-left:10px; 
 }
 .single-featured-property:hover{
   box-shadow: 0 0 10px rgba(0,0,0,.4);
@@ -3327,7 +3337,7 @@ a.room-price {
   /*right: 50%;*/
 }
 #agents {
-    padding: 60px 0;
+    padding: 30px 0;
     background: #f2f2f2;
 }
 .agentContent{

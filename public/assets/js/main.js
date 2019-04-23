@@ -238,21 +238,15 @@ $(document).ready(function(){
 
         // notice slider js
         $(document).ready(function() {
-
-            var homebannerDesc = $('#notice_slider');
-            var homebannerDesc_settings = {
-                loop: true,
-                touchDrag: true,
-                // autoplaySpeed: 1000,
-                
-                // navSpeed: 1000,
-                // dotsSpeed: 1000,
-                // dragEndSpeed: 1000,
-                center: true,
-                autoplay: true,
-                autoplayTimeout:2000,
-                autoplayHoverPause:true,
-                responsive: {
+            var owl = $('#notice_slider');
+              owl.owlCarousel({
+                  // items:4,
+                  loop:true,
+                  // margin:10,
+                  autoplay:true,
+                  autoplayTimeout:1000,
+                  autoplayHoverPause:true,
+                  responsive: {
                     0: {
                         items: 1
                     },
@@ -269,8 +263,44 @@ $(document).ready(function(){
                         items: 2
                     }
                 }
-            };
-            homebannerDesc.owlCarousel(homebannerDesc_settings);
+              });
+              $('.play').on('click',function(){
+                  owl.trigger('play.owl.autoplay',[1000])
+              })
+              $('.stop').on('click',function(){
+                  owl.trigger('stop.owl.autoplay')
+              })
+            // var homebannerDesc = $('#notice_slider');
+            // var homebannerDesc_settings = {
+            //     loop: true,
+            //     touchDrag: true,
+            //     autoplaySpeed: 1000,
+            //     navSpeed: 1000,
+            //     dotsSpeed: 1000,
+            //     dragEndSpeed: 1000,
+            //     center: true,
+            //     autoplay: true,
+            //     autoplayTimeout:2000,
+            //     autoplayHoverPause:true,
+            //     responsive: {
+            //         0: {
+            //             items: 1
+            //         },
+            //         360: {
+            //             items: 1
+            //         },
+            //         500: {
+            //             items: 1
+            //         },
+            //         991: {
+            //             items: 2
+            //         },
+            //         1600: {
+            //             items: 2
+            //         }
+            //     }
+            // };
+            // homebannerDesc.owlCarousel(homebannerDesc_settings);
         });
 
         // $(document).ready(function() {
