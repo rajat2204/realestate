@@ -76,7 +76,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4165.321812020541!2d77.38378970022572!3d28.61164902546254!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5aa32ba7abd%3A0x348f1dd49387e0a7!2sMainee+Steel+Works+Private+Limited!5e0!3m2!1sen!2sin!4v1543673481681" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.4695622912436!2d80.9487711145173!3d26.761298173035613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfb0c32f4ea69%3A0xed74a8ea3b48faf3!2sSKD+Academy+(CBSE%2C+Vrindavan)!5e0!3m2!1sen!2sin!4v1555930607947!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
       </div>
     </div>
