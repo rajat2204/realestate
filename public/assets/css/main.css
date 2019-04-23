@@ -1690,6 +1690,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 
 .top-nav-collapse .navbar-brand img {
   /*width: 50%;*/
+  padding: 5px;
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
@@ -2791,7 +2792,9 @@ p.contact_number {
   float: left;
   margin: 0 0 0 16px;
 }
-
+.right-space .navbar-nav{
+  margin-top: 0;
+}
 .notice_title p {
     font-size: 18px;
     font-weight: 600;
@@ -3633,7 +3636,11 @@ select:focus{
   margin: 0;
 }
 .contact-modal .modal-header img{
-  width: 90px;
+  width: 60px;
+}
+.btn-red{
+  background-color:#9c100a;
+  border-color:#9c100a;
 }
 .modalWrapper .form-group{
   margin-bottom: 10px;
