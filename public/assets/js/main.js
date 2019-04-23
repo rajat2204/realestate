@@ -157,47 +157,30 @@ $(document).ready(function(){
       /*on mobile slider*/
 
       $(document).ready(function(){
-      var winWidth = $(window).width();
+      // var winWidth = $(window).width();
       // showWidth( "window", $( window ).width() );
-        if (winWidth>991) {
-           $("#vertical_slider_mobile").mCustomScrollbar({
+       
+           $("#vertical_slider3").mCustomScrollbar({
               axis:"y", // horizontal scrollbar
               scrollButtons:{enable:true},
               theme:"light-thick",
               scrollbarPosition:"outside"
     
           });
-        }
-        else{
-          $("#vertical_slider_mobile").mCustomScrollbar({
-              axis:"x", // horizontal scrollbar
-              scrollButtons:{enable:true},
-              theme:"light-thick",
-              scrollbarPosition:"outside"
-          });
-        }
+       
       });
         // }
       $(document).ready(function(){
-      var winWidth = $(window).width();
+      // var winWidth = $(window).width();
       // showWidth( "window", $( window ).width() );
-        if (winWidth>991) {
-           $("#vertical_slider_mobile2").mCustomScrollbar({
+              $("#vertical_slider4").mCustomScrollbar({
               axis:"y", // horizontal scrollbar
               scrollButtons:{enable:true},
               theme:"light-thick",
               scrollbarPosition:"outside"
     
           });
-        }
-        else{
-          $("#vertical_slider_mobile2").mCustomScrollbar({
-              axis:"x", // horizontal scrollbar
-              scrollButtons:{enable:true},
-              theme:"light-thick",
-              scrollbarPosition:"outside"
-          });
-        }
+        
       });
 
 

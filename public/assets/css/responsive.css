@@ -393,8 +393,26 @@
   .our_services{
     margin-bottom: 15px;
   }
+  #services h3{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: auto;
+  }
   #services .service-desc{
     height:auto;
+  }
+  p.contact_number{
+    float:none;
+  }
+  p.slider_title{
+    float:none;
+  }
+  .slides li p{
+    font-size: 12px;
+    line-height: 14px !important;
+  }
+  .horizontal_slider .item p{
+    font-size: 12px;
   }
   .agentprofile {
       padding: 5px;

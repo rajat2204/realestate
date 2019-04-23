@@ -51,7 +51,7 @@
   </div>
    <div class="header_wrapper_mobile clearfix">
         <div class="vertical_slides_mobile">
-            <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
+            <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
                 @php
                 $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
@@ -69,7 +69,7 @@
         </div>
        
         <div class="vertical_slides_mobile2">
-            <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
+            <ul class="slides"  id="vertical_slider4"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
                 @php
                 $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
