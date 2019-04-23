@@ -383,6 +383,9 @@
   .our_services{
     margin-bottom: 15px;
   }
+  #services .service-desc{
+    height:auto;
+  }
   .agentprofile {
       padding: 5px;
       margin: -1px;
