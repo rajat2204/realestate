@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         @foreach($service_load as $services)
-        <div class="col-md-4 col-sm-6">
+        <div class="col-lg-4 col-md-6">
           <div class="our_services">
               <div class="service-media"> <img src="{{url('assets/img/services')}}/{{$services['image']}}" alt="service"> </div>
               <div class="service-desc">
