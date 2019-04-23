@@ -2937,6 +2937,7 @@ p.contact_number {
 }
 .phone_header{
   float:left;
+  padding-top: 2px;
 }
 
 .phone_header a{
