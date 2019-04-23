@@ -242,14 +242,15 @@ $(document).ready(function(){
             var homebannerDesc = $('#notice_slider');
             var homebannerDesc_settings = {
                 loop: true,
-                mouseDrag: true ,
-                autoplaySpeed: 1000,
-                autoplayTimeout:2000,
-                navSpeed: 1000,
-                dotsSpeed: 1000,
-                dragEndSpeed: 1000,
-                autoplay: true,
+                touchDrag: true,
+                // autoplaySpeed: 1000,
+                
+                // navSpeed: 1000,
+                // dotsSpeed: 1000,
+                // dragEndSpeed: 1000,
                 center: true,
+                autoplay: true,
+                autoplayTimeout:2000,
                 autoplayHoverPause:true,
                 responsive: {
                     0: {
@@ -270,7 +271,6 @@ $(document).ready(function(){
                 }
             };
             homebannerDesc.owlCarousel(homebannerDesc_settings);
-
         });
 
         // $(document).ready(function() {

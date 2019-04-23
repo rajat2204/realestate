@@ -20,7 +20,7 @@
         <meta charset="utf-8"/>
         <title>DevDrishti Infrahomes Pvt. Ltd.</title>
         
-    <link rel="icon" type="image/png" href="{{asset('assets/img/logo.jpg')}}">
+    <link rel="icon" type="image/png" href="{{asset('assets/img/logo.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/smartphoto.min.css')}}">  
   <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}" >
