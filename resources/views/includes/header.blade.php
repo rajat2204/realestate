@@ -35,7 +35,10 @@
                   <span class="icon-menu"></span>
                   <span class="icon-menu"></span>
                 </button>
-                <a href="{{url('/')}}" class="navbar-brand"><img src="{{url('assets/img/logo.png')}}" alt="Devdrishti Infrahomes" height="60"></a>
+                <a href="{{url('/')}}" class="navbar-brand navbar-start">
+                  <img src="{{url('assets/img/logo.png')}}" alt="Devdrishti Infrahomes" height="60">
+                  <p><span style="color:#02ad97;">D</span>evdrishti <span style="color:#02ad97;">I</span>nfrahomes <span style="color:#02ad97;">P</span>vt. <span style="color:#02ad97;">L</span>td.</p>
+                </a>
               </div> 
                <div class="collapse navbar-collapse" id="main-navbar">
                      <ul class="onepage-nev navbar-nav mr-auto w-100 justify-content-end clearfix">

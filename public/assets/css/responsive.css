@@ -10,7 +10,11 @@
     padding: 7px 15px;
   }
 }
-
+@media (max-width: 1156px){
+  .navbar-expand-lg .navbar-nav .nav-link{
+    padding: 0 7px;
+  }
+}
 @media (max-width: 1024px) {
   .services-item {
       margin-bottom: 20px;
@@ -449,6 +453,19 @@
 @media (max-width: 480px) {
   .header_strip {
       text-align: right;
+  }
+  .slicknav_btn{
+    margin: 11px 15px 11px 0;
+    height: 29px;
+    padding: 7px 0 9px;
+    width: 30px;
+  }
+  .navbar-start p{
+    padding-left: 2px;
+    font-size: 14px;
+  }
+  a.navbar-brand img{
+    max-width: 48px;
   }
   ul.smartphotoWrapper .brick{
         width: 100%;
