@@ -467,7 +467,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 .subscribe-btn{
   position: absolute;
-  top: 1px;
+  top: 0px;
   right: 0;
 }
 .subscribe-btn button {
@@ -477,8 +477,8 @@ a.back-to-top:hover, a.back-to-top:focus {
     bottom: 1px;
 }
 .subscribe-btn button:hover{
-  background-color: #2e9db3;
-  border-left: 1px solid #2e9db3;
+  background-color: #50beda;
+  border-left: 1px solid #50beda;
 }
 /*.subscribe-btn button:hover i{
   color: #12b6d7;
@@ -1247,11 +1247,13 @@ a {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  color: #50beda;
   transition: all 0.2s linear;
 }
 
 a:hover {
   text-decoration: none;
+  color:#08af9a;
 }
 
 a a:focus {
@@ -1726,7 +1728,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link i:hover {
-  color: #127eab;
+  color: #98100a;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -1734,6 +1736,8 @@ a.back-to-top:hover, a.back-to-top:focus {
   font-weight: 700;
   padding: 0 17px;
   margin-top: 15px;
+  font-family: "Open Sans",sans-serif;
+  font-size: 13px; 
   margin-bottom: 15px;
   line-height: 40px;
   text-transform: uppercase;
@@ -2250,7 +2254,7 @@ img.form-control.slide-image {
 #contact {
   position: relative;
   overflow: hidden;
-  padding: 0px 0 30px;
+  padding: 20px 0 30px;
   background: #f2f2f2;
 }
 
@@ -3238,7 +3242,7 @@ a.room-price {
   color: #02ad97;
 }
 .copyright_footer p a:hover{
-  color: #239eb8;
+  color: #50beda;
 }
 .copyright_footer p{
   color:#fff;
