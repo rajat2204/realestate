@@ -29,7 +29,7 @@
 		<div class="container ">
 			<div class="row">
 				<div class="box_xs">
-	     	       <form role="login" action="{{url('admin/login')}}"  method="post" data-request="enable-enter">
+	     	       <form role="login" action="{{url('admin/login')}}" method="post" data-request="enable-enter">
 	            	{{ csrf_field() }}
 		                <h3 class=" text-center ">Sign in to Proceed</h3>   
 		                <div class="form-row "> 
@@ -37,7 +37,7 @@
 		                    <label for="inputEmail3" class="control-label whites">Email</label>
 		         		  </div>			
 		                  <div class="form-group col-md-8 ">
-		                    <input type="email" name="email" class=" form-control" id="inputEmail3" placeholder="Email">
+		                    <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
 		                   </div> 
 		                 </div>
 		                 <div class="form-row "> 
