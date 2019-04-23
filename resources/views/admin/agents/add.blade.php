@@ -8,6 +8,7 @@
       <form role="add-agent" method="POST" action="{!! action('Admin\AgentController@store') !!}">
         {{csrf_field()}}
 
+        <input type="hidden" class="form-control" name="agent_id">
         <div class="form-group">
           <label for="image">Agent's Image:</label>
           <div>
