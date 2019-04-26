@@ -198,7 +198,7 @@
         </button>
       </div>
       <div class="modal-body">
-      <form method="post" action="{{url('login')}}" role="login">
+      <form method="post" action="{{url('logincustomer')}}" role="login">
         {{csrf_field()}}
         <div class="container far27" >
           <ul class="signlist">

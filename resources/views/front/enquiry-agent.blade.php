@@ -19,7 +19,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label>Agent Contact:</label>
-                          <input type="number" id="agent_contact" class="form-control" value="{{$agent['mobile']}}" name="agent_contact"  readonly="">
+                          <input type="number" id="agent_contact" class="form-control" value="{{$agent['phone']}}" name="agent_contact"  readonly="">
                         </div> 
                       </div>
                     </div>

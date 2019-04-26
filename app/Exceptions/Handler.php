@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -13,7 +14,12 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -46,6 +52,27 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+        switch ($exception->getStatusCode()) {            
+            case '403':
+                return redirect()->route('notfound');
+                break;
+            // not found
+            case '404':
+                return redirect()->route('notfound');
+                break;
+
+            // internal error
+            case '500':
+                return redirect()->route('notfound');
+                break;
+
+            default:
+                return $this->renderHttpException($exception);
+                break;
+        }
+    } else {
         return parent::render($request, $exception);
+        }
     }
 }

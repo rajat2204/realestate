@@ -19,7 +19,7 @@ Route::get('/clear-cache', function() {
 });
 
 /***********************Front-Section****************************/
-
+Route::get('pagenotfound', ['as' => 'notfound', 'uses' => 'HomeController@pageNotFound']);
 Route::get('/','HomeController@index');
 Route::get('aboutus','HomeController@aboutUs');
 Route::post('paytm','HomeController@paytm');
@@ -42,7 +42,7 @@ Route::post('agentenquirysubmission','HomeController@agentEnquirySubmission');
 Route::post('agentcontact','HomeController@agentEnquiryModal');
 Route::get('search-properties','HomeController@propertyFinder');
 Route::post('signup','HomeController@signUp');
-Route::post('login','HomeController@customerLogin');
+Route::post('logincustomer','HomeController@customerLogin');
 Route::get('dashboard','HomeController@agentDashboard');
 Route::get('userdashboard','HomeController@clientDashboard');
 Route::post('paymentplan','HomeController@ajaxPaymentPlan');

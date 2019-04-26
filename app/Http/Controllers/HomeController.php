@@ -59,6 +59,11 @@ class HomeController extends Controller{
 		return view('front_home',$data);
     }
 
+    public function pageNotFound()
+    {
+        return view('errors.404');
+    }
+
     public function featuredProperty(Request $request){
         $data['view'] = 'front.all-featured-properties';
         $where = 'featured = "1" AND status = "active"';
