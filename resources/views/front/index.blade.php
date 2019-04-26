@@ -293,7 +293,7 @@
       </div>
       @endforeach
     </div>
-    @if(count($property_featured)>6)
+    @if(count($property_featured)>3)
     <div class="text-center m-b-10">
       <a class="btn btn-info" href="{{url('/featuredproperty')}}">Load More..</a>
     </div>
