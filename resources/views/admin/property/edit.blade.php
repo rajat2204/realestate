@@ -118,6 +118,7 @@
           <label for="image">Property Featured Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="featured_image" type="file">
+              <span class="image-size">File Size(1049X657 pixels)</span>
           </div>
           <div>
             <img style="max-width: 250px;" src="{{url('assets/img/properties')}}/{{$property['featured_image']}}" id="adminimg" alt="No Featured Image Added">
@@ -142,6 +143,7 @@
               @endforeach
             @endif
               <input type="file" id="gallery" accept="image/*" name="gallery[]" multiple/>
+              <span class="image-size">File Size(357X281 pixels)</span>
               <br>
               <p class="small-label">Multiple Image Allowed</p>
           </div>

@@ -65,6 +65,7 @@
               <label>Project Image:</label>
               <div>
                 <input type="file" id="images" accept="image/*" name="image">
+                <span class="image-size">File Size(358X220 pixels)</span>
                 <img style="max-width: 250px;" src="{{url('assets/img/Projects')}}/{{$project['image']}}" id="adminimg" alt="No Featured Image Added">
               </div>
             </div>
@@ -74,7 +75,8 @@
             <div class="form-group">
               <label>Project Layout Plan:</label>
               <div>
-                <input type="file" id="layoutplan" accept="image/*" name="layout">  
+                <input type="file" id="layoutplan" accept="image/*" name="layout">
+                <span class="image-size">File Size(358X220 pixels)</span>  
                 <img style="max-width: 250px;" src="{{url('assets/img/Project Layout')}}/{{$project['layout']}}" id="layoutimg" alt="No Featured Image Added">
               </div>
             </div>
@@ -84,7 +86,8 @@
             <div class="form-group">
               <label>Project Location Map:</label>
               <div>
-                <input type="file" id="locationmap" accept="image/*" name="locationmap">  
+                <input type="file" id="locationmap" accept="image/*" name="locationmap">
+                <span class="image-size">File Size(358X220 pixels)</span> 
                 <img style="max-width: 250px;" src="{{url('assets/img/Project Location Map')}}/{{$project['locationmap']}}" id="mapimg" alt="No Featured Image Added">
               </div>
             </div>

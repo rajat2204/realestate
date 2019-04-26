@@ -17,6 +17,7 @@
           <label>Service Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
+              <span class="image-size">File Size(310X195 pixels)</span>
           </div>
           <div>
             <img style="max-width: 250px;" src="{{url('assets/img/services')}}/{{$service['image']}}" id="adminimg" alt="No Featured Image Added">
