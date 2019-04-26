@@ -120,7 +120,7 @@
         });
        $(document).ready(function() {
           $('#our-agent').owlCarousel({
-            loop: true,
+            loop: false,
             margin: 30,
             nav: true,
             items: 4,
