@@ -1868,7 +1868,7 @@ section#products1 {
     color: #fff!important;
 }
 body.loginpg{
-background:linear-gradient(rgb(0,0,0,0.7), rgba(0,0,0,0.9) ) ,url('../img/properties/loginpg.jpg') ;
+background:url('../img/properties/loginpg.jpg') ;
 background-repeat: no-repeat;
 background-size: cover;
 background-position: center ,center;
