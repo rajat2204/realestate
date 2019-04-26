@@ -3113,7 +3113,7 @@ a.room-price {
     position: relative;
     z-index: 1;
     background: #f2f2f2;
-    padding: 50px 50px;
+    padding: 30px 30px;
     border: 1px solid #e1dddd;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.15);
 }
@@ -3146,7 +3146,7 @@ a.room-price {
   border-top-color: #02ad97;
 }
 .main-form .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     min-height: 35px;
 }
 .main-form .form-group .form-control, .main-form .form-group .btn-default {
@@ -3223,7 +3223,7 @@ a.room-price {
     border-radius: 5px !important;
     color: #fff;
     font-size: 18px;
-    margin: 10px 0 12px !important;
+    /*margin: 10px 0 12px !important;*/
     padding: 2px 20px !important;
     min-height: 55px;
     /*float: right;*/
