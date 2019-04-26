@@ -16,7 +16,7 @@
               <div class="service-media"> <img src="{{url('assets/img/services')}}/{{$services['image']}}" alt="service"> </div>
               <div class="service-desc">
                 <h3>{{$services['title']}}</h3>
-                <p>{{strip_tags($services['description'])}}</p>
+                <p title="{{strip_tags($services['description'])}}">{{strip_tags(str_limit($services['description'],85))}}</p>
               </div>
           </div>
         </div>
