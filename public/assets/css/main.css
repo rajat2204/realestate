@@ -2750,7 +2750,7 @@ p.contact_number {
 
 /* Testimonials Section */
 #testimonials {
-  padding: 30px 0 0;
+  padding: 30px 0 15px;
   background: #f2f2f2;
 }
 #testimonials i {
@@ -2761,6 +2761,9 @@ p.contact_number {
 .testimonial {
   position: relative;
   padding: 20px;
+}
+.testimonial-front{
+  padding: 0px 20px 20px;
 }
 .testimonial-image {
   float: left;
@@ -2947,7 +2950,7 @@ p.contact_number {
     position: relative;
     z-index: 1;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .section-heading h2 {
     font-size: 30px;
@@ -3038,7 +3041,8 @@ p.contact_number {
   box-shadow: 0 0 10px rgba(0,0,0,.4);
 }
 .feature-title {
-    padding-top: 20px;
+    padding-top: 5px;
+    /* padding: 10px 20px; */
 }
 .feature-title h5 {
     font-weight: 400;
@@ -3046,14 +3050,15 @@ p.contact_number {
 }
 .feature-title p {
     margin-bottom: 0;
+    font-size: 15px;
 }
 .room-info-warp {
-    padding: 25px;
+    padding: 5px 20px;
     padding-bottom: 0;
 }
 .room-info {
     border-top: 1px solid #ebebeb;
-    padding-top: 15px;
+    padding-top: 5px;
     overflow: hidden;
 }
 .room-info .rf-left {
@@ -3063,7 +3068,7 @@ p.contact_number {
     float: right;
 }
 .room-info p {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     color: #707070;
     font-size: 14px;
 }

@@ -431,7 +431,7 @@
     <div class="row">
       @foreach($testimonial as $testimonials)
       <div class="col-md-4 col-sm-6 col-xs-12">
-        <div class="testimonial">
+        <div class="testimonial testimonial-front">
           <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt=""> </div>
           <div class="testimonial-content">
             <p>"{{strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')}}"</p>
@@ -442,7 +442,7 @@
         @endforeach
     </div>
     @if(count($testimonial_load)>3)
-      <div class="text-center m-b-10">
+      <div class="text-center">
         <a class="btn btn-red" href="{{url('/testimonials')}}">Load More..</a>
       </div>
     @endif
@@ -496,7 +496,7 @@
           </div>
         </div>
         <div class="col-md-6 col-lg-6 col-sm-12">
-          <div class="footer-right-area wow fadeIn">
+          <!-- <div class="footer-right-area wow fadeIn">
             <h2>Contact Address</h2>
             <div class="footer-right-contact">
               <div class="single-contact">
@@ -525,12 +525,13 @@
                 <p><a href="tel:{{!empty($contact[0]['phone'])?$contact[0]['phone']:''}}">+91-{{!empty($contact[0]['whatsapp'])?$contact[0]['whatsapp']:''}}</a></p>
               </div>
             </div>
-          </div>
+          </div> -->
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.4695622912436!2d80.9487711145173!3d26.761298173035613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfb0c32f4ea69%3A0xed74a8ea3b48faf3!2sSKD+Academy+(CBSE%2C+Vrindavan)!5e0!3m2!1sen!2sin!4v1555930607947!5m2!1sen!2sin" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
           
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.4695622912436!2d80.9487711145173!3d26.761298173035613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfb0c32f4ea69%3A0xed74a8ea3b48faf3!2sSKD+Academy+(CBSE%2C+Vrindavan)!5e0!3m2!1sen!2sin!4v1555930607947!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>   
