@@ -234,7 +234,7 @@
           <div class="section-heading wow fadeInUp">
               <h2>Featured Properties</h2>
               <img src="{{url('assets/img/underline.png')}}" alt="line">
-              <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p>
+              <!-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> -->
           </div>
       </div>
     </div>
