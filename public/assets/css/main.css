@@ -2856,6 +2856,7 @@ p.contact_number {
     padding: 15px;
     margin-top: 10px;
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 /*sidebar social icons*/
