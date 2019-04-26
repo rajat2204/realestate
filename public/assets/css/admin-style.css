@@ -7,6 +7,9 @@
 span.admin-color {
     color: red;
 }
+span.image-size {
+    font-weight: bold;
+}
 .skin-blue .user-panel>.info, .skin-blue .user-panel>.info>a {
     color: #fff;
     line-height: 37px;
@@ -213,3 +216,4 @@ div.configs
         text-align: center;
     }
 }
+
