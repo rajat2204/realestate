@@ -48,7 +48,7 @@ class HomeController extends Controller{
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
-        $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',6));
+        $data['property'] = _arefy(Property::list('array',$where,['*'],'id-desc',3));
         $data['property_featured'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
         $where = 'status = "active"';
         $data['remarkablework'] = _arefy(Property::list('array',$where,['*'],'id-desc',9));
