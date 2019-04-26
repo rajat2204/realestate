@@ -42,7 +42,7 @@ class HomeController extends Controller{
     	$data['view']='front.index';
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $where = 'status = "active"';
-        $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc',9));
+        $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc',3));
         $data['testimonial_load'] = _arefy(Testimonials::list('array',$where,['*'],'id-asc'));
         $data['agent'] = _arefy(Agents::where('status','active')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
@@ -53,7 +53,7 @@ class HomeController extends Controller{
         $where = 'status = "active"';
         $data['remarkablework'] = _arefy(Property::list('array',$where,['*'],'id-desc',9));
         $where = 'status = "active"';
-        $data['service'] = _arefy(Services::list('array',$where,['*'],'id-asc',6));
+        $data['service'] = _arefy(Services::list('array',$where,['*'],'id-asc',3));
         $data['service_load'] = _arefy(Services::list('array',$where,['*'],'id-asc'));
         $data['notice'] = _arefy(Notice::list('array',$where,['*'],'id-desc',3));
 		return view('front_home',$data);

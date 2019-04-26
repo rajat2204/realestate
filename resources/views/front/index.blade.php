@@ -327,7 +327,7 @@
         </div>
         @endforeach
       </div>
-      @if(count($service_load)>6)
+      @if(count($service_load)>3)
       <div class="text-center m-b-10">
         <a class="btn btn-red" href="{{url('/services')}}">Load More..</a>
       </div>
@@ -441,7 +441,7 @@
       </div>
         @endforeach
     </div>
-    @if(count($testimonial_load)>9)
+    @if(count($testimonial_load)>3)
       <div class="text-center m-b-10">
         <a class="btn btn-red" href="{{url('/testimonials')}}">Load More..</a>
       </div>
