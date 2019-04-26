@@ -33,7 +33,7 @@ class LoginController extends Controller
                     $this->status   = true;
                     $this->modal    = true;
                     $this->alert    = true;
-                    $this->message  = "Admin Logged In Successfully !!!";
+                    $this->message  = "Successfully Logged In!!!";
                     $this->redirect = url('admin/home');
                }else{
                     \Session::flush();
