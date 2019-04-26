@@ -51,7 +51,7 @@
   </div>
    <div class="header_wrapper_mobile clearfix">
         <div class="vertical_slides_mobile">
-            <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
+            <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
                 @php
                 $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
@@ -69,7 +69,7 @@
         </div>
        
         <div class="vertical_slides_mobile2">
-            <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
+            <ul class="slides"  id="vertical_slider4"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
                 @php
                 $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
@@ -294,7 +294,7 @@
       @endforeach
     </div>
     @if(count($property_featured)>6)
-    <div class="text-center">
+    <div class="text-center m-b-10">
       <a class="btn btn-info" href="{{url('/featuredproperty')}}">Load More..</a>
     </div>
     @endif
@@ -316,7 +316,7 @@
       </div>
       <div class="row">
         @foreach($service as $services)
-        <div class="col-md-4 col-sm-6">
+        <div class="col-lg-4 col-md-6">
           <div class="our_services">
               <div class="service-media"> <img src="{{url('assets/img/services')}}/{{$services['image']}}" alt="service"> </div>
               <div class="service-desc">
@@ -328,8 +328,8 @@
         @endforeach
       </div>
       @if(count($service_load)>6)
-      <div class="text-center">
-        <a class="btn btn-info" href="{{url('/services')}}">Load More..</a>
+      <div class="text-center m-b-10">
+        <a class="btn btn-red" href="{{url('/services')}}">Load More..</a>
       </div>
       @endif
     </div>
@@ -442,8 +442,8 @@
         @endforeach
     </div>
     @if(count($testimonial_load)>9)
-      <div class="text-center">
-        <a class="btn btn-info" href="{{url('/testimonials')}}">Load More..</a>
+      <div class="text-center m-b-10">
+        <a class="btn btn-red" href="{{url('/testimonials')}}">Load More..</a>
       </div>
     @endif
   </div>

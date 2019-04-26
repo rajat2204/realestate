@@ -58,7 +58,7 @@
   }
 
   #testimonials {
-      padding: 40px 0;
+      padding: 20px 0;
   }
 
   .testimonial {
@@ -89,6 +89,9 @@
   .section-title {
     font-size: 30px;
     margin-bottom: 30px;
+  }
+  #filter-search{
+    padding-top: 0;
   }
   .tableLeft{
     float: none;
@@ -130,19 +133,19 @@
     padding-top: 0;
   }
   .featured-properties-area {
-      padding: 40px 0 20px;
+      padding: 30px 0 20px;
   }
   .gallery-wrap {
-      padding: 30px 0 14px;
+      padding: 20px 0 14px;
   }
   #contact{
     padding: 10px 0 30px;
   }
   #agents {
-    padding: 35px 0 50px;
+    /*padding: 35px 0 50px;*/
   }
   #services {
-    padding: 15px 0;
+    padding: 23px 0 20px;
   }
   #header-wrap {
       height: 55px;
@@ -260,6 +263,12 @@
     font-size: 22px;
     margin-bottom: 30px;
   }
+  .vertical_slides_mobile{
+    padding-top: 0;
+  }
+  .vertical_slides_mobile2{
+    padding-top: 0;
+  }
   .top-nav-collapse .navbar-brand img{
     width: 90%;
   }
@@ -349,7 +358,7 @@
     margin: -12px -40px;
   }
   .contact-form-area {
-    padding: 40px 0px;
+    /*padding: 40px 0px;*/
   }
   .footer-right-area {
     margin-top: 20px;
@@ -390,8 +399,32 @@
   .our_services{
     margin-bottom: 15px;
   }
+  .vertical_slides_mobile .slides li{
+    padding: 4px 4px 4px 15px;
+  }
+  .vertical_slides_mobile2 li{
+    padding: 4px 15px 4px 13px;
+  }
+  #services h3{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    min-height: auto;
+  }
   #services .service-desc{
     height:auto;
+  }
+  p.contact_number{
+    float:none;
+  }
+  p.slider_title{
+    float:none;
+  }
+  .slides li p{
+    font-size: 12px;
+    line-height: 14px !important;
+  }
+  .horizontal_slider .item p{
+    font-size: 12px;
   }
   .agentprofile {
       padding: 5px;
@@ -428,10 +461,10 @@
     padding: 0 0;
   }
   .gallery-wrap {
-    padding: 40px 0 20px;
+    padding: 20px 0 20px;
   }
   #agents {
-      padding: 50px 0;
+      /*padding: 50px 0;*/
   }
   .button_search1{
     min-height: 45px;
@@ -480,7 +513,7 @@
     padding-top: 35px;
   }
   #filter-search {
-      margin-bottom: 30px;
+      margin-bottom: 20px;
   }
   .footer-text{
     margin-bottom: 0;

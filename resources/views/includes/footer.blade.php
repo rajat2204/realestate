@@ -6,7 +6,7 @@
       <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12">
         <div class="footer-text">
           <div class="menus_footer">
-            <h3>About <span style="color: #02ad97">R</span>eal <span style="color: #02ad97">E</span>state</h3>
+            <h3><span style="color: #02ad97">A</span>bout <span style="color: #02ad97">R</span>eal <span style="color: #02ad97">E</span>state</h3>
           </div>
           <div class="footer-about">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

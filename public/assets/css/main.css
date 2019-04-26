@@ -467,7 +467,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 .subscribe-btn{
   position: absolute;
-  top: 1px;
+  top: 0px;
   right: 0;
 }
 .subscribe-btn button {
@@ -477,8 +477,8 @@ a.back-to-top:hover, a.back-to-top:focus {
     bottom: 1px;
 }
 .subscribe-btn button:hover{
-  background-color: #2e9db3;
-  border-left: 1px solid #2e9db3;
+  background-color: #50beda;
+  border-left: 1px solid #50beda;
 }
 /*.subscribe-btn button:hover i{
   color: #12b6d7;
@@ -1247,11 +1247,13 @@ a {
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
+  color: #50beda;
   transition: all 0.2s linear;
 }
 
 a:hover {
   text-decoration: none;
+  color:#08af9a;
 }
 
 a a:focus {
@@ -1690,6 +1692,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 
 .top-nav-collapse .navbar-brand img {
   /*width: 50%;*/
+  padding: 5px;
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
@@ -1725,7 +1728,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link i:hover {
-  color: #127eab;
+  color: #98100a;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -1733,6 +1736,8 @@ a.back-to-top:hover, a.back-to-top:focus {
   font-weight: 700;
   padding: 0 17px;
   margin-top: 15px;
+  font-family: "Open Sans",sans-serif;
+  font-size: 13px; 
   margin-bottom: 15px;
   line-height: 40px;
   text-transform: uppercase;
@@ -2249,7 +2254,7 @@ img.form-control.slide-image {
 #contact {
   position: relative;
   overflow: hidden;
-  padding: 0px 0 30px;
+  padding: 20px 0 30px;
   background: #f2f2f2;
 }
 
@@ -2706,12 +2711,14 @@ p.contact_number {
 }
 #services .service-media {
   margin: 10px;
+  /*width: 310px;*/
+  height: 195px;
 }
 #services .service-media img {
   position: relative;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 #services .service-desc {
   margin: 10px 10px 20px;
@@ -2791,7 +2798,9 @@ p.contact_number {
   float: left;
   margin: 0 0 0 16px;
 }
-
+.right-space .navbar-nav{
+  margin-top: 0;
+}
 .notice_title p {
     font-size: 18px;
     font-weight: 600;
@@ -2886,13 +2895,19 @@ p.contact_number {
 .fixed-social-icon .social-icon li {
     display: block;
 }
+.btn-red:hover {
+    color: #02ad97;
+}
+.m-b-10{
+  margin-bottom: 20px;
+}
 .share_with {
     /* border-radius: 50%; */
     text-align: center;
     font-size: 13px;
     margin-bottom: 12px;
     position: relative;
-    background: #3f353d;
+    background: #07af99;
     display: inline-block;
     vertical-align: middle;
     position: absolute;
@@ -2922,7 +2937,9 @@ p.contact_number {
 }
 .phone_header{
   float:left;
+  padding-top: 2px;
 }
+
 .phone_header a{
   color:#fff;
 }
@@ -3226,7 +3243,7 @@ a.room-price {
   color: #02ad97;
 }
 .copyright_footer p a:hover{
-  color: #239eb8;
+  color: #50beda;
 }
 .copyright_footer p{
   color:#fff;
@@ -3633,7 +3650,11 @@ select:focus{
   margin: 0;
 }
 .contact-modal .modal-header img{
-  width: 90px;
+  width: 60px;
+}
+.btn-red{
+  background-color:#9c100a;
+  border-color:#9c100a;
 }
 .modalWrapper .form-group{
   margin-bottom: 10px;

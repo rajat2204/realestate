@@ -28,7 +28,7 @@
 							<input type="text" name="name" placeholder="Enter name">	
 							<input type="email" name="email" placeholder="Enter Email">	
 							<input type="text" name="mobile" placeholder="Mobile ">		
-							<button type="button" class="btn btn-success" data-request="ajax-submit" data-target='[role="plotenquiryform"]'> Connect with Builder</button>
+							<button type="button" class="btn btn-red" data-request="ajax-submit" data-target='[role="plotenquiryform"]'> Connect with Builder</button>
 						</div>	
 					</div>
 				</div>
@@ -273,7 +273,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+        <img src="{{url('assets/img/logo.png')}}" alt="Devdrishti Infrahomes" height="60">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
      
@@ -290,7 +290,7 @@
 									<input type="text" name="name" placeholder="Enter name">	
 									<input type="email" name="email" placeholder = "Enter Email">	
 									<input type="text" name="mobile" placeholder= "Mobile ">		
-									<button type="button" class="btn btn-success" data-request="ajax-submit" data-target='[role="plotenquiry"]'> Connect with Builder</button>
+									<button type="button" class="btn btn-red" data-request="ajax-submit" data-target='[role="plotenquiry"]'> Connect with Builder</button>
 								</div>	
 							</div>
 						</div>
