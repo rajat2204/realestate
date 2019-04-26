@@ -23,6 +23,7 @@
           <label for="image">Testimonial's Featured Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
+              <span class="image-size">File Size(64X64 pixels)</span>
           </div>
           <div>
             <img style="max-width: 250px;" src="{{url('assets/img/testimonials')}}/{{$testimonial['image']}}" id="adminimg" alt="No Featured Image Added">

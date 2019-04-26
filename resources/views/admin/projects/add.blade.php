@@ -59,6 +59,7 @@
               <label>Project Image:</label>
               <div>
                 <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
+                <span class="image-size">File Size(358X220 pixels)</span>
               </div>
               <div>
                 <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added">
@@ -71,6 +72,7 @@
               <label>Project Layout Plan:</label>
               <div>
                   <input onchange="readURLLayout(this)" id="layoutplan" accept="image/*" name="layout" type="file">
+                  <span class="image-size">File Size(358X220 pixels)</span>
               </div>
               <div>
                 <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="layoutimg" alt="No Featured Image Added">
@@ -82,6 +84,7 @@
               <label>Project Location Map:</label>
               <div>
                   <input onchange="readURLLocation(this)" id="locationmap" accept="image/*" name="locationmap" type="file">
+                  <span class="image-size">File Size(358X220 pixels)</span>
               </div>
               <div>
                 <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="mapimg" alt="No Featured Image Added">
