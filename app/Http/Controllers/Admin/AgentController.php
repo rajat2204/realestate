@@ -52,13 +52,26 @@ class AgentController extends Controller
                         data-url="'.url(sprintf('admin/agent/status/?id=%s&status=inactive',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/inactive-user.png').'"
-                        data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a>';
+                        data-ask="Would you like to change '.$item['name'].' status from Active to Inactive?" title="Update Status"><i class="fa fa-fw fa-ban"></i></a> |';
                 }elseif($item['status'] == 'inactive'){
                     $html   .= '<a href="javascript:void(0);" 
                         data-url="'.url(sprintf('admin/agent/status/?id=%s&status=active',$item['id'])).'" 
                         data-request="ajax-confirm"
                         data-ask_image="'.url('assets/img/active-user.png').'"
                         data-ask="Would you like to change '.$item['name'].' status from Inactive to Active?" title="Update Status"><i class="fa fa-fw fa-check"></i></a> | ';
+                }
+                if($item['approved'] == 'yes'){
+                    $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/agent/approval/?id=%s&approved=no',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/disapproved.jpg').'"
+                        data-ask="Would you like to Disapprove?" title="Update Approval Status"><i class="fa fa-fw fa-ban"></i></a>';
+                }elseif($item['approved'] == 'no'){
+                    $html   .= '<a href="javascript:void(0);" 
+                        data-url="'.url(sprintf('admin/agent/approval/?id=%s&approved=yes',$item['id'])).'" 
+                        data-request="ajax-confirm"
+                        data-ask_image="'.url('assets/img/approved.png').'"
+                        data-ask="Would you like to Approve?" title="Update Approval Status"><i class="fa fa-fw fa-check"></i></a> | ';
                 }
                 $html   .= '</div>';
                                 
@@ -69,6 +82,9 @@ class AgentController extends Controller
             })
             ->editColumn('name',function($item){
                 return ucfirst($item['name']);
+            })
+            ->editColumn('approved',function($item){
+                return ucfirst($item['approved']);
             })
             ->editColumn('phone',function($item){
                 return '+91-' .$item['phone'];
@@ -135,6 +151,7 @@ class AgentController extends Controller
             ->addColumn(['data' => 'phone', 'name' => 'phone','title' => 'Agent Mobile','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'address', 'name' => 'address','title' => 'Agent Address','orderable' => false, 'width' => 120])
              ->addColumn(['data' => 'balance','name' => 'balance','title' => 'Balance','orderable' => false, 'width' => 120])           
+             ->addColumn(['data' => 'approved','name' => 'approved','title' => 'Approved','orderable' => false, 'width' => 120])           
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
@@ -391,6 +408,22 @@ class AgentController extends Controller
 
     public function changeStatus(Request $request){
         $userData                = ['status' => $request->status, 'updated_at' => date('Y-m-d H:i:s')];
+        $isUpdated               = Agents::change($request->id,$userData);
+
+        if($isUpdated){
+            if($request->status == 'trashed'){
+                $this->message = 'Deleted Agent successfully.';
+            }else{
+                $this->message = 'Updated Agent successfully.';
+            }
+            $this->status = true;
+            $this->redirect = true;
+            $this->jsondata = [];
+        }
+        return $this->populateresponse();
+    }
+    public function changeApprovalStatus(Request $request){
+        $userData                = ['approved' => $request->approved, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = Agents::change($request->id,$userData);
 
         if($isUpdated){

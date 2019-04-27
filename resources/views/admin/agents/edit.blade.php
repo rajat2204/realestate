@@ -197,7 +197,7 @@
               <input type="text" class="form-control" placeholder="Enter Rank" name="rank" value="{{!empty($agent['rank'])?$agent['rank']:''}}">
             </div>
           </div>
-        </div> 
+        </div>
         <div class="box-footer">
           <a href="{{url('admin/agent')}}" class="btn btn-default">Cancel</a>
           <button type="button" data-request="ajax-submit" data-target='[role="edit-agent"]' class="btn btn-info pull-right">Submit</button>
