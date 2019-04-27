@@ -207,6 +207,49 @@ div.configs
 {
     padding:10px auto;
 }
+.row.white_box_wrapper.database_table.table-responsive{
+    background-color: #fff;
+}
+@media only screen and (max-width: 767px){
+  .navbar-nav {
+    margin: 7.5px 6px !important;
+  }
+  .dropdown-menu.arrow:before{
+    display: none;
+  }
+  .dropdown-menu.userinfo li.username .pull-right small {
+    color: #040404;
+  }
+  .navbar-nav .open .dropdown-menu {
+         position: absolute; 
+         float: none; 
+        width: auto;
+        margin-top: 0;
+        background-color: #3c8dbc;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    .box_xs{
+        margin: 100px auto;
+        width: 90%;
+        height: 340px;
+    }
+    .box_xs .form-row .form-group{
+        margin-bottom: 8px;
+
+    }
+    .row.white_box_wrapper.database_table.table-responsive {
+        margin-left: 0;
+    }
+    #dataTableBuilder_wrapper .col-xs-7{
+        width: auto;
+    }
+    /*.skin-blue .main-header .navbar {
+        background-color: transparent !important;
+    }*/
+}
+
 @media only screen and (max-width: 576px){
     .classFloat{
         float: none;

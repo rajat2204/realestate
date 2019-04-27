@@ -20,7 +20,7 @@
 	 	<link rel="stylesheet" href="{{asset('assets/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
 	  	<!-- Theme style -->
 	  	<link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
-	  	
+	  	<link rel="stylesheet" href="{{asset('assets/css/admin-style.css')}}">
 	  	<link rel="stylesheet" href="{{asset('assets/css/sweetalert2.css')}}">
 	  	<!-- Google Font -->
 	</head>
