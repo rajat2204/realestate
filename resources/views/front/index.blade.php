@@ -2,13 +2,15 @@
 <header id="hero-area">
   <div class="header_wrapper clearfix">
     <div class="vertical_slides">
-      <ul class="slides"  id="vertical_slider"  class="mCustomScrollbar" 
+      
+      <ul class="slides mCustomScrollbar"  id="vertical_slider"  
           data-mcs-theme="dark">
+          <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
           @php
             $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
           @endphp  
           @foreach($slider as $sliders)
-          <li>
+          <li class="item">
             <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
             <div class="sliderwrap clearfix">
               <p class="slider_title">{{$sliders['title']}}</p>
@@ -16,7 +18,9 @@
             </div>
           </li>
           @endforeach
+        </marquee>
       </ul>
+      
     </div>
     <div class="horizontal_slider">
       <div id="hero_slider" class="owl-carousel">
@@ -32,8 +36,9 @@
       </div>
     </div>
     <div class="vertical_slides2">
-      <ul class="slides"  id="vertical_slider2"  class="mCustomScrollbar" 
+      <ul class="slides mCustomScrollbar"  id="vertical_slider2" 
           data-mcs-theme="dark">
+          <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
         @php
           $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
         @endphp
@@ -46,13 +51,15 @@
             </div>
           </li>
         @endforeach
+      </marquee>
       </ul>
     </div>
   </div>
    <div class="header_wrapper_mobile clearfix">
         <div class="vertical_slides_mobile">
-            <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar" 
+            <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar owl-carousel" 
                 data-mcs-theme="dark">
+                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @php
                 $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
                 @endphp  
@@ -65,12 +72,14 @@
                   </div>
                 </li>
                 @endforeach
+              </marquee>
             </ul>
         </div>
        
         <div class="vertical_slides_mobile2">
             <ul class="slides"  id="vertical_slider4"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
+                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @php
                 $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
                 @endphp
@@ -83,6 +92,7 @@
                     </div>
                   </li>
                 @endforeach
+              </marquee>
             </ul>
         </div>
     </div>

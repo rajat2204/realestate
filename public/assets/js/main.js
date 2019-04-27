@@ -226,9 +226,10 @@ $(document).ready(function(){
                   // items:4,
                   loop:true,
                   // margin:10,
-                  // autoplaySpeed: 1000,
+                  slideTransition: 'linear',
+                  autoplaySpeed: 2000,
                   autoplay:true,
-                  autoplayTimeout:1500,
+                  autoplayTimeout:3000,
                   autoplayHoverPause:true,
                   responsive: {
                     0: {
@@ -249,7 +250,7 @@ $(document).ready(function(){
                 }
               });
               $('#notice_slider').on('mouseleave',function(){
-                  owl.trigger('play.owl.autoplay',[1500])
+                  owl.trigger('play.owl.autoplay',[2000])
               })
               $('#notice_slider').on('mouseover',function(){
                   owl.trigger('stop.owl.autoplay')
@@ -328,4 +329,6 @@ $('.share_with a').on('click',function(){
             console.log('open');
         });
   });
+
+  
  
