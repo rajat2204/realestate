@@ -5,20 +5,36 @@
       
       <ul class="slides mCustomScrollbar"  id="vertical_slider"  
           data-mcs-theme="dark">
-          <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
+          
           @php
             $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
-          @endphp  
-          @foreach($slider as $sliders)
-          <li class="item">
-            <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
-            <div class="sliderwrap clearfix">
-              <p class="slider_title">{{$sliders['title']}}</p>
-              <p class="contact_number">+91-{{$sliders['mobile']}}</p>
-            </div>
-          </li>
-          @endforeach
-        </marquee>
+            $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
+          @endphp
+          @if($count>2)
+            <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">  
+              @foreach($slider as $sliders)
+              <li class="item">
+                <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+                <div class="sliderwrap clearfix">
+                  <p class="slider_title">{{$sliders['title']}}</p>
+                  <p class="contact_number">+91-{{$sliders['mobile']}}</p>
+                </div>
+              </li>
+              @endforeach
+            </marquee>
+          @else
+
+            @foreach($slider as $sliders)
+            <li class="item">
+              <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+              <div class="sliderwrap clearfix">
+                <p class="slider_title">{{$sliders['title']}}</p>
+                <p class="contact_number">+91-{{$sliders['mobile']}}</p>
+              </div>
+            </li>
+            @endforeach
+            
+          @endif
       </ul>
       
     </div>
@@ -38,20 +54,34 @@
     <div class="vertical_slides2">
       <ul class="slides mCustomScrollbar"  id="vertical_slider2" 
           data-mcs-theme="dark">
-          <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
         @php
           $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
+          $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
         @endphp
-        @foreach($sliderright as $slidersrit)
-          <li>
-            <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
-            <div class="sliderwrap clearfix">
-              <p class="slider_title">{{$slidersrit['title']}}</p>
-              <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
-            </div>
-          </li>
-        @endforeach
-      </marquee>
+         @if($count>2)
+          <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
+          @foreach($sliderright as $slidersrit)
+            <li>
+              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+              <div class="sliderwrap clearfix">
+                <p class="slider_title">{{$slidersrit['title']}}</p>
+                <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
+              </div>
+            </li>
+          @endforeach
+          </marquee>
+           @else
+
+            @foreach($slider as $sliders)
+              <li>
+                <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+                <div class="sliderwrap clearfix">
+                  <p class="slider_title">{{$slidersrit['title']}}</p>
+                  <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
+                </div>
+              </li>
+            @endforeach
+          @endif
       </ul>
     </div>
   </div>
@@ -59,10 +89,13 @@
         <div class="vertical_slides_mobile">
             <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar owl-carousel" 
                 data-mcs-theme="dark">
-                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @php
                 $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
-                @endphp  
+                $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
+
+                @endphp
+                @if($count>2)  
+                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @foreach($slider as $sliders)
                 <li>
                   <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
@@ -73,16 +106,31 @@
                 </li>
                 @endforeach
               </marquee>
+              @else
+
+              @foreach($slider as $sliders)
+              <li>
+                  <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+                  <div class="sliderwrap clearfix">
+                    <p class="slider_title">{{$sliders['title']}}</p>
+                    <p class="contact_number">+91-{{$sliders['mobile']}}</p>
+                  </div>
+                </li>
+              @endforeach
+              @endif
             </ul>
         </div>
        
         <div class="vertical_slides_mobile2">
             <ul class="slides"  id="vertical_slider4"  class="mCustomScrollbar" 
                 data-mcs-theme="dark">
-                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @php
                 $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
+                $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
+
                 @endphp
+                @if($count>2) 
+                <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @foreach($sliderright as $slidersrit)
                   <li>
                     <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
@@ -93,6 +141,18 @@
                   </li>
                 @endforeach
               </marquee>
+              @else
+
+              @foreach($slider as $sliders)
+                <li>
+                  <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+                  <div class="sliderwrap clearfix">
+                    <p class="slider_title">{{$slidersrit['title']}}</p>
+                    <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
+                  </div>
+                </li>
+              @endforeach
+              @endif
             </ul>
         </div>
     </div>
