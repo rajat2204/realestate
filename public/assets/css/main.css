@@ -3555,10 +3555,15 @@ margin-top: 75px;
 }
 ul.shubhX button {
     border: none;
-    background: transparent;
+    background: #009688;
     color: #fff;
+    padding: 0 11px;
+    border-radius: 3px;
     cursor: pointer;
 }
+/*.marquee {
+  height: 300px;
+}*/
 ul.shubhX{
     display: -webkit-inline-box;
     padding:0px 14px;
