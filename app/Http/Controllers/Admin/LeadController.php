@@ -73,7 +73,7 @@ class LeadController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'email', 'name' => 'email','title' => 'E-mail','orderable' => false, 'width' => 120])
@@ -126,7 +126,7 @@ class LeadController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
@@ -194,7 +194,7 @@ class LeadController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'image', 'name' => 'image',"render"=> 'data','title' => 'Property Image','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Name','orderable' => false, 'width' => 120])
@@ -254,7 +254,7 @@ class LeadController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'agent_name', 'name' => 'agent_name','title' => 'Agent Name','orderable' => false, 'width' => 120])
@@ -313,7 +313,7 @@ class LeadController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             // ->addColumn(['data' => 'id', 'name' => 'id','title' => 'Id','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'slider_name', 'name' => 'slider_name','title' => 'Slider Name','orderable' => false, 'width' => 120])

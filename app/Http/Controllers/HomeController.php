@@ -98,7 +98,6 @@ class HomeController extends Controller{
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $where = 'slug = "'.$slug.'"';
         $data['property'] = _arefy(Property::list('single',$where));
-        // dd($data['property']);
         return view('single_page',$data);
     }
 
@@ -139,7 +138,6 @@ class HomeController extends Controller{
         $data['view'] = 'front.termsandconditions';
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['static'] = _arefy(Static_pages::where('status','active')->get());
-        // dd($data['static']);
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -168,7 +166,6 @@ class HomeController extends Controller{
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $data['agent'] = _arefy(Agents::where('id',$id)->first());
-        // dd($data['agent']);
         $data['view'] = 'front.enquiry-agent';
         return view('front_home',$data);
     }
@@ -178,7 +175,6 @@ class HomeController extends Controller{
         $data['social'] = _arefy(SocialMedia::where('status','active')->get());
         $where = 'status = "active"';
         $data['project'] = _arefy(Project::list('array',$where,['*'],'id-desc'));
-        // dd($data['project']);
         $data['view'] = 'front.projects';
         return view('front_home',$data);
     }
@@ -190,7 +186,6 @@ class HomeController extends Controller{
         $where = 'status = "active"';
         $where .= 'AND project_id ="'.$id.'"';
         $data['projectproperty'] = _arefy(Property::list('array',$where,['*'],'id-desc'));
-        // dd($data['projectproperty']);
         $data['view'] = 'front.projectproperties';
         return view('front_home',$data);
     }
@@ -232,10 +227,12 @@ class HomeController extends Controller{
            
             curl_close($ch);
 
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
+
             $admin = curl_init();
             curl_setopt($admin, CURLOPT_URL, $pingurl);
             curl_setopt($admin, CURLOPT_POST, 1);
-            curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
             curl_setopt($admin, CURLOPT_RETURNTRANSFER, true);
             $result_admin = curl_exec($admin);
            
@@ -271,11 +268,12 @@ class HomeController extends Controller{
             $message="From your Portal, you have got an enquiry from ".ucfirst($data['name']).". The Customer's contact number is ".$data['mobile'].". You can contact ".ucfirst($data['name'])." regarding any query. You have also got the lead regarding Property Enquiry in your admin panel. -Devdrishti Infrahomes Pvt.Ltd.";
 
             $pingurl = "skycon.bulksms5.com/sendmessage.php";
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $pingurl);
             curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7651827761 . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = curl_exec($ch);
            
@@ -324,10 +322,12 @@ class HomeController extends Controller{
            
             curl_close($ch);
 
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
+
             $admin_agent = curl_init();
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
-            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
             curl_setopt($admin_agent, CURLOPT_RETURNTRANSFER, true);
             $result_agent = curl_exec($admin_agent);
            
@@ -376,10 +376,12 @@ class HomeController extends Controller{
            
             curl_close($ch);
 
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
+
             $admin_agent = curl_init();
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
-            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . 7510085144 . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
             $result_agent = curl_exec($admin_agent);
            
             curl_close($admin_agent);
@@ -600,8 +602,6 @@ class HomeController extends Controller{
             $data['city']     = $request->filter_city;
             $data['view']     = 'front.property-list';
             return view('front_home',$data);
-        // }
-        //     return $this->populateresponse();
     }
 
     public function agentDashboard(Request $request){
@@ -611,7 +611,6 @@ class HomeController extends Controller{
         $whereProperty = 'agent_id = '.$data['agent']['id'];
         $data['soldProperty'] = _arefy(Deals::list('array',$whereProperty));
         $data['agentwallet'] = _arefy(Agents_Wallets::where('agents_id',$data['agent']['id'])->get());
-        // dd($data['agentwallet']);
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         return view('front_home',$data);
     }
@@ -639,7 +638,6 @@ class HomeController extends Controller{
         $client = _arefy(Clients::list('single',$where));
         $whereProperty = 'client_id = '.$client['id'];
         $purchased = _arefy(Deals::list('single',$whereProperty));
-        // dd($purchased);
         $planview = view('front.template.ajaxpaymentplan',compact('purchased'));
         return Response($planview);
     }

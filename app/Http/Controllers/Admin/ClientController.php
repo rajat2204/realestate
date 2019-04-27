@@ -99,7 +99,7 @@ class ClientController extends Controller
 
         $data['html'] = $builder
             ->parameters([
-                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-4'l><'col-md-6 col-sm-12 col-xs-4'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
+                "dom" => "<'row' <'col-md-6 col-sm-12 col-xs-6'l><'col-md-6 col-sm-12 col-xs-6'f>><'row filter'><'row white_box_wrapper database_table table-responsive'rt><'row' <'col-md-6'i><'col-md-6'p>>",
             ])
             ->addColumn(['data' => 'photo', 'name' => 'photo',"render"=> 'data','title' => 'Client photo','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'name', 'name' => 'name','title' => 'Client Name','orderable' => false, 'width' => 120])
