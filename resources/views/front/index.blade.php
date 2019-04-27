@@ -353,7 +353,7 @@
     <div class="row">
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
-                  <h2>Our Agents</h2>
+                  <h2>Our Team</h2>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
                   
               </div>
@@ -366,7 +366,11 @@
               @foreach($agent as $agents)
                 <div class="item agentSpace">
                   <div>
-                    <a href="{{url('agentenquiry')}}/{{___encrypt($agents['id'])}}"><img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent"></a>
+                    @if(!empty($agents['image']))
+                      <a href="{{url('agentenquiry')}}/{{___encrypt($agents['id'])}}"><img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent"></a>
+                    @else
+                      <img src="{{url('assets/img/dummy_avatar.png')}}" alt="agent">
+                    @endif
                   </div>
                   <div class="agentContent">
                     <div class="agent_name">{{$agents['name']}}</div>

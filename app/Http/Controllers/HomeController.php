@@ -44,7 +44,7 @@ class HomeController extends Controller{
         $where = 'status = "active"';
         $data['testimonial'] = _arefy(Testimonials::list('array',$where,['*'],'id-desc',3));
         $data['testimonial_load'] = _arefy(Testimonials::list('array',$where,['*'],'id-asc'));
-        $data['agent'] = _arefy(Agents::where('status','active')->get());
+        $data['agent'] = _arefy(Agents::where('status','active')->where('approved','yes')->get());
         $data['contact'] = _arefy(Contact::where('status','active')->get());
         $data['categories'] = _arefy(PropertyCategories::where('status','active')->get());
         $where = 'featured = "1" AND status = "active"';
@@ -513,11 +513,42 @@ class HomeController extends Controller{
             $agentdata['name']                      =!empty($request->first_name)?$request->first_name:'';
             $agentdata['email']                     =!empty($request->email)?$request->email:'';
             $agentdata['phone']                     =!empty($request->phone)?$request->phone:'';
+            $agentdata['approved']                  ='no';
             $agentdata['password']                  =Hash::make(!empty($request->password)?$request->password:'');
             $agentdata['created_at']                = date('Y-m-d H:i:s');
             $agentdata['updated_at']                = date('Y-m-d H:i:s');
 
             $clientdata = Agents::add($agentdata);
+
+            $username="AMREESH@25"; 
+            $password="AMREESH@25";
+            $sender="AMRESH";
+
+            $message="Dear " .$agentdata['name']. ",you have successfully registered on our portal. Please wait for the approval of the admin. You will get the approval shortly. -Devdrishti Infrahomes Pvt. Ltd.";
+
+            $message_admin="From your Portal,an Agent named " .$agentdata['name']. " has registered whose Contact Number is " .$agentdata['phone']. " and E-mail Id is " .$agentdata['email']. " .Please verify and approve the agent. -Devdrishti Infrahomes Pvt. Ltd.";
+
+            $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $pingurl);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $agentdata['phone'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $result = curl_exec($ch);
+           
+            curl_close($ch);
+
+            $data['contact'] = _arefy(Contact::where('status','active')->get());
+
+            $admin_agent = curl_init();
+            curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
+            curl_setopt($admin_agent, CURLOPT_POST, 1);
+            curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message_admin) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_RETURNTRANSFER, true);
+            $result_agent = curl_exec($admin_agent);
+           
+            curl_close($admin_agent);
 
             $this->status   = true;
             $this->modal    = true;

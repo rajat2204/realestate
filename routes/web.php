@@ -183,6 +183,7 @@ Route::get('agent/wallet_history','AgentController@walletHistory');
 Route::resource('agent', 'AgentController');
 Route::group(['prefix' => 'agent'],function(){
 	Route::post('/status', 'AgentController@changeStatus');
+	Route::post('/approval', 'AgentController@changeApprovalStatus');
     Route::get('/wallet/{id}','AgentController@wallet');
     Route::post('/wallet/{id}','AgentController@walletAmount');
 	});
