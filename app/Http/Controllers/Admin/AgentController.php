@@ -422,14 +422,34 @@ class AgentController extends Controller
         }
         return $this->populateresponse();
     }
+    
     public function changeApprovalStatus(Request $request){
         $userData                = ['approved' => $request->approved, 'updated_at' => date('Y-m-d H:i:s')];
         $isUpdated               = Agents::change($request->id,$userData);
-
+        $data['agent']           = _arefy(Agents::where('id',$request->id)->first());
+        
         if($isUpdated){
             if($request->status == 'trashed'){
                 $this->message = 'Deleted Agent successfully.';
             }else{
+                if ($request->approved == 'yes') {
+                    $username="AMREESH@25"; 
+                    $password="AMREESH@25";
+                    $sender="AMRESH";
+
+                    $message="Your Profile has been approved by the admin. Now you can access your profile form the website. -DevDrishti Infrahomes Pvt. Ltd.";
+
+                    $pingurl = "skycon.bulksms5.com/sendmessage.php";
+
+                    $ch = curl_init();
+                    curl_setopt($ch, CURLOPT_URL, $pingurl);
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['agent']['phone'] . '&message=' . urlencode($message) . '&sender=' . $sender . '&type=3');
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $result = curl_exec($ch);
+                   
+                    curl_close($ch);
+                }
                 $this->message = 'Updated Agent successfully.';
             }
             $this->status = true;
