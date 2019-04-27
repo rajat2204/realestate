@@ -72,15 +72,15 @@
           </marquee>
            @else
 
-            @foreach($slider as $sliders)
-              <li>
-                <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
-                <div class="sliderwrap clearfix">
-                  <p class="slider_title">{{$slidersrit['title']}}</p>
-                  <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
-                </div>
-              </li>
-            @endforeach
+            @foreach($sliderright as $slidersrit)
+            <li>
+              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+              <div class="sliderwrap clearfix">
+                <p class="slider_title">{{$slidersrit['title']}}</p>
+                <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
+              </div>
+            </li>
+          @endforeach
           @endif
       </ul>
     </div>
@@ -143,7 +143,7 @@
               </marquee>
               @else
 
-              @foreach($slider as $sliders)
+              @foreach($sliderright as $slidersrit)
                 <li>
                   <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
                   <div class="sliderwrap clearfix">
