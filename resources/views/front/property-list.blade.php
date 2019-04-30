@@ -98,7 +98,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <img src="{{url('assets/img/logo.jpg')}}" alt="Devdrishti Infrahomes">
+        <img src="{{url('assets/img/logo.png')}}" alt="Devdrishti Infrahomes">
          
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>

@@ -520,6 +520,10 @@ class HomeController extends Controller{
 
             $clientdata = Agents::add($agentdata);
 
+            $lastId = $clientdata;
+            $agentId['agent_id'] = "DIH00" . $lastId;
+            $clientdata = Agents::change($lastId,$agentId);
+
             $username="AMREESH@25"; 
             $password="AMREESH@25";
             $sender="AMRESH";

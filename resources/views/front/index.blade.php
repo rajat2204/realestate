@@ -56,7 +56,7 @@
           data-mcs-theme="dark">
         @php
           $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
-          $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
+          $count =  \App\Models\Sliders::where('position','right')->where('status','active')->count();
         @endphp
          @if($count>2)
           <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
@@ -92,7 +92,6 @@
                 @php
                 $slider = \App\Models\Sliders::where('position','left')->where('status','active')->get();
                 $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
-
                 @endphp
                 @if($count>2)  
                 <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
@@ -127,7 +126,6 @@
                 @php
                 $sliderright = \App\Models\Sliders::where('position','right')->where('status','active')->get();
                 $count =  \App\Models\Sliders::where('position','left')->where('status','active')->count();
-
                 @endphp
                 @if($count>2) 
                 <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
