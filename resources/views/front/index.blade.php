@@ -506,7 +506,7 @@
         <div class="testimonial testimonial-front">
           <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt=""> </div>
           <div class="testimonial-content">
-            <p>"{{strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')}}"</p>
+            <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p>
             <div class="testimonial-meta">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</div>
           </div>
         </div>
