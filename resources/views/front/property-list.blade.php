@@ -105,7 +105,7 @@
       <div class="modal-header-btm">
         <span class="modal-title property-name-modal">{{$value['company']['name']}}</span>
         <div>
-        <span>Agent: {{$value['agent']['mobile']}}</span>
+        <span>Agent: {{$value['agent']['phone']}}</span>
         </div>
       </div>
 

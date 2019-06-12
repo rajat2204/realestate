@@ -382,6 +382,7 @@ class HomeController extends Controller{
             curl_setopt($admin_agent, CURLOPT_URL, $pingurl);
             curl_setopt($admin_agent, CURLOPT_POST, 1);
             curl_setopt($admin_agent, CURLOPT_POSTFIELDS, 'user=' . $username . '&password=' . $password . '&mobile=' . $data['contact'][0]['phone'] . '&message=' . urlencode($message_agent) . '&sender=' . $sender . '&type=3');
+            curl_setopt($admin_agent, CURLOPT_RETURNTRANSFER, true);
             $result_agent = curl_exec($admin_agent);
            
             curl_close($admin_agent);
