@@ -168,9 +168,9 @@
         $serial_no = 1;
       @endphp
     @foreach($notice as $notices)
-      <div class="item noticeBoxes">
+      <div class="item noticeBoxes ">
         <span class="badge badge-light numbering">{{$serial_no++}}</span>
-        <p class="">{{$notices['text']}}</p>
+        <p class="more_info" title="{{$notices['text']}}">{{$notices['text']}}</p>
       </div>
 
     @endforeach
@@ -363,7 +363,7 @@
     </div>
     @if(count($property_featured)>3)
     <div class="text-center m-b-10">
-      <a class="btn btn-info" href="{{url('/featuredproperty')}}">Load More..</a>
+      <a class="btn btn-info" href="{{url('/featuredproperty')}}">Load More</a>
     </div>
     @endif
   </div>
@@ -397,7 +397,7 @@
       </div>
       @if(count($service_load)>3)
       <div class="text-center m-b-10">
-        <a class="btn btn-red" href="{{url('/services')}}">Load More..</a>
+        <a class="btn btn-red" href="{{url('/services')}}">Load More</a>
       </div>
       @endif
     </div>
@@ -515,7 +515,7 @@
     </div>
     @if(count($testimonial_load)>3)
       <div class="text-center">
-        <a class="btn btn-red" href="{{url('/testimonials')}}">Load More..</a>
+        <a class="btn btn-red" href="{{url('/testimonials')}}">Load More</a>
       </div>
     @endif
   </div>

@@ -288,6 +288,7 @@ $(document).ready(function(){
             // homebannerDesc.owlCarousel(homebannerDesc_settings);
         });
 
+
         // $(document).ready(function() {
         //   $('#gallery'),owlCarousel(function(){
             
@@ -301,6 +302,14 @@ $('.share_with a').on('click',function(){
   $('.share_with').toggleClass('open');
 })
 
+$(".more_info").click(function () {
+    var $title = $(this).find(".title");
+    if (!$title.length) {
+        $(this).append('<p class="title">' + $(this).attr("title") + '</p>');
+    } else {
+        $title.remove();
+    }
+});
 
   document.addEventListener('DOMContentLoaded',function(){
     var photo = new SmartPhoto(".js-img-viwer");

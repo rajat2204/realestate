@@ -2841,10 +2841,15 @@ p.contact_number {
     bottom: 0;
     left: -1px;
 }
-
+.more_info .title {
+    
+    white-space: nowrap;
+}
 .noticeboard_slider .item p {
     font-size: 15px;
     color: #fff;
+    height: 28px;
+    overflow: hidden;
     padding: 0 10px 0 10px;
 }
 
@@ -3246,8 +3251,18 @@ a.room-price {
   font-size: 16px;
   padding-right: 5px;
 }
+.showmore{
+  background-color: #950f0a;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+.social-icon li a:hover{
+  transform: rotate(360deg);
+}
 .copyright_footer{
   padding: 10px;
+  background: #000;
 }
 .copyright_footer p a{
   color: #02ad97;

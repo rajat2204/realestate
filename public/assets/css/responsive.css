@@ -1,8 +1,14 @@
 /* only small desktops */
+@media (max-width: 1200px){
+  .noticeboard_slider .item p{
+    font-size: 12px;
+  }
+}
 @media (min-width: 992px) and (max-width: 1199px) {
   #hero-area .contents .head-title {
     font-size: 40px;
   }
+  
   .services-item .services-content h3 a {
     font-size: 14px;
   }
@@ -21,7 +27,6 @@
     }
 
     .noticeboard_slider .item p {
-        font-size: 14px;
         padding: 0 10px 0 10px;
     }
     #about {
@@ -372,6 +377,7 @@
       max-width: 400px;
       margin: 0 auto;
   }
+
   .horizontal_slider img {
       height: 190px;
   }
@@ -389,6 +395,9 @@
   .notice_title p {
       padding: 5px 20px;
       font-size: 15px;
+  }
+  .noticeboard_slider .item p{
+    height: auto;
   }
 
   .noticeboard_slider .owl-item:nth-child(odd):after, 
