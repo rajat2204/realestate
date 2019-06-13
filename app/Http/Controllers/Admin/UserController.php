@@ -237,7 +237,7 @@ class UserController extends Controller
         $data['view'] = 'admin.user.add';
         $data['userlevel'] = _arefy(User_level::where('status','!=','trashed')->get());
         $data['get_user_menu']=_arefy(\DB::table('users_menu')->where(
-            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
+            ['status' => 'active','menu_section' => 'sidebar',])->where('parent',0)->orderBy('menu_order','ASC')->get()->toArray());
         return view('admin.home',$data);
     }
 
@@ -254,15 +254,23 @@ class UserController extends Controller
         if ($validator->fails()) {
             $this->message = $validator->errors();
         }else{
+            foreach ($request->menu as $value) {
+                $submenu = _arefy(\DB::table('users_menu')->select('id')->where('parent',$value)->get());
+                foreach ($submenu as $key) {
+                    $menu[]=$key['id'];
+                }
+            }
+            $main_menu = array_merge($request->menu,$menu);
+            // dd($main_menu);           
             $user = new Users;
             $request['password']            = Hash::make($request['password']);
             $request['remember_token']      =str_random(60).$request['remember_token'];
             $user->fill($request->all());
 
             $user->save();
-            $menu['menu_visibility'] = json_encode($request->menu);
-            $menu['user_id'] = $user->id;
-            \DB::table('get_menu_visibility')->insert($menu);
+            $menu_visibility['menu_visibility'] = json_encode($main_menu);
+            $menu_visibility['user_id'] = $user->id;
+            \DB::table('get_menu_visibility')->insert($menu_visibility);
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;
@@ -296,9 +304,9 @@ class UserController extends Controller
         $data['userlevel'] = _arefy(User_level::where('status','!=','trashed')->get());
         $data['user'] = _arefy(Users::where('id',$id)->first());
         $data['get_user_menu']=_arefy(\DB::table('users_menu')->where(
-            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
-        $data['menu']=_arefy(\DB::table('users_menu')->where(
-            ['status' => 'active','menu_section' => 'sidebar',])->orderBy('menu_order','ASC')->get()->toArray());
+            ['status' => 'active','menu_section' => 'sidebar',])->where('parent',0)->orderBy('menu_order','ASC')->get()->toArray());
+        // $data['menu']=_arefy(\DB::table('users_menu')->where(
+        //     ['status' => 'active','menu_section' => 'sidebar',])->where('parent',0)->orderBy('menu_order','ASC')->get()->toArray());
         $data['visible_menu']=_arefy(\DB::table('get_menu_visibility')->where(
             ['user_id' => $id])->first());
         return view('admin.home',$data);
@@ -320,13 +328,20 @@ class UserController extends Controller
             $this->message = $validator->errors();
         }
         else{
+            foreach ($request->menu as $value) {
+                $submenu = _arefy(\DB::table('users_menu')->select('id')->where('parent',$value)->get());
+                foreach ($submenu as $key) {
+                    $menu[]=$key['id'];
+                }
+            }
+            $main_menu = array_merge($request->menu,$menu);
             $users = Users::findOrFail($id);
             $request['remember_token']      = str_random(60).$request['remember_token'];
             $data = $request->all();
             $users->update($data);
 
-            $menu['menu_visibility'] = json_encode($request->menu);
-            \DB::table('get_menu_visibility')->where('user_id',$id)->update($menu);
+            $menu_visibility['menu_visibility'] = json_encode($main_menu);
+            \DB::table('get_menu_visibility')->where('user_id',$id)->update($menu_visibility);
             $this->status   = true;
             $this->modal    = true;
             $this->alert    = true;

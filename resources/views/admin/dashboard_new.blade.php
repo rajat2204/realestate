@@ -15,7 +15,6 @@
             <div style="font-size: 45px;
               	        color: #5f82a0;
               	        font-weight: bold;"> WELCOME
-
             </div>  	
 
  </div>
