@@ -745,7 +745,6 @@
                 'user_id' => $id_admin
             ]
         )->first();
-//dd(json_decode($admin_menus->menu_visibility));
         $result = DB::table('users_menu')->where(
             [
                 'status' => 'active',
