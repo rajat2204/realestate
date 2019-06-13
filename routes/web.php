@@ -303,6 +303,9 @@ Route::get('cancelledcheques', 'ChequeController@cancelledchequesList');
 Route::get('allcheques/{id}/edit', 'ChequeController@updateChequeStatus');
 Route::post('allcheques/{id}', 'ChequeController@updateCheque');
 Route::get('cheques/chequepdf', 'ChequeController@pdfCheques');
+Route::get('cancelledcheques/chequepdf', 'ChequeController@pdfCancelledCheques');
+Route::get('clearcheques/chequepdf', 'ChequeController@pdfClearCheques');
+Route::get('bouncedcheques/chequepdf', 'ChequeController@pdfBouncedCheques');
 
 /***********************Invoices-Section****************************/
 

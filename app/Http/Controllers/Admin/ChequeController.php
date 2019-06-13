@@ -26,7 +26,6 @@ class ChequeController extends Controller
         
         $where = 'status = "pending"';
         $data['cheques'] = _arefy(Cheques::list('array',$where));
-        // dd($data['cheques']);
        
         if ($request->ajax()) {
             return DataTables::of($data['cheques'])
@@ -277,9 +276,35 @@ class ChequeController extends Controller
         $where = 'status = "pending"';
         $data['cheques'] = _arefy(Cheques::list('array',$where));
         $data['cheque'] = _arefy($data['cheques']);
-        // dd($data['cheque']);
-        $excel_name='cheques_pending_data';
+        $excel_name='allcheques_data';
         $pdf = PDF::loadView('admin.chequepdfview', $data);
-        return $pdf->download('cheques_pending_data.pdf');
+        return $pdf->download('allcheques_data.pdf');
+    }
+
+    public function pdfCancelledCheques(Request $request){
+        $where = 'status = "cancelled"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        $data['cheque'] = _arefy($data['cheques']);
+        $excel_name='cancelled_cheques_data';
+        $pdf = PDF::loadView('admin.cancelledchequepdfview', $data);
+        return $pdf->download('cancelled_cheques_data.pdf');
+    }
+
+    public function pdfClearCheques(Request $request){
+        $where = 'status = "clear"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        $data['cheque'] = _arefy($data['cheques']);
+        $excel_name='clear_cheques_data';
+        $pdf = PDF::loadView('admin.clearchequepdfview', $data);
+        return $pdf->download('clear_cheques_data.pdf');
+    }
+
+    public function pdfBouncedCheques(Request $request){
+        $where = 'status = "bounce"';
+        $data['cheques'] = _arefy(Cheques::list('array',$where));
+        $data['cheque'] = _arefy($data['cheques']);
+        $excel_name='bounce_cheques_data';
+        $pdf = PDF::loadView('admin.bouncededchequepdfview', $data);
+        return $pdf->download('bounce_cheques_data.pdf');
     }
 }
