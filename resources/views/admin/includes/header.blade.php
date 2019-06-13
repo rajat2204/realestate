@@ -1,11 +1,15 @@
 <header class="main-header">
   <!-- Logo -->
-  <a href="{{url('admin/home')}}" class="logo">
-    <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>D</b>I</span>
-    <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Devdrishti</b></span>
-  </a>
+  @if(\Auth::user()->user_type != 'super-admin')
+    <a href="{{url('admin/homenew')}}" class="logo">
+  @else
+    <a href="{{url('admin/home')}}" class="logo">
+  @endif
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>D</b>I</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Devdrishti</b></span>
+    </a>
   <!-- Header Navbar: style can be found in header.less -->
   <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->

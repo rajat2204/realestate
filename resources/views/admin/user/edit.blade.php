@@ -46,12 +46,12 @@
         </div>
         <div class="form-group">
           <label>Menu Permission:</label><br>
-          @if(!empty($get_user_menu))
+          @if(!empty($get_user_menu) && !empty($visible_menu['menu_visibility']))
             @foreach($get_user_menu as $menu)
               @if(in_array($menu['id'],json_decode($visible_menu['menu_visibility'])))
-                <input type="checkbox" name="menu[]"  value="{{$menu['id']}}" checked="">{{$menu['name']}}<br>
+                <input type="checkbox" name="menu[]" value="{{$menu['id']}}" checked="">{{$menu['name']}}<br>
               @else
-                <input type="checkbox" name="menu[]"  value="{{$menu['id']}}" >{{$menu['name']}}<br>
+                <input type="checkbox" name="menu[]" value="{{$menu['id']}}" >{{$menu['name']}}<br>
               @endif
             @endforeach
           @endif
