@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpenseCategoryController extends Controller
 {
@@ -75,6 +77,40 @@ class ExpenseCategoryController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportExpenseCategory(Request $request, Builder $builder){
+        $expensecategory  = _arefy(ExpenseCategory::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='expensecategory_data';
+        Excel::create($excel_name, function($excel) use ($expensecategory) {
+                $excel->sheet('mySheet', function($sheet) use ($expensecategory){
+                    $headings = [
+                        'Expense Category Name',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($expensecategory)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($expensecategory as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

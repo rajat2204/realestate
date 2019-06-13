@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InventoryController extends Controller
 {
@@ -107,6 +109,53 @@ class InventoryController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function exportInventory(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $inventoryex  = _arefy(Inventory::list('array',$where));
+        $type='xlsx';
+        $excel_name='inventory_data';
+        Excel::create($excel_name, function($excel) use ($inventoryex) {
+                $excel->sheet('mySheet', function($sheet) use ($inventoryex){
+                    $headings = [
+                        'Project Name',
+                        'Category Name',
+                        'Vendor/Staff',
+                        'Invoice Number',
+                        'Invoice Date',
+                        'Quantity',
+                        'Balance Due',
+                        'Remarks',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($inventoryex)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($inventoryex as $key => $value) {
+                        if($value){
+                            $sheet->row($i,[
+                                $value['project']['name'],
+                                $value['expensecategory']['name'],
+                                $value['vendor']['name'],
+                                $value['invoice_no'],
+                                $value['invoice_date'],
+                                $value['quantity'],
+                                $value['balance'],
+                                strip_tags($value['remarks']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
     public function showInventoryEntry(Request $request, Builder $builder,$id){
         $data['view'] = 'admin.inventory.entrylist';
         
@@ -151,6 +200,44 @@ class InventoryController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
             // ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportEntryList(Request $request, Builder $builder){
+        $entrylist  = _arefy(Inventory_balance::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='entrylist_data';
+        Excel::create($excel_name, function($excel) use ($entrylist) {
+                $excel->sheet('mySheet', function($sheet) use ($entrylist){
+                    $headings = [
+                        'Entry Date',
+                        'Quantity',
+                        'Remarks',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($entrylist)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($entrylist as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['date'],
+                                $value['qty'],
+                                strip_tags($value['remarks']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class VendorController extends Controller
 {
@@ -85,6 +87,46 @@ class VendorController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportVendor(Request $request, Builder $builder){
+        $vendor  = _arefy(Vendor::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='vendor_data';
+        Excel::create($excel_name, function($excel) use ($vendor) {
+                $excel->sheet('mySheet', function($sheet) use ($vendor){
+                    $headings = [
+                        'Vendor Name',
+                        'Vendor Address',
+                        'Vendor Mobile Number',
+                        'Vendor Licence Number',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($vendor)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($vendor as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                                $value['address'],
+                                $value['contact'],
+                                $value['licence_no'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

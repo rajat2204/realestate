@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -100,6 +102,49 @@ class UserController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function exportUsers(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $user  = _arefy(Users::list('array',$where));
+        $type='xlsx';
+        $excel_name='user_data';
+        Excel::create($excel_name, function($excel) use ($user) {
+                $excel->sheet('mySheet', function($sheet) use ($user){
+                    $headings = [
+                        'Users Name',
+                        'Username',
+                        'User Type',
+                        'User E-mail',
+                        'User Mobile Number',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($user)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($user as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['first_name'],
+                                $value['username'],
+                                $value['userlevel']['level_name'],
+                                $value['email'],
+                                $value['phone'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
     public function userlevellist(Request $request, Builder $builder){
         $data['view'] = 'admin.user.userlevellist';
         
@@ -138,6 +183,40 @@ class UserController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportUserslevel(Request $request, Builder $builder){
+        $userlevel  = _arefy(User_level::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='userlevel_data';
+        Excel::create($excel_name, function($excel) use ($userlevel) {
+                $excel->sheet('mySheet', function($sheet) use ($userlevel){
+                    $headings = [
+                        'Users Level Name',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($userlevel)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($userlevel as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['level_name'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     public function setPermissionList(Request $request,$id)

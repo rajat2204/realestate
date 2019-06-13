@@ -75,6 +75,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin','middleware'=>'admin']
 	});
 /***********************Categories-Section****************************/
 
+Route::get('categories/export', 'CategoryController@exportCategory');
 Route::resource('categories', 'CategoryController');
 	Route::group(['prefix' => 'categories'],function(){
 		Route::post('/status', 'CategoryController@changeStatus');
@@ -106,17 +107,20 @@ Route::resource('project', 'ProjectController');
 
 /***********************Users-Section****************************/
 Route::get('userlevel','UserController@userlevellist');
+Route::get('userlevel/export', 'UserController@exportUserslevel');
 Route::get('userlevel/create','UserController@createUserLevel');
 Route::post('userleveladd','UserController@userLevel');
 Route::post('userlevel/status','UserController@changeStatusUserLevel');
 Route::get('setpermission/{id}','UserController@setPermissionList');
+Route::get('users/export', 'UserController@exportUsers');
 Route::resource('users', 'UserController');
 	Route::group(['prefix' => 'users'],function(){
 		Route::post('/status', 'UserController@changeStatus');
 	});
 
 /***********************Expense-Section****************************/
-
+Route::get('expenses/export', 'ExpenseController@exportExpenses');
+Route::get('showpayment/export', 'ExpenseController@exportPayments');
 Route::get('/showpayment/{id}','ExpenseController@showPayment');
 Route::resource('expenses', 'ExpenseController');
 	Route::group(['prefix' => 'expenses'],function(){
@@ -126,6 +130,8 @@ Route::resource('expenses', 'ExpenseController');
 	});
 
 /***********************Inventory-Section****************************/
+Route::get('inventory/export', 'InventoryController@exportInventory');
+Route::get('showinventory/export', 'InventoryController@exportEntryList');
 Route::get('/showinventory/{id}','InventoryController@showInventoryEntry');
 Route::resource('inventory', 'InventoryController');
 	Route::group(['prefix' => 'inventory'],function(){
@@ -135,14 +141,14 @@ Route::resource('inventory', 'InventoryController');
 	});
 
 /***********************Expense-Category-Section****************************/
-
+Route::get('expensecategories/export', 'ExpenseCategoryController@exportExpenseCategory');
 Route::resource('expensecategories', 'ExpenseCategoryController');
 	Route::group(['prefix' => 'expensecategories'],function(){
 		Route::post('/status', 'ExpenseCategoryController@changeStatus');
 	});
 
 /***********************Vendor-Section****************************/
-
+Route::get('vendors/export', 'VendorController@exportVendor');
 Route::resource('vendors', 'VendorController');
 	Route::group(['prefix' => 'vendors'],function(){
 		Route::post('/status', 'VendorController@changeStatus');
@@ -156,6 +162,7 @@ Route::resource('property', 'PropertyController');
 	});
 
 /***********************Client-Section****************************/
+Route::get('client/export', 'ClientController@exportClient');
 Route::resource('client', 'ClientController');
 	Route::group(['prefix' => 'client'],function(){
 		Route::post('/status', 'ClientController@changeStatus');
@@ -164,7 +171,7 @@ Route::resource('client', 'ClientController');
 	});
 
 /***********************Sliders-Section****************************/
-
+Route::get('sliders/export', 'SliderController@exportSliders');
 Route::resource('sliders', 'SliderController');
 	Route::group(['prefix' => 'sliders'],function(){
 		Route::post('/status', 'SliderController@changeStatus');
@@ -239,7 +246,7 @@ Route::resource('company', 'CompanyController');
 	});
 
 /***********************Deals-Section****************************/
-
+Route::get('deals/export', 'DealsController@exportDeals');
 Route::resource('deals', 'DealsController');
 	Route::group(['prefix' => 'property'],function(){
 			Route::post('ajaxproperties', 'DealsController@ajaxProperties');
