@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DealsController extends Controller
 {
@@ -124,6 +126,63 @@ class DealsController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportDeals(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $deals  = _arefy(Deals::list('array',$where));
+        $type='xlsx';
+        $excel_name='deals_data';
+        Excel::create($excel_name, function($excel) use ($deals) {
+                $excel->sheet('mySheet', function($sheet) use ($deals){
+                    $headings = [
+                        'Client Name',
+                        'Project Name',
+                        'Property Name',
+                        'Invoice Number',
+                        'Invoice Date',
+                        'Area',
+                        'Amount',
+                        'Discount Offered',
+                        'Balance',
+                        'Plan',
+                        'Payment Method',
+                        'Remarks',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($deals)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($deals as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['client']['name'],
+                                $value['project']['name'],
+                                $value['property']['name'],
+                                $value['invoice_no'],
+                                $value['date'],
+                                number_format($value['area']).' ' .$value['units']['name'],
+                                'Rs.'.number_format($value['amount']),
+                                $value['discount'].'%',
+                                'Rs.'.number_format($value['balance']),
+                                $value['plan']['name'],
+                                ucfirst($value['payment_method']),
+                                strip_tags($value['remarks']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     public function showPaymentPlan(Request $request, Builder $builder,$id){

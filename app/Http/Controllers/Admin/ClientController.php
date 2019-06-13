@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientController extends Controller
 {
@@ -110,6 +112,48 @@ class ClientController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportClient(Request $request, Builder $builder){
+        $client  = _arefy(Clients::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='client_data';
+        Excel::create($excel_name, function($excel) use ($client) {
+                $excel->sheet('mySheet', function($sheet) use ($client){
+                    $headings = [
+                        'Client Name',
+                        'Client E-mail',
+                        'Client Mobile',
+                        'Client DOB',
+                        'Client Address',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($client)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($client as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['name'],
+                                $value['email'],
+                                $value['phone'],
+                                $value['dob'],
+                                $value['address'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

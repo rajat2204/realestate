@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExpenseController extends Controller
 {
@@ -118,9 +120,57 @@ class ExpenseController extends Controller
         return view('admin.home')->with($data);
     }
 
+    public function exportExpenses(Request $request, Builder $builder){
+        $where = 'status != "trashed"';
+        $expenses  = _arefy(Expense::list('array',$where));
+        $type='xlsx';
+        $excel_name='expenses_data';
+        Excel::create($excel_name, function($excel) use ($expenses) {
+                $excel->sheet('mySheet', function($sheet) use ($expenses){
+                    $headings = [
+                        'Project Name',
+                        'Category Name',
+                        'Vendor/Staff',
+                        'Invoice Number',
+                        'Invoice Date',
+                        'Invoice Amount',
+                        'Balance Due',
+                        'Remarks',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($expenses)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($expenses as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['project']['name'],
+                                $value['expensecategory']['name'],
+                                $value['vendor']['name'],
+                                $value['invoice_no'],
+                                $value['invoice_date'],
+                                'Rs.'.number_format($value['amount']),
+                                'Rs.'.number_format($value['balance']),
+                                strip_tags($value['remarks']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
+    }
+
     public function showPayment(Request $request, Builder $builder,$id){
         $data['view'] = 'admin.expenses.showpaymentlist';
-        
         $id = ___decrypt($id);
         $expensesPayment  = _arefy(Expense_Payment::where('expense_id',$id)->get());
         if ($request->ajax()) {
@@ -128,13 +178,7 @@ class ExpenseController extends Controller
             ->editColumn('action',function($item){
                 
                 $html    = '<div class="edit_details_box">';
-                // $html   .= '<a href="'.url(sprintf('admin/expenses/%s/edit',___encrypt($item['id']))).'"  title="Edit Detail"><i class="fa fa-edit"></i></a> | ';
-                // $html   .= '<a href="javascript:void(0);" 
-                //         data-url="'.url(sprintf('admin/showpayment/status/?id=%s&status=trashed',$item['id'])).'" 
-                //         data-request="ajax-confirm"
-                //         data-ask_image="'.url('assets/img/delete.png').'"
-                //         data-ask="Would you like to Delete?" title="Delete"><i class="fa fa-fw fa-trash"></i></a>';
-                // }
+                
                 $html   .= '</div>';
                                 
                 return $html;
@@ -153,7 +197,7 @@ class ExpenseController extends Controller
             })
             ->editColumn('remarks',function($item){
                 if (!empty($item['remarks'])) {
-                  return ucfirst(item['remarks']);
+                  return ucfirst($item['remarks']);
                 }else{
                   return 'N/A';
                 }
@@ -180,6 +224,46 @@ class ExpenseController extends Controller
             ->addColumn(['data' => 'remarks','name' => 'remarks','title' => 'Remarks','orderable' => false, 'width' => 120])
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportPayments(Request $request, Builder $builder){
+        $payment  = _arefy(Expense_Payment::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='expenses_payment_data';
+        Excel::create($excel_name, function($excel) use ($payment) {
+                $excel->sheet('mySheet', function($sheet) use ($payment){
+                    $headings = [
+                        'Amount',
+                        'Payment Type',
+                        'Date',
+                        'Remarks',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($payment)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($payment as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                'Rs.'.number_format($value['amount']),
+                                $value['payment_type'],
+                                $value['date'],
+                                strip_tags($value['remarks']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

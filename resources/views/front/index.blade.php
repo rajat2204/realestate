@@ -16,7 +16,7 @@
               <li class="item">
                 <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
                 <div class="sliderwrap clearfix">
-                  <p class="slider_title">{{$sliders['title']}}</p>
+                  <p class="slider_title" title="{{$sliders['title']}}">{{str_limit($sliders['title'],8)}}</p>
                   <p class="contact_number">+91-{{$sliders['mobile']}}</p>
                 </div>
               </li>
@@ -64,7 +64,7 @@
             <li>
               <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
               <div class="sliderwrap clearfix">
-                <p class="slider_title">{{$slidersrit['title']}}</p>
+                <p class="slider_title" title="{{$slidersrit['title']}}">{{str_limit($slidersrit['title'],8)}}</p>
                 <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
               </div>
             </li>

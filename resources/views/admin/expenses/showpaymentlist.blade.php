@@ -17,15 +17,15 @@
 			<div class="col-md-12">
 				
 				<div class="portlet light">
-					<!-- <div class="portlet-title"> -->
-						<!-- <div class="actions">
-							<a href="{{url('admin/expenses/create')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-plus"></i>
-							<span class="hidden-480">
-							Add Expenses</span>
+					<div class="portlet-title">
+						<div class="actions">
+							<a href="{{url('admin/showpayment/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
+							<span class="hidden-480" id="btnopen" >
+							Export Expenses Payment</span>
 							</a>
-						</div> -->
-					<!-- </div> -->
+						</div>
+					</div>
 					<div class="portlet-body">
 						<div class="table-container">
 							<table class="table table-striped table-bordered table-hover" id="datatable_ajax">

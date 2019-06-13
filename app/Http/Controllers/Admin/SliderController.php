@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SliderController extends Controller
 {
@@ -108,6 +110,48 @@ class SliderController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => 'Actions', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportSliders(Request $request, Builder $builder){
+        $sliders  = _arefy(Sliders::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='sliders_data';
+        Excel::create($excel_name, function($excel) use ($sliders) {
+                $excel->sheet('mySheet', function($sheet) use ($sliders){
+                    $headings = [
+                        'Slider Title',
+                        'Slider Position',
+                        'Slider Contact Number',
+                        'Slider Location',
+                        'Slider Description',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($sliders)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($sliders as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['title'],
+                                ucfirst($value['position']),
+                                $value['mobile'],
+                                $value['location'],
+                                strip_tags($value['description']),
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

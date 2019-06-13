@@ -24,6 +24,11 @@
 							<span class="hidden-480">
 							Add Expense Category</span>
 							</a>
+							<a href="{{url('admin/expensecategories/export')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-file-image-o"></i>
+							<span class="hidden-480" id="btnopen" >
+							Export Expense Category</span>
+							</a>
 						</div>
 					</div>
 					<div class="portlet-body">

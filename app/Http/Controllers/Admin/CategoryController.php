@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use Yajra\DataTables\Html\Builder;
 use Validations\Validate as Validations;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -77,6 +79,42 @@ class CategoryController extends Controller
             ->addColumn(['data' => 'status','name' => 'status','title' => 'Status','orderable' => false, 'width' => 120])
             ->addAction(['title' => '', 'orderable' => false, 'width' => 120]);
         return view('admin.home')->with($data);
+    }
+
+    public function exportCategory(Request $request, Builder $builder){
+        $category  = _arefy(PropertyCategories::where('status','!=','trashed')->get());
+        $type='xlsx';
+        $excel_name='category_data';
+        Excel::create($excel_name, function($excel) use ($category) {
+                $excel->sheet('mySheet', function($sheet) use ($category){
+                    $headings = [
+                        'Category ID',
+                        'Category Name',
+                    ];
+
+                    $sheet->row(1, $headings);
+                    $sheet->cell('A1:I1', function($cell) {
+                        $cell->setFontWeight('bold');
+                    });
+                    $total=count($category)+1;
+                    $sheet->setBorder('A1:I'.$total, 'thin');
+
+                    $i=2;
+                    $j=1;
+                    foreach ($category as $key => $value) {
+                        if($value){
+                            
+            
+                            $sheet->row($i,[
+                                $value['id'],
+                                $value['name'],
+                            ]);
+                        }
+                        $i++;
+                        $j++;
+                    }
+                });
+            })->download($type);
     }
 
     /**

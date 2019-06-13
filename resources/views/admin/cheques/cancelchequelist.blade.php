@@ -18,13 +18,13 @@
 				
 				<div class="portlet light">
 					<div class="portlet-title">
-						<!-- <div class="actions">
-							<a href="{{url('admin/categories/create')}}" class="btn btn-default btn-circle">
-							<i class="fa fa-plus"></i>
+						<div class="actions">
+							<a href="{{url('admin/cancelledcheques/chequepdf')}}" class="btn btn-default btn-circle">
+							<i class="fa fa-print"></i>
 							<span class="hidden-480">
-							Add Property Categories</span>
+							Print</span>
 							</a>
-						</div> -->
+						</div>
 					</div>
 					<div class="portlet-body">
 						<div class="table-container">

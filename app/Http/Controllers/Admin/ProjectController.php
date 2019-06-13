@@ -106,7 +106,6 @@ class ProjectController extends Controller
     public function exportProject(Request $request, Builder $builder){
         $where = 'status != "trashed"';
         $projects  = _arefy(Project::list('array',$where));
-        // dd($projects);
         $type='xlsx';
         $excel_name='project_data';
         Excel::create($excel_name, function($excel) use ($projects) {

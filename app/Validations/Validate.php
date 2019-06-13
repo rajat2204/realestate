@@ -749,12 +749,13 @@ class Validate
 	public function addPlan($action='add'){
       $validations = [
       	'name' 				=> $this->validation('name'),
-				'installment'  		=> $this->validation('name'),
+		'installment'  		=> $this->validation('price'),
   		];
   	
       $validator = \Validator::make($this->data->all(), $validations,[
   		'name.required' 		=>  'Plan Name is required.',
-  		'installment.required' 	=>  'Plan Installment is required.',
+        'installment.required'  =>  'Plan Installment is required.',
+  		'installment.numeric' 	=>  'Plan Installment should contain numbers only.',
   	]);
       return $validator;		
 	}
