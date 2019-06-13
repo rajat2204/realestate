@@ -68,6 +68,7 @@ Route::get('admin/changepassword','Admin\LoginController@changePassword');
 Route::post('admin/changepassword','Admin\LoginController@adminchangePass');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin','middleware'=>'admin'],function(){
 	Route::get('home','LoginController@home');
+	Route::get('homenew','LoginController@home1');
 	Route::get('logout',function(){
 		\Auth::logout();
           return redirect('admin/login');
