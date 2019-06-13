@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background: #fff;
+  background: #f2f2f2;
   font-size: 14px;
   font-weight: 400;
   font-family: "Source Sans Pro", sans-serif;
@@ -29,7 +29,9 @@ body {
     background-size: 100px;
     color: #797979;
 }
-
+.wrapperIndex{
+  background-color: #fff;
+}
 h1, h2, h3, h4 {
   font-size: 38px;
   font-weight: 700;
@@ -1213,7 +1215,7 @@ html {
 }
 
 body {
-  background: #fff;
+  background-color: #f2f2f2;
   font-size: 14px;
   font-weight: 400;
   font-family: "Source Sans Pro", sans-serif;

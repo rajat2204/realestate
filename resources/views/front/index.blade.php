@@ -1,4 +1,5 @@
 <!-- header section html starts-->
+<div class="wrapperIndex">
 <header id="hero-area">
   <div class="header_wrapper clearfix">
     <div class="vertical_slides">
@@ -608,7 +609,7 @@
     </div>
   </div>   
 </section>
-
+</div>
 @section('requirejs')
 <script type="text/javascript">
   $(document).ready(function(){
