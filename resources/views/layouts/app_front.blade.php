@@ -246,6 +246,19 @@
       });
 
     </script>
+    <script>
+
+    $(document).ready(function() {
+
+     var docHeight = $(window).height();
+     var footerHeight = $('#footer-section').height();
+     var footerTop = $('#footer-section').position().top + footerHeight;
+
+     if (footerTop < docHeight) {
+      $('#footer-section').css('margin-top', 2+ (docHeight - footerTop) + 'px');
+     }
+    });
+   </script>
     
     <!--Start of Tawk.to Script-->
 
