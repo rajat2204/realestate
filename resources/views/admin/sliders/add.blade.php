@@ -11,7 +11,7 @@
           <label>Slider Image:</label>
           <div>
               <input onchange="readURL(this)" id="uploadFile" accept="image/*" name="image" type="file">
-              <span class="image-size">File Size(844X330 pixels)</span>
+              <span class="image-size">File Size(844X380 pixels)</span>
           </div>
           <div>
             <img style="max-width: 250px;" src="{{asset('assets/img/avatar.png')}}" id="adminimg" alt="No Featured Image Added">

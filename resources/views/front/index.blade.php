@@ -2,7 +2,7 @@
 <div class="wrapperIndex">
 <header id="hero-area">
   <div class="header_wrapper clearfix">
-    <div class="vertical_slides">
+   {{--  <div class="vertical_slides">
       
       <ul class="slides mCustomScrollbar"  id="vertical_slider"  
           data-mcs-theme="dark">
@@ -38,7 +38,7 @@
           @endif
       </ul>
       
-    </div>
+    </div> --}}
     <div class="horizontal_slider">
       <div id="hero_slider" class="owl-carousel">
         @php
@@ -52,7 +52,7 @@
         @endforeach
       </div>
     </div>
-    <div class="vertical_slides2">
+    {{-- <div class="vertical_slides2">
       <ul class="slides mCustomScrollbar"  id="vertical_slider2" 
           data-mcs-theme="dark">
         @php
@@ -84,9 +84,9 @@
           @endforeach
           @endif
       </ul>
-    </div>
+    </div> --}}
   </div>
-   <div class="header_wrapper_mobile clearfix">
+   {{-- <div class="header_wrapper_mobile clearfix">
         <div class="vertical_slides_mobile">
             <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar owl-carousel" 
                 data-mcs-theme="dark">
@@ -154,7 +154,7 @@
               @endif
             </ul>
         </div>
-    </div>
+    </div> --}}
 </header>
 <!-- header section html ends-->
 

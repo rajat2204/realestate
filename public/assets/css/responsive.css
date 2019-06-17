@@ -377,10 +377,10 @@
       max-width: 400px;
       margin: 0 auto;
   }
-
+/*
   .horizontal_slider img {
       height: 190px;
-  }
+  }*/
   .shot-item>img {
       max-width: none;
       width: 100%;

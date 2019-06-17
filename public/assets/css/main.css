@@ -503,7 +503,7 @@ a.back-to-top:hover, a.back-to-top:focus {
   border-color: #02ad97 !important;
 }
 .horizontal_slider img {
-    height: 330px;
+    /*height: 330px;*/
 }
 .timeline li:first-child i {
   font-size: 20px;
@@ -2570,8 +2570,9 @@ header#header {
     padding-top: 0;
 }
 .horizontal_slider{
-  width: calc(100% - 528px);
-  float: left;
+  /*width: calc(100% - 528px);*/
+  /*float: left;*/
+  width: 100%;
 }
 .header_wrapper {
     padding: 0px 0 10px;
@@ -4738,6 +4739,9 @@ ul.owl-gallery li {
 @media screen and (max-width: 576px){
   .featured-properties-area {
     padding: 38px 0 30px;
+  }
+  .horizontal_slider .item p{
+    padding:6px 10px;
   }
   ul.smartphotoWrapper{
     column-count:1;
