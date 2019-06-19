@@ -302,6 +302,7 @@
       <div class="col-12">
           <div class="section-heading wow fadeInUp">
               <h2>Featured Properties</h2>
+              <h3 class="hidden-xs">Featured Properties</h3>
               <img src="{{url('assets/img/underline.png')}}" alt="line">
               <!-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> -->
           </div>
@@ -379,6 +380,7 @@
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
                   <h2>Our Services</h2>
+                  <h3 class="hidden-xs">Our Services</h3>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
               </div>
           </div>
@@ -413,6 +415,7 @@
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
                   <h2>Our Team</h2>
+                  <h3 class="hidden-xs">Our Team</h3>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
                   
               </div>
@@ -426,7 +429,12 @@
                 <div class="item agentSpace">
                   <div>
                     @if(!empty($agents['image']))
-                      <a href="{{url('agentenquiry')}}/{{___encrypt($agents['id'])}}"><img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent"></a>
+                      <a href="{{url('agentenquiry')}}/{{___encrypt($agents['id'])}}">
+                        <img src="{{url('assets/img/agent')}}/{{$agents['image']}}" alt="agent">
+                        <div class="team_overlay">
+                          <div class="teamname">{{$agents['name']}}</div>
+                        </div>
+                      </a>
                     @else
                       <img src="{{url('assets/img/dummy_avatar.png')}}" alt="agent">
                     @endif
@@ -451,6 +459,7 @@
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
             <h2>Our Remarkable Works</h2>
+            <h3 class="hidden-xs">Our Remarkable</h3>
             <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -491,12 +500,40 @@
 <!-- Portfolio Section Ends -->
   
 <!-- testimonial section html -->
-<div id="testimonials">
+<section class="video-w3l" data-vide-bg="video/1" style="position: relative;" id="testimonials">
+  <div style="position: absolute;display:flex;align-items:center;z-index: 9;top: 0px;left: 0px;bottom: 0px;right: 0px;overflow: hidden;background-size: cover;background-repeat: no-repeat;background-position: 50% 50%;background-image: none;">
+        <div class="container">
+          <video autoplay="" loop="" muted="" style="margin: auto; position: absolute;  top: 50%; left: 50%; transform: translate(-50%, -50%); visibility: visible; width: 1351px; height: auto;"><source src="{{asset('assets/img/testimonialvideo.mp4')}}" type="video/mp4"><source src="{{asset('assets/img/testimonialvideo.webm')}}" type="video/webm"><source src="{{asset('assets/img/testimonialvideo.ogv')}}" type="video/ogg"></video>
+            <div class="section-heading wow fadeInUp">
+              <h2 style="color:#fff;">Testimonials</h2>
+            </div>
+          <div class="review-slider owl-carousel owl-loaded owl-drag">
+                   
+                @foreach($testimonial as $testimonials)
+                  <div class="review-item text-white">
+                   
+                    <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p>
+                    <span>- {{!empty($testimonials['name'])?$testimonials['name']:''}}</span>
+                    <div class="clint-pic set-bg"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="">
+                    </div>
+                  </div>
+                @endforeach
+                </div>
+                 @if(count($testimonial_load)>3)
+                  <div class="text-center" style="margin-top: 20px;">
+                    <a class="btn btn-red" href="{{url('/testimonials')}}">Load More</a>
+                  </div>
+                @endif
+              </div>
+         </div>   
+    </section>
+{{-- <div id="testimonials">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
           <h2>Testimonials</h2>
+          <h3 class="hidden-xs">Testimonials</h3>
           <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -520,7 +557,7 @@
       </div>
     @endif
   </div>
-</div>
+</div> --}}
 <!-- testimonial section end -->
 
 <!-- Contact Section Start -->
@@ -559,7 +596,7 @@
                     <textarea class="form-control" id="message" placeholder="Message" rows="5" name="message"></textarea>
                   </div>
                   <div class="submit-button">
-                    <button class="btn btn-common" id="submit" type="button" data-request="ajax-submit" data-target='[role="contactus"]'>Send Message</button>
+                    <button class="btn btn-common btn-red" id="submit" type="button" data-request="ajax-submit" data-target='[role="contactus"]'>Send Message</button>
                     <div id="msgSubmit" class="h3 text-center hidden"></div> 
                     <div class="clearfix"></div> 
                   </div>

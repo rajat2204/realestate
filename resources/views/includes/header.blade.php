@@ -19,8 +19,8 @@
               <li><p>Hello,{{ Auth::user()->first_name}}</p></li>
               <li><span><a href="{{url('/logout')}}" class=""><i class="fa fa-sign-out"></i>Logout</a></span></li>
             @else
-              <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal">Sign Up</button></li>
-              <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#exampleModalCenter">Log In</button></li>
+              <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#myModal"><i class="fa fa-user" style="padding-right: 3px;"></i> Sign Up</button></li>
+              <li><button type="button" class="primary-btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-sign-in" style="padding-right: 3px;"></i>Log In</button></li>
             @endif
           </ul>
       </div>

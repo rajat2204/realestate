@@ -95,6 +95,10 @@
     font-size: 30px;
     margin-bottom: 30px;
   }
+  .slicknav_menu .slicknav_nav{
+    position: absolute;
+    top:50px;
+  }
   #filter-search{
     padding-top: 0;
     margin-bottom: 0;
@@ -409,6 +413,10 @@
   .our_services{
     margin-bottom: 15px;
   }
+  .category_container{
+    margin: 0;
+    padding: 20px;
+  }
   .vertical_slides_mobile .slides li{
     padding: 4px 4px 4px 15px;
   }
@@ -502,6 +510,15 @@
     height: 29px;
     padding: 7px 0 9px;
     width: 30px;
+  }
+  .noticeboard_sec{
+    margin-top: 5px;
+  }
+  .header_wrapper {
+      padding: 0px 0 0;
+  }
+  .agentSpace{
+    margin:0 25px;
   }
   .navbar-start p{
     padding-left: 2px;

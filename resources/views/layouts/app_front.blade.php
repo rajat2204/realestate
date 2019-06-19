@@ -82,6 +82,7 @@
     <script src="https://cdn.ckeditor.com/4.11.1/standard-all/ckeditor.js"></script>
     <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
     <script src="{{asset('assets/bower_components/ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('assets/js/SmoothScroll.min.js')}}"></script>
     <script src="{{asset('assets/js/main.js')}}"></script>
     <script src="{{asset('assets/js/script.js')}}"></script>
     <script src="{{asset('assets/js/sweetalert2.js')}}"></script>
@@ -106,7 +107,10 @@
           nav: false,
           items: 1,
           dots: true,
-          autoplay: true
+          autoplay: true,
+          autoplaySpeed: 2000,
+          autoplayTimeout: 5000,
+          slideTransition: 'linear',
         });
 
        $(".price-filter").ionRangeSlider({
@@ -126,6 +130,9 @@
             items: 4,
             dots: true,
             autoplay: true,
+            autoplaySpeed: 2000,
+            autoplayTimeout: 5000,
+            slideTransition: 'linear',
             responsive: {
               0: {
                   items: 1
