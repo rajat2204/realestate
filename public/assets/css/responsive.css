@@ -505,6 +505,9 @@
   .header_strip {
       text-align: right;
   }
+  ul.shubhX button{
+    padding: 1px 10px;
+  }
   .slicknav_btn{
     margin: 11px 15px 11px 0;
     height: 29px;

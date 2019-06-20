@@ -540,21 +540,6 @@ a.back-to-top:hover, a.back-to-top:focus {
 .horizontal_slider .owl-stage-outer .item:hover img{
   transform: scale3d(1.02, 1.03, 1);
 }
-.horizontal_slider:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left:0;
-  height: 4px;
-  z-index: 99;
-  width: 0;
-  background-color: #950f0a;
-  transition: all 800ms ease-in;
-}
-.horizontal_slider:hover::before {
-    width: 100%;
-    left:0;
-}
 .timeline li:first-child i {
   font-size: 20px;
   float: left;
@@ -3080,19 +3065,6 @@ p.contact_number {
     text-align: center;
     margin-bottom: 20px;
 }
-.section-heading h3 {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-    top: -24px;
-    font-size: 60px;
-    font-weight: 600;
-    opacity: .5;
-    z-index: -1;
-    color: #caccd1;
-    letter-spacing: 3px
-}
 .section-heading h2 {
     font-size: 30px;
     font-weight: 500;
@@ -3924,91 +3896,9 @@ select:focus{
 .featured-properties-area{
   position: relative;
 }
-.featured-properties-area:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 2px;
-    z-index: 99;
-    width: 0;
-    background-color: #950f0a;
-    transition: all 800ms ease-in;
-}
-.featured-properties-area:hover::before{
-  width: 100%;
-  left:0;
-  opacity: .6;
-}
+
 #service, #testimonials{
   position: relative;
-}
-#service:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  z-index: 99;
-  width: 0;
-  background-color: #950f0a;
-  transition: all 800ms ease-in;
-}
-#service:hover::before{
-  width: 100%;
-  left:0;
-  opacity: .6;
-}
-.agent-wrap,.gallery-wrap{
-  position: relative;
-}
-.agent-wrap:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  z-index: 99;
-  width: 0;
-  background-color: #950f0a;
-  transition: all 800ms ease-in;
-}
-.agent-wrap:hover::before{
-  width: 100%;
-  left:0;
-  opacity: .6;
-}
-.gallery-wrap:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  z-index: 99;
-  width: 0;
-  background-color: #950f0a;
-  transition: all 800ms ease-in;
-}
-.gallery-wrap:hover::before{
-  width: 100%;
-  left:0;
-  opacity: .6;
-}
-#testimonials:before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2px;
-  z-index: 99;
-  width: 0;
-  background-color: #950f0a;
-  transition: all 800ms ease-in;
-}
-#testimonials:hover::before{
-  width: 100%;
-  left:0;
-  opacity: .6;
 }
  #wraperr{
   clear:both;
