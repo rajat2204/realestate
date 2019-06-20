@@ -10,7 +10,8 @@
             </h3>
           </div>
           <div class="footer-about">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>To provide an outstanding level of service in the real estate market that is innovative and ambitious. Our Company is dedicated to the highest standards, systems and performance necessary to fulfill all of your real estate dreams.</p>
+            {{-- <p>{{($static[0]['description'],130)}}</p> --}}
             <a href="{{url('aboutus')}}" class="showmore">Show More</a>
           </div>
           <ul class="social-icon">
@@ -70,7 +71,7 @@
 <!-- </div> -->
 <footer class="footer-bottom footer-area">
   <div class="text-center copyright_footer">
-     <p>Copyright © <a href="https://www.igniterpro.com/" target="_blank">Igniterpro</a> 2018 All Right Reserved</p>
+     <p>Designed & Developed by <a href="https://www.igniterpro.com/" target="_blank"> Igniterpro</a></p>
   </div>
 </footer>
 <!-- Footer Section End -->

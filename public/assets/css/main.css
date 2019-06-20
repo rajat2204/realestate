@@ -234,7 +234,7 @@ button:focus {
   text-align: center;
   border-radius: 100%;
   font-size: 16px;
-  margin: 15px 6px 12px 6px;
+  margin: 15px 3px 12px 3px;
   transition: all 0.3s ease-in-out 0s;
   -moz-transition: all 0.3s ease-in-out 0s;
   -webkit-transition: all 0.3s ease-in-out 0s;
@@ -536,6 +536,7 @@ a.back-to-top:hover, a.back-to-top:focus {
 .horizontal_slider .owl-stage-outer .item img{
   transition: .5s ease-in;
   overflow: hidden;
+  padding-top: 5px;
 }
 .horizontal_slider .owl-stage-outer .item:hover img{
   transform: scale3d(1.02, 1.03, 1);
@@ -2371,9 +2372,11 @@ img.form-control.slide-image {
   background: #1C1C20;
   border-top: 4px solid #000;
 }
-
+footer#footer-section {
+    padding: 50px 0;
+}
 .footer-area .footer-text p {
-  font-size: 14px;
+  font-size: 15px;
   margin-top: 0;
   color: #fff;
 }
@@ -2657,12 +2660,12 @@ header#header {
     padding-top: 0;
 }
 .horizontal_slider{
-  /*width: calc(100% - 528px);*/
-  /*float: left;*/
-  width: 100%;
+  width: calc(100% - 528px);
+  float: left;
+  /*width: 100%;*/
 }
 .header_wrapper {
-    padding: 0px 0 10px;
+    padding: 10px 0 10px;
 }
 .slides li a {
     display: block;
@@ -3065,7 +3068,7 @@ p.contact_number {
     text-align: center;
     margin-bottom: 20px;
 }
-.section-heading h2 {
+.section-heading h1 {
     font-size: 30px;
     font-weight: 500;
     text-transform: uppercase;
@@ -3411,6 +3414,7 @@ a.room-price {
 .footer-menu ul li a{
   color: #fff;
   display: block;
+  font-size: 15px;
   transition: .5s ease-in;
   transform: translateX(0px);
 }
@@ -3819,23 +3823,25 @@ select:focus{
 .button_search1 {
   transform:translateX(0);
   border-width: 2px;
-  background-image: linear-gradient(to right,#63c5de,#02ac97);
+  background-color: #fff;
+  color:#63c5de; 
+  border-color:#63c5de !important;
   transition: .5s ease-in;
 }
 .button_search1:hover{
   border-color:#63c5de !important;
   border-width: 2px;
-  color:#63c5de; 
-  transform:translateX(10px);
+  transform:translateX(5px);
   font-weight: 600;
-  background-image: linear-gradient(#fff,#fff);
+  background-image: linear-gradient(to right,#63c5de,#02ac97));
 }
 .btn-red{
   /*background-color:#9c100a;*/
-  background-image: linear-gradient(to right,#63c5de,#02ac97);
+  background-color: #fff;
   border-color:#63c5de;
   transform:translateX(0);
   border-width: 2px;
+  color:#63c5de; 
   transition: .5s ease-in;
 }
 .btn-red:hover{

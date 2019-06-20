@@ -2,7 +2,7 @@
 <div class="wrapperIndex">
 <header id="hero-area">
   <div class="header_wrapper clearfix">
-   {{--  <div class="vertical_slides">
+    <div class="vertical_slides">
       
       <ul class="slides mCustomScrollbar"  id="vertical_slider"  
           data-mcs-theme="dark">
@@ -15,7 +15,7 @@
             <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">  
               @foreach($slider as $sliders)
               <li class="item">
-                <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+                <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" alt="slider"></a>
                 <div class="sliderwrap clearfix">
                   <p class="slider_title" title="{{$sliders['title']}}">{{str_limit($sliders['title'],8)}}</p>
                   <p class="contact_number">+91-{{$sliders['mobile']}}</p>
@@ -27,9 +27,9 @@
 
             @foreach($slider as $sliders)
             <li class="item">
-              <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+              <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" alt="slider"></a>
               <div class="sliderwrap clearfix">
-                <p class="slider_title">{{$sliders['title']}}</p>
+                <p class="slider_title" title="{{$sliders['title']}}">{{str_limit($sliders['title'],8)}}</p>
                 <p class="contact_number">+91-{{$sliders['mobile']}}</p>
               </div>
             </li>
@@ -38,7 +38,7 @@
           @endif
       </ul>
       
-    </div> --}}
+    </div>
     <div class="horizontal_slider">
       <div id="hero_slider" class="owl-carousel">
         @php
@@ -46,13 +46,13 @@
         @endphp
         @foreach($sliders as $sliderscenter)
           <div class="item">
-            <img src="{{url('assets/img/Sliders')}}/{{$sliderscenter['image']}}" />
+            <img src="{{url('assets/img/Sliders')}}/{{$sliderscenter['image']}}" alt="slider">
             <p title="{{strip_tags(html_entity_decode($sliderscenter['description']))}}">{{strip_tags(html_entity_decode(str_limit($sliderscenter['description'],180)))}}</p>
           </div>
         @endforeach
       </div>
     </div>
-    {{-- <div class="vertical_slides2">
+    <div class="vertical_slides2">
       <ul class="slides mCustomScrollbar"  id="vertical_slider2" 
           data-mcs-theme="dark">
         @php
@@ -63,7 +63,7 @@
           <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
           @foreach($sliderright as $slidersrit)
             <li>
-              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" alt="slider"></a>
               <div class="sliderwrap clearfix">
                 <p class="slider_title" title="{{$slidersrit['title']}}">{{str_limit($slidersrit['title'],8)}}</p>
                 <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
@@ -75,18 +75,18 @@
 
             @foreach($sliderright as $slidersrit)
             <li>
-              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+              <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" alt="slider"></a>
               <div class="sliderwrap clearfix">
-                <p class="slider_title">{{$slidersrit['title']}}</p>
+                <p class="slider_title" title="{{$slidersrit['title']}}">{{str_limit($slidersrit['title'],8)}}</p>
                 <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
               </div>
             </li>
           @endforeach
           @endif
       </ul>
-    </div> --}}
+    </div>
   </div>
-   {{-- <div class="header_wrapper_mobile clearfix">
+   <div class="header_wrapper_mobile clearfix">
         <div class="vertical_slides_mobile">
             <ul class="slides"  id="vertical_slider3"  class="mCustomScrollbar owl-carousel" 
                 data-mcs-theme="dark">
@@ -98,7 +98,7 @@
                 <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @foreach($slider as $sliders)
                 <li>
-                  <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+                  <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" alt="slider"></a>
                   <div class="sliderwrap clearfix">
                     <p class="slider_title">{{$sliders['title']}}</p>
                     <p class="contact_number">+91-{{$sliders['mobile']}}</p>
@@ -110,7 +110,7 @@
 
               @foreach($slider as $sliders)
               <li>
-                  <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" /></a>
+                  <a href="{{url('sliders')}}/{{($sliders['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$sliders['image']}}" alt="slider"></a>
                   <div class="sliderwrap clearfix">
                     <p class="slider_title">{{$sliders['title']}}</p>
                     <p class="contact_number">+91-{{$sliders['mobile']}}</p>
@@ -132,7 +132,7 @@
                 <marquee onmouseover="stop();" onmouseout="start();" scrollamount="10" scrolldelay="10" direction="down">
                 @foreach($sliderright as $slidersrit)
                   <li>
-                    <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+                    <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" alt="slider"></a>
                     <div class="sliderwrap clearfix">
                       <p class="slider_title">{{$slidersrit['title']}}</p>
                       <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
@@ -144,7 +144,7 @@
 
               @foreach($sliderright as $slidersrit)
                 <li>
-                  <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" /></a>
+                  <a href="{{url('sliders')}}/{{($slidersrit['slug'])}}"><img src="{{url('assets/img/Sliders')}}/{{$slidersrit['image']}}" alt="slider"></a>
                   <div class="sliderwrap clearfix">
                     <p class="slider_title">{{$slidersrit['title']}}</p>
                     <p class="contact_number">+91-{{$slidersrit['mobile']}}</p>
@@ -154,7 +154,7 @@
               @endif
             </ul>
         </div>
-    </div> --}}
+    </div>
 </header>
 <!-- header section html ends-->
 
@@ -301,7 +301,7 @@
     <div class="row">
       <div class="col-12">
           <div class="section-heading wow fadeInUp">
-              <h2>Featured Properties</h2>
+              <h1>Featured Properties</h1>
               <img src="{{url('assets/img/underline.png')}}" alt="line">
               {{-- <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p> --}}
           </div>
@@ -378,7 +378,7 @@
       <div class="row">
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
-                  <h2>Our Services</h2>
+                  <h1>Our Services</h1>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
               </div>
           </div>
@@ -412,7 +412,7 @@
     <div class="row">
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
-                  <h2>Our Team</h2>
+                  <h1>Our Team</h1>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
                   
               </div>
@@ -455,7 +455,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
-            <h2>Our Remarkable Works</h2>
+            <h1>Our Remarkable Works</h1>
             <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -502,7 +502,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
-          <h2>Testimonials</h2>
+          <h1>Testimonials</h1>
           <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -511,7 +511,7 @@
       @foreach($testimonial as $testimonials)
       <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="testimonial testimonial-front">
-          <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt=""> </div>
+          <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="testimonial"> </div>
           <div class="testimonial-content">
             <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p>
             <div class="testimonial-meta">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</div>

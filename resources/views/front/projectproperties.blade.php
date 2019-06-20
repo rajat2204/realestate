@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="section-heading wow fadeInUp">
-                <h2>Project Properties</h2>
+                <h1>Project Properties</h1>
                 <img src="{{url('assets/img/underline.png')}}" alt="line">
                 <p>Suspendisse dictum enim sit amet libero malesuada feugiat.</p>
             </div>

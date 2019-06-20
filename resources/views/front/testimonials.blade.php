@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <div class="section-heading wow fadeInUp">
-          <h2>Testimonials</h2>
+          <h1>Testimonials</h1>
           <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
       </div>
@@ -12,7 +12,7 @@
       @foreach($testimonial as $testimonials)
       <div class="col-md-4 col-sm-6 col-xs-12">
         <div class="testimonial">
-          <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt=""> </div>
+          <div class="testimonial-image"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="testimonial"> </div>
           <div class="testimonial-content">
             <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p>
             <div class="testimonial-meta">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</div>

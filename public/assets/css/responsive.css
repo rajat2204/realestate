@@ -189,7 +189,7 @@
       display: inline-block;
       /*float: left;*/
       width: 300px;
-      padding-top: 20px;
+      padding-top: 0;
   }
   .vertical_slides_mobile2{
     display: block;
@@ -204,7 +204,7 @@
       display: inline-block;
       /*float: left;*/
       width: 300px;
-      padding-top: 20px;
+      padding-top: 0;
   }
   .horizontal_slider {
       width: 100%;
@@ -238,7 +238,7 @@
     height: 52px!important;
   }
   div#hero_slider {
-      padding-top: 45px;
+      padding-top: 30px;
       padding-right:0;
       padding-left: 0;
   }
@@ -504,6 +504,12 @@
 @media (max-width: 480px) {
   .header_strip {
       text-align: right;
+  }
+  .vertical_slides_mobile{
+    padding-top:10px; 
+  }
+  .vertical_slides_mobile2{
+    padding-top:10px; 
   }
   ul.shubhX button{
     padding: 1px 10px;

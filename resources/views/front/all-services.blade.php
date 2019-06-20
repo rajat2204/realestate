@@ -4,7 +4,7 @@
       <div class="row">
           <div class="col-12">
               <div class="section-heading wow fadeInUp">
-                  <h2>Our Services</h2>
+                  <h1>Our Services</h1>
                   <img src="{{url('assets/img/underline.png')}}" alt="line">
               </div>
           </div>

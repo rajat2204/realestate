@@ -4,10 +4,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <meta content="" name="description"/>
-        <meta content="" name="author"/>
+        <meta content="Search Real Estate Properties in India at Devdrishti, Devdrishti Infrahomes Pvt Ltd  producing, buying and selling of real estate properties" name="description"/>
+        <meta content="Buy/Sale/Rent Properties | Devdrishti Infrahomes Pvt Ltd" name="author"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142461506-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-        
+          gtag('config', 'UA-142461506-1');
+        </script>
+
+        <script async src='https://www.google-analytics.com/analytics.js'></script>
+        <meta name="google-site-verification" content="itYRRPYc4CePYsGFzydgw1X32pE7cJso2c9TDYTT51Y">
+        <!-- Google Tag Manager -->
+      
+<!-- End Google Tag Manager -->
+        <!-- End Google Analytics -->
         <meta name="_token" content="{{ csrf_token() }}">
         
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -49,7 +63,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
     <!-- Responsive Style -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
-
+    <!-- Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
 </head>
     <body class="page-md login loadingInProgress">
         <div id="cover"></div>

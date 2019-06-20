@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="section-heading wow fadeInUp">
-            <h2>{{$static[2]['title']}}</h2>
+            <h1>{{$static[2]['title']}}</h1>
             <img src="{{url('assets/img/underline.png')}}" alt="line">
         </div>
 
