@@ -116,17 +116,26 @@
             },isLocal: false
         });
       });
-       $('.review-slider').owlCarousel({
-          loop: true,
-          margin: 0,
-          nav: false,
-          items: 1,
-          dots: true,
-          autoplay: true,
-          autoplaySpeed: 2000,
-          autoplayTimeout: 5000,
-          slideTransition: 'linear',
-        });
+      
+      $('.review-slider').owlCarousel({
+        items:1,
+        margin:30,
+        animateIn: 'lightSpeedIn',
+        autoplay:true,
+        slideTransition: 'linear',
+        autoplaySpeed: 2000,
+      });
+       // $('.review-slider').owlCarousel({
+       //    loop: true,
+       //    margin: 0,
+       //    nav: false,
+       //    items: 1,
+       //    dots: true,
+       //    autoplay: true,
+       //    autoplaySpeed: 2000,
+       //    autoplayTimeout: 5000,
+       //    slideTransition: 'linear',
+       //  });
 
        $(".price-filter").ionRangeSlider({
             type: "double",

@@ -474,7 +474,7 @@
         <div id="portfolio" class="row wow fadeInDown" data-wow-delay="0.4s">
           @foreach($remarkablework as $remarkableworks)
             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-              <div class="portfolio-item">
+              <div class="portfolio-item" style="visibility: visible; animation-delay: 300ms; animation-name: fadeIn;">
                 <div class="shot-item">
                   <img src="{{url('assets/img/properties')}}/{{$remarkableworks['featured_image']}}" alt="projects"/>  
                   <div class="overlay">
@@ -497,7 +497,7 @@
   
 <!-- testimonial section html -->
 
-<div id="testimonials">
+{{-- <div id="testimonials">
   <div class="container">
     <div class="row">
       <div class="col-12">
@@ -526,7 +526,33 @@
       </div>
     @endif
   </div>
-</div>
+</div> --}}
+<section class="review-section set-bg" style="background-image: url(assets/img/review-bg.jpg); background-size: cover;">
+      
+      <div class="review_head">
+        <small>Review</small>
+      </div>
+        <div class="container">
+          <div class="text-left testimonialHead"><h1>Testimonial</h1></div>
+          <div class="review-slider owl-carousel owl-loaded owl-drag">
+              @foreach($testimonial as $testimonials)
+             <div class="review-item text-white">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="clint-pic set-bg"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="testimonial"></div>
+                    </div>
+                    <div class="col-md-9">
+                        <h5>- {{!empty($testimonials['name'])?$testimonials['name']:''}}</h5>
+                        {{-- <span>CEP’s Director</span> --}}
+                        <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p> 
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+            
+    </section>
 <!-- testimonial section end -->
 
 <!-- Contact Section Start -->

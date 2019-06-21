@@ -1,4 +1,4 @@
-<section id="contact" class="contact-section">
+<section id="contact" class="contact-section enquiryForm">
   <div class="contact-form">
     <div class="container">
       <form id="enquiry" role="enquiry" action="{{url('enquirysubmission')}}" method="POST">

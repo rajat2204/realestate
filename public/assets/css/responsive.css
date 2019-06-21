@@ -151,6 +151,9 @@
   #contact{
     padding: 10px 0 30px;
   }
+  .enquiryForm{
+    padding: 50px 0 30px !important;
+  }
   #agents {
     /*padding: 35px 0 50px;*/
   }
@@ -417,6 +420,11 @@
     margin: 0;
     padding: 20px;
   }
+  .datas_show{
+    padding-left:0 !important;
+    border-left:none !important;
+  }
+
   .vertical_slides_mobile .slides li{
     padding: 4px 4px 4px 15px;
   }
@@ -504,6 +512,9 @@
 @media (max-width: 480px) {
   .header_strip {
       text-align: right;
+  }
+  .enquiryForm{
+    padding: 10px 0 30px !important;
   }
   .vertical_slides_mobile{
     padding-top:10px; 
