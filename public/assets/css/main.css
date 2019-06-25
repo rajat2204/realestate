@@ -3830,7 +3830,7 @@ ul.shubhX p{
   padding-bottom: 3px;
 }
 .contact-modal .popupmodal-body{
-  padding: 5px 30px;
+  padding: 5px 20px;
 }
 .contact-modal .form-control{
   display: block;
@@ -3985,7 +3985,8 @@ select:focus{
     vertical-align: middle;
   }
   .help-block{
-  color:red;
+    color:red;
+    display: block;
   }
   section.bg{
     background-color:whitesmoke;
@@ -4292,23 +4293,23 @@ i.fa.fa-map-marker.text {
 .modalphotos .modal-dialog{
   max-width: 1300px;
 }
-#big .item { 
+.bigdata .item { 
   background: #fff; 
-  padding: 20px 0px; 
+  padding: 0px 0px; 
   margin:2px; 
   color: #FFF; 
   border-radius: 3px; 
   text-align: center; 
 }
-#thumbs .item span{
-  height:130px;
+.thumbss .item span{
+  height:130px !important;
   display: block;
 }
-#thumbs .item span img{
+.thumbss .item span img{
   height:100%;
 }
-#thumbs .item { 
-  opacity: .4;
+.thumbss .item { 
+  /*opacity: .4;*/
   line-height:70px; 
   padding: 0px; 
   margin:2px; 
@@ -4316,16 +4317,16 @@ i.fa.fa-map-marker.text {
   border-radius: 3px; text-align: center; cursor: pointer; 
 }
 
-#thumbs .current .item { 
+.thumbss .current .item { 
   opacity: 1;
 }
 .owl-theme .owl-nav [class*='owl-'] { -webkit-transition: all .3s ease; transition: all .3s ease; }
 .owl-theme .owl-nav [class*='owl-'].disabled:hover { background-color: #D6D6D6; }
-#big.owl-theme { position: relative; }
-#big.owl-theme .owl-next, #big.owl-theme .owl-prev { background:transparent; width: 22px; line-height:40px; height: 40px; margin-top: -20px; position: absolute; text-align:center; top: 50%; }
-#big.owl-theme .owl-prev { left: 10px; }
-#big.owl-theme .owl-next { right: 10px; }
-#thumbs.owl-theme .owl-next, #thumbs.owl-theme .owl-prev { 
+.bigdata.owl-theme { position: relative; }
+.bigdata.owl-theme .owl-next, .bigdata.owl-theme .owl-prev { background:transparent; width: 22px; line-height:40px; height: 40px; margin-top: -20px; position: absolute; text-align:center; top: 50%; }
+.bigdata.owl-theme .owl-prev { left: 10px; }
+.bigdata.owl-theme .owl-next { right: 10px; }
+.thumbss.owl-theme .owl-next, .thumbss.owl-theme .owl-prev { 
   background:#333; 
   display: none;
 }

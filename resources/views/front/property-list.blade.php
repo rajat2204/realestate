@@ -22,7 +22,7 @@
               <div class ="row">
                 <div class="col-lg-2">
                   <div class="boxd">
-                    <a href="#viewphotos-{{$value['id']}}" data-toggle="modal">
+                    <a href="#viewphotos-{{$value['id']}}" data-toggle="modal" class="viewphotos" data-id="{{$value['id']}}">
                       <img src= "{{url('assets/img/properties')}}/{{$value['featured_image']}} " alt="">
                       <span class="bulge">{{count($value['property_gallery'])}} photo(s)</span>
                       <p class="utopia">Posted:{{ ___ago($value['updated_at'])}} </p> 
@@ -142,7 +142,7 @@
       </div>
     </div>
 
-    <div class="modal modalphotos fade" id="viewphotos-{{$value['id']}}" role="dialog">
+    <div class="modal modalphotos fade" id="viewphotos-{{$value['id']}}"  role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -152,7 +152,7 @@
           
           <div class="modal-body popupmodal-body swiperpopupBox">
             <div class="outer">
-              <div id="big" class="owl-carousel bigdata-{{$value['id']}}">
+              <div class="owl-carousel owl-theme bigdata" id="bigdata-{{$value['id']}}" data-id="{{$value['id']}}">
                 @foreach($value['property_gallery'] as $property_galleries)
                   <div class="item">
                     
@@ -162,7 +162,7 @@
                 @endforeach
               </div>
 
-              <div id="thumbs-{{$value['id']}}" class="owl-carousel thumbss">
+              <div id="thumbs-{{$value['id']}}" class="owl-carousel owl-theme thumbss"  data-id="{{$value['id']}}">
                 @foreach($value['property_gallery'] as $property_galleries)
                   <div class="item">
                     <span><img src="{{url('assets/img/PropertyGallery')}}/{{$property_galleries['images']}}" alt="gallery"></span>
@@ -179,13 +179,13 @@
 </div>
 @section('requirejs')
 <script type="text/javascript">
-   $(document).ready(function() {
-    var number={{$value['id']}};
-        var bigimage = $('.bigdata-'+ number);
-        var thumbs = $('#thumbs-'+ number);
-        alert(thumbs);
-        //var totalslides = 10;
+   $(".viewphotos").click(function() {
 
+        var id = $(this).data('id');
+        
+        var bigimage = $('#bigdata-'+ id);
+        var thumbs = $('#thumbs-'+ id);
+        //var totalslides = 10;
         var syncedSecondary = true;
 
         bigimage

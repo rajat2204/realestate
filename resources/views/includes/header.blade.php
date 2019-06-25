@@ -207,7 +207,7 @@
           </ul>
           <div class="form-row ">
             <div class="form-group col-md-12">
-              <label >Username:</label>
+              <label >Mobile Number:</label>
               <input type ="text" placeholder ="Enter your Number"  class="form-control" name ="phone">
             </div>
           </div>
@@ -218,12 +218,13 @@
             </div>
           </div>
          </div>
-        </div>  
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-red btn-sm " data-request="ajax-submit" data-target='[role="login"]'>Submit</button>
         </div>
       </form>
     </div>
   </div>
+</div>
 </div>
 <!-- Modal -->

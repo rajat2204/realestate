@@ -131,7 +131,8 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Father's/Mother's Name:</td>
-                            <td style="text-align:left;"><input type="text" name="father_name" value="{{!empty($client['father_name'])?$client['father_name']:''}}"></td>
+                            <td style="text-align:left;"><input type="text" name="father_name" value="{{!empty($client['father_name'])?$client['father_name']:''}}">
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Registered As:</td>
@@ -139,15 +140,18 @@
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Occupation:</td>
-                            <td style="text-align:left;"><input type="text" name="occupation" value="{{!empty($client['occupation'])?$client['occupation']:''}}"></td>
+                            <td style="text-align:left;"><input type="text" name="occupation" value="{{!empty($client['occupation'])?$client['occupation']:''}}">
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Email:</td>
-                            <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly></td>
+                            <td style="text-align:left;"><input type="text" name="email" value="{{Auth::user()->email}}" readonly>
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Mobile no.:</td>
-                            <td style="text-align:left;"><input type="text" name="phone" value="{{Auth::user()->phone}}"></td>
+                            <td style="text-align:left;"><input type="text" name="phone" value="{{Auth::user()->phone}}">
+                            </td>
                           </tr>
                          </tbody>
                       </table>
@@ -155,15 +159,19 @@
                         <tbody>
                           <tr>
                             <td style="text-align:right;" class="inputBold">Address:</td>
-                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{!empty($client['address'])?$client['address']:''}}"></td>
+                            <td style="text-align:left;"><input type="text" name="address" id="autocomplete" value="{{!empty($client['address'])?$client['address']:''}}">
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">District:</td>
-                            <td style="text-align:left;"><input type="text" name="district" value="{{!empty($client['district'])?$client['district']:''}}"></td>
+                            <td style="text-align:left;"><input type="text" name="district" value="{{!empty($client['district'])?$client['district']:''}}">
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">State:</td>
-                            <td style="text-align:left;"><input type="text" name="state" value="{{!empty($client['state'])?$client['state']:''}}"></td>
+                            <td style="text-align:left;">
+                              <input type="text" name="state" value="{{!empty($client['state'])?$client['state']:''}}">
+                            </td>
                           </tr>
                           <tr>
                             <td style="text-align:right;" class="inputBold">DOB:</td>
