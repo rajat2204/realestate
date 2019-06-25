@@ -542,7 +542,7 @@
                       <div class="clint-pic set-bg"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="testimonial"></div>
                     </div>
                     <div class="col-md-9">
-                        <h5>- {{!empty($testimonials['name'])?$testimonials['name']:''}}</h5>
+                        <h5 style="font-weight: 600;">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</h5>
                         {{-- <span>CEP’s Director</span> --}}
                         <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p> 
                     </div>

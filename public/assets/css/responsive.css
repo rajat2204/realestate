@@ -89,6 +89,11 @@
     max-width: 800px;
   } 
 }
+@media (min-width: 576px){
+  .modalphotos .modal-dialog{
+    margin: 1rem auto;
+  }
+}
 /* tablets */
 @media (max-width: 991px) {
   .section-title {
@@ -276,6 +281,21 @@
     font-size: 22px;
     margin-bottom: 30px;
   }
+  .review-slider .review-item{
+    padding: 0 30px;
+  }
+  .review-slider {
+      padding: 40px 0;
+  }
+  .review-section {
+      padding: 60px 0 0;
+  }
+  .review_head {
+      display: none;
+  }
+  .review-item .clint-pic{
+    margin: 0 auto 20px;
+  }
   .vertical_slides_mobile{
     padding-top: 0;
   }
@@ -416,9 +436,20 @@
   .our_services{
     margin-bottom: 15px;
   }
+  .testimonialHead h1{
+    font-size: 30px;
+  }
+  .review-item p{
+    line-height: 22px !important;
+    font-size: 15px;
+    text-align: justify;
+  }
   .category_container{
     margin: 0;
     padding: 20px;
+  }
+  .review-slider .review-item {
+      padding: 0 0;
   }
   .datas_show{
     padding-left:0 !important;

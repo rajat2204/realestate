@@ -147,7 +147,7 @@ ul li, ol li {
 .btn:active {
   box-shadow: none;
   outline: none;
-  color: #fff;
+  /*color: #fff;*/
 }
 
 .btn-common {
@@ -1408,13 +1408,6 @@ ul li, ol li {
   display: inline-block;
 }
 
-.btn:focus,
-.btn:active {
-  box-shadow: none;
-  outline: none;
-  color: #fff;
-}
-
 .btn-common {
   background-color: #9c100a;
   position: relative;
@@ -2601,7 +2594,9 @@ a.navbar-brand .singleLogo img {
 .image-overview img{
   height: 100%;
   width: 100%;
-  object-fit: contain;
+}
+.button_search1:focus{
+  color: #63c5de;
 }
 .header_strip ul li a:hover {
     color: #000;
@@ -2872,7 +2867,7 @@ p.contact_number {
 }
 
 /* Testimonials Section */
-/*#testimonials {
+#testimonials {
   padding: 30px 0 15px;
   background: #f2f2f2;
 }
@@ -2911,7 +2906,7 @@ p.contact_number {
   font-size: 13px;
   font-weight: bold;
   text-transform: uppercase;
-}*/
+}
 .review-section{
   padding: 50px 0;
   position: relative;
@@ -3533,7 +3528,7 @@ a.room-price {
 
 .agentSpace img {
     width: 100%;
-    height: 210px;
+    height: 290px;
 }
 .agent-wrap .owl-carousel .owl-nav {
     width: 100%;
@@ -3592,6 +3587,11 @@ a.room-price {
   /*left: 0;*/
   /*right: 20px;*/
 }
+#service .btn-red:active{
+transform: scale(0.99);
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
 .agent-wrap .owl-carousel .owl-nav .owl-next:after{
   content: "\f054";
   font-size: 16px;
@@ -3922,9 +3922,13 @@ select:focus{
 .button_search1:hover{
   border-color:#63c5de !important;
   border-width: 2px;
+  color:#63c5de !important;
   transform:translateX(5px);
   font-weight: 600;
   background-image: linear-gradient(to right,#63c5de,#02ac97));
+}
+.button_search1:focus, .button_search1:active{
+  color:#63c5de !important;
 }
 .btn-red{
   /*background-color:#9c100a;*/
@@ -4285,11 +4289,11 @@ i.fa.fa-map-marker.text {
 .swiperpopupBox .outer .owl-theme .item span img {
     height: 100%;
 }
-#viewphotos .modal-dialog{
+.modalphotos .modal-dialog{
   max-width: 1300px;
 }
 #big .item { 
-  background: #151514; 
+  background: #fff; 
   padding: 20px 0px; 
   margin:2px; 
   color: #FFF; 
