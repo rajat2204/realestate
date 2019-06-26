@@ -188,20 +188,20 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="advanced-search-form main-form">
-          <form role='filter' action="{{url('search/property')}}" class="form-horizontal clearfix" enctype="multipart/form-data" method="post" id="search">
-            {{csrf_field()}}
-            <div class="form-group">
+        <div class="advanced-search-form main-form" id="search">
+         {{--  <form role='filter' action="{{url('search/property')}}" class="form-horizontal clearfix" enctype="multipart/form-data" method="post" id="search">
+            {{csrf_field()}} --}}
+            <div class="form-group" >
               <div class="row">
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                  <select class="form-control" name="filter_propertystatus">
+                  <select class="form-control" name="filter_propertystatus" id="filter_propertystatus">
                     <option value="">Property Type</option>
                     <option value="rent">RENT</option> 
                     <option value="sale">SALE</option> 
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
-                  <select class=" form-control" name="filter_propertycategory">
+                  <select class=" form-control" name="filter_propertycategory" id="filter_propertycategory">
                     <option value="">Property Category</option>
                     @foreach($categories as $category)
                       <option value="{{!empty($category['id'])?$category['id']:''}}">{{!empty($category['name'])?$category['name']:''}}</option>
@@ -210,20 +210,20 @@
                 </div>
               <!--static code start-->
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
-                  <input type="text" class="form-control" name="filter_city" value="" placeholder="City">
+                  <input type="text" class="form-control" name="filter_city" id="filter_city" value="" placeholder="City">
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
-                  <input type="text" class="form-control" name="filter_address" value="" placeholder="Address">
+                  <input type="text" class="form-control" name="filter_address" id="filter_address" value="" placeholder="Address">
                 </div>
               </div>
             </div>
                 <div class="form-group">
                   <div class="row">
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
-                      <input type="text" class="form-control" name="filter_neighborhood" value="" placeholder="Neighborhood">
+                      <input type="text" class="form-control" name="filter_neighborhood" value="" placeholder="Neighborhood" id="filter_neighborhood">
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">            
-                      <input type="text" class="form-control" name="filter_zipcode" value="" placeholder="Zip code">
+                      <input type="text" class="form-control" id="filter_zipcode" name="filter_zipcode" value="" placeholder="Zip code">
                     </div>
                         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                       <!-- <label for="input-filter_bed_rooms">Bedrooms:</label> -->
@@ -285,10 +285,10 @@
               </div>
                 
                 <div class="searchwrap">
-                  <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} class="btn button_search1 text-right" type="submit"><i class="fa fa-search"></i> Search</button>
+                  <button {{-- data-request="ajax-submit" data-target='[role="filter"]' --}} id="search-property" class="btn button_search1 text-right" type="button"><i class="fa fa-search"></i> Search</button>
                 </div>
             </div>
-          </form>
+         {{--  </form> --}}
       </div>
     </div> 
   </div>
@@ -542,7 +542,7 @@
                       <div class="clint-pic set-bg"><img src="{{url('assets/img/testimonials')}}/{{$testimonials['image']}}" alt="testimonial"></div>
                     </div>
                     <div class="col-md-9">
-                        <h5 style="font-weight: 600;">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</h5>
+                        <h5 style="font-weight:600;font-size:23px;">- {{!empty($testimonials['name'])?$testimonials['name']:''}}</h5>
                         {{-- <span>CEP’s Director</span> --}}
                         <p>"{!! html_entity_decode(strip_tags(!empty($testimonials['description'])?$testimonials['description']:'')) !!}"</p> 
                     </div>
@@ -656,6 +656,25 @@
               }
           });
       });
+  });
+
+  $("#search-property").click(function(){
+
+    var filter_propertystatus = $("#filter_propertystatus").children("option:selected").val();
+    var filter_propertycategory = $("#filter_propertycategory").children("option:selected").val();
+    var filter_city = $("#filter_city").val();
+    var filter_address = $("#filter_address").val();
+    var filter_neighborhood = $("#filter_neighborhood").val();
+    var filter_zipcode = $("#filter_zipcode").val();
+    var filter_bed_rooms = $("#input-filter_bed_rooms").children("option:selected").val();
+    var filter_bath_rooms = $("#input-filter_bath_rooms").children("option:selected").val();
+    var $urlstring = "search/property?propertystatus="+filter_propertystatus+"&propertycategory="+filter_propertycategory+"&city="+filter_city+"&address="+filter_address+"&neighborhood="+filter_neighborhood+"&zipcode="+filter_zipcode+"&bed_rooms="+filter_bed_rooms+"&bath_rooms="+filter_bath_rooms;
+
+    
+    window.location.href="{{url('/')}}"+"/"+$urlstring;
+
+    
+   
   });
 </script>
 @endsection

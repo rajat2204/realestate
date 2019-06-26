@@ -51,7 +51,7 @@ Route::post('balancepayment','HomeController@ajaxBalancePayment');
 Route::post('editprofile','HomeController@editAgentProfile');
 Route::post('clienteditprofile','HomeController@editClientProfile');
 Route::post('changepassword','HomeController@agentchangePass');
-Route::post('search/property','HomeController@searchProperty');
+Route::get('search/property','HomeController@searchProperty');
 Route::get('projectproperties/{id}','HomeController@projectProperties');
 Route::get('termsandconditions','HomeController@termsandconditions');
 Route::get('privacypolicy','HomeController@privacypolicy');
